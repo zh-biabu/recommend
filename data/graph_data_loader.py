@@ -21,15 +21,11 @@ class GraphRecommendationDataset(Dataset):
     
     def __init__(
         self,
-        data_path: str,
-        user_col: str = "userID",
-        item_col: str = "itemID",
-        rating_col: str = "rating",
-        timestamp_col: Optional[str] = None,
+        config,
         negative_sampling: bool = True,
         neg_ratio: int = 100,
         mode: str = "train",  # train, val, test
-        transform: Optional[callable] = None
+        transform: Optional[callable] = None,
     ):
         """
         Initialize graph recommendation dataset.
@@ -43,28 +39,29 @@ class GraphRecommendationDataset(Dataset):
             mode: Dataset mode (train/val/test)
             transform: Optional data transformation
         """
-        self.data_path = data_path
-        self.user_col = user_col
-        self.item_col = item_col
-        self.rating_col = rating_col
-        self.timestamp_col = timestamp_col
+        self.config = config
+        self.data_path = config.data.data_path
+        self.user_col = config.data.user_col
+        self.item_col = config.data.item_col
+        self.rating_col = config.data.rating_col
+        self.timestamp_col = config.data.timestamp_col
         self.negative_sampling = negative_sampling
         self.neg_ratio = neg_ratio
         self.mode = mode
         self.transform = transform
+        self.num_users = config.data.num_users
+        self.num_items = config.data.num_items
         
         # Load and process data
         self._load_interactions()
-        self._build_mappings()
+        self._caculate_num()
         self._load_features()
         if self.negative_sampling and self.mode == "train":
             self._generate_negative_samples()
         self.get_statistics()
-        self.num_users = len(self.user2id)
-        self.num_items = len(self.item2id)
         
         print(f"Dataset {mode} loaded: {len(self.data)} interactions, "
-              f"{len(self.user2id)} users, {len(self.item2id)} items, {self.data.columns}")
+              f"{self.num_users} users, {self.num_items} items, {self.data.columns}")
     
     def _load_interactions(self):
         """Load interaction data."""
@@ -77,33 +74,19 @@ class GraphRecommendationDataset(Dataset):
             raise FileNotFoundError(f"No .inter file found in {self.data_path}")
         
         # Validate required columns
-        required_cols = [self.user_col, self.item_col, self.rating_col]
+        required_cols = [self.user_col, self.item_col]
         missing_cols = [col for col in required_cols if col not in self.data.columns]
         if missing_cols:
             raise ValueError(f"Missing required columns: {file} {missing_cols}")
-    
-    def _build_mappings(self):
-        """Build user and item ID mappings."""
-        for file in os.listdir(self.data_path):
-            # print(file)
-            if file.endswith('.csv') and "u_id_mapping" in file:
-                file_path = os.path.join(self.data_path, file)
-                df = pd.read_csv(file_path)
-                self.id2user = df[self.user_col].to_dict()
-                self.user2id = pd.Series(df.index, index=df[self.user_col]).to_dict()
-            if file.endswith('.csv') and "i_id_mapping" in file:
-                file_path = os.path.join(self.data_path, file)
-                df = pd.read_csv(file_path)
-                self.id2item = df[self.item_col].to_dict()
-                self.item2id = pd.Series(df.index, index=df[self.item_col]).to_dict()
-        print(len(self.id2item),len(self.user2id))
-        
-        # Add offset for items (to distinguish from users in graph)
-        self.num_nodes = len(self.user2id) + len(self.item2id)
-        
-        # Map IDs
-        self.data['user_id_mapped'] = self.data[self.user_col].map(self.user2id)
-        self.data['item_id_mapped'] = self.data[self.item_col].map(self.item2id)
+
+    def _caculate_num(self):
+        if self.num_users == -1:
+            file_path = os.path.join(self.data_path, "u_id_mapping.csv")
+            self.num_users = len(pd.read_csv(file_path))
+        if self.num_items == -1:
+            file_path = os.path.join(self.data_path, "i_id_mapping.csv")
+            self.num_items = len(pd.read_csv(file_path))
+
     
     def _load_features(self):
         """Load multi-modal features."""
@@ -125,12 +108,48 @@ class GraphRecommendationDataset(Dataset):
         
         # Ensure all features have the same number of users/items
         for name, features in self.user_features.items():
-            if features.shape[0] != len(self.user2id):
-                warnings.warn(f"User feature {name} has {features.shape[0]} rows, expected {len(self.user2id)}")
+            if features.shape[0] != self.num_users:
+                warnings.warn(f"User feature {name} has {features.shape[0]} rows, expected {self.num_users} user num")
         
         for name, features in self.item_features.items():
-            if features.shape[0] != len(self.item2id):
-                warnings.warn(f"Item feature {name} has {features.shape[0]} rows, expected {len(self.item2id)}")
+            if features.shape[0] != self.num_items:
+                warnings.warn(f"Item feature {name} has {features.shape[0]} rows, expected {self.num_items} item num")
+
+    def _generate_negative_samples(self):
+        print("Generating negative samples...")
+        if self.neg_ratio <=0:
+            raise Exception("The number of negative samples must be greater than zero.")
+        user_items = defaultdict(set)
+        for _, row in self.data.iterrows():
+            user_items[row[self.user_col]].add(row[self.item_col])
+        all_items = set(range(self.num_items))
+        neg_samples = []
+        for _, row in self.data.iterrows():
+            user_id = row[self.user_col]
+            pos_items = user_items[user_id]
+            neg_pool = list(all_items - pos_items)
+            if len(neg_pool) >= self.neg_ratio:
+                neg_samples.append(random.sample(neg_pool, k=self.neg_ratio))
+            else:
+                neg_samples.append(neg_pool)
+                warnings.warn(f"The number of remaining samples is less than the preset value of {self.neg_ratio}, which may lead to errors.")
+        self.data['negs'] = neg_samples
+
+    def get_statistics(self):
+        """Get dataset statistics."""
+        stats = {
+            'num_users': self.num_users,
+            'num_items': self.num_items,
+            'num_interactions': len(self.data),
+            'sparsity': 1 - (len(self.data) / (self.num_users * self.num_items)),
+            'user_features': list(self.user_features.keys()),
+            'item_features': list(self.item_features.keys()),
+        }
+        print("show dataset basic salution")
+        for k,v in stats.items():
+            print(k,":",v)
+        return stats
+
     
     def __len__(self):
         return len(self.data)
@@ -142,19 +161,22 @@ class GraphRecommendationDataset(Dataset):
         sample = self.data.iloc[idx]
         
         # Basic information
-        user_id = torch.tensor(sample['user_id_mapped'], dtype=torch.long)
-        item_id = torch.tensor(sample['item_id_mapped'], dtype=torch.long)
-        rating = torch.tensor(sample[self.rating_col], dtype=torch.float32)
+        user_id = torch.tensor(sample[self.user_col], dtype=torch.long)
+        item_id = torch.tensor(sample[self.item_col], dtype=torch.long)
+        
         
         result = {
             'user_id': user_id,
             'item_id': item_id,
-            'rating': rating,
         }
         
-        if self.mode == "train":
-            neg_items = torch.tensor(sample["neg_items"], dtype=torch.long)
-            result["neg_items"] = neg_items
+        if self.rating_col:
+            rating = torch.tensor(sample[self.rating_col], dtype=torch.float32)
+            result["rating"] = rating
+
+        if self.negative_sampling and self.mode == "train":
+            neg_items_id = torch.tensor(sample["negs"], dtype=torch.long)
+            result["neg_items_id"] = neg_items_id
 
         # Add timestamp if available
         if self.timestamp_col and self.timestamp_col in sample:
@@ -162,14 +184,14 @@ class GraphRecommendationDataset(Dataset):
         
         # Add features
         # if self.user_features:
-        #     user_feat_idx = sample['user_id_mapped'].astype(int)
+        #     user_feat_idx = sample[self.user_col].astype(int)
         #     user_features = {}
         #     for name, features in self.user_features.items():
         #         user_features[name] = features[user_feat_idx]
         #     result['user_features'] = user_features
         
         # if self.item_features:
-        #     item_feat_idx = sample['item_id_mapped'].astype(int) - self.item_offset
+        #     item_feat_idx = sample[self.item_col].astype(int) - self.item_offset
         #     item_features = {}
         #     for name, features in self.item_features.items():
         #         item_features[name] = features[item_feat_idx]
@@ -180,32 +202,8 @@ class GraphRecommendationDataset(Dataset):
         
         return result
     
-    def get_statistics(self):
-        """Get dataset statistics."""
-        stats = {
-            'num_users': len(self.user2id),
-            'num_items': len(self.item2id),
-            'num_interactions': len(self.data),
-            'sparsity': 1 - (len(self.data) / (len(self.user2id) * len(self.item2id))),
-            'user_features': list(self.user_features.keys()),
-            'item_features': list(self.item_features.keys()),
-        }
-        
-        return stats
 
-    def _generate_negative_samples(self):
-        print("Generating negative samples...")
-        user_items = defaultdict(set)
-        for _, row in self.data.iterrows():
-            user_items[row['user_id_mapped']].add(row['item_id_mapped'])
-        all_items = set(range(len(self.item2id)))
-        neg_samples = []
-        for _, row in self.data.iterrows():
-            user_id = row['user_id_mapped']
-            pos_items = user_items[user_id]
-            neg_pool = list(all_items - pos_items)
-            neg_samples.append(random.choices(neg_pool, k=self.neg_ratio))
-        self.data['neg_items'] = neg_samples
+
 
 
 class GraphDataLoader:
@@ -213,24 +211,24 @@ class GraphDataLoader:
     
     def __init__(
         self,
+        config,
         dataset: GraphRecommendationDataset,
-        batch_size: int = 256,
         shuffle: bool = True,
-        num_workers: int = 4,
         pin_memory: bool = False
     ):
+        self.config = config
         self.dataset = dataset
-        self.batch_size = batch_size
+        self.batch_size = config.data.batch_size
         self.shuffle = shuffle
-        self.num_workers = num_workers
+        self.num_workers = config.data.num_workers
         self.pin_memory = pin_memory
         
         # Create data loader
         self.dataloader = DataLoader(
             dataset,
-            batch_size=batch_size,
+            batch_size=self.batch_size,
             shuffle=shuffle,
-            num_workers=num_workers,
+            num_workers=self.num_workers,
             pin_memory=pin_memory,
             collate_fn=self._collate_fn
         )
@@ -240,20 +238,21 @@ class GraphDataLoader:
         # Separate different types of data
         user_ids = torch.stack([item['user_id'] for item in batch])
         item_ids = torch.stack([item['item_id'] for item in batch])
-        ratings = torch.stack([item['rating'] for item in batch])
         
         # is_positive = torch.stack([item['is_positive'] for item in batch])
         
         result = {
             'user_ids': user_ids,
             'item_ids': item_ids,
-            'ratings': ratings,
             # 'is_positive': is_positive
-
         }
 
-        if "neg_items" in  batch[0]:
-            neg_items = torch.stack([item['neg_items'] for item in batch])
+        if "rating" in batch[0]:
+            ratings = torch.stack([item['ratings'] for item in batch])
+            result["ratings"] = ratings
+
+        if "neg_items_id" in batch[0]:
+            neg_items = torch.stack([item['neg_items_id'] for item in batch])
             result["neg_items"] = neg_items
         
         # Handle features
@@ -283,13 +282,7 @@ class GraphDataLoader:
         return len(self.dataloader)
 
 
-def create_data_loaders(
-    data_path: str,
-    batch_size: int = 256,
-    num_workers: int = 4,
-    negative_sampling: bool = True,
-    neg_ratio: int = 100
-) -> Tuple[GraphDataLoader, GraphDataLoader, GraphDataLoader]:
+def create_data_loaders(config) -> Tuple[GraphDataLoader, GraphDataLoader, GraphDataLoader]:
     """
     Create train, validation, and test data loaders.
     
@@ -298,24 +291,30 @@ def create_data_loaders(
     """
     # Create datasets
     train_dataset = GraphRecommendationDataset(
-        data_path, mode="train", negative_sampling=negative_sampling, neg_ratio=neg_ratio
+        config,
+        mode="train", negative_sampling=config.data.negative_sampling, neg_ratio=config.data.neg_ratio
     )
     val_dataset = GraphRecommendationDataset(
-        data_path, mode="val", negative_sampling=False
+        config,
+        mode="val", negative_sampling=False
     )
     test_dataset = GraphRecommendationDataset(
-        data_path, mode="test", negative_sampling=False
+        config,
+        mode="test", negative_sampling=False
     )
     
     # Create data loaders
     train_loader = GraphDataLoader(
-        train_dataset, batch_size=batch_size, shuffle=True, num_workers=num_workers
+        config,
+        train_dataset, shuffle=True
     )
     val_loader = GraphDataLoader(
-        val_dataset, batch_size=batch_size, shuffle=False, num_workers=num_workers
+        config,
+        val_dataset, shuffle=False
     )
     test_loader = GraphDataLoader(
-        test_dataset, batch_size=batch_size, shuffle=False, num_workers=num_workers
+        config,
+        test_dataset, shuffle=False
     )
     
     return train_loader, val_loader, test_loader
@@ -323,15 +322,25 @@ def create_data_loaders(
 
 if __name__ == "__main__":
     # Test the data loader
+    import sys
+    from pathlib import Path
+
+    # 将项目根目录加入 Python 搜索路径
+    sys.path.append(str(Path(__file__).parent.parent))  # 根据实际结构调整层级
+    print(Path(__file__))
+
+    from config import get_config 
+    config = get_config("baby")
     train_loader, val_loader, test_loader = create_data_loaders(
-        "./data/scale_data/baby",
-        batch_size=32
+        config
     )
-    
+    print("dataset output {user_id item_id [rating neg_items_id]}")
+    print("loader output {user_ids item_ids [ratings neg_items]}")
     # Test a batch
     for batch in train_loader:
         print("Batch keys:", batch.keys())
         print("User IDs shape:", batch['user_ids'].shape)
         print("Item IDs shape:", batch['item_ids'].shape)
         print("Ratings shape:", batch['ratings'].shape)
+        print("negs shape:", batch['neg_items'].shape)
         break

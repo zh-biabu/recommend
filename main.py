@@ -50,13 +50,7 @@ def prepare_data(config):
     """Prepare data loaders and extract features."""
     print("Loading data...")
     # Create data loaders
-    train_loader, val_loader, test_loader = create_data_loaders(
-        data_path=config.data.data_path,
-        batch_size=config.data.batch_size,
-        num_workers=config.data.num_workers,
-        negative_sampling=config.data.negative_sampling,
-        neg_ratio=config.data.neg_ratio
-    )
+    train_loader, val_loader, test_loader = create_data_loaders(config)
     
     # Extract dataset information
     train_dataset = train_loader.dataset
@@ -74,7 +68,7 @@ def prepare_data(config):
     return train_loader, val_loader, test_loader, num_users, num_items, user_features, item_features
 
 
-def build_graph_and_model(config, train_loader, num_users, num_items, user_features, item_features):
+def build_graph_and_model(config, train_loader, user_features, item_features):
     """Build the recommendation graph and model."""
     print("Building graph and model...")
     
@@ -82,8 +76,8 @@ def build_graph_and_model(config, train_loader, num_users, num_items, user_featu
     model = ModelFactory.create_MMGCN(
         model_name=config.model.model_name,
         config=config,
-        num_users=num_users,
-        num_items=num_items,
+        num_users=config.data.num_users,
+        num_items=config.data.num_items,
         user_features=user_features,
         item_features=item_features
     )
@@ -257,7 +251,7 @@ def main():
         # Prepare data
         train_loader, val_loader, test_loader, num_users, num_items, user_features, item_features = prepare_data(config)
         # Build graph and model
-        model, graph = build_graph_and_model(config, train_loader, num_users, num_items, user_features, item_features)
+        model, graph = build_graph_and_model(config, train_loader, user_features, item_features)
         model = model.to(device)
         
         # Get model info

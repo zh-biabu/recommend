@@ -13,10 +13,10 @@ from dataclasses import dataclass, asdict
 @dataclass
 class DataConfig:
     """Data loading and preprocessing configuration."""
-    data_path: str = "../autodl-tmp/scale_data/baby"
+    data_path: str = "../autodl-tmp/data/scale_data/baby"
     user_col: str = "userID"
     item_col: str = "itemID"
-    rating_col: str = "rating"
+    rating_col: Optional[str] = None
     timestamp_col: Optional[str] = None
     negative_sampling: bool = True
     neg_ratio: int = 100
@@ -28,6 +28,9 @@ class DataConfig:
     # Data leakage prevention
     use_time_split: bool = True  # Use temporal split to prevent data leakage
     graph_from_train_only: bool = True  # Build graph only from training data
+    num_users : int = -1
+    num_items : int = -1
+    
 
 
 @dataclass
@@ -162,11 +165,16 @@ class Config:
 def get_baby_config() -> Config:
     """Get configuration for baby dataset."""
     config = Config()
-    config.data.data_path = "/root/autodl-tmp/scale_data/baby"
+    config.data.data_path = "/root/autodl-tmp/data/scale_data/baby"
+    config.data.user_col = "userID"
+    config.data.item_col = "itemID"
+    config.data.rating_col = "rating"
     config.data.batch_size = 512
     config.model.emb_dim = 64
     config.training.epochs = 50
     config.training.learning_rate = 0.001
+    config.data.num_users=19445
+    config.data.num_items=7050
     return config
 
 
