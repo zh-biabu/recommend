@@ -1,0 +1,1062 @@
+2025-10-19 13:23:18 - RecommendationSystem - INFO - Starting training...
+2025-10-19 13:23:18 - RecommendationSystem - INFO - 模型: MMGCN
+2025-10-19 13:23:18 - RecommendationSystem - INFO - 总参数量: 2,053,256
+2025-10-19 13:23:18 - RecommendationSystem - INFO - 可训练参数量: 2,053,256
+2025-10-19 13:23:18 - RecommendationSystem - INFO - ============================================================
+2025-10-19 13:23:18 - RecommendationSystem - INFO - 开始第 1/50 轮训练
+2025-10-19 13:23:18 - RecommendationSystem - INFO - ============================================================
+2025-10-19 13:30:44 - RecommendationSystem - INFO - Starting training...
+2025-10-19 13:30:44 - RecommendationSystem - INFO - 模型: MMGCN
+2025-10-19 13:30:44 - RecommendationSystem - INFO - 总参数量: 2,053,256
+2025-10-19 13:30:44 - RecommendationSystem - INFO - 可训练参数量: 2,053,256
+2025-10-19 13:30:44 - RecommendationSystem - INFO - ============================================================
+2025-10-19 13:30:44 - RecommendationSystem - INFO - 开始第 1/50 轮训练
+2025-10-19 13:30:44 - RecommendationSystem - INFO - ============================================================
+2025-10-19 13:30:51 - torch._dynamo.utils - INFO - TorchDynamo compilation metrics:
+Function, Runtimes (s)
+2025-10-19 13:33:15 - RecommendationSystem - INFO - Starting training...
+2025-10-19 13:33:15 - RecommendationSystem - INFO - 模型: MMGCN
+2025-10-19 13:33:15 - RecommendationSystem - INFO - 总参数量: 2,053,256
+2025-10-19 13:33:15 - RecommendationSystem - INFO - 可训练参数量: 2,053,256
+2025-10-19 13:33:15 - RecommendationSystem - INFO - ============================================================
+2025-10-19 13:33:15 - RecommendationSystem - INFO - 开始第 1/50 轮训练
+2025-10-19 13:33:15 - RecommendationSystem - INFO - ============================================================
+2025-10-19 13:33:15 - torch._dynamo.utils - INFO - TorchDynamo compilation metrics:
+Function, Runtimes (s)
+2025-10-19 13:35:28 - RecommendationSystem - INFO - Starting training...
+2025-10-19 13:35:28 - RecommendationSystem - INFO - 模型: MMGCN
+2025-10-19 13:35:28 - RecommendationSystem - INFO - 总参数量: 2,053,256
+2025-10-19 13:35:28 - RecommendationSystem - INFO - 可训练参数量: 2,053,256
+2025-10-19 13:35:28 - RecommendationSystem - INFO - ============================================================
+2025-10-19 13:35:28 - RecommendationSystem - INFO - 开始第 1/50 轮训练
+2025-10-19 13:35:28 - RecommendationSystem - INFO - ============================================================
+2025-10-19 13:35:34 - torch._dynamo.utils - INFO - TorchDynamo compilation metrics:
+Function, Runtimes (s)
+2025-10-19 13:39:00 - RecommendationSystem - INFO - Starting training...
+2025-10-19 13:39:00 - RecommendationSystem - INFO - 模型: MMGCN
+2025-10-19 13:39:00 - RecommendationSystem - INFO - 总参数量: 2,053,256
+2025-10-19 13:39:00 - RecommendationSystem - INFO - 可训练参数量: 2,053,256
+2025-10-19 13:39:00 - RecommendationSystem - INFO - ============================================================
+2025-10-19 13:39:00 - RecommendationSystem - INFO - 开始第 1/50 轮训练
+2025-10-19 13:39:00 - RecommendationSystem - INFO - ============================================================
+2025-10-19 13:39:05 - torch._dynamo.utils - INFO - TorchDynamo compilation metrics:
+Function, Runtimes (s)
+2025-10-19 13:40:32 - RecommendationSystem - INFO - Starting training...
+2025-10-19 13:40:32 - RecommendationSystem - INFO - 模型: MMGCN
+2025-10-19 13:40:32 - RecommendationSystem - INFO - 总参数量: 2,053,256
+2025-10-19 13:40:32 - RecommendationSystem - INFO - 可训练参数量: 2,053,256
+2025-10-19 13:40:32 - RecommendationSystem - INFO - ============================================================
+2025-10-19 13:40:32 - RecommendationSystem - INFO - 开始第 1/50 轮训练
+2025-10-19 13:40:32 - RecommendationSystem - INFO - ============================================================
+2025-10-19 13:40:38 - torch._dynamo.utils - INFO - TorchDynamo compilation metrics:
+Function, Runtimes (s)
+2025-10-19 13:41:52 - RecommendationSystem - INFO - Starting training...
+2025-10-19 13:41:52 - RecommendationSystem - INFO - 模型: MMGCN
+2025-10-19 13:41:52 - RecommendationSystem - INFO - 总参数量: 2,053,256
+2025-10-19 13:41:52 - RecommendationSystem - INFO - 可训练参数量: 2,053,256
+2025-10-19 13:41:52 - RecommendationSystem - INFO - ============================================================
+2025-10-19 13:41:52 - RecommendationSystem - INFO - 开始第 1/50 轮训练
+2025-10-19 13:41:52 - RecommendationSystem - INFO - ============================================================
+2025-10-19 13:44:18 - RecommendationSystem - INFO - Starting training...
+2025-10-19 13:44:18 - RecommendationSystem - INFO - 模型: MMGCN
+2025-10-19 13:44:18 - RecommendationSystem - INFO - 总参数量: 2,053,256
+2025-10-19 13:44:18 - RecommendationSystem - INFO - 可训练参数量: 2,053,256
+2025-10-19 13:44:18 - RecommendationSystem - INFO - ============================================================
+2025-10-19 13:44:18 - RecommendationSystem - INFO - 开始第 1/50 轮训练
+2025-10-19 13:44:18 - RecommendationSystem - INFO - ============================================================
+2025-10-19 13:45:53 - RecommendationSystem - INFO - Starting training...
+2025-10-19 13:45:53 - RecommendationSystem - INFO - 模型: MMGCN
+2025-10-19 13:45:53 - RecommendationSystem - INFO - 总参数量: 2,053,256
+2025-10-19 13:45:53 - RecommendationSystem - INFO - 可训练参数量: 2,053,256
+2025-10-19 13:45:53 - RecommendationSystem - INFO - ============================================================
+2025-10-19 13:45:53 - RecommendationSystem - INFO - 开始第 1/50 轮训练
+2025-10-19 13:45:53 - RecommendationSystem - INFO - ============================================================
+2025-10-19 13:47:27 - RecommendationSystem - INFO - Starting training...
+2025-10-19 13:47:27 - RecommendationSystem - INFO - 模型: MMGCN
+2025-10-19 13:47:27 - RecommendationSystem - INFO - 总参数量: 2,053,256
+2025-10-19 13:47:27 - RecommendationSystem - INFO - 可训练参数量: 2,053,256
+2025-10-19 13:47:27 - RecommendationSystem - INFO - ============================================================
+2025-10-19 13:47:27 - RecommendationSystem - INFO - 开始第 1/50 轮训练
+2025-10-19 13:47:27 - RecommendationSystem - INFO - ============================================================
+2025-10-19 13:47:36 - torch._dynamo.utils - INFO - TorchDynamo compilation metrics:
+Function, Runtimes (s)
+2025-10-19 13:57:01 - RecommendationSystem - INFO - Starting training...
+2025-10-19 13:57:01 - RecommendationSystem - INFO - 模型: MMGCN
+2025-10-19 13:57:01 - RecommendationSystem - INFO - 总参数量: 2,053,256
+2025-10-19 13:57:01 - RecommendationSystem - INFO - 可训练参数量: 2,053,256
+2025-10-19 13:57:01 - RecommendationSystem - INFO - ============================================================
+2025-10-19 13:57:01 - RecommendationSystem - INFO - 开始第 1/50 轮训练
+2025-10-19 13:57:01 - RecommendationSystem - INFO - ============================================================
+2025-10-19 13:57:11 - torch._dynamo.utils - INFO - TorchDynamo compilation metrics:
+Function, Runtimes (s)
+2025-10-19 14:01:43 - RecommendationSystem - INFO - Starting training...
+2025-10-19 14:01:43 - RecommendationSystem - INFO - 模型: MMGCN
+2025-10-19 14:01:43 - RecommendationSystem - INFO - 总参数量: 2,053,256
+2025-10-19 14:01:43 - RecommendationSystem - INFO - 可训练参数量: 2,053,256
+2025-10-19 14:01:43 - RecommendationSystem - INFO - ============================================================
+2025-10-19 14:01:43 - RecommendationSystem - INFO - 开始第 1/50 轮训练
+2025-10-19 14:01:43 - RecommendationSystem - INFO - ============================================================
+2025-10-19 14:01:53 - torch._dynamo.utils - INFO - TorchDynamo compilation metrics:
+Function, Runtimes (s)
+2025-10-19 14:05:31 - RecommendationSystem - INFO - Starting training...
+2025-10-19 14:05:31 - RecommendationSystem - INFO - 模型: MMGCN
+2025-10-19 14:05:31 - RecommendationSystem - INFO - 总参数量: 2,053,256
+2025-10-19 14:05:31 - RecommendationSystem - INFO - 可训练参数量: 2,053,256
+2025-10-19 14:05:31 - RecommendationSystem - INFO - ============================================================
+2025-10-19 14:05:31 - RecommendationSystem - INFO - 开始第 1/50 轮训练
+2025-10-19 14:05:31 - RecommendationSystem - INFO - ============================================================
+2025-10-19 14:05:40 - torch._dynamo.utils - INFO - TorchDynamo compilation metrics:
+Function, Runtimes (s)
+2025-10-19 14:07:57 - RecommendationSystem - INFO - Starting training...
+2025-10-19 14:07:57 - RecommendationSystem - INFO - 模型: MMGCN
+2025-10-19 14:07:57 - RecommendationSystem - INFO - 总参数量: 2,053,256
+2025-10-19 14:07:57 - RecommendationSystem - INFO - 可训练参数量: 2,053,256
+2025-10-19 14:07:57 - RecommendationSystem - INFO - ============================================================
+2025-10-19 14:07:57 - RecommendationSystem - INFO - 开始第 1/50 轮训练
+2025-10-19 14:07:57 - RecommendationSystem - INFO - ============================================================
+2025-10-19 14:08:07 - torch._dynamo.utils - INFO - TorchDynamo compilation metrics:
+Function, Runtimes (s)
+2025-10-19 14:14:06 - RecommendationSystem - INFO - Starting training...
+2025-10-19 14:14:06 - RecommendationSystem - INFO - 模型: MMGCN
+2025-10-19 14:14:06 - RecommendationSystem - INFO - 总参数量: 2,053,256
+2025-10-19 14:14:06 - RecommendationSystem - INFO - 可训练参数量: 2,053,256
+2025-10-19 14:14:06 - RecommendationSystem - INFO - ============================================================
+2025-10-19 14:14:06 - RecommendationSystem - INFO - 开始第 1/50 轮训练
+2025-10-19 14:14:06 - RecommendationSystem - INFO - ============================================================
+2025-10-19 14:14:16 - RecommendationSystem - INFO - 验证结果:
+2025-10-19 14:14:16 - RecommendationSystem - INFO -   precision@5: 1.000000
+2025-10-19 14:14:16 - RecommendationSystem - INFO -   recall@5: 0.000243
+2025-10-19 14:14:16 - RecommendationSystem - INFO -   hit_rate@5: 1.000000
+2025-10-19 14:14:16 - RecommendationSystem - INFO -   ndcg@5: 1.000000
+2025-10-19 14:14:16 - RecommendationSystem - INFO -   map@5: 0.000243
+2025-10-19 14:14:16 - RecommendationSystem - INFO -   mrr@5: 1.000000
+2025-10-19 14:14:16 - RecommendationSystem - INFO -   precision@10: 1.000000
+2025-10-19 14:14:16 - RecommendationSystem - INFO -   recall@10: 0.000486
+2025-10-19 14:14:16 - RecommendationSystem - INFO -   hit_rate@10: 1.000000
+2025-10-19 14:14:16 - RecommendationSystem - INFO -   ndcg@10: 1.000000
+2025-10-19 14:14:16 - RecommendationSystem - INFO -   map@10: 0.000486
+2025-10-19 14:14:16 - RecommendationSystem - INFO -   mrr@10: 1.000000
+2025-10-19 14:14:16 - RecommendationSystem - INFO -   precision@20: 1.000000
+2025-10-19 14:14:16 - RecommendationSystem - INFO -   recall@20: 0.000973
+2025-10-19 14:14:16 - RecommendationSystem - INFO -   hit_rate@20: 1.000000
+2025-10-19 14:14:16 - RecommendationSystem - INFO -   ndcg@20: 1.000000
+2025-10-19 14:14:16 - RecommendationSystem - INFO -   map@20: 0.000973
+2025-10-19 14:14:16 - RecommendationSystem - INFO -   mrr@20: 1.000000
+2025-10-19 14:14:16 - RecommendationSystem - INFO - 第 1 轮训练完成
+2025-10-19 14:14:16 - RecommendationSystem - INFO - train_loss: 1.234219
+2025-10-19 14:14:16 - RecommendationSystem - INFO - precision@5: 1.000000
+2025-10-19 14:14:16 - RecommendationSystem - INFO - recall@5: 0.000243
+2025-10-19 14:14:16 - RecommendationSystem - INFO - hit_rate@5: 1.000000
+2025-10-19 14:14:16 - RecommendationSystem - INFO - ndcg@5: 1.000000
+2025-10-19 14:14:16 - RecommendationSystem - INFO - map@5: 0.000243
+2025-10-19 14:14:16 - RecommendationSystem - INFO - mrr@5: 1.000000
+2025-10-19 14:14:16 - RecommendationSystem - INFO - precision@10: 1.000000
+2025-10-19 14:14:16 - RecommendationSystem - INFO - recall@10: 0.000486
+2025-10-19 14:14:16 - RecommendationSystem - INFO - hit_rate@10: 1.000000
+2025-10-19 14:14:16 - RecommendationSystem - INFO - ndcg@10: 1.000000
+2025-10-19 14:14:16 - RecommendationSystem - INFO - map@10: 0.000486
+2025-10-19 14:14:16 - RecommendationSystem - INFO - mrr@10: 1.000000
+2025-10-19 14:14:16 - RecommendationSystem - INFO - precision@20: 1.000000
+2025-10-19 14:14:16 - RecommendationSystem - INFO - recall@20: 0.000973
+2025-10-19 14:14:16 - RecommendationSystem - INFO - hit_rate@20: 1.000000
+2025-10-19 14:14:16 - RecommendationSystem - INFO - ndcg@20: 1.000000
+2025-10-19 14:14:16 - RecommendationSystem - INFO - map@20: 0.000973
+2025-10-19 14:14:16 - RecommendationSystem - INFO - mrr@20: 1.000000
+2025-10-19 14:14:16 - RecommendationSystem - INFO - ------------------------------------------------------------
+2025-10-19 14:14:16 - RecommendationSystem - INFO - ============================================================
+2025-10-19 14:14:16 - RecommendationSystem - INFO - 开始第 2/50 轮训练
+2025-10-19 14:14:16 - RecommendationSystem - INFO - ============================================================
+2025-10-19 14:14:26 - RecommendationSystem - INFO - 验证结果:
+2025-10-19 14:14:26 - RecommendationSystem - INFO -   precision@5: 1.000000
+2025-10-19 14:14:26 - RecommendationSystem - INFO -   recall@5: 0.000243
+2025-10-19 14:14:26 - RecommendationSystem - INFO -   hit_rate@5: 1.000000
+2025-10-19 14:14:26 - RecommendationSystem - INFO -   ndcg@5: 1.000000
+2025-10-19 14:14:26 - RecommendationSystem - INFO -   map@5: 0.000243
+2025-10-19 14:14:26 - RecommendationSystem - INFO -   mrr@5: 1.000000
+2025-10-19 14:14:26 - RecommendationSystem - INFO -   precision@10: 1.000000
+2025-10-19 14:14:26 - RecommendationSystem - INFO -   recall@10: 0.000486
+2025-10-19 14:14:26 - RecommendationSystem - INFO -   hit_rate@10: 1.000000
+2025-10-19 14:14:26 - RecommendationSystem - INFO -   ndcg@10: 1.000000
+2025-10-19 14:14:26 - RecommendationSystem - INFO -   map@10: 0.000486
+2025-10-19 14:14:26 - RecommendationSystem - INFO -   mrr@10: 1.000000
+2025-10-19 14:14:26 - RecommendationSystem - INFO -   precision@20: 1.000000
+2025-10-19 14:14:26 - RecommendationSystem - INFO -   recall@20: 0.000973
+2025-10-19 14:14:26 - RecommendationSystem - INFO -   hit_rate@20: 1.000000
+2025-10-19 14:14:26 - RecommendationSystem - INFO -   ndcg@20: 1.000000
+2025-10-19 14:14:26 - RecommendationSystem - INFO -   map@20: 0.000973
+2025-10-19 14:14:26 - RecommendationSystem - INFO -   mrr@20: 1.000000
+2025-10-19 14:14:26 - RecommendationSystem - INFO - 第 2 轮训练完成
+2025-10-19 14:14:26 - RecommendationSystem - INFO - train_loss: 0.488780
+2025-10-19 14:14:26 - RecommendationSystem - INFO - precision@5: 1.000000
+2025-10-19 14:14:26 - RecommendationSystem - INFO - recall@5: 0.000243
+2025-10-19 14:14:26 - RecommendationSystem - INFO - hit_rate@5: 1.000000
+2025-10-19 14:14:26 - RecommendationSystem - INFO - ndcg@5: 1.000000
+2025-10-19 14:14:26 - RecommendationSystem - INFO - map@5: 0.000243
+2025-10-19 14:14:26 - RecommendationSystem - INFO - mrr@5: 1.000000
+2025-10-19 14:14:26 - RecommendationSystem - INFO - precision@10: 1.000000
+2025-10-19 14:14:26 - RecommendationSystem - INFO - recall@10: 0.000486
+2025-10-19 14:14:26 - RecommendationSystem - INFO - hit_rate@10: 1.000000
+2025-10-19 14:14:26 - RecommendationSystem - INFO - ndcg@10: 1.000000
+2025-10-19 14:14:26 - RecommendationSystem - INFO - map@10: 0.000486
+2025-10-19 14:14:26 - RecommendationSystem - INFO - mrr@10: 1.000000
+2025-10-19 14:14:26 - RecommendationSystem - INFO - precision@20: 1.000000
+2025-10-19 14:14:26 - RecommendationSystem - INFO - recall@20: 0.000973
+2025-10-19 14:14:26 - RecommendationSystem - INFO - hit_rate@20: 1.000000
+2025-10-19 14:14:26 - RecommendationSystem - INFO - ndcg@20: 1.000000
+2025-10-19 14:14:26 - RecommendationSystem - INFO - map@20: 0.000973
+2025-10-19 14:14:26 - RecommendationSystem - INFO - mrr@20: 1.000000
+2025-10-19 14:14:26 - RecommendationSystem - INFO - ------------------------------------------------------------
+2025-10-19 14:14:26 - RecommendationSystem - INFO - ============================================================
+2025-10-19 14:14:26 - RecommendationSystem - INFO - 开始第 3/50 轮训练
+2025-10-19 14:14:26 - RecommendationSystem - INFO - ============================================================
+2025-10-19 14:14:36 - RecommendationSystem - INFO - 验证结果:
+2025-10-19 14:14:36 - RecommendationSystem - INFO -   precision@5: 1.000000
+2025-10-19 14:14:36 - RecommendationSystem - INFO -   recall@5: 0.000243
+2025-10-19 14:14:36 - RecommendationSystem - INFO -   hit_rate@5: 1.000000
+2025-10-19 14:14:36 - RecommendationSystem - INFO -   ndcg@5: 1.000000
+2025-10-19 14:14:36 - RecommendationSystem - INFO -   map@5: 0.000243
+2025-10-19 14:14:36 - RecommendationSystem - INFO -   mrr@5: 1.000000
+2025-10-19 14:14:36 - RecommendationSystem - INFO -   precision@10: 1.000000
+2025-10-19 14:14:36 - RecommendationSystem - INFO -   recall@10: 0.000486
+2025-10-19 14:14:36 - RecommendationSystem - INFO -   hit_rate@10: 1.000000
+2025-10-19 14:14:36 - RecommendationSystem - INFO -   ndcg@10: 1.000000
+2025-10-19 14:14:36 - RecommendationSystem - INFO -   map@10: 0.000486
+2025-10-19 14:14:36 - RecommendationSystem - INFO -   mrr@10: 1.000000
+2025-10-19 14:14:36 - RecommendationSystem - INFO -   precision@20: 1.000000
+2025-10-19 14:14:36 - RecommendationSystem - INFO -   recall@20: 0.000973
+2025-10-19 14:14:36 - RecommendationSystem - INFO -   hit_rate@20: 1.000000
+2025-10-19 14:14:36 - RecommendationSystem - INFO -   ndcg@20: 1.000000
+2025-10-19 14:14:36 - RecommendationSystem - INFO -   map@20: 0.000973
+2025-10-19 14:14:36 - RecommendationSystem - INFO -   mrr@20: 1.000000
+2025-10-19 14:14:36 - RecommendationSystem - INFO - 第 3 轮训练完成
+2025-10-19 14:14:36 - RecommendationSystem - INFO - train_loss: 0.464583
+2025-10-19 14:14:36 - RecommendationSystem - INFO - precision@5: 1.000000
+2025-10-19 14:14:36 - RecommendationSystem - INFO - recall@5: 0.000243
+2025-10-19 14:14:36 - RecommendationSystem - INFO - hit_rate@5: 1.000000
+2025-10-19 14:14:36 - RecommendationSystem - INFO - ndcg@5: 1.000000
+2025-10-19 14:14:36 - RecommendationSystem - INFO - map@5: 0.000243
+2025-10-19 14:14:36 - RecommendationSystem - INFO - mrr@5: 1.000000
+2025-10-19 14:14:36 - RecommendationSystem - INFO - precision@10: 1.000000
+2025-10-19 14:14:36 - RecommendationSystem - INFO - recall@10: 0.000486
+2025-10-19 14:14:36 - RecommendationSystem - INFO - hit_rate@10: 1.000000
+2025-10-19 14:14:36 - RecommendationSystem - INFO - ndcg@10: 1.000000
+2025-10-19 14:14:36 - RecommendationSystem - INFO - map@10: 0.000486
+2025-10-19 14:14:36 - RecommendationSystem - INFO - mrr@10: 1.000000
+2025-10-19 14:14:36 - RecommendationSystem - INFO - precision@20: 1.000000
+2025-10-19 14:14:36 - RecommendationSystem - INFO - recall@20: 0.000973
+2025-10-19 14:14:36 - RecommendationSystem - INFO - hit_rate@20: 1.000000
+2025-10-19 14:14:36 - RecommendationSystem - INFO - ndcg@20: 1.000000
+2025-10-19 14:14:36 - RecommendationSystem - INFO - map@20: 0.000973
+2025-10-19 14:14:36 - RecommendationSystem - INFO - mrr@20: 1.000000
+2025-10-19 14:14:36 - RecommendationSystem - INFO - ------------------------------------------------------------
+2025-10-19 14:14:36 - RecommendationSystem - INFO - ============================================================
+2025-10-19 14:14:36 - RecommendationSystem - INFO - 开始第 4/50 轮训练
+2025-10-19 14:14:36 - RecommendationSystem - INFO - ============================================================
+2025-10-19 14:14:47 - RecommendationSystem - INFO - 验证结果:
+2025-10-19 14:14:47 - RecommendationSystem - INFO -   precision@5: 1.000000
+2025-10-19 14:14:47 - RecommendationSystem - INFO -   recall@5: 0.000243
+2025-10-19 14:14:47 - RecommendationSystem - INFO -   hit_rate@5: 1.000000
+2025-10-19 14:14:47 - RecommendationSystem - INFO -   ndcg@5: 1.000000
+2025-10-19 14:14:47 - RecommendationSystem - INFO -   map@5: 0.000243
+2025-10-19 14:14:47 - RecommendationSystem - INFO -   mrr@5: 1.000000
+2025-10-19 14:14:47 - RecommendationSystem - INFO -   precision@10: 1.000000
+2025-10-19 14:14:47 - RecommendationSystem - INFO -   recall@10: 0.000486
+2025-10-19 14:14:47 - RecommendationSystem - INFO -   hit_rate@10: 1.000000
+2025-10-19 14:14:47 - RecommendationSystem - INFO -   ndcg@10: 1.000000
+2025-10-19 14:14:47 - RecommendationSystem - INFO -   map@10: 0.000486
+2025-10-19 14:14:47 - RecommendationSystem - INFO -   mrr@10: 1.000000
+2025-10-19 14:14:47 - RecommendationSystem - INFO -   precision@20: 1.000000
+2025-10-19 14:14:47 - RecommendationSystem - INFO -   recall@20: 0.000973
+2025-10-19 14:14:47 - RecommendationSystem - INFO -   hit_rate@20: 1.000000
+2025-10-19 14:14:47 - RecommendationSystem - INFO -   ndcg@20: 1.000000
+2025-10-19 14:14:47 - RecommendationSystem - INFO -   map@20: 0.000973
+2025-10-19 14:14:47 - RecommendationSystem - INFO -   mrr@20: 1.000000
+2025-10-19 14:14:47 - RecommendationSystem - INFO - 第 4 轮训练完成
+2025-10-19 14:14:47 - RecommendationSystem - INFO - train_loss: 0.456333
+2025-10-19 14:14:47 - RecommendationSystem - INFO - precision@5: 1.000000
+2025-10-19 14:14:47 - RecommendationSystem - INFO - recall@5: 0.000243
+2025-10-19 14:14:47 - RecommendationSystem - INFO - hit_rate@5: 1.000000
+2025-10-19 14:14:47 - RecommendationSystem - INFO - ndcg@5: 1.000000
+2025-10-19 14:14:47 - RecommendationSystem - INFO - map@5: 0.000243
+2025-10-19 14:14:47 - RecommendationSystem - INFO - mrr@5: 1.000000
+2025-10-19 14:14:47 - RecommendationSystem - INFO - precision@10: 1.000000
+2025-10-19 14:14:47 - RecommendationSystem - INFO - recall@10: 0.000486
+2025-10-19 14:14:47 - RecommendationSystem - INFO - hit_rate@10: 1.000000
+2025-10-19 14:14:47 - RecommendationSystem - INFO - ndcg@10: 1.000000
+2025-10-19 14:14:47 - RecommendationSystem - INFO - map@10: 0.000486
+2025-10-19 14:14:47 - RecommendationSystem - INFO - mrr@10: 1.000000
+2025-10-19 14:14:47 - RecommendationSystem - INFO - precision@20: 1.000000
+2025-10-19 14:14:47 - RecommendationSystem - INFO - recall@20: 0.000973
+2025-10-19 14:14:47 - RecommendationSystem - INFO - hit_rate@20: 1.000000
+2025-10-19 14:14:47 - RecommendationSystem - INFO - ndcg@20: 1.000000
+2025-10-19 14:14:47 - RecommendationSystem - INFO - map@20: 0.000973
+2025-10-19 14:14:47 - RecommendationSystem - INFO - mrr@20: 1.000000
+2025-10-19 14:14:47 - RecommendationSystem - INFO - ------------------------------------------------------------
+2025-10-19 14:14:47 - RecommendationSystem - INFO - ============================================================
+2025-10-19 14:14:47 - RecommendationSystem - INFO - 开始第 5/50 轮训练
+2025-10-19 14:14:47 - RecommendationSystem - INFO - ============================================================
+2025-10-19 14:14:57 - RecommendationSystem - INFO - 验证结果:
+2025-10-19 14:14:57 - RecommendationSystem - INFO -   precision@5: 1.000000
+2025-10-19 14:14:57 - RecommendationSystem - INFO -   recall@5: 0.000243
+2025-10-19 14:14:57 - RecommendationSystem - INFO -   hit_rate@5: 1.000000
+2025-10-19 14:14:57 - RecommendationSystem - INFO -   ndcg@5: 1.000000
+2025-10-19 14:14:57 - RecommendationSystem - INFO -   map@5: 0.000243
+2025-10-19 14:14:57 - RecommendationSystem - INFO -   mrr@5: 1.000000
+2025-10-19 14:14:57 - RecommendationSystem - INFO -   precision@10: 1.000000
+2025-10-19 14:14:57 - RecommendationSystem - INFO -   recall@10: 0.000486
+2025-10-19 14:14:57 - RecommendationSystem - INFO -   hit_rate@10: 1.000000
+2025-10-19 14:14:57 - RecommendationSystem - INFO -   ndcg@10: 1.000000
+2025-10-19 14:14:57 - RecommendationSystem - INFO -   map@10: 0.000486
+2025-10-19 14:14:57 - RecommendationSystem - INFO -   mrr@10: 1.000000
+2025-10-19 14:14:57 - RecommendationSystem - INFO -   precision@20: 1.000000
+2025-10-19 14:14:57 - RecommendationSystem - INFO -   recall@20: 0.000973
+2025-10-19 14:14:57 - RecommendationSystem - INFO -   hit_rate@20: 1.000000
+2025-10-19 14:14:57 - RecommendationSystem - INFO -   ndcg@20: 1.000000
+2025-10-19 14:14:57 - RecommendationSystem - INFO -   map@20: 0.000973
+2025-10-19 14:14:57 - RecommendationSystem - INFO -   mrr@20: 1.000000
+2025-10-19 14:14:57 - RecommendationSystem - INFO - 第 5 轮训练完成
+2025-10-19 14:14:57 - RecommendationSystem - INFO - train_loss: 0.450862
+2025-10-19 14:14:57 - RecommendationSystem - INFO - precision@5: 1.000000
+2025-10-19 14:14:57 - RecommendationSystem - INFO - recall@5: 0.000243
+2025-10-19 14:14:57 - RecommendationSystem - INFO - hit_rate@5: 1.000000
+2025-10-19 14:14:57 - RecommendationSystem - INFO - ndcg@5: 1.000000
+2025-10-19 14:14:57 - RecommendationSystem - INFO - map@5: 0.000243
+2025-10-19 14:14:57 - RecommendationSystem - INFO - mrr@5: 1.000000
+2025-10-19 14:14:57 - RecommendationSystem - INFO - precision@10: 1.000000
+2025-10-19 14:14:57 - RecommendationSystem - INFO - recall@10: 0.000486
+2025-10-19 14:14:57 - RecommendationSystem - INFO - hit_rate@10: 1.000000
+2025-10-19 14:14:57 - RecommendationSystem - INFO - ndcg@10: 1.000000
+2025-10-19 14:14:57 - RecommendationSystem - INFO - map@10: 0.000486
+2025-10-19 14:14:57 - RecommendationSystem - INFO - mrr@10: 1.000000
+2025-10-19 14:14:57 - RecommendationSystem - INFO - precision@20: 1.000000
+2025-10-19 14:14:57 - RecommendationSystem - INFO - recall@20: 0.000973
+2025-10-19 14:14:57 - RecommendationSystem - INFO - hit_rate@20: 1.000000
+2025-10-19 14:14:57 - RecommendationSystem - INFO - ndcg@20: 1.000000
+2025-10-19 14:14:57 - RecommendationSystem - INFO - map@20: 0.000973
+2025-10-19 14:14:57 - RecommendationSystem - INFO - mrr@20: 1.000000
+2025-10-19 14:14:57 - RecommendationSystem - INFO - ------------------------------------------------------------
+2025-10-19 14:14:57 - RecommendationSystem - INFO - ============================================================
+2025-10-19 14:14:57 - RecommendationSystem - INFO - 开始第 6/50 轮训练
+2025-10-19 14:14:57 - RecommendationSystem - INFO - ============================================================
+2025-10-19 14:15:07 - RecommendationSystem - INFO - 验证结果:
+2025-10-19 14:15:07 - RecommendationSystem - INFO -   precision@5: 1.000000
+2025-10-19 14:15:07 - RecommendationSystem - INFO -   recall@5: 0.000243
+2025-10-19 14:15:07 - RecommendationSystem - INFO -   hit_rate@5: 1.000000
+2025-10-19 14:15:07 - RecommendationSystem - INFO -   ndcg@5: 1.000000
+2025-10-19 14:15:07 - RecommendationSystem - INFO -   map@5: 0.000243
+2025-10-19 14:15:07 - RecommendationSystem - INFO -   mrr@5: 1.000000
+2025-10-19 14:15:07 - RecommendationSystem - INFO -   precision@10: 1.000000
+2025-10-19 14:15:07 - RecommendationSystem - INFO -   recall@10: 0.000486
+2025-10-19 14:15:07 - RecommendationSystem - INFO -   hit_rate@10: 1.000000
+2025-10-19 14:15:07 - RecommendationSystem - INFO -   ndcg@10: 1.000000
+2025-10-19 14:15:07 - RecommendationSystem - INFO -   map@10: 0.000486
+2025-10-19 14:15:07 - RecommendationSystem - INFO -   mrr@10: 1.000000
+2025-10-19 14:15:07 - RecommendationSystem - INFO -   precision@20: 1.000000
+2025-10-19 14:15:07 - RecommendationSystem - INFO -   recall@20: 0.000973
+2025-10-19 14:15:07 - RecommendationSystem - INFO -   hit_rate@20: 1.000000
+2025-10-19 14:15:07 - RecommendationSystem - INFO -   ndcg@20: 1.000000
+2025-10-19 14:15:07 - RecommendationSystem - INFO -   map@20: 0.000973
+2025-10-19 14:15:07 - RecommendationSystem - INFO -   mrr@20: 1.000000
+2025-10-19 14:15:07 - RecommendationSystem - INFO - 第 6 轮训练完成
+2025-10-19 14:15:07 - RecommendationSystem - INFO - train_loss: 0.447212
+2025-10-19 14:15:07 - RecommendationSystem - INFO - precision@5: 1.000000
+2025-10-19 14:15:07 - RecommendationSystem - INFO - recall@5: 0.000243
+2025-10-19 14:15:07 - RecommendationSystem - INFO - hit_rate@5: 1.000000
+2025-10-19 14:15:07 - RecommendationSystem - INFO - ndcg@5: 1.000000
+2025-10-19 14:15:07 - RecommendationSystem - INFO - map@5: 0.000243
+2025-10-19 14:15:07 - RecommendationSystem - INFO - mrr@5: 1.000000
+2025-10-19 14:15:07 - RecommendationSystem - INFO - precision@10: 1.000000
+2025-10-19 14:15:07 - RecommendationSystem - INFO - recall@10: 0.000486
+2025-10-19 14:15:07 - RecommendationSystem - INFO - hit_rate@10: 1.000000
+2025-10-19 14:15:07 - RecommendationSystem - INFO - ndcg@10: 1.000000
+2025-10-19 14:15:07 - RecommendationSystem - INFO - map@10: 0.000486
+2025-10-19 14:15:07 - RecommendationSystem - INFO - mrr@10: 1.000000
+2025-10-19 14:15:07 - RecommendationSystem - INFO - precision@20: 1.000000
+2025-10-19 14:15:07 - RecommendationSystem - INFO - recall@20: 0.000973
+2025-10-19 14:15:07 - RecommendationSystem - INFO - hit_rate@20: 1.000000
+2025-10-19 14:15:07 - RecommendationSystem - INFO - ndcg@20: 1.000000
+2025-10-19 14:15:07 - RecommendationSystem - INFO - map@20: 0.000973
+2025-10-19 14:15:07 - RecommendationSystem - INFO - mrr@20: 1.000000
+2025-10-19 14:15:07 - RecommendationSystem - INFO - ------------------------------------------------------------
+2025-10-19 14:15:07 - RecommendationSystem - INFO - ============================================================
+2025-10-19 14:15:07 - RecommendationSystem - INFO - 开始第 7/50 轮训练
+2025-10-19 14:15:07 - RecommendationSystem - INFO - ============================================================
+2025-10-19 14:15:17 - RecommendationSystem - INFO - 验证结果:
+2025-10-19 14:15:17 - RecommendationSystem - INFO -   precision@5: 1.000000
+2025-10-19 14:15:17 - RecommendationSystem - INFO -   recall@5: 0.000243
+2025-10-19 14:15:17 - RecommendationSystem - INFO -   hit_rate@5: 1.000000
+2025-10-19 14:15:17 - RecommendationSystem - INFO -   ndcg@5: 1.000000
+2025-10-19 14:15:17 - RecommendationSystem - INFO -   map@5: 0.000243
+2025-10-19 14:15:17 - RecommendationSystem - INFO -   mrr@5: 1.000000
+2025-10-19 14:15:17 - RecommendationSystem - INFO -   precision@10: 1.000000
+2025-10-19 14:15:17 - RecommendationSystem - INFO -   recall@10: 0.000486
+2025-10-19 14:15:17 - RecommendationSystem - INFO -   hit_rate@10: 1.000000
+2025-10-19 14:15:17 - RecommendationSystem - INFO -   ndcg@10: 1.000000
+2025-10-19 14:15:17 - RecommendationSystem - INFO -   map@10: 0.000486
+2025-10-19 14:15:17 - RecommendationSystem - INFO -   mrr@10: 1.000000
+2025-10-19 14:15:17 - RecommendationSystem - INFO -   precision@20: 1.000000
+2025-10-19 14:15:17 - RecommendationSystem - INFO -   recall@20: 0.000973
+2025-10-19 14:15:17 - RecommendationSystem - INFO -   hit_rate@20: 1.000000
+2025-10-19 14:15:17 - RecommendationSystem - INFO -   ndcg@20: 1.000000
+2025-10-19 14:15:17 - RecommendationSystem - INFO -   map@20: 0.000973
+2025-10-19 14:15:17 - RecommendationSystem - INFO -   mrr@20: 1.000000
+2025-10-19 14:15:17 - RecommendationSystem - INFO - 第 7 轮训练完成
+2025-10-19 14:15:17 - RecommendationSystem - INFO - train_loss: 0.444538
+2025-10-19 14:15:17 - RecommendationSystem - INFO - precision@5: 1.000000
+2025-10-19 14:15:17 - RecommendationSystem - INFO - recall@5: 0.000243
+2025-10-19 14:15:17 - RecommendationSystem - INFO - hit_rate@5: 1.000000
+2025-10-19 14:15:17 - RecommendationSystem - INFO - ndcg@5: 1.000000
+2025-10-19 14:15:17 - RecommendationSystem - INFO - map@5: 0.000243
+2025-10-19 14:15:17 - RecommendationSystem - INFO - mrr@5: 1.000000
+2025-10-19 14:15:17 - RecommendationSystem - INFO - precision@10: 1.000000
+2025-10-19 14:15:17 - RecommendationSystem - INFO - recall@10: 0.000486
+2025-10-19 14:15:17 - RecommendationSystem - INFO - hit_rate@10: 1.000000
+2025-10-19 14:15:17 - RecommendationSystem - INFO - ndcg@10: 1.000000
+2025-10-19 14:15:17 - RecommendationSystem - INFO - map@10: 0.000486
+2025-10-19 14:15:17 - RecommendationSystem - INFO - mrr@10: 1.000000
+2025-10-19 14:15:17 - RecommendationSystem - INFO - precision@20: 1.000000
+2025-10-19 14:15:17 - RecommendationSystem - INFO - recall@20: 0.000973
+2025-10-19 14:15:17 - RecommendationSystem - INFO - hit_rate@20: 1.000000
+2025-10-19 14:15:17 - RecommendationSystem - INFO - ndcg@20: 1.000000
+2025-10-19 14:15:17 - RecommendationSystem - INFO - map@20: 0.000973
+2025-10-19 14:15:17 - RecommendationSystem - INFO - mrr@20: 1.000000
+2025-10-19 14:15:17 - RecommendationSystem - INFO - ------------------------------------------------------------
+2025-10-19 14:15:17 - RecommendationSystem - INFO - ============================================================
+2025-10-19 14:15:17 - RecommendationSystem - INFO - 开始第 8/50 轮训练
+2025-10-19 14:15:17 - RecommendationSystem - INFO - ============================================================
+2025-10-19 14:15:28 - RecommendationSystem - INFO - 验证结果:
+2025-10-19 14:15:28 - RecommendationSystem - INFO -   precision@5: 1.000000
+2025-10-19 14:15:28 - RecommendationSystem - INFO -   recall@5: 0.000243
+2025-10-19 14:15:28 - RecommendationSystem - INFO -   hit_rate@5: 1.000000
+2025-10-19 14:15:28 - RecommendationSystem - INFO -   ndcg@5: 1.000000
+2025-10-19 14:15:28 - RecommendationSystem - INFO -   map@5: 0.000243
+2025-10-19 14:15:28 - RecommendationSystem - INFO -   mrr@5: 1.000000
+2025-10-19 14:15:28 - RecommendationSystem - INFO -   precision@10: 1.000000
+2025-10-19 14:15:28 - RecommendationSystem - INFO -   recall@10: 0.000486
+2025-10-19 14:15:28 - RecommendationSystem - INFO -   hit_rate@10: 1.000000
+2025-10-19 14:15:28 - RecommendationSystem - INFO -   ndcg@10: 1.000000
+2025-10-19 14:15:28 - RecommendationSystem - INFO -   map@10: 0.000486
+2025-10-19 14:15:28 - RecommendationSystem - INFO -   mrr@10: 1.000000
+2025-10-19 14:15:28 - RecommendationSystem - INFO -   precision@20: 1.000000
+2025-10-19 14:15:28 - RecommendationSystem - INFO -   recall@20: 0.000973
+2025-10-19 14:15:28 - RecommendationSystem - INFO -   hit_rate@20: 1.000000
+2025-10-19 14:15:28 - RecommendationSystem - INFO -   ndcg@20: 1.000000
+2025-10-19 14:15:28 - RecommendationSystem - INFO -   map@20: 0.000973
+2025-10-19 14:15:28 - RecommendationSystem - INFO -   mrr@20: 1.000000
+2025-10-19 14:15:28 - RecommendationSystem - INFO - 第 8 轮训练完成
+2025-10-19 14:15:28 - RecommendationSystem - INFO - train_loss: 0.439646
+2025-10-19 14:15:28 - RecommendationSystem - INFO - precision@5: 1.000000
+2025-10-19 14:15:28 - RecommendationSystem - INFO - recall@5: 0.000243
+2025-10-19 14:15:28 - RecommendationSystem - INFO - hit_rate@5: 1.000000
+2025-10-19 14:15:28 - RecommendationSystem - INFO - ndcg@5: 1.000000
+2025-10-19 14:15:28 - RecommendationSystem - INFO - map@5: 0.000243
+2025-10-19 14:15:28 - RecommendationSystem - INFO - mrr@5: 1.000000
+2025-10-19 14:15:28 - RecommendationSystem - INFO - precision@10: 1.000000
+2025-10-19 14:15:28 - RecommendationSystem - INFO - recall@10: 0.000486
+2025-10-19 14:15:28 - RecommendationSystem - INFO - hit_rate@10: 1.000000
+2025-10-19 14:15:28 - RecommendationSystem - INFO - ndcg@10: 1.000000
+2025-10-19 14:15:28 - RecommendationSystem - INFO - map@10: 0.000486
+2025-10-19 14:15:28 - RecommendationSystem - INFO - mrr@10: 1.000000
+2025-10-19 14:15:28 - RecommendationSystem - INFO - precision@20: 1.000000
+2025-10-19 14:15:28 - RecommendationSystem - INFO - recall@20: 0.000973
+2025-10-19 14:15:28 - RecommendationSystem - INFO - hit_rate@20: 1.000000
+2025-10-19 14:15:28 - RecommendationSystem - INFO - ndcg@20: 1.000000
+2025-10-19 14:15:28 - RecommendationSystem - INFO - map@20: 0.000973
+2025-10-19 14:15:28 - RecommendationSystem - INFO - mrr@20: 1.000000
+2025-10-19 14:15:28 - RecommendationSystem - INFO - ------------------------------------------------------------
+2025-10-19 14:15:28 - RecommendationSystem - INFO - ============================================================
+2025-10-19 14:15:28 - RecommendationSystem - INFO - 开始第 9/50 轮训练
+2025-10-19 14:15:28 - RecommendationSystem - INFO - ============================================================
+2025-10-19 14:15:38 - RecommendationSystem - INFO - 验证结果:
+2025-10-19 14:15:38 - RecommendationSystem - INFO -   precision@5: 1.000000
+2025-10-19 14:15:38 - RecommendationSystem - INFO -   recall@5: 0.000243
+2025-10-19 14:15:38 - RecommendationSystem - INFO -   hit_rate@5: 1.000000
+2025-10-19 14:15:38 - RecommendationSystem - INFO -   ndcg@5: 1.000000
+2025-10-19 14:15:38 - RecommendationSystem - INFO -   map@5: 0.000243
+2025-10-19 14:15:38 - RecommendationSystem - INFO -   mrr@5: 1.000000
+2025-10-19 14:15:38 - RecommendationSystem - INFO -   precision@10: 1.000000
+2025-10-19 14:15:38 - RecommendationSystem - INFO -   recall@10: 0.000486
+2025-10-19 14:15:38 - RecommendationSystem - INFO -   hit_rate@10: 1.000000
+2025-10-19 14:15:38 - RecommendationSystem - INFO -   ndcg@10: 1.000000
+2025-10-19 14:15:38 - RecommendationSystem - INFO -   map@10: 0.000486
+2025-10-19 14:15:38 - RecommendationSystem - INFO -   mrr@10: 1.000000
+2025-10-19 14:15:38 - RecommendationSystem - INFO -   precision@20: 1.000000
+2025-10-19 14:15:38 - RecommendationSystem - INFO -   recall@20: 0.000973
+2025-10-19 14:15:38 - RecommendationSystem - INFO -   hit_rate@20: 1.000000
+2025-10-19 14:15:38 - RecommendationSystem - INFO -   ndcg@20: 1.000000
+2025-10-19 14:15:38 - RecommendationSystem - INFO -   map@20: 0.000973
+2025-10-19 14:15:38 - RecommendationSystem - INFO -   mrr@20: 1.000000
+2025-10-19 14:15:38 - RecommendationSystem - INFO - 第 9 轮训练完成
+2025-10-19 14:15:38 - RecommendationSystem - INFO - train_loss: 0.433411
+2025-10-19 14:15:38 - RecommendationSystem - INFO - precision@5: 1.000000
+2025-10-19 14:15:38 - RecommendationSystem - INFO - recall@5: 0.000243
+2025-10-19 14:15:38 - RecommendationSystem - INFO - hit_rate@5: 1.000000
+2025-10-19 14:15:38 - RecommendationSystem - INFO - ndcg@5: 1.000000
+2025-10-19 14:15:38 - RecommendationSystem - INFO - map@5: 0.000243
+2025-10-19 14:15:38 - RecommendationSystem - INFO - mrr@5: 1.000000
+2025-10-19 14:15:38 - RecommendationSystem - INFO - precision@10: 1.000000
+2025-10-19 14:15:38 - RecommendationSystem - INFO - recall@10: 0.000486
+2025-10-19 14:15:38 - RecommendationSystem - INFO - hit_rate@10: 1.000000
+2025-10-19 14:15:38 - RecommendationSystem - INFO - ndcg@10: 1.000000
+2025-10-19 14:15:38 - RecommendationSystem - INFO - map@10: 0.000486
+2025-10-19 14:15:38 - RecommendationSystem - INFO - mrr@10: 1.000000
+2025-10-19 14:15:38 - RecommendationSystem - INFO - precision@20: 1.000000
+2025-10-19 14:15:38 - RecommendationSystem - INFO - recall@20: 0.000973
+2025-10-19 14:15:38 - RecommendationSystem - INFO - hit_rate@20: 1.000000
+2025-10-19 14:15:38 - RecommendationSystem - INFO - ndcg@20: 1.000000
+2025-10-19 14:15:38 - RecommendationSystem - INFO - map@20: 0.000973
+2025-10-19 14:15:38 - RecommendationSystem - INFO - mrr@20: 1.000000
+2025-10-19 14:15:38 - RecommendationSystem - INFO - ------------------------------------------------------------
+2025-10-19 14:15:38 - RecommendationSystem - INFO - ============================================================
+2025-10-19 14:15:38 - RecommendationSystem - INFO - 开始第 10/50 轮训练
+2025-10-19 14:15:38 - RecommendationSystem - INFO - ============================================================
+2025-10-19 14:15:48 - RecommendationSystem - INFO - 验证结果:
+2025-10-19 14:15:48 - RecommendationSystem - INFO -   precision@5: 1.000000
+2025-10-19 14:15:48 - RecommendationSystem - INFO -   recall@5: 0.000243
+2025-10-19 14:15:48 - RecommendationSystem - INFO -   hit_rate@5: 1.000000
+2025-10-19 14:15:48 - RecommendationSystem - INFO -   ndcg@5: 1.000000
+2025-10-19 14:15:48 - RecommendationSystem - INFO -   map@5: 0.000243
+2025-10-19 14:15:48 - RecommendationSystem - INFO -   mrr@5: 1.000000
+2025-10-19 14:15:48 - RecommendationSystem - INFO -   precision@10: 1.000000
+2025-10-19 14:15:48 - RecommendationSystem - INFO -   recall@10: 0.000486
+2025-10-19 14:15:48 - RecommendationSystem - INFO -   hit_rate@10: 1.000000
+2025-10-19 14:15:48 - RecommendationSystem - INFO -   ndcg@10: 1.000000
+2025-10-19 14:15:48 - RecommendationSystem - INFO -   map@10: 0.000486
+2025-10-19 14:15:48 - RecommendationSystem - INFO -   mrr@10: 1.000000
+2025-10-19 14:15:48 - RecommendationSystem - INFO -   precision@20: 1.000000
+2025-10-19 14:15:48 - RecommendationSystem - INFO -   recall@20: 0.000973
+2025-10-19 14:15:48 - RecommendationSystem - INFO -   hit_rate@20: 1.000000
+2025-10-19 14:15:48 - RecommendationSystem - INFO -   ndcg@20: 1.000000
+2025-10-19 14:15:48 - RecommendationSystem - INFO -   map@20: 0.000973
+2025-10-19 14:15:48 - RecommendationSystem - INFO -   mrr@20: 1.000000
+2025-10-19 14:15:48 - RecommendationSystem - INFO - 第 10 轮训练完成
+2025-10-19 14:15:48 - RecommendationSystem - INFO - train_loss: 0.415903
+2025-10-19 14:15:48 - RecommendationSystem - INFO - precision@5: 1.000000
+2025-10-19 14:15:48 - RecommendationSystem - INFO - recall@5: 0.000243
+2025-10-19 14:15:48 - RecommendationSystem - INFO - hit_rate@5: 1.000000
+2025-10-19 14:15:48 - RecommendationSystem - INFO - ndcg@5: 1.000000
+2025-10-19 14:15:48 - RecommendationSystem - INFO - map@5: 0.000243
+2025-10-19 14:15:48 - RecommendationSystem - INFO - mrr@5: 1.000000
+2025-10-19 14:15:48 - RecommendationSystem - INFO - precision@10: 1.000000
+2025-10-19 14:15:48 - RecommendationSystem - INFO - recall@10: 0.000486
+2025-10-19 14:15:48 - RecommendationSystem - INFO - hit_rate@10: 1.000000
+2025-10-19 14:15:48 - RecommendationSystem - INFO - ndcg@10: 1.000000
+2025-10-19 14:15:48 - RecommendationSystem - INFO - map@10: 0.000486
+2025-10-19 14:15:48 - RecommendationSystem - INFO - mrr@10: 1.000000
+2025-10-19 14:15:48 - RecommendationSystem - INFO - precision@20: 1.000000
+2025-10-19 14:15:48 - RecommendationSystem - INFO - recall@20: 0.000973
+2025-10-19 14:15:48 - RecommendationSystem - INFO - hit_rate@20: 1.000000
+2025-10-19 14:15:48 - RecommendationSystem - INFO - ndcg@20: 1.000000
+2025-10-19 14:15:48 - RecommendationSystem - INFO - map@20: 0.000973
+2025-10-19 14:15:48 - RecommendationSystem - INFO - mrr@20: 1.000000
+2025-10-19 14:15:48 - RecommendationSystem - INFO - ------------------------------------------------------------
+2025-10-19 14:15:48 - RecommendationSystem - INFO - 检查点已保存: Epoch 10 -> ./checkpoints/checkpoint_epoch_10.pth
+2025-10-19 14:15:48 - RecommendationSystem - INFO - ============================================================
+2025-10-19 14:15:48 - RecommendationSystem - INFO - 开始第 11/50 轮训练
+2025-10-19 14:15:48 - RecommendationSystem - INFO - ============================================================
+2025-10-19 14:15:58 - RecommendationSystem - INFO - 验证结果:
+2025-10-19 14:15:58 - RecommendationSystem - INFO -   precision@5: 1.000000
+2025-10-19 14:15:58 - RecommendationSystem - INFO -   recall@5: 0.000243
+2025-10-19 14:15:58 - RecommendationSystem - INFO -   hit_rate@5: 1.000000
+2025-10-19 14:15:58 - RecommendationSystem - INFO -   ndcg@5: 1.000000
+2025-10-19 14:15:58 - RecommendationSystem - INFO -   map@5: 0.000243
+2025-10-19 14:15:58 - RecommendationSystem - INFO -   mrr@5: 1.000000
+2025-10-19 14:15:58 - RecommendationSystem - INFO -   precision@10: 1.000000
+2025-10-19 14:15:58 - RecommendationSystem - INFO -   recall@10: 0.000486
+2025-10-19 14:15:58 - RecommendationSystem - INFO -   hit_rate@10: 1.000000
+2025-10-19 14:15:58 - RecommendationSystem - INFO -   ndcg@10: 1.000000
+2025-10-19 14:15:58 - RecommendationSystem - INFO -   map@10: 0.000486
+2025-10-19 14:15:58 - RecommendationSystem - INFO -   mrr@10: 1.000000
+2025-10-19 14:15:58 - RecommendationSystem - INFO -   precision@20: 1.000000
+2025-10-19 14:15:58 - RecommendationSystem - INFO -   recall@20: 0.000973
+2025-10-19 14:15:58 - RecommendationSystem - INFO -   hit_rate@20: 1.000000
+2025-10-19 14:15:58 - RecommendationSystem - INFO -   ndcg@20: 1.000000
+2025-10-19 14:15:58 - RecommendationSystem - INFO -   map@20: 0.000973
+2025-10-19 14:15:58 - RecommendationSystem - INFO -   mrr@20: 1.000000
+2025-10-19 14:15:58 - RecommendationSystem - INFO - 第 11 轮训练完成
+2025-10-19 14:15:58 - RecommendationSystem - INFO - train_loss: 0.386742
+2025-10-19 14:15:58 - RecommendationSystem - INFO - precision@5: 1.000000
+2025-10-19 14:15:58 - RecommendationSystem - INFO - recall@5: 0.000243
+2025-10-19 14:15:58 - RecommendationSystem - INFO - hit_rate@5: 1.000000
+2025-10-19 14:15:58 - RecommendationSystem - INFO - ndcg@5: 1.000000
+2025-10-19 14:15:58 - RecommendationSystem - INFO - map@5: 0.000243
+2025-10-19 14:15:58 - RecommendationSystem - INFO - mrr@5: 1.000000
+2025-10-19 14:15:58 - RecommendationSystem - INFO - precision@10: 1.000000
+2025-10-19 14:15:58 - RecommendationSystem - INFO - recall@10: 0.000486
+2025-10-19 14:15:58 - RecommendationSystem - INFO - hit_rate@10: 1.000000
+2025-10-19 14:15:58 - RecommendationSystem - INFO - ndcg@10: 1.000000
+2025-10-19 14:15:58 - RecommendationSystem - INFO - map@10: 0.000486
+2025-10-19 14:15:58 - RecommendationSystem - INFO - mrr@10: 1.000000
+2025-10-19 14:15:58 - RecommendationSystem - INFO - precision@20: 1.000000
+2025-10-19 14:15:58 - RecommendationSystem - INFO - recall@20: 0.000973
+2025-10-19 14:15:58 - RecommendationSystem - INFO - hit_rate@20: 1.000000
+2025-10-19 14:15:58 - RecommendationSystem - INFO - ndcg@20: 1.000000
+2025-10-19 14:15:58 - RecommendationSystem - INFO - map@20: 0.000973
+2025-10-19 14:15:58 - RecommendationSystem - INFO - mrr@20: 1.000000
+2025-10-19 14:15:58 - RecommendationSystem - INFO - ------------------------------------------------------------
+2025-10-19 14:15:58 - RecommendationSystem - INFO - ============================================================
+2025-10-19 14:15:58 - RecommendationSystem - INFO - 开始第 12/50 轮训练
+2025-10-19 14:15:58 - RecommendationSystem - INFO - ============================================================
+2025-10-19 14:16:08 - RecommendationSystem - INFO - 验证结果:
+2025-10-19 14:16:08 - RecommendationSystem - INFO -   precision@5: 1.000000
+2025-10-19 14:16:08 - RecommendationSystem - INFO -   recall@5: 0.000243
+2025-10-19 14:16:08 - RecommendationSystem - INFO -   hit_rate@5: 1.000000
+2025-10-19 14:16:08 - RecommendationSystem - INFO -   ndcg@5: 1.000000
+2025-10-19 14:16:08 - RecommendationSystem - INFO -   map@5: 0.000243
+2025-10-19 14:16:08 - RecommendationSystem - INFO -   mrr@5: 1.000000
+2025-10-19 14:16:08 - RecommendationSystem - INFO -   precision@10: 1.000000
+2025-10-19 14:16:08 - RecommendationSystem - INFO -   recall@10: 0.000486
+2025-10-19 14:16:08 - RecommendationSystem - INFO -   hit_rate@10: 1.000000
+2025-10-19 14:16:08 - RecommendationSystem - INFO -   ndcg@10: 1.000000
+2025-10-19 14:16:08 - RecommendationSystem - INFO -   map@10: 0.000486
+2025-10-19 14:16:08 - RecommendationSystem - INFO -   mrr@10: 1.000000
+2025-10-19 14:16:08 - RecommendationSystem - INFO -   precision@20: 1.000000
+2025-10-19 14:16:08 - RecommendationSystem - INFO -   recall@20: 0.000973
+2025-10-19 14:16:08 - RecommendationSystem - INFO -   hit_rate@20: 1.000000
+2025-10-19 14:16:08 - RecommendationSystem - INFO -   ndcg@20: 1.000000
+2025-10-19 14:16:08 - RecommendationSystem - INFO -   map@20: 0.000973
+2025-10-19 14:16:08 - RecommendationSystem - INFO -   mrr@20: 1.000000
+2025-10-19 14:16:08 - RecommendationSystem - INFO - 第 12 轮训练完成
+2025-10-19 14:16:08 - RecommendationSystem - INFO - train_loss: 0.376725
+2025-10-19 14:16:08 - RecommendationSystem - INFO - precision@5: 1.000000
+2025-10-19 14:16:08 - RecommendationSystem - INFO - recall@5: 0.000243
+2025-10-19 14:16:08 - RecommendationSystem - INFO - hit_rate@5: 1.000000
+2025-10-19 14:16:08 - RecommendationSystem - INFO - ndcg@5: 1.000000
+2025-10-19 14:16:08 - RecommendationSystem - INFO - map@5: 0.000243
+2025-10-19 14:16:08 - RecommendationSystem - INFO - mrr@5: 1.000000
+2025-10-19 14:16:08 - RecommendationSystem - INFO - precision@10: 1.000000
+2025-10-19 14:16:08 - RecommendationSystem - INFO - recall@10: 0.000486
+2025-10-19 14:16:08 - RecommendationSystem - INFO - hit_rate@10: 1.000000
+2025-10-19 14:16:08 - RecommendationSystem - INFO - ndcg@10: 1.000000
+2025-10-19 14:16:08 - RecommendationSystem - INFO - map@10: 0.000486
+2025-10-19 14:16:08 - RecommendationSystem - INFO - mrr@10: 1.000000
+2025-10-19 14:16:08 - RecommendationSystem - INFO - precision@20: 1.000000
+2025-10-19 14:16:08 - RecommendationSystem - INFO - recall@20: 0.000973
+2025-10-19 14:16:08 - RecommendationSystem - INFO - hit_rate@20: 1.000000
+2025-10-19 14:16:08 - RecommendationSystem - INFO - ndcg@20: 1.000000
+2025-10-19 14:16:08 - RecommendationSystem - INFO - map@20: 0.000973
+2025-10-19 14:16:08 - RecommendationSystem - INFO - mrr@20: 1.000000
+2025-10-19 14:16:08 - RecommendationSystem - INFO - ------------------------------------------------------------
+2025-10-19 14:16:08 - RecommendationSystem - INFO - ============================================================
+2025-10-19 14:16:08 - RecommendationSystem - INFO - 开始第 13/50 轮训练
+2025-10-19 14:16:08 - RecommendationSystem - INFO - ============================================================
+2025-10-19 14:16:18 - RecommendationSystem - INFO - 验证结果:
+2025-10-19 14:16:18 - RecommendationSystem - INFO -   precision@5: 1.000000
+2025-10-19 14:16:18 - RecommendationSystem - INFO -   recall@5: 0.000243
+2025-10-19 14:16:18 - RecommendationSystem - INFO -   hit_rate@5: 1.000000
+2025-10-19 14:16:18 - RecommendationSystem - INFO -   ndcg@5: 1.000000
+2025-10-19 14:16:18 - RecommendationSystem - INFO -   map@5: 0.000243
+2025-10-19 14:16:18 - RecommendationSystem - INFO -   mrr@5: 1.000000
+2025-10-19 14:16:18 - RecommendationSystem - INFO -   precision@10: 1.000000
+2025-10-19 14:16:18 - RecommendationSystem - INFO -   recall@10: 0.000486
+2025-10-19 14:16:18 - RecommendationSystem - INFO -   hit_rate@10: 1.000000
+2025-10-19 14:16:18 - RecommendationSystem - INFO -   ndcg@10: 1.000000
+2025-10-19 14:16:18 - RecommendationSystem - INFO -   map@10: 0.000486
+2025-10-19 14:16:18 - RecommendationSystem - INFO -   mrr@10: 1.000000
+2025-10-19 14:16:18 - RecommendationSystem - INFO -   precision@20: 1.000000
+2025-10-19 14:16:18 - RecommendationSystem - INFO -   recall@20: 0.000973
+2025-10-19 14:16:18 - RecommendationSystem - INFO -   hit_rate@20: 1.000000
+2025-10-19 14:16:18 - RecommendationSystem - INFO -   ndcg@20: 1.000000
+2025-10-19 14:16:18 - RecommendationSystem - INFO -   map@20: 0.000973
+2025-10-19 14:16:18 - RecommendationSystem - INFO -   mrr@20: 1.000000
+2025-10-19 14:16:18 - RecommendationSystem - INFO - 第 13 轮训练完成
+2025-10-19 14:16:18 - RecommendationSystem - INFO - train_loss: 0.368251
+2025-10-19 14:16:18 - RecommendationSystem - INFO - precision@5: 1.000000
+2025-10-19 14:16:18 - RecommendationSystem - INFO - recall@5: 0.000243
+2025-10-19 14:16:18 - RecommendationSystem - INFO - hit_rate@5: 1.000000
+2025-10-19 14:16:18 - RecommendationSystem - INFO - ndcg@5: 1.000000
+2025-10-19 14:16:18 - RecommendationSystem - INFO - map@5: 0.000243
+2025-10-19 14:16:18 - RecommendationSystem - INFO - mrr@5: 1.000000
+2025-10-19 14:16:18 - RecommendationSystem - INFO - precision@10: 1.000000
+2025-10-19 14:16:18 - RecommendationSystem - INFO - recall@10: 0.000486
+2025-10-19 14:16:18 - RecommendationSystem - INFO - hit_rate@10: 1.000000
+2025-10-19 14:16:18 - RecommendationSystem - INFO - ndcg@10: 1.000000
+2025-10-19 14:16:18 - RecommendationSystem - INFO - map@10: 0.000486
+2025-10-19 14:16:18 - RecommendationSystem - INFO - mrr@10: 1.000000
+2025-10-19 14:16:18 - RecommendationSystem - INFO - precision@20: 1.000000
+2025-10-19 14:16:18 - RecommendationSystem - INFO - recall@20: 0.000973
+2025-10-19 14:16:18 - RecommendationSystem - INFO - hit_rate@20: 1.000000
+2025-10-19 14:16:18 - RecommendationSystem - INFO - ndcg@20: 1.000000
+2025-10-19 14:16:18 - RecommendationSystem - INFO - map@20: 0.000973
+2025-10-19 14:16:18 - RecommendationSystem - INFO - mrr@20: 1.000000
+2025-10-19 14:16:18 - RecommendationSystem - INFO - ------------------------------------------------------------
+2025-10-19 14:16:18 - RecommendationSystem - INFO - ============================================================
+2025-10-19 14:16:18 - RecommendationSystem - INFO - 开始第 14/50 轮训练
+2025-10-19 14:16:18 - RecommendationSystem - INFO - ============================================================
+2025-10-19 14:16:28 - RecommendationSystem - INFO - 验证结果:
+2025-10-19 14:16:28 - RecommendationSystem - INFO -   precision@5: 1.000000
+2025-10-19 14:16:28 - RecommendationSystem - INFO -   recall@5: 0.000243
+2025-10-19 14:16:28 - RecommendationSystem - INFO -   hit_rate@5: 1.000000
+2025-10-19 14:16:28 - RecommendationSystem - INFO -   ndcg@5: 1.000000
+2025-10-19 14:16:28 - RecommendationSystem - INFO -   map@5: 0.000243
+2025-10-19 14:16:28 - RecommendationSystem - INFO -   mrr@5: 1.000000
+2025-10-19 14:16:28 - RecommendationSystem - INFO -   precision@10: 1.000000
+2025-10-19 14:16:28 - RecommendationSystem - INFO -   recall@10: 0.000486
+2025-10-19 14:16:28 - RecommendationSystem - INFO -   hit_rate@10: 1.000000
+2025-10-19 14:16:28 - RecommendationSystem - INFO -   ndcg@10: 1.000000
+2025-10-19 14:16:28 - RecommendationSystem - INFO -   map@10: 0.000486
+2025-10-19 14:16:28 - RecommendationSystem - INFO -   mrr@10: 1.000000
+2025-10-19 14:16:28 - RecommendationSystem - INFO -   precision@20: 1.000000
+2025-10-19 14:16:28 - RecommendationSystem - INFO -   recall@20: 0.000973
+2025-10-19 14:16:28 - RecommendationSystem - INFO -   hit_rate@20: 1.000000
+2025-10-19 14:16:28 - RecommendationSystem - INFO -   ndcg@20: 1.000000
+2025-10-19 14:16:28 - RecommendationSystem - INFO -   map@20: 0.000973
+2025-10-19 14:16:28 - RecommendationSystem - INFO -   mrr@20: 1.000000
+2025-10-19 14:16:28 - RecommendationSystem - INFO - 第 14 轮训练完成
+2025-10-19 14:16:28 - RecommendationSystem - INFO - train_loss: 0.364208
+2025-10-19 14:16:28 - RecommendationSystem - INFO - precision@5: 1.000000
+2025-10-19 14:16:28 - RecommendationSystem - INFO - recall@5: 0.000243
+2025-10-19 14:16:28 - RecommendationSystem - INFO - hit_rate@5: 1.000000
+2025-10-19 14:16:28 - RecommendationSystem - INFO - ndcg@5: 1.000000
+2025-10-19 14:16:28 - RecommendationSystem - INFO - map@5: 0.000243
+2025-10-19 14:16:28 - RecommendationSystem - INFO - mrr@5: 1.000000
+2025-10-19 14:16:28 - RecommendationSystem - INFO - precision@10: 1.000000
+2025-10-19 14:16:28 - RecommendationSystem - INFO - recall@10: 0.000486
+2025-10-19 14:16:28 - RecommendationSystem - INFO - hit_rate@10: 1.000000
+2025-10-19 14:16:28 - RecommendationSystem - INFO - ndcg@10: 1.000000
+2025-10-19 14:16:28 - RecommendationSystem - INFO - map@10: 0.000486
+2025-10-19 14:16:28 - RecommendationSystem - INFO - mrr@10: 1.000000
+2025-10-19 14:16:28 - RecommendationSystem - INFO - precision@20: 1.000000
+2025-10-19 14:16:28 - RecommendationSystem - INFO - recall@20: 0.000973
+2025-10-19 14:16:28 - RecommendationSystem - INFO - hit_rate@20: 1.000000
+2025-10-19 14:16:28 - RecommendationSystem - INFO - ndcg@20: 1.000000
+2025-10-19 14:16:28 - RecommendationSystem - INFO - map@20: 0.000973
+2025-10-19 14:16:28 - RecommendationSystem - INFO - mrr@20: 1.000000
+2025-10-19 14:16:28 - RecommendationSystem - INFO - ------------------------------------------------------------
+2025-10-19 14:16:28 - RecommendationSystem - INFO - ============================================================
+2025-10-19 14:16:28 - RecommendationSystem - INFO - 开始第 15/50 轮训练
+2025-10-19 14:16:28 - RecommendationSystem - INFO - ============================================================
+2025-10-19 14:16:38 - RecommendationSystem - INFO - 验证结果:
+2025-10-19 14:16:38 - RecommendationSystem - INFO -   precision@5: 1.000000
+2025-10-19 14:16:38 - RecommendationSystem - INFO -   recall@5: 0.000243
+2025-10-19 14:16:38 - RecommendationSystem - INFO -   hit_rate@5: 1.000000
+2025-10-19 14:16:38 - RecommendationSystem - INFO -   ndcg@5: 1.000000
+2025-10-19 14:16:38 - RecommendationSystem - INFO -   map@5: 0.000243
+2025-10-19 14:16:38 - RecommendationSystem - INFO -   mrr@5: 1.000000
+2025-10-19 14:16:38 - RecommendationSystem - INFO -   precision@10: 1.000000
+2025-10-19 14:16:38 - RecommendationSystem - INFO -   recall@10: 0.000486
+2025-10-19 14:16:38 - RecommendationSystem - INFO -   hit_rate@10: 1.000000
+2025-10-19 14:16:38 - RecommendationSystem - INFO -   ndcg@10: 1.000000
+2025-10-19 14:16:38 - RecommendationSystem - INFO -   map@10: 0.000486
+2025-10-19 14:16:38 - RecommendationSystem - INFO -   mrr@10: 1.000000
+2025-10-19 14:16:38 - RecommendationSystem - INFO -   precision@20: 1.000000
+2025-10-19 14:16:38 - RecommendationSystem - INFO -   recall@20: 0.000973
+2025-10-19 14:16:38 - RecommendationSystem - INFO -   hit_rate@20: 1.000000
+2025-10-19 14:16:38 - RecommendationSystem - INFO -   ndcg@20: 1.000000
+2025-10-19 14:16:38 - RecommendationSystem - INFO -   map@20: 0.000973
+2025-10-19 14:16:38 - RecommendationSystem - INFO -   mrr@20: 1.000000
+2025-10-19 14:16:38 - RecommendationSystem - INFO - 第 15 轮训练完成
+2025-10-19 14:16:38 - RecommendationSystem - INFO - train_loss: 0.362681
+2025-10-19 14:16:38 - RecommendationSystem - INFO - precision@5: 1.000000
+2025-10-19 14:16:38 - RecommendationSystem - INFO - recall@5: 0.000243
+2025-10-19 14:16:38 - RecommendationSystem - INFO - hit_rate@5: 1.000000
+2025-10-19 14:16:38 - RecommendationSystem - INFO - ndcg@5: 1.000000
+2025-10-19 14:16:38 - RecommendationSystem - INFO - map@5: 0.000243
+2025-10-19 14:16:38 - RecommendationSystem - INFO - mrr@5: 1.000000
+2025-10-19 14:16:38 - RecommendationSystem - INFO - precision@10: 1.000000
+2025-10-19 14:16:38 - RecommendationSystem - INFO - recall@10: 0.000486
+2025-10-19 14:16:38 - RecommendationSystem - INFO - hit_rate@10: 1.000000
+2025-10-19 14:16:38 - RecommendationSystem - INFO - ndcg@10: 1.000000
+2025-10-19 14:16:38 - RecommendationSystem - INFO - map@10: 0.000486
+2025-10-19 14:16:38 - RecommendationSystem - INFO - mrr@10: 1.000000
+2025-10-19 14:16:38 - RecommendationSystem - INFO - precision@20: 1.000000
+2025-10-19 14:16:38 - RecommendationSystem - INFO - recall@20: 0.000973
+2025-10-19 14:16:38 - RecommendationSystem - INFO - hit_rate@20: 1.000000
+2025-10-19 14:16:38 - RecommendationSystem - INFO - ndcg@20: 1.000000
+2025-10-19 14:16:38 - RecommendationSystem - INFO - map@20: 0.000973
+2025-10-19 14:16:38 - RecommendationSystem - INFO - mrr@20: 1.000000
+2025-10-19 14:16:38 - RecommendationSystem - INFO - ------------------------------------------------------------
+2025-10-19 14:16:38 - RecommendationSystem - INFO - ============================================================
+2025-10-19 14:16:38 - RecommendationSystem - INFO - 开始第 16/50 轮训练
+2025-10-19 14:16:38 - RecommendationSystem - INFO - ============================================================
+2025-10-19 14:16:48 - RecommendationSystem - INFO - 验证结果:
+2025-10-19 14:16:48 - RecommendationSystem - INFO -   precision@5: 1.000000
+2025-10-19 14:16:48 - RecommendationSystem - INFO -   recall@5: 0.000243
+2025-10-19 14:16:48 - RecommendationSystem - INFO -   hit_rate@5: 1.000000
+2025-10-19 14:16:48 - RecommendationSystem - INFO -   ndcg@5: 1.000000
+2025-10-19 14:16:48 - RecommendationSystem - INFO -   map@5: 0.000243
+2025-10-19 14:16:48 - RecommendationSystem - INFO -   mrr@5: 1.000000
+2025-10-19 14:16:48 - RecommendationSystem - INFO -   precision@10: 1.000000
+2025-10-19 14:16:48 - RecommendationSystem - INFO -   recall@10: 0.000486
+2025-10-19 14:16:48 - RecommendationSystem - INFO -   hit_rate@10: 1.000000
+2025-10-19 14:16:48 - RecommendationSystem - INFO -   ndcg@10: 1.000000
+2025-10-19 14:16:48 - RecommendationSystem - INFO -   map@10: 0.000486
+2025-10-19 14:16:48 - RecommendationSystem - INFO -   mrr@10: 1.000000
+2025-10-19 14:16:48 - RecommendationSystem - INFO -   precision@20: 1.000000
+2025-10-19 14:16:48 - RecommendationSystem - INFO -   recall@20: 0.000973
+2025-10-19 14:16:48 - RecommendationSystem - INFO -   hit_rate@20: 1.000000
+2025-10-19 14:16:48 - RecommendationSystem - INFO -   ndcg@20: 1.000000
+2025-10-19 14:16:48 - RecommendationSystem - INFO -   map@20: 0.000973
+2025-10-19 14:16:48 - RecommendationSystem - INFO -   mrr@20: 1.000000
+2025-10-19 14:16:48 - RecommendationSystem - INFO - 第 16 轮训练完成
+2025-10-19 14:16:48 - RecommendationSystem - INFO - train_loss: 0.361247
+2025-10-19 14:16:48 - RecommendationSystem - INFO - precision@5: 1.000000
+2025-10-19 14:16:48 - RecommendationSystem - INFO - recall@5: 0.000243
+2025-10-19 14:16:48 - RecommendationSystem - INFO - hit_rate@5: 1.000000
+2025-10-19 14:16:48 - RecommendationSystem - INFO - ndcg@5: 1.000000
+2025-10-19 14:16:48 - RecommendationSystem - INFO - map@5: 0.000243
+2025-10-19 14:16:48 - RecommendationSystem - INFO - mrr@5: 1.000000
+2025-10-19 14:16:48 - RecommendationSystem - INFO - precision@10: 1.000000
+2025-10-19 14:16:48 - RecommendationSystem - INFO - recall@10: 0.000486
+2025-10-19 14:16:48 - RecommendationSystem - INFO - hit_rate@10: 1.000000
+2025-10-19 14:16:48 - RecommendationSystem - INFO - ndcg@10: 1.000000
+2025-10-19 14:16:48 - RecommendationSystem - INFO - map@10: 0.000486
+2025-10-19 14:16:48 - RecommendationSystem - INFO - mrr@10: 1.000000
+2025-10-19 14:16:48 - RecommendationSystem - INFO - precision@20: 1.000000
+2025-10-19 14:16:48 - RecommendationSystem - INFO - recall@20: 0.000973
+2025-10-19 14:16:48 - RecommendationSystem - INFO - hit_rate@20: 1.000000
+2025-10-19 14:16:48 - RecommendationSystem - INFO - ndcg@20: 1.000000
+2025-10-19 14:16:48 - RecommendationSystem - INFO - map@20: 0.000973
+2025-10-19 14:16:48 - RecommendationSystem - INFO - mrr@20: 1.000000
+2025-10-19 14:16:48 - RecommendationSystem - INFO - ------------------------------------------------------------
+2025-10-19 14:16:48 - RecommendationSystem - INFO - ============================================================
+2025-10-19 14:16:48 - RecommendationSystem - INFO - 开始第 17/50 轮训练
+2025-10-19 14:16:48 - RecommendationSystem - INFO - ============================================================
+2025-10-19 14:16:58 - RecommendationSystem - INFO - 验证结果:
+2025-10-19 14:16:58 - RecommendationSystem - INFO -   precision@5: 1.000000
+2025-10-19 14:16:58 - RecommendationSystem - INFO -   recall@5: 0.000243
+2025-10-19 14:16:58 - RecommendationSystem - INFO -   hit_rate@5: 1.000000
+2025-10-19 14:16:58 - RecommendationSystem - INFO -   ndcg@5: 1.000000
+2025-10-19 14:16:58 - RecommendationSystem - INFO -   map@5: 0.000243
+2025-10-19 14:16:58 - RecommendationSystem - INFO -   mrr@5: 1.000000
+2025-10-19 14:16:58 - RecommendationSystem - INFO -   precision@10: 1.000000
+2025-10-19 14:16:58 - RecommendationSystem - INFO -   recall@10: 0.000486
+2025-10-19 14:16:58 - RecommendationSystem - INFO -   hit_rate@10: 1.000000
+2025-10-19 14:16:58 - RecommendationSystem - INFO -   ndcg@10: 1.000000
+2025-10-19 14:16:58 - RecommendationSystem - INFO -   map@10: 0.000486
+2025-10-19 14:16:58 - RecommendationSystem - INFO -   mrr@10: 1.000000
+2025-10-19 14:16:58 - RecommendationSystem - INFO -   precision@20: 1.000000
+2025-10-19 14:16:58 - RecommendationSystem - INFO -   recall@20: 0.000973
+2025-10-19 14:16:58 - RecommendationSystem - INFO -   hit_rate@20: 1.000000
+2025-10-19 14:16:58 - RecommendationSystem - INFO -   ndcg@20: 1.000000
+2025-10-19 14:16:58 - RecommendationSystem - INFO -   map@20: 0.000973
+2025-10-19 14:16:58 - RecommendationSystem - INFO -   mrr@20: 1.000000
+2025-10-19 14:16:58 - RecommendationSystem - INFO - 第 17 轮训练完成
+2025-10-19 14:16:58 - RecommendationSystem - INFO - train_loss: 0.360010
+2025-10-19 14:16:58 - RecommendationSystem - INFO - precision@5: 1.000000
+2025-10-19 14:16:58 - RecommendationSystem - INFO - recall@5: 0.000243
+2025-10-19 14:16:58 - RecommendationSystem - INFO - hit_rate@5: 1.000000
+2025-10-19 14:16:58 - RecommendationSystem - INFO - ndcg@5: 1.000000
+2025-10-19 14:16:58 - RecommendationSystem - INFO - map@5: 0.000243
+2025-10-19 14:16:58 - RecommendationSystem - INFO - mrr@5: 1.000000
+2025-10-19 14:16:58 - RecommendationSystem - INFO - precision@10: 1.000000
+2025-10-19 14:16:58 - RecommendationSystem - INFO - recall@10: 0.000486
+2025-10-19 14:16:58 - RecommendationSystem - INFO - hit_rate@10: 1.000000
+2025-10-19 14:16:58 - RecommendationSystem - INFO - ndcg@10: 1.000000
+2025-10-19 14:16:58 - RecommendationSystem - INFO - map@10: 0.000486
+2025-10-19 14:16:58 - RecommendationSystem - INFO - mrr@10: 1.000000
+2025-10-19 14:16:58 - RecommendationSystem - INFO - precision@20: 1.000000
+2025-10-19 14:16:58 - RecommendationSystem - INFO - recall@20: 0.000973
+2025-10-19 14:16:58 - RecommendationSystem - INFO - hit_rate@20: 1.000000
+2025-10-19 14:16:58 - RecommendationSystem - INFO - ndcg@20: 1.000000
+2025-10-19 14:16:58 - RecommendationSystem - INFO - map@20: 0.000973
+2025-10-19 14:16:58 - RecommendationSystem - INFO - mrr@20: 1.000000
+2025-10-19 14:16:58 - RecommendationSystem - INFO - ------------------------------------------------------------
+2025-10-19 14:16:58 - RecommendationSystem - INFO - ============================================================
+2025-10-19 14:16:58 - RecommendationSystem - INFO - 开始第 18/50 轮训练
+2025-10-19 14:16:58 - RecommendationSystem - INFO - ============================================================
+2025-10-19 14:17:08 - RecommendationSystem - INFO - 验证结果:
+2025-10-19 14:17:08 - RecommendationSystem - INFO -   precision@5: 1.000000
+2025-10-19 14:17:08 - RecommendationSystem - INFO -   recall@5: 0.000243
+2025-10-19 14:17:08 - RecommendationSystem - INFO -   hit_rate@5: 1.000000
+2025-10-19 14:17:08 - RecommendationSystem - INFO -   ndcg@5: 1.000000
+2025-10-19 14:17:08 - RecommendationSystem - INFO -   map@5: 0.000243
+2025-10-19 14:17:08 - RecommendationSystem - INFO -   mrr@5: 1.000000
+2025-10-19 14:17:08 - RecommendationSystem - INFO -   precision@10: 1.000000
+2025-10-19 14:17:08 - RecommendationSystem - INFO -   recall@10: 0.000486
+2025-10-19 14:17:08 - RecommendationSystem - INFO -   hit_rate@10: 1.000000
+2025-10-19 14:17:08 - RecommendationSystem - INFO -   ndcg@10: 1.000000
+2025-10-19 14:17:08 - RecommendationSystem - INFO -   map@10: 0.000486
+2025-10-19 14:17:08 - RecommendationSystem - INFO -   mrr@10: 1.000000
+2025-10-19 14:17:08 - RecommendationSystem - INFO -   precision@20: 1.000000
+2025-10-19 14:17:08 - RecommendationSystem - INFO -   recall@20: 0.000973
+2025-10-19 14:17:08 - RecommendationSystem - INFO -   hit_rate@20: 1.000000
+2025-10-19 14:17:08 - RecommendationSystem - INFO -   ndcg@20: 1.000000
+2025-10-19 14:17:08 - RecommendationSystem - INFO -   map@20: 0.000973
+2025-10-19 14:17:08 - RecommendationSystem - INFO -   mrr@20: 1.000000
+2025-10-19 14:17:08 - RecommendationSystem - INFO - 第 18 轮训练完成
+2025-10-19 14:17:08 - RecommendationSystem - INFO - train_loss: 0.358587
+2025-10-19 14:17:08 - RecommendationSystem - INFO - precision@5: 1.000000
+2025-10-19 14:17:08 - RecommendationSystem - INFO - recall@5: 0.000243
+2025-10-19 14:17:08 - RecommendationSystem - INFO - hit_rate@5: 1.000000
+2025-10-19 14:17:08 - RecommendationSystem - INFO - ndcg@5: 1.000000
+2025-10-19 14:17:08 - RecommendationSystem - INFO - map@5: 0.000243
+2025-10-19 14:17:08 - RecommendationSystem - INFO - mrr@5: 1.000000
+2025-10-19 14:17:08 - RecommendationSystem - INFO - precision@10: 1.000000
+2025-10-19 14:17:08 - RecommendationSystem - INFO - recall@10: 0.000486
+2025-10-19 14:17:08 - RecommendationSystem - INFO - hit_rate@10: 1.000000
+2025-10-19 14:17:08 - RecommendationSystem - INFO - ndcg@10: 1.000000
+2025-10-19 14:17:08 - RecommendationSystem - INFO - map@10: 0.000486
+2025-10-19 14:17:08 - RecommendationSystem - INFO - mrr@10: 1.000000
+2025-10-19 14:17:08 - RecommendationSystem - INFO - precision@20: 1.000000
+2025-10-19 14:17:08 - RecommendationSystem - INFO - recall@20: 0.000973
+2025-10-19 14:17:08 - RecommendationSystem - INFO - hit_rate@20: 1.000000
+2025-10-19 14:17:08 - RecommendationSystem - INFO - ndcg@20: 1.000000
+2025-10-19 14:17:08 - RecommendationSystem - INFO - map@20: 0.000973
+2025-10-19 14:17:08 - RecommendationSystem - INFO - mrr@20: 1.000000
+2025-10-19 14:17:08 - RecommendationSystem - INFO - ------------------------------------------------------------
+2025-10-19 14:17:08 - RecommendationSystem - INFO - ============================================================
+2025-10-19 14:17:08 - RecommendationSystem - INFO - 开始第 19/50 轮训练
+2025-10-19 14:17:08 - RecommendationSystem - INFO - ============================================================
+2025-10-19 14:17:18 - RecommendationSystem - INFO - 验证结果:
+2025-10-19 14:17:18 - RecommendationSystem - INFO -   precision@5: 1.000000
+2025-10-19 14:17:18 - RecommendationSystem - INFO -   recall@5: 0.000243
+2025-10-19 14:17:18 - RecommendationSystem - INFO -   hit_rate@5: 1.000000
+2025-10-19 14:17:18 - RecommendationSystem - INFO -   ndcg@5: 1.000000
+2025-10-19 14:17:18 - RecommendationSystem - INFO -   map@5: 0.000243
+2025-10-19 14:17:18 - RecommendationSystem - INFO -   mrr@5: 1.000000
+2025-10-19 14:17:18 - RecommendationSystem - INFO -   precision@10: 1.000000
+2025-10-19 14:17:18 - RecommendationSystem - INFO -   recall@10: 0.000486
+2025-10-19 14:17:18 - RecommendationSystem - INFO -   hit_rate@10: 1.000000
+2025-10-19 14:17:18 - RecommendationSystem - INFO -   ndcg@10: 1.000000
+2025-10-19 14:17:18 - RecommendationSystem - INFO -   map@10: 0.000486
+2025-10-19 14:17:18 - RecommendationSystem - INFO -   mrr@10: 1.000000
+2025-10-19 14:17:18 - RecommendationSystem - INFO -   precision@20: 1.000000
+2025-10-19 14:17:18 - RecommendationSystem - INFO -   recall@20: 0.000973
+2025-10-19 14:17:18 - RecommendationSystem - INFO -   hit_rate@20: 1.000000
+2025-10-19 14:17:18 - RecommendationSystem - INFO -   ndcg@20: 1.000000
+2025-10-19 14:17:18 - RecommendationSystem - INFO -   map@20: 0.000973
+2025-10-19 14:17:18 - RecommendationSystem - INFO -   mrr@20: 1.000000
+2025-10-19 14:17:18 - RecommendationSystem - INFO - 第 19 轮训练完成
+2025-10-19 14:17:18 - RecommendationSystem - INFO - train_loss: 0.357300
+2025-10-19 14:17:18 - RecommendationSystem - INFO - precision@5: 1.000000
+2025-10-19 14:17:18 - RecommendationSystem - INFO - recall@5: 0.000243
+2025-10-19 14:17:18 - RecommendationSystem - INFO - hit_rate@5: 1.000000
+2025-10-19 14:17:18 - RecommendationSystem - INFO - ndcg@5: 1.000000
+2025-10-19 14:17:18 - RecommendationSystem - INFO - map@5: 0.000243
+2025-10-19 14:17:18 - RecommendationSystem - INFO - mrr@5: 1.000000
+2025-10-19 14:17:18 - RecommendationSystem - INFO - precision@10: 1.000000
+2025-10-19 14:17:18 - RecommendationSystem - INFO - recall@10: 0.000486
+2025-10-19 14:17:18 - RecommendationSystem - INFO - hit_rate@10: 1.000000
+2025-10-19 14:17:18 - RecommendationSystem - INFO - ndcg@10: 1.000000
+2025-10-19 14:17:18 - RecommendationSystem - INFO - map@10: 0.000486
+2025-10-19 14:17:18 - RecommendationSystem - INFO - mrr@10: 1.000000
+2025-10-19 14:17:18 - RecommendationSystem - INFO - precision@20: 1.000000
+2025-10-19 14:17:18 - RecommendationSystem - INFO - recall@20: 0.000973
+2025-10-19 14:17:18 - RecommendationSystem - INFO - hit_rate@20: 1.000000
+2025-10-19 14:17:18 - RecommendationSystem - INFO - ndcg@20: 1.000000
+2025-10-19 14:17:18 - RecommendationSystem - INFO - map@20: 0.000973
+2025-10-19 14:17:18 - RecommendationSystem - INFO - mrr@20: 1.000000
+2025-10-19 14:17:18 - RecommendationSystem - INFO - ------------------------------------------------------------
+2025-10-19 14:17:18 - RecommendationSystem - INFO - ============================================================
+2025-10-19 14:17:18 - RecommendationSystem - INFO - 开始第 20/50 轮训练
+2025-10-19 14:17:18 - RecommendationSystem - INFO - ============================================================
+2025-10-19 14:17:27 - RecommendationSystem - INFO - 验证结果:
+2025-10-19 14:17:27 - RecommendationSystem - INFO -   precision@5: 1.000000
+2025-10-19 14:17:27 - RecommendationSystem - INFO -   recall@5: 0.000243
+2025-10-19 14:17:27 - RecommendationSystem - INFO -   hit_rate@5: 1.000000
+2025-10-19 14:17:27 - RecommendationSystem - INFO -   ndcg@5: 1.000000
+2025-10-19 14:17:27 - RecommendationSystem - INFO -   map@5: 0.000243
+2025-10-19 14:17:27 - RecommendationSystem - INFO -   mrr@5: 1.000000
+2025-10-19 14:17:27 - RecommendationSystem - INFO -   precision@10: 1.000000
+2025-10-19 14:17:27 - RecommendationSystem - INFO -   recall@10: 0.000486
+2025-10-19 14:17:27 - RecommendationSystem - INFO -   hit_rate@10: 1.000000
+2025-10-19 14:17:27 - RecommendationSystem - INFO -   ndcg@10: 1.000000
+2025-10-19 14:17:27 - RecommendationSystem - INFO -   map@10: 0.000486
+2025-10-19 14:17:27 - RecommendationSystem - INFO -   mrr@10: 1.000000
+2025-10-19 14:17:27 - RecommendationSystem - INFO -   precision@20: 1.000000
+2025-10-19 14:17:27 - RecommendationSystem - INFO -   recall@20: 0.000973
+2025-10-19 14:17:27 - RecommendationSystem - INFO -   hit_rate@20: 1.000000
+2025-10-19 14:17:27 - RecommendationSystem - INFO -   ndcg@20: 1.000000
+2025-10-19 14:17:27 - RecommendationSystem - INFO -   map@20: 0.000973
+2025-10-19 14:17:27 - RecommendationSystem - INFO -   mrr@20: 1.000000
+2025-10-19 14:17:27 - RecommendationSystem - INFO - 第 20 轮训练完成
+2025-10-19 14:17:27 - RecommendationSystem - INFO - train_loss: 0.356447
+2025-10-19 14:17:27 - RecommendationSystem - INFO - precision@5: 1.000000
+2025-10-19 14:17:27 - RecommendationSystem - INFO - recall@5: 0.000243
+2025-10-19 14:17:27 - RecommendationSystem - INFO - hit_rate@5: 1.000000
+2025-10-19 14:17:27 - RecommendationSystem - INFO - ndcg@5: 1.000000
+2025-10-19 14:17:27 - RecommendationSystem - INFO - map@5: 0.000243
+2025-10-19 14:17:27 - RecommendationSystem - INFO - mrr@5: 1.000000
+2025-10-19 14:17:27 - RecommendationSystem - INFO - precision@10: 1.000000
+2025-10-19 14:17:27 - RecommendationSystem - INFO - recall@10: 0.000486
+2025-10-19 14:17:27 - RecommendationSystem - INFO - hit_rate@10: 1.000000
+2025-10-19 14:17:27 - RecommendationSystem - INFO - ndcg@10: 1.000000
+2025-10-19 14:17:27 - RecommendationSystem - INFO - map@10: 0.000486
+2025-10-19 14:17:27 - RecommendationSystem - INFO - mrr@10: 1.000000
+2025-10-19 14:17:27 - RecommendationSystem - INFO - precision@20: 1.000000
+2025-10-19 14:17:27 - RecommendationSystem - INFO - recall@20: 0.000973
+2025-10-19 14:17:27 - RecommendationSystem - INFO - hit_rate@20: 1.000000
+2025-10-19 14:17:27 - RecommendationSystem - INFO - ndcg@20: 1.000000
+2025-10-19 14:17:27 - RecommendationSystem - INFO - map@20: 0.000973
+2025-10-19 14:17:27 - RecommendationSystem - INFO - mrr@20: 1.000000
+2025-10-19 14:17:27 - RecommendationSystem - INFO - ------------------------------------------------------------
+2025-10-19 14:17:27 - RecommendationSystem - INFO - 检查点已保存: Epoch 20 -> ./checkpoints/checkpoint_epoch_20.pth
+2025-10-19 14:17:27 - RecommendationSystem - INFO - ============================================================
+2025-10-19 14:17:27 - RecommendationSystem - INFO - 开始第 21/50 轮训练
+2025-10-19 14:17:27 - RecommendationSystem - INFO - ============================================================
+2025-10-19 14:17:37 - RecommendationSystem - INFO - 验证结果:
+2025-10-19 14:17:37 - RecommendationSystem - INFO -   precision@5: 1.000000
+2025-10-19 14:17:37 - RecommendationSystem - INFO -   recall@5: 0.000243
+2025-10-19 14:17:37 - RecommendationSystem - INFO -   hit_rate@5: 1.000000
+2025-10-19 14:17:37 - RecommendationSystem - INFO -   ndcg@5: 1.000000
+2025-10-19 14:17:37 - RecommendationSystem - INFO -   map@5: 0.000243
+2025-10-19 14:17:37 - RecommendationSystem - INFO -   mrr@5: 1.000000
+2025-10-19 14:17:37 - RecommendationSystem - INFO -   precision@10: 1.000000
+2025-10-19 14:17:37 - RecommendationSystem - INFO -   recall@10: 0.000486
+2025-10-19 14:17:37 - RecommendationSystem - INFO -   hit_rate@10: 1.000000
+2025-10-19 14:17:37 - RecommendationSystem - INFO -   ndcg@10: 1.000000
+2025-10-19 14:17:37 - RecommendationSystem - INFO -   map@10: 0.000486
+2025-10-19 14:17:37 - RecommendationSystem - INFO -   mrr@10: 1.000000
+2025-10-19 14:17:37 - RecommendationSystem - INFO -   precision@20: 1.000000
+2025-10-19 14:17:37 - RecommendationSystem - INFO -   recall@20: 0.000973
+2025-10-19 14:17:37 - RecommendationSystem - INFO -   hit_rate@20: 1.000000
+2025-10-19 14:17:37 - RecommendationSystem - INFO -   ndcg@20: 1.000000
+2025-10-19 14:17:37 - RecommendationSystem - INFO -   map@20: 0.000973
+2025-10-19 14:17:37 - RecommendationSystem - INFO -   mrr@20: 1.000000
+2025-10-19 14:17:37 - RecommendationSystem - INFO - 第 21 轮训练完成
+2025-10-19 14:17:37 - RecommendationSystem - INFO - train_loss: 0.355576
+2025-10-19 14:17:37 - RecommendationSystem - INFO - precision@5: 1.000000
+2025-10-19 14:17:37 - RecommendationSystem - INFO - recall@5: 0.000243
+2025-10-19 14:17:37 - RecommendationSystem - INFO - hit_rate@5: 1.000000
+2025-10-19 14:17:37 - RecommendationSystem - INFO - ndcg@5: 1.000000
+2025-10-19 14:17:37 - RecommendationSystem - INFO - map@5: 0.000243
+2025-10-19 14:17:37 - RecommendationSystem - INFO - mrr@5: 1.000000
+2025-10-19 14:17:37 - RecommendationSystem - INFO - precision@10: 1.000000
+2025-10-19 14:17:37 - RecommendationSystem - INFO - recall@10: 0.000486
+2025-10-19 14:17:37 - RecommendationSystem - INFO - hit_rate@10: 1.000000
+2025-10-19 14:17:37 - RecommendationSystem - INFO - ndcg@10: 1.000000
+2025-10-19 14:17:37 - RecommendationSystem - INFO - map@10: 0.000486
+2025-10-19 14:17:37 - RecommendationSystem - INFO - mrr@10: 1.000000
+2025-10-19 14:17:37 - RecommendationSystem - INFO - precision@20: 1.000000
+2025-10-19 14:17:37 - RecommendationSystem - INFO - recall@20: 0.000973
+2025-10-19 14:17:37 - RecommendationSystem - INFO - hit_rate@20: 1.000000
+2025-10-19 14:17:37 - RecommendationSystem - INFO - ndcg@20: 1.000000
+2025-10-19 14:17:37 - RecommendationSystem - INFO - map@20: 0.000973
+2025-10-19 14:17:37 - RecommendationSystem - INFO - mrr@20: 1.000000
+2025-10-19 14:17:37 - RecommendationSystem - INFO - ------------------------------------------------------------
+2025-10-19 14:17:37 - RecommendationSystem - WARNING - 早停触发 - 第 21 轮，最佳指标: 1.000000
+2025-10-19 14:17:37 - RecommendationSystem - INFO - ============================================================
+2025-10-19 14:17:37 - RecommendationSystem - INFO - 训练完成!
+2025-10-19 14:17:37 - RecommendationSystem - INFO - 总训练时间: 0.06 hours
+2025-10-19 14:17:37 - RecommendationSystem - INFO - 最佳指标:
+2025-10-19 14:17:37 - RecommendationSystem - INFO -   best_precision@5: 1.000000
+2025-10-19 14:17:37 - RecommendationSystem - INFO -   best_recall@5: 0.000243
+2025-10-19 14:17:37 - RecommendationSystem - INFO -   best_hit_rate@5: 1.000000
+2025-10-19 14:17:37 - RecommendationSystem - INFO -   best_ndcg@5: 1.000000
+2025-10-19 14:17:37 - RecommendationSystem - INFO -   best_map@5: 0.000243
+2025-10-19 14:17:37 - RecommendationSystem - INFO -   best_mrr@5: 1.000000
+2025-10-19 14:17:37 - RecommendationSystem - INFO -   best_precision@10: 1.000000
+2025-10-19 14:17:37 - RecommendationSystem - INFO -   best_recall@10: 0.000486
+2025-10-19 14:17:37 - RecommendationSystem - INFO -   best_hit_rate@10: 1.000000
+2025-10-19 14:17:37 - RecommendationSystem - INFO -   best_ndcg@10: 1.000000
+2025-10-19 14:17:37 - RecommendationSystem - INFO -   best_map@10: 0.000486
+2025-10-19 14:17:37 - RecommendationSystem - INFO -   best_mrr@10: 1.000000
+2025-10-19 14:17:37 - RecommendationSystem - INFO -   best_precision@20: 1.000000
+2025-10-19 14:17:37 - RecommendationSystem - INFO -   best_recall@20: 0.000973
+2025-10-19 14:17:37 - RecommendationSystem - INFO -   best_hit_rate@20: 1.000000
+2025-10-19 14:17:37 - RecommendationSystem - INFO -   best_ndcg@20: 1.000000
+2025-10-19 14:17:37 - RecommendationSystem - INFO -   best_map@20: 0.000973
+2025-10-19 14:17:37 - RecommendationSystem - INFO -   best_mrr@20: 1.000000
+2025-10-19 14:17:37 - RecommendationSystem - INFO - ============================================================
+2025-10-19 14:17:37 - RecommendationSystem - INFO - Loaded best model from epoch 1
+2025-10-19 14:17:39 - RecommendationSystem - INFO - Best model saved to ./checkpoints/best_model.pth
+2025-10-19 14:17:40 - torch._dynamo.utils - INFO - TorchDynamo compilation metrics:
+Function, Runtimes (s)
+2025-10-19 14:27:47 - RecommendationSystem - INFO - Starting training...
+2025-10-19 14:27:47 - RecommendationSystem - INFO - 模型: MMGCN
+2025-10-19 14:27:47 - RecommendationSystem - INFO - 总参数量: 2,053,256
+2025-10-19 14:27:47 - RecommendationSystem - INFO - 可训练参数量: 2,053,256
+2025-10-19 14:27:47 - RecommendationSystem - INFO - ============================================================
+2025-10-19 14:27:47 - RecommendationSystem - INFO - 开始第 1/50 轮训练
+2025-10-19 14:27:47 - RecommendationSystem - INFO - ============================================================
