@@ -44,7 +44,7 @@ class MMGCN(nn.Module):
             self.MGCNs.append(MGCN(emb_num, layer_num, dropout))
 
     def forward(self, g, Xs, embs, ks, alphas):
-        print(Xs, embs, ks, alphas, "\n")
+        # print(Xs, embs, ks, alphas, "\n")
         # print(input())
         modal_features = []
         for i in range(self.modal_num):

@@ -40,6 +40,7 @@ def setup_device(config) -> str:
         device = "cuda"
         print(f"Using GPU: {torch.cuda.get_device_name()}")
     else:
+        config.system.device ="cpu"
         device = "cpu"
         print("Using CPU")
     
@@ -54,18 +55,16 @@ def prepare_data(config):
     
     # Extract dataset information
     train_dataset = train_loader.dataset
-    num_users = train_dataset.num_users
-    num_items = train_dataset.num_items
     
     # Extract features
     user_features = train_dataset.user_features
     item_features = train_dataset.item_features
     
-    print(f"Data loaded: {num_users} users, {num_items} items")
+    print(f"Data loaded: {config.data.num_users} users, {config.data.num_items} items")
     print(f"User features: {list(user_features.keys())}")
     print(f"Item features: {list(item_features.keys())}")
     
-    return train_loader, val_loader, test_loader, num_users, num_items, user_features, item_features
+    return train_loader, val_loader, test_loader, user_features, item_features
 
 
 def build_graph_and_model(config, train_loader, user_features, item_features):
@@ -74,10 +73,7 @@ def build_graph_and_model(config, train_loader, user_features, item_features):
     
     # Create model
     model = ModelFactory.create_MMGCN(
-        model_name=config.model.model_name,
         config=config,
-        num_users=config.data.num_users,
-        num_items=config.data.num_items,
         user_features=user_features,
         item_features=item_features
     )
@@ -93,7 +89,10 @@ def build_graph_and_model(config, train_loader, user_features, item_features):
         sample = train_dataset[idx]
         user_id = sample['user_id'].item()
         item_id = sample['item_id'].item()  # Remove offset
-        rating = sample['rating'].item()
+        if "rating" in sample:
+            rating = sample['rating'].item()
+        else:
+            rating = 1
         interactions.append((user_id, item_id, rating))
     
     
@@ -249,7 +248,7 @@ def main():
     
     try:
         # Prepare data
-        train_loader, val_loader, test_loader, num_users, num_items, user_features, item_features = prepare_data(config)
+        train_loader, val_loader, test_loader, user_features, item_features = prepare_data(config)
         # Build graph and model
         model, graph = build_graph_and_model(config, train_loader, user_features, item_features)
         model = model.to(device)

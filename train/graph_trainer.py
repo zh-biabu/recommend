@@ -136,14 +136,14 @@ class GraphTrainer:
         num_batches = len(self.train_loader)
         for batch_idx, batch in enumerate(self.train_loader):
             batch = self._move_batch_to_device(batch)
-            print(batch.keys())
+            # print(batch.keys())
             # print(input())
             self.optimizer.zero_grad()
             # try:
             # 获取必需的参数
             # Xs, embs, ks, alphas = None, None, None, None  # 实际训练时外部应适配
             outputs = self.model(batch)
-            print(outputs)
+            # print(outputs)
             # print(input())
             if 'loss' in outputs:
                 loss = outputs["loss"]
@@ -153,14 +153,14 @@ class GraphTrainer:
                 pos_item_emb = outputs.get('pos_item_embeddings')
                 neg_item_emb = outputs.get('neg_item_embeddings')
                 if user_emb is not None and pos_item_emb is not None and neg_item_emb is not None:
-                    print(user_emb.shape, neg_item_emb.shape)
+                    # print(user_emb.shape, neg_item_emb.shape)
                     pos_scores = torch.sum(user_emb * pos_item_emb, dim=-1)
                     neg_scores = torch.sum(user_emb.unsqueeze(1) * neg_item_emb, dim=-1)
                     loss = bpr_loss(pos_scores, neg_scores)
                 else:
                     # Fallback: compute loss from batch data
                     loss = self._compute_loss_from_batch(batch, outputs)
-            print(loss)
+            print(f"{batch_idx} train_loss",loss)
             loss.backward()
             if self.config.training.gradient_clip_norm > 0:
                 torch.nn.utils.clip_grad_norm_(
@@ -200,7 +200,7 @@ class GraphTrainer:
         with torch.no_grad():
             for batch in self.val_loader:
                 batch = self._move_batch_to_device(batch)
-                print(batch.keys())
+                # print(batch.keys())
                 # try:
                 outputs = self.model(batch)
                 
@@ -213,8 +213,8 @@ class GraphTrainer:
                     user_ids = batch['user_ids']
                     item_ids = batch['item_ids']
                     embeddings = outputs.get('embeddings', outputs)
-                    print(outputs.keys())
-                    print(embeddings.shape, user_ids.shape, item_ids.shape)
+                    # print(outputs.keys())
+                    # print(embeddings.shape, user_ids.shape, item_ids.shape)
                     scores = torch.sum(embeddings[user_ids] * embeddings[item_ids], dim=1)
                 
                 all_scores.append(scores.cpu())
@@ -261,7 +261,7 @@ class GraphTrainer:
             self.current_epoch = epoch
             self.logger.log_epoch_start(epoch, self.config.training.epochs)
             train_loss = self.train_epoch()
-            print(train_loss)
+            print(f"The {epoch} training average loss:",train_loss)
             # print(input())
             # Validate
             if epoch % self.config.training.eval_every == 0:

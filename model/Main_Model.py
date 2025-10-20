@@ -20,8 +20,6 @@ class MMGCNModel(nn.Module):
     def __init__(
         self,
         config,
-        num_users: int,
-        num_items: int,
         user_features: Optional[Dict[str, torch.Tensor]] = None,
         item_features: Optional[Dict[str, torch.Tensor]] = None
     ):
@@ -38,9 +36,9 @@ class MMGCNModel(nn.Module):
         super().__init__()
         
         self.config = config
-        self.num_users = num_users
-        self.num_items = num_items
-        self.num_nodes = num_users + num_items
+        self.num_users = config.data.num_users
+        self.num_items = config.data.num_items
+        self.num_nodes = self.num_users + self.num_items
         
         # Store features
         self.user_features = user_features or {}
@@ -136,7 +134,7 @@ class MMGCNModel(nn.Module):
         self.Xs = [linear(x) for linear, x in zip(self.linears, self.feats)]
         # try:
         node_embeddings = self.mmgcn(g, self.Xs, self.embs, self.ks, self.alphas)
-        print(node_embeddings)
+        # print(node_embeddings)
         # print(input())
         # except Exception as e:
         #     print(f"MMGCN forward failed: {e}. Using fallback.")
@@ -150,7 +148,7 @@ class MMGCNModel(nn.Module):
         # 支持正负样本embedding输出
         if 'neg_items' in batch:
             neg_item_ids = batch['neg_items']
-            print(neg_item_ids)
+            # print(neg_item_ids)
             pos_user_emb = user_embeddings[user_ids]
             pos_item_emb = item_embeddings[item_ids]
             neg_item_emb = item_embeddings[neg_item_ids]  # shape: (N, neg_ratio, emb_dim)
@@ -277,10 +275,7 @@ class ModelFactory:
     
     @staticmethod
     def create_MMGCN(
-        model_name: str,
         config,
-        num_users: int,
-        num_items: int,
         user_features: Optional[Dict[str, torch.Tensor]] = None,
         item_features: Optional[Dict[str, torch.Tensor]] = None
     ) -> nn.Module:
@@ -298,16 +293,14 @@ class ModelFactory:
         Returns:
             Initialized model
         """
-        if model_name.lower() == 'mmgcn':
+        if config.model.model_name.lower() == 'mmgcn':
             return MMGCNModel(
                 config=config,
-                num_users=num_users,
-                num_items=num_items,
                 user_features=user_features,
                 item_features=item_features
             )
         else:
-            raise ValueError(f"Unknown model: {model_name}")
+            raise ValueError(f"Unknown model: {config.model.model_name}")
 
 
 if __name__ == "__main__":
