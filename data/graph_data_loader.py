@@ -248,7 +248,7 @@ class GraphDataLoader:
         }
 
         if "rating" in batch[0]:
-            ratings = torch.stack([item['ratings'] for item in batch])
+            ratings = torch.stack([item['rating'] for item in batch])
             result["ratings"] = ratings
 
         if "neg_items_id" in batch[0]:

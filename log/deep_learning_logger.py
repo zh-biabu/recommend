@@ -3,6 +3,33 @@ import os
 import datetime
 from logging.handlers import TimedRotatingFileHandler
 import json
+import time
+
+
+class DailyFolderTimedRotatingFileHandler(TimedRotatingFileHandler):
+    def __init__(self, base_log_dir, *args, **kwargs):
+        # base_log_dir：日志根目录（如 "logs"）
+        self.base_log_dir = base_log_dir
+        # 初始化时生成当天的日志路径
+        today = time.strftime("%Y%m%d")
+        self.current_dir = os.path.join(base_log_dir, today)
+        os.makedirs(self.current_dir, exist_ok=True)  # 确保文件夹存在
+        # 日志文件名（同一文件夹内按小时轮转，文件名可固定或加小时）
+        log_file = os.path.join(self.current_dir, "app.log")
+        super().__init__(log_file, *args, **kwargs)
+
+    def doRollover(self):
+        # 轮转时检查是否跨天，若跨天则切换到新的日期文件夹
+        today = time.strftime("%Y%m%d")
+        new_dir = os.path.join(self.base_log_dir, today)
+        if new_dir != self.current_dir:
+            # 跨天：更新当前文件夹路径，创建新文件夹
+            self.current_dir = new_dir
+            os.makedirs(self.current_dir, exist_ok=True)
+            # 更新日志文件路径（指向新文件夹）
+            self.baseFilename = os.path.join(self.current_dir, "app.log")
+        # 执行原有的小时轮转逻辑（生成带小时的备份文件，如 app.log.20251022-14）
+        super().doRollover()
 
 
 class DeepLearningLogger(logging.Logger):
@@ -43,16 +70,16 @@ class DeepLearningLogger(logging.Logger):
         if not os.path.exists(self.train_log_dir):
             os.makedirs(self.train_log_dir, exist_ok=True)  # 加 exist_ok 避免多进程冲突
 
-        log_file = os.path.join(self.train_log_dir, "training.log")
+        # log_file = os.path.join(self.train_log_dir, "training.log")
         
         # 使用TimedRotatingFileHandler按天分割日志
-        file_handler = TimedRotatingFileHandler(
-            filename=log_file,
-            when='midnight',  # 每天午夜分割
+        file_handler = DailyFolderTimedRotatingFileHandler(
+            base_log_dir=self.train_log_dir,
+            when='H',  # 每天午夜分割
             interval=1,       # 间隔1天
-            backupCount=30,   # 保留30天的日志
+            backupCount=30*24,   # 保留30天的日志
             encoding='utf-8',
-            delay=True
+            delay=False
         )
         file_handler.setLevel(logging.DEBUG)
         file_handler.setFormatter(self.formatter)

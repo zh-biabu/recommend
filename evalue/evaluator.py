@@ -51,7 +51,7 @@ class Verifier:
         outputs = model({}, return_embeddings=True)
         user_embeddings = outputs["user_embeddings"]
         item_embeddings = outputs["item_embeddings"]
-        pre_score = (torch.matmul(user_embeddings, item_embeddings.T)*self.mask).to("cpu")
+        pre_score = (torch.matmul(user_embeddings, item_embeddings.T).to("cpu")*self.mask)
         
 
         # 计算各项指标
@@ -76,7 +76,7 @@ class Tester:
         self.device = config.system.device
         self.k_list = config.evaluation.k_values  # 不同的k值
     
-    def test(self, model, test_loader):
+    def test(self, model):
         """
         测试模型性能
         Args:
@@ -94,7 +94,7 @@ class Tester:
         outputs = model({}, return_embeddings=True)
         user_embeddings = outputs["user_embeddings"]
         item_embeddings = outputs["item_embeddings"]
-        pre_score = (torch.matmul(user_embeddings, item_embeddings.T)*self.mask).to("cpu")
+        pre_score = (torch.matmul(user_embeddings, item_embeddings.T).to("cpu")*self.mask)
         
 
         # 计算各项指标

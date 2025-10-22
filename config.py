@@ -13,7 +13,7 @@ from dataclasses import dataclass, asdict
 @dataclass
 class DataConfig:
     """Data loading and preprocessing configuration."""
-    data_path: str = "./data/scale_data/baby"
+    data_path: str = "/root/autodl-tmp/data/scale_data/baby"
     user_col: str = "userID"
     item_col: str = "itemID"
     rating_col: Optional[str] = None
@@ -166,7 +166,7 @@ class Config:
 def get_baby_config() -> Config:
     """Get configuration for baby dataset."""
     config = Config()
-    config.data.data_path = "./data/scale_data/baby"
+    config.data.data_path = "/root/autodl-tmp/data/scale_data/baby"
     config.data.user_col = "userID"
     config.data.item_col = "itemID"
     config.data.rating_col = "rating"
