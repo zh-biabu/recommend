@@ -103,7 +103,7 @@ def build_graph_and_model(config, train_loader, user_features, item_features):
     # Build graph using ONLY training data
     graph = model.build_graph(interactions)
     model.graph_constructor.creat_feature_weight()
-    model.graph_constructor.creat_feature_weight(feature="text_feat")
+    # model.graph_constructor.creat_feature_weight(feature="text_feat")
     
     print(f"Graph built from training data only: {graph.num_nodes()} nodes, {graph.num_edges()} edges")
     print("⚠️  Important: Graph constructed using only training data to prevent data leakage")
