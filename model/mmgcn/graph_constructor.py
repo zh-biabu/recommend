@@ -3,6 +3,7 @@ Graph construction module for multi-modal recommendation systems.
 Handles bipartite graph construction with multi-modal features and edge weights.
 """
 
+from code import interact
 import torch
 import numpy as np
 import dgl
@@ -67,6 +68,7 @@ class GraphConstructor:
         self.num_users = num_users
         self.num_items = num_items
         self.num_nodes = num_users + num_items
+        self.num_interactions = len(interactions)
         
         # Create edge lists
         user_indices = []

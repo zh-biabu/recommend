@@ -40,6 +40,9 @@ class DeepLearningLogger(logging.Logger):
     
     def _setup_file_handler(self):
         """设置文件处理器，按天分割日志"""
+        if not os.path.exists(self.train_log_dir):
+            os.makedirs(self.train_log_dir, exist_ok=True)  # 加 exist_ok 避免多进程冲突
+
         log_file = os.path.join(self.train_log_dir, "training.log")
         
         # 使用TimedRotatingFileHandler按天分割日志
@@ -48,7 +51,8 @@ class DeepLearningLogger(logging.Logger):
             when='midnight',  # 每天午夜分割
             interval=1,       # 间隔1天
             backupCount=30,   # 保留30天的日志
-            encoding='utf-8'
+            encoding='utf-8',
+            delay=True
         )
         file_handler.setLevel(logging.DEBUG)
         file_handler.setFormatter(self.formatter)

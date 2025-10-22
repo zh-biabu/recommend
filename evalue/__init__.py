@@ -10,6 +10,7 @@ from .loss import (
     bpr_loss, pairwise_hinge_loss, bce_with_logits_loss,
     cross_entropy_loss, info_nce_loss, l2_regularization
 )
+from .evaluator import Verifier,Tester
 
 __all__ = [
     'precision_at_k',
@@ -24,5 +25,7 @@ __all__ = [
     'bce_with_logits_loss',
     'cross_entropy_loss',
     'info_nce_loss',
-    'l2_regularization'
+    'l2_regularization',
+    "Verifier",
+    "Tester"
 ]

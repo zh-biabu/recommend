@@ -29,10 +29,7 @@ class GraphTrainer:
         self,
         model: nn.Module,
         train_loader,
-        val_loader,
-        test_loader,
         config,
-        device: str = "cuda",
         logger=None
     ):
         """
@@ -47,12 +44,10 @@ class GraphTrainer:
             device: Device to use for training
             logger: Logger instance
         """
-        self.model = model.to(device)
+        self.device = config.system.device
+        self.model = model.to(self.device)
         self.train_loader = train_loader
-        self.val_loader = val_loader
-        self.test_loader = test_loader
         self.config = config
-        self.device = device
         self.logger = logger or get_logger("GraphTrainer")
         
         # Training state
@@ -75,6 +70,7 @@ class GraphTrainer:
         # Early stopping
         self.patience_counter = 0
         self.best_model_state = None
+
     
     def _setup_optimizer(self):
         """Setup optimizer based on config."""
@@ -191,64 +187,8 @@ class GraphTrainer:
                 device_batch[key] = value
         return device_batch
     
-    def validate(self) -> Dict[str, float]:
-        """Validate the model."""
-        self.model.eval()
-        all_scores = []
-        all_targets = []
-        
-        with torch.no_grad():
-            for batch in self.val_loader:
-                batch = self._move_batch_to_device(batch)
-                # print(batch.keys())
-                # try:
-                outputs = self.model(batch)
-                
-                
-                # Get predictions
-                if 'scores' in outputs:
-                    scores = outputs["scores"]
-                else:
-                    # Compute scores from embeddings
-                    user_ids = batch['user_ids']
-                    item_ids = batch['item_ids']
-                    embeddings = outputs.get('embeddings', outputs)
-                    # print(outputs.keys())
-                    # print(embeddings.shape, user_ids.shape, item_ids.shape)
-                    scores = torch.sum(embeddings[user_ids] * embeddings[item_ids], dim=1)
-                
-                all_scores.append(scores.cpu())
-                all_targets.append(batch['ratings'].cpu())
-                
-                # except Exception as e:
-                # self.logger.error(f"Error in validation batch: {str(e)}")
-                continue
     
-        if not all_scores:
-            return {}
-        
-        # Combine all scores and targets
-        all_scores = torch.cat(all_scores, dim=0)
-        all_targets = torch.cat(all_targets, dim=0)
-        
-        # Convert to binary targets (ratings > 0)
-        binary_targets = (all_targets > 0).float()
-        
-        # Evaluate metrics
-        metrics = {}
-        for k in self.config.evaluation.k_values:
-            # For evaluation, we need to reshape scores and targets properly
-            # This is a simplified version - in practice, you'd need proper ranking evaluation
-            batch_scores = all_scores.unsqueeze(0)  # (1, N)
-            batch_targets = binary_targets.unsqueeze(0)  # (1, N)
-            
-            k_metrics = evaluate_all_at_k(batch_scores, batch_targets, k)
-            for metric_name, value in k_metrics.items():
-                metrics[f"{metric_name}@{k}"] = value.item()
-        
-        return metrics
-    
-    def train(self) -> Dict[str, Any]:
+    def train(self, verifier) -> Dict[str, Any]:
         """Main training loop."""
         self.logger.info("Starting training...")
         self.logger.log_model_info(
@@ -265,12 +205,12 @@ class GraphTrainer:
             # print(input())
             # Validate
             if epoch % self.config.training.eval_every == 0:
-                val_metrics = self.validate()
+                val_metrics = verifier.verify(self.model)
                 if val_metrics:
                     self.val_metrics.append(val_metrics)
                     self.logger.log_validation_results(val_metrics)
                     # Update best model
-                    primary_metric = f"ndcg@{self.config.evaluation.k_values[0]}"
+                    primary_metric = f"{self.config.evaluation.main_metric}@{self.config.evaluation.k_values[0]}"
                     if primary_metric in val_metrics:
                         current_metric = val_metrics[primary_metric]
                         if current_metric > self.best_val_metric:
@@ -280,6 +220,8 @@ class GraphTrainer:
                             self.patience_counter = 0
                         else:
                             self.patience_counter += 1
+                    else:
+                        raise Exception(f"metric {primary_metric} miss")
                     # Update scheduler
                     if self.scheduler and isinstance(self.scheduler, torch.optim.lr_scheduler.ReduceLROnPlateau):
                         self.scheduler.step(current_metric)
@@ -310,68 +252,15 @@ class GraphTrainer:
         if self.best_model_state:
             self.model.load_state_dict(self.best_model_state)
             self.logger.info(f"Loaded best model from epoch {self.best_epoch}")
-        # Final evaluation
-        final_metrics = self.evaluate()
         return {
             'best_epoch': self.best_epoch,
             'best_val_metric': self.best_val_metric,
             'train_losses': self.train_losses,
             'val_metrics': self.val_metrics,
-            'final_test_metrics': final_metrics,
             'training_time': total_time
         }
     
-    def evaluate(self) -> Dict[str, float]:
-        """Evaluate model on test set."""
-        self.model.eval()
-        all_scores = []
-        all_targets = []
-        
-        with torch.no_grad():
-            for batch in self.test_loader:
-                batch = self._move_batch_to_device(batch)
-                
-                # try:
-                outputs = self.model(batch)
-                
-                # Get predictions
-                if 'scores' in outputs:
-                    scores = outputs["scores"]
-                else:
-                    user_ids = batch['user_ids']
-                    item_ids = batch['item_ids']
-                    
-                    embeddings = outputs.get('embeddings', outputs)
-                    scores = torch.sum(embeddings[user_ids] * embeddings[item_ids], dim=1)
-                
-                all_scores.append(scores.cpu())
-                all_targets.append(batch['ratings'].cpu())
-                
-                # except Exception as e:
-                # self.logger.error(f"Error in test batch: {str(e)}")
-                continue
-        
-        if not all_scores:
-            return {}
-        
-        # Combine all scores and targets
-        all_scores = torch.cat(all_scores, dim=0)
-        all_targets = torch.cat(all_targets, dim=0)
-        
-        # Convert to binary targets
-        binary_targets = (all_targets > 0).float()
-        
-        # Evaluate metrics
-        metrics = {}
-        for k in self.config.evaluation.k_values:
-            batch_scores = all_scores.unsqueeze(0)
-            batch_targets = binary_targets.unsqueeze(0)
-            
-            k_metrics = evaluate_all_at_k(batch_scores, batch_targets, k)
-            for metric_name, value in k_metrics.items():
-                metrics[f"test_{metric_name}@{k}"] = value.item()
-        
-        return metrics
+
     
     def _save_checkpoint(self, epoch: int):
         """Save model checkpoint."""

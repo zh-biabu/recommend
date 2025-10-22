@@ -69,6 +69,7 @@ class EvaluationConfig:
     k_values: list = None
     test_batch_size: int = 512
     num_negatives: int = 100
+    main_metric: str = "ndcg"
     
     def __post_init__(self):
         if self.metrics is None:

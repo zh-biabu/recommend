@@ -5,6 +5,7 @@ Orchestrates the entire pipeline from data loading to model evaluation.
 
 import os
 import sys
+from dgl.view import defaultdict
 import torch
 import argparse
 import random
@@ -21,6 +22,7 @@ from model import ModelFactory
 # from model.graph_constructor import GraphConstructor
 from train import GraphTrainer
 from log.deep_learning_logger import get_logger
+from evalue import Verifier,Tester
 
 
 def set_seed(seed: int):
@@ -108,8 +110,30 @@ def build_graph_and_model(config, train_loader, user_features, item_features):
     
     return model, graph
 
+def mask_index(config, target_loader, need_mask_loaders):
+    user_col = config.data.user_col
+    item_col = config.data.item_col
+    num_users = config.data.num_users
+    num_items = config.data.num_items
+    target_df = target_loader.dataset.data
+    need_mask_df = [loader.dataset.data for loader in need_mask_loaders]
+    target = torch.zeros((num_users, num_items))
+    mask = torch.ones((num_users, num_items))
+    target_cache = target_df.groupby(user_col)[item_col].apply(list).to_dict()
 
-def train_model(config, model, train_loader, val_loader, test_loader, device):
+    for user_id, item_id in target_cache.items():
+        target[user_id][item_id] = 1
+
+    for df in need_mask_df:
+        mask_cache = df.groupby(user_col)[item_col].apply(list).to_dict()
+        for user_id, item_id in mask_cache.items():
+            mask[user_id][item_id] = -float("inf")
+            
+    return target,mask
+
+ 
+
+def train_model(config, model, train_loader, val_loader, test_loader):
     """Train the model."""
     print("Starting training...")
     
@@ -123,7 +147,6 @@ def train_model(config, model, train_loader, val_loader, test_loader, device):
         val_loader=val_loader,
         test_loader=test_loader,
         config=config,
-        device=device,
         logger=logger
     )
     
@@ -257,12 +280,22 @@ def main():
         model_info = model.get_model_info()
         print(f"Model parameters: {model_info['total_parameters']:,}")
         print(model.graph_constructor.get_graph_statistics())
-        
+
+        # init trainer,verifier,tester
+        print(f"init trainer,verifier,tester")
+
+        val_target, val_mask = mask_index(config, val_loader, [train_loader, test_loader])
+        test_target, test_mask = mask_index(config, test_loader,[train_loader, val_loader])
+
+        trainer = GraphTrainer(model, train_loader, config)
+        verifier = Verifier(config, val_loader,val_target, val_mask)
+        tester = Tester(config, test_loader,test_target, test_mask)
+
         # Train model
-        training_results, trainer = train_model(config, model, train_loader, val_loader, test_loader, device)
+        training_results = trainer.train(verifier)
         
         # Evaluate model
-        test_metrics = evaluate_model(config, model, test_loader, device)
+        test_metrics = tester.test(model)
         
         # Print results
         print("\n" + "=" * 60)
