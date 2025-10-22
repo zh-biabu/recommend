@@ -7,10 +7,12 @@ import os
 import sys
 from dgl.view import defaultdict
 import torch
+import torch.nn.functional as F
 import argparse
 import random
 import numpy as np
 from pathlib import Path
+import time
 
 # Add current directory to path for imports
 _CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -22,7 +24,7 @@ from model import ModelFactory
 # from model.graph_constructor import GraphConstructor
 from train import GraphTrainer
 from log.deep_learning_logger import get_logger
-from evalue import Verifier,Tester
+from evalue import Verifier, Tester, compute_info_bpr_loss, compute_l2_loss
 
 
 def set_seed(seed: int):
@@ -74,7 +76,7 @@ def build_graph_and_model(config, train_loader, user_features, item_features):
     print("Building graph and model...")
     
     # Create model
-    model = ModelFactory.create_MMGCN(
+    model = ModelFactory.create_Model(
         config=config,
         user_features=user_features,
         item_features=item_features
@@ -130,6 +132,30 @@ def mask_index(config, target_loader, need_mask_loaders):
             mask[user_id][item_id] = -float("inf")
             
     return target,mask
+
+def mig_loss_func(outputs, batch):
+
+    user_h = outputs["user_h"]
+    item_h = outputs["item_h"]
+    z_memory_h = outputs["z_memory_h"]
+    user_ids = batch.get('user_ids', torch.tensor([], dtype=torch.long))
+    item_ids = batch.get('item_ids', torch.tensor([], dtype=torch.long))
+    neg_items = batch.get('neg_items', torch.tensor([], dtype=torch.long))
+    batch = torch.cat([user_ids, item_ids]).T
+    num_users = user_h.size(0)
+    
+
+
+    mf_losses = compute_info_bpr_loss(user_h, item_h, batch, neg_items, reduction="none")
+    l2_loss = compute_l2_loss([user_h, item_h])
+
+    loss = mf_losses.sum() + l2_loss * 1e-5
+    pos_user_h = user_h[batch[:, 0]]
+    pos_z_memory_h = z_memory_h[batch[:, 1] + num_users]  
+    unsmooth_logits = (pos_user_h.unsqueeze(1) @ pos_z_memory_h.permute(0, 2, 1)).squeeze(1)
+    unsmooth_loss = F.cross_entropy(unsmooth_logits, torch.zeros([batch.size(0)], dtype=torch.long, device="cpu"), reduction="none").sum()
+    loss = loss + unsmooth_loss
+    return loss
 
  
 
@@ -219,7 +245,13 @@ def save_results(config, training_results, test_metrics, model_info):
         'config': config.to_dict()
     }
     
-    results_path = os.path.join(config.system.results_dir, "results.json")
+    # 生成带时间戳的文件名：results_20251022_1530.json
+    timestamp = time.strftime("%Y%m%d_%H%M", time.localtime())
+    filename = f"results_{timestamp}.json"  # 时间作为文件名的一部分
+
+    # 拼接完整路径
+    results_path = os.path.join(config.system.results_dir, filename)
+
     os.makedirs(os.path.dirname(results_path), exist_ok=True)
     
     import json

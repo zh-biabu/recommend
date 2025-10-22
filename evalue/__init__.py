@@ -8,7 +8,8 @@ from .metric import (
 )
 from .loss import (
     bpr_loss, pairwise_hinge_loss, bce_with_logits_loss,
-    cross_entropy_loss, info_nce_loss, l2_regularization
+    cross_entropy_loss, info_nce_loss, l2_regularization, 
+    compute_info_bpr_loss, compute_l2_loss
 )
 from .evaluator import Verifier,Tester
 

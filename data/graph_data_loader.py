@@ -65,6 +65,7 @@ class GraphRecommendationDataset(Dataset):
     
     def _load_interactions(self):
         """Load interaction data."""
+        print(os.path.abspath(self.data_path))
         for file in os.listdir(self.data_path):
             if file.endswith('.csv') and self.mode in file:
                 file_path = os.path.join(self.data_path, file)

@@ -13,6 +13,9 @@ from typing import Dict, List, Tuple, Optional, Any
 from .mmgcn.graph_constructor import GraphConstructor
 from .mmgcn.out_Layer import MMGCN
 
+from .mig.mirf_gt import MIGGT
+from .mig.mgdcf import MGDCF
+
 
 class MMGCNModel(nn.Module):
     """Enhanced MMFCN model wrapper for graph-based recommendation."""
@@ -270,11 +273,145 @@ class MMGCNModel(nn.Module):
         }
 
 
+class MIG(nn.Module):
+    def __init__(
+        self,
+        config,
+        user_features: Optional[Dict[str, torch.Tensor]] = None,
+        item_features: Optional[Dict[str, torch.Tensor]] = None
+    ):
+        """
+        Initialize MMFCN model.
+        
+        Args:
+            config: Configuration object
+            num_users: Number of users
+            num_items: Number of items
+            user_features: User feature tensors
+            item_features: Item feature tensors
+        """
+        super().__init__()
+
+        self.config = config
+        self.num_users = config.data.num_users
+        self.num_items = config.data.num_items
+        self.num_nodes = self.num_users + self.num_items
+        self.device = config.system.device
+
+        self.user_features = user_features or {}
+        self.item_features = item_features or {}
+
+        self.v_feat = item_features["image_feat"]
+        self.t_feat = item_features["text_feat"]
+        if self.use_rp:
+            v_feat = self.random_project(self.v_feat, self.t_feat.size(-1))
+
+        self.v_feat.to(self.device)
+        self.t_feat.to(self.device)
+        self.user_embeddings = nn.Embedding(self.num_users, config.model.emb_dim, device=self.device)
+        self.item_embeddings = nn.Embedding(self.num_items, config.model.emb_dim, device=self.device)
+ 
+        self.k_e = 4
+        self.k_t = 2
+        self.k_v = 1
+        self.alpha, self.beta = 0.1, 0.9
+        self.input_feat_drop_rate=0.3,
+        self.feat_drop_rate=0.3,
+        self.user_x_drop_rate=0.3,
+        self.item_x_drop_rate=0.3,
+        self.edge_drop_rate=0.2,
+        self.z_drop_rate=0.2,
+        self.use_rp=True,
+        self.use_item_emb=False,
+        self.num_clusters=5,
+        self.num_samples=10
+
+        
+
+
+        self.model =  MIGGT(
+        # k=config.k,
+
+        k_e=self.k_e,
+        k_t=self.k_t,
+        k_v=self.k_v,
+
+        alpha=self.alpha, 
+        beta=self.beta, 
+
+        input_feat_drop_rate=self.input_feat_drop_rate,
+        feat_drop_rate=self.feat_drop_rate,
+        user_x_drop_rate=self.user_x_drop_rate,
+        item_x_drop_rate=self.item_x_drop_rate, 
+        edge_drop_rate=self.edge_drop_rate, 
+        z_drop_rate=self.z_drop_rate,
+        user_in_channels=self.embedding_size,
+        item_v_in_channels=self.v_feat.size(-1),
+        item_v_hidden_channels_list=[config.feat_hidden_units, self.embedding_size], 
+        item_t_in_channels=self.t_feat.size(-1), 
+        item_t_hidden_channels_list=[config.feat_hidden_units, self.embedding_size], 
+
+        bn=config.bn,
+        num_clusters=config.num_clusters,
+        num_samples=config.num_samples
+    ).to(self.device)
+
+        self._graph_cache = None
+
+
+    def random_project(self, x, units):
+        
+        weight_shape = (x.shape[-1], units)
+        weight = torch.randn(weight_shape)
+        h = x @ weight
+        h = self.l2_normalize(h, dim=-1)
+        return h
+
+    def l2_normalize(self, x, dim=-1):
+        return x / (torch.norm(x, dim=dim, keepdim=True) + 1e-8)
+    
+    def build_graph(self, interactions: List[Tuple[int, int, float]]):
+        """Build the recommendation graph."""
+        interactions = torch.tensor(interactions,dtype=torch.long)[:,:-1]
+        self._graph_cache = MGDCF.build_sorted_homo_graph(
+            interactions, self.num_users, self.num_items
+        )
+        return self._graph_cache
+    
+    def forward(self,batch):
+        result = {}
+        virtual_h, emb_h, t_h, v_h, encoded_t, encoded_v, z_memory_h = self.model(self._graph_cache, self.user_embeddings, self.v_feat, self.t_feat, 
+                                                                                item_embeddings=self.item_embeddings if self.use_item_emb else None, 
+                                                                                return_all=True)
+        result["user_h"] = virtual_h[:self.num_users]
+        result["item_h"] = virtual_h[self.num_users:]
+
+        result["user_emb_h"] = emb_h[:self.num_users]
+        result["item_emb_h"] = emb_h[self.num_users:]
+
+        result["user_t_h"] = t_h[:self.num_users]
+        result["item_t_h"] = t_h[self.num_users:]
+
+        if v_h is not None:
+            result["user_v_h"] = v_h[:self.num_users]
+            result["item_v_h"] = v_h[self.num_users:]
+        else:
+            result["user_v_h"] = None
+            result["item_v_h"] = None
+        
+        result["encoded_t"] = encoded_t
+        result["encoded_v"] = encoded_v
+        result["z_memory_h"] = z_memory_h
+
+        return result
+
+
+
 class ModelFactory:
     """Factory for creating recommendation models."""
     
     @staticmethod
-    def create_MMGCN(
+    def create_Model(
         config,
         user_features: Optional[Dict[str, torch.Tensor]] = None,
         item_features: Optional[Dict[str, torch.Tensor]] = None
@@ -295,6 +432,12 @@ class ModelFactory:
         """
         if config.model.model_name.lower() == 'mmgcn':
             return MMGCNModel(
+                config=config,
+                user_features=user_features,
+                item_features=item_features
+            )
+        if config.model.model_name.lower() == "mig":
+            return MIG(
                 config=config,
                 user_features=user_features,
                 item_features=item_features

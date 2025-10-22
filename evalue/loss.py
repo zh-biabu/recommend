@@ -1,6 +1,7 @@
 import torch
 import torch.nn.functional as F
 from typing import Optional, Iterable
+import numpy as np
 
 
 def bpr_loss(pos_scores: torch.Tensor,
@@ -91,6 +92,42 @@ def l2_regularization(parameters: Iterable[torch.nn.Parameter], weight: float) -
     return weight * total
 
 
+def compute_info_bpr_loss(a_embeddings, b_embeddings, pos_edges, neg_items, reduction='mean', hard_negs=None):
+
+    if isinstance(pos_edges, list):
+        pos_edges = np.array(pos_edges)
+
+    device = a_embeddings.device
+
+    a_indices = pos_edges[:, 0]
+    b_indices = pos_edges[:, 1]
+    num_pos_edges = neg_items.size(1)
+
+    embedded_a = a_embeddings[a_indices]
+    embedded_b = b_embeddings[b_indices]
+    embedded_neg_b = b_embeddings[neg_items]
+    
+
+    embedded_combined_b = torch.cat([embedded_b.unsqueeze(1), embedded_neg_b], 1)
+
+    logits = (embedded_combined_b @ embedded_a.unsqueeze(-1)).squeeze(-1)
+
+    info_bpr_loss = F.cross_entropy(logits, torch.zeros([num_pos_edges], dtype=torch.int64).to(device), reduction=reduction)
+
+    return info_bpr_loss
+
+def compute_l2_loss(params):
+    """
+    Compute l2 loss for a list of parameters/tensors
+    """
+    l2_loss = 0.0
+    for param in params:
+        l2_loss += param.pow(2).sum() * 0.5
+    return l2_loss
+    
+
+
+
 __all__ = [
     "bpr_loss",
     "pairwise_hinge_loss",
@@ -98,6 +135,8 @@ __all__ = [
     "cross_entropy_loss",
     "info_nce_loss",
     "l2_regularization",
+    "compute_info_bpr_loss",
+    "compute_l2_loss"
 ]
 
 

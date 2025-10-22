@@ -30,6 +30,7 @@ class GraphTrainer:
         model: nn.Module,
         train_loader,
         config,
+        loss_func=None,
         logger=None
     ):
         """
@@ -49,6 +50,8 @@ class GraphTrainer:
         self.train_loader = train_loader
         self.config = config
         self.logger = logger or get_logger("GraphTrainer")
+        if loss_func:
+            self._loss_func = loss_func
         
         # Training state
         self.current_epoch = 0
@@ -141,21 +144,7 @@ class GraphTrainer:
             outputs = self.model(batch)
             # print(outputs)
             # print(input())
-            if 'loss' in outputs:
-                loss = outputs["loss"]
-            else:
-                # 支持正负样本BPR损失
-                user_emb = outputs.get('user_embeddings', outputs.get('embeddings'))
-                pos_item_emb = outputs.get('pos_item_embeddings')
-                neg_item_emb = outputs.get('neg_item_embeddings')
-                if user_emb is not None and pos_item_emb is not None and neg_item_emb is not None:
-                    # print(user_emb.shape, neg_item_emb.shape)
-                    pos_scores = torch.sum(user_emb * pos_item_emb, dim=-1)
-                    neg_scores = torch.sum(user_emb.unsqueeze(1) * neg_item_emb, dim=-1)
-                    loss = bpr_loss(pos_scores, neg_scores)
-                else:
-                    # Fallback: compute loss from batch data
-                    loss = self._compute_loss_from_batch(batch, outputs)
+            loss = self._loss_func(outputs, batch)
             print(f"{batch_idx} train_loss",loss)
             loss.backward()
             if self.config.training.gradient_clip_norm > 0:
@@ -196,6 +185,7 @@ class GraphTrainer:
             sum(p.numel() for p in self.model.parameters()),
             sum(p.numel() for p in self.model.parameters() if p.requires_grad)
         )
+
         start_time = time.time()
         for epoch in range(1, self.config.training.epochs + 1):
             self.current_epoch = epoch
@@ -259,6 +249,24 @@ class GraphTrainer:
             'val_metrics': self.val_metrics,
             'training_time': total_time
         }
+
+    def _loss_func(self, outputs, batch):
+        if 'loss' in outputs:
+            loss = outputs["loss"]
+        else:
+            # 支持正负样本BPR损失
+            user_emb = outputs.get('user_embeddings', outputs.get('embeddings'))
+            pos_item_emb = outputs.get('pos_item_embeddings')
+            neg_item_emb = outputs.get('neg_item_embeddings')
+            if user_emb is not None and pos_item_emb is not None and neg_item_emb is not None:
+                # print(user_emb.shape, neg_item_emb.shape)
+                pos_scores = torch.sum(user_emb * pos_item_emb, dim=-1)
+                neg_scores = torch.sum(user_emb.unsqueeze(1) * neg_item_emb, dim=-1)
+                loss = bpr_loss(pos_scores, neg_scores)
+            else:
+                # Fallback: compute loss from batch data
+                loss = self._compute_loss_from_batch(batch, outputs)
+        return loss
     
 
     

@@ -1,9 +1,9 @@
 import torch
 import torch.nn as nn
-from torch_scatter import scatter_mean
-from mig_gt.layers.common import MyLinear, MyMLP, get_activation
+# from torch_scatter import scatter_mean
+from .common import MyLinear, MyMLP, get_activation
 
-from mig_gt.layers.mgdcf import MGDCF
+from .mgdcf import MGDCF
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
