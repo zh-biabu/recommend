@@ -104,8 +104,8 @@ def build_graph_and_model(config, train_loader, user_features, item_features):
     
     # Build graph using ONLY training data
     graph = model.build_graph(interactions)
-    # model.graph_constructor.creat_feature_weight()
-    # model.graph_constructor.creat_feature_weight(feature="text_feat")
+    model.creat_feature_weight()
+
     
     print(f"Graph built from training data only: {graph.num_nodes()} nodes, {graph.num_edges()} edges")
     print("⚠️  Important: Graph constructed using only training data to prevent data leakage")
@@ -135,14 +135,13 @@ def mask_index(config, target_loader, need_mask_loaders):
 
 def mig_loss_func(outputs, batch):
 
-    user_h = outputs["user_h"]
-    item_h = outputs["item_h"]
+    user_h = outputs["user_embeddings"]
+    item_h = outputs["item_embeddings"]
     z_memory_h = outputs["z_memory_h"]
     user_ids = batch.get('user_ids', torch.tensor([], dtype=torch.long))
     item_ids = batch.get('item_ids', torch.tensor([], dtype=torch.long))
     neg_items = batch.get('neg_items', torch.tensor([], dtype=torch.long))
     batch = torch.cat([user_ids.unsqueeze(1), item_ids.unsqueeze(1)],dim=1)
-    print(batch.shape)
     num_users = user_h.size(0)
     
 
@@ -310,9 +309,8 @@ def main():
         model = model.to(device)
         
         # Get model info
-        # model_info = model.get_model_info()
-        # print(f"Model parameters: {model_info['total_parameters']:,}")
-        # print(model.graph_constructor.get_graph_statistics())
+        model_info = model.get_model_info()
+        print(f"Model parameters: {model_info['total_parameters']:,}")
 
         # init trainer,verifier,tester
         print(f"init trainer,verifier,tester")
@@ -320,7 +318,7 @@ def main():
         val_target, val_mask = mask_index(config, val_loader, [train_loader, test_loader])
         test_target, test_mask = mask_index(config, test_loader,[train_loader, val_loader])
 
-        trainer = GraphTrainer(model, train_loader, config, mig_loss_func)
+        trainer = GraphTrainer(model, train_loader, config, loss_func=mig_loss_func)
         verifier = Verifier(config, val_loader,val_target, val_mask)
         tester = Tester(config, test_loader,test_target, test_mask)
 

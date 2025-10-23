@@ -42,6 +42,8 @@ class MMGCNModel(nn.Module):
         self.num_users = config.data.num_users
         self.num_items = config.data.num_items
         self.num_nodes = self.num_users + self.num_items
+        self.modal_num = config.model.modal_num
+        self.weight_feature = config.graph.weight_feature
         
         # Store features
         self.user_features = user_features or {}
@@ -59,14 +61,14 @@ class MMGCNModel(nn.Module):
             for x in self.feats
         ])
             
-        self.ks= [5]*config.model.modal_num
-        self.alphas = torch.randn(config.model.modal_num, requires_grad=True, device=config.system.device)
+        self.ks= [5] * self.modal_num
+        self.alphas = torch.randn(self.modal_num, requires_grad=True, device=config.system.device)
         self.emb = nn.Embedding(self.num_nodes, config.model.emb_dim, device=config.system.device)
-        self.embs = self.emb.weight.unsqueeze(0).expand(config.model.modal_num, -1, -1)
+        self.embs = self.emb.weight.unsqueeze(0).expand(self.modal_num, -1, -1)
 
         # Initialize MMGCN model
         self.mmgcn = MMGCN(
-            modal_num=config.model.modal_num,
+            modal_num=self.modal_num,
             emb_num=config.model.emb_dim,
             layer_num=config.model.layer_num,
             dropout=config.model.dropout
@@ -118,6 +120,10 @@ class MMGCNModel(nn.Module):
         )
         return self._graph_cache
     
+    def creat_feature_weight(self):
+        for feature in self.weight_feature:
+            self.graph_constructor.creat_feature_weight(feature = feature)
+    
     def get_graph(self):
         """Get the constructed graph."""
         if self._graph_cache is None:
@@ -126,8 +132,7 @@ class MMGCNModel(nn.Module):
     
     def forward(
         self,
-        batch: Dict[str, torch.Tensor],
-        return_embeddings: bool = False
+        batch: Dict[str, torch.Tensor]
     ) -> Dict[str, torch.Tensor]:
         if self._graph_cache is None:
             raise ValueError("Graph not built. Call build_graph() first.")
@@ -146,33 +151,10 @@ class MMGCNModel(nn.Module):
         node_embeddings = self.dropout(node_embeddings)
         user_embeddings = node_embeddings[:self.num_users]
         item_embeddings = node_embeddings[self.num_users:]
-        user_ids = batch.get('user_ids', torch.tensor([], dtype=torch.long))
-        item_ids = batch.get('item_ids', torch.tensor([], dtype=torch.long))
-        # 支持正负样本embedding输出
-        if 'neg_items' in batch:
-            neg_item_ids = batch['neg_items']
-            # print(neg_item_ids)
-            pos_user_emb = user_embeddings[user_ids]
-            pos_item_emb = item_embeddings[item_ids]
-            neg_item_emb = item_embeddings[neg_item_ids]  # shape: (N, neg_ratio, emb_dim)
-            return {
-                'user_embeddings': pos_user_emb,
-                'pos_item_embeddings': pos_item_emb,
-                'neg_item_embeddings': neg_item_emb,
-                'embeddings': node_embeddings
-            }
-        # 仅正样本
-        if len(user_ids) > 0 and len(item_ids) > 0:
-            user_emb = user_embeddings[user_ids]
-            item_emb = item_embeddings[item_ids]
-            scores = torch.sum(user_emb * item_emb, dim=1)
-        else:
-            scores = torch.empty(0, dtype=torch.float32, device=node_embeddings.device)
-        result = {'scores': scores}
-        if return_embeddings:
-            result['embeddings'] = node_embeddings
-            result['user_embeddings'] = user_embeddings
-            result['item_embeddings'] = item_embeddings
+
+        result = {}
+        result['user_embeddings'] = user_embeddings
+        result['item_embeddings'] = item_embeddings
         return result
     
     def _prepare_modal_features(self) -> List[torch.Tensor]:
@@ -296,9 +278,9 @@ class MIG(nn.Module):
         self.num_users = config.data.num_users
         self.num_items = config.data.num_items
         self.num_nodes = self.num_users + self.num_items
-        self.device = config.system.device
         self.use_rp = True
         self.embedding_size = config.model.emb_dim
+        self.device = config.system.device
 
         self.user_features = user_features or {}
         self.item_features = item_features or {}
@@ -309,7 +291,7 @@ class MIG(nn.Module):
             self.v_feat = self.random_project(self.v_feat, self.t_feat.size(-1))
 
         self.v_feat = self.v_feat.to(self.device)
-        self.t_feat = self.t_feat.to(self.device)
+        self.tfeat  = self.t_feat.to(self.device)
         self.user_embeddings = torch.randn((self.num_users, config.model.emb_dim), device=self.device)
         self.item_embeddings = torch.randn((self.num_items, config.model.emb_dim), device=self.device)
  
@@ -328,6 +310,7 @@ class MIG(nn.Module):
         self.num_clusters=5
         self.num_samples=10
         self.feat_hidden_units = 512
+
 
         
 
@@ -378,18 +361,19 @@ class MIG(nn.Module):
         interactions = torch.tensor(interactions,dtype=torch.long)[:,:-1]
         self._graph_cache = MGDCF.build_sorted_homo_graph(
             interactions, self.num_users, self.num_items
-        )
+        ).to(self.device)
         return self._graph_cache
+
+    def creat_feature_weight(self):
+        MGDCF.norm_adj(self._graph_cache)
     
-    def forward(self,batch, return_embeddings=True):
+    def forward(self,batch):
         result = {}
-        self._graph_cache = self._graph_cache.to(self.device)
-        print(self._graph_cache.device, self.v_feat.device, self.t_feat.device)
         virtual_h, emb_h, t_h, v_h, encoded_t, encoded_v, z_memory_h = self.model(self._graph_cache, self.user_embeddings, self.v_feat, self.t_feat, 
                                                                                 item_embeddings=self.item_embeddings if self.use_item_emb else None, 
                                                                                 return_all=True)
-        result["user_h"] = virtual_h[:self.num_users]
-        result["item_h"] = virtual_h[self.num_users:]
+        result["user_embeddings"] = virtual_h[:self.num_users]
+        result["item_embeddings"] = virtual_h[self.num_users:]
 
         result["user_emb_h"] = emb_h[:self.num_users]
         result["item_emb_h"] = emb_h[self.num_users:]
@@ -409,6 +393,25 @@ class MIG(nn.Module):
         result["z_memory_h"] = z_memory_h
 
         return result
+    
+    def get_model_info(self) -> Dict[str, Any]:
+        """Get model information."""
+        total_params = sum(p.numel() for p in self.parameters())
+        trainable_params = sum(p.numel() for p in self.parameters() if p.requires_grad)
+        
+        return {
+            'model_name': 'MMFCN',
+            'total_parameters': total_params,
+            'trainable_parameters': trainable_params,
+            'num_users': self.num_users,
+            'num_items': self.num_items,
+            'num_nodes': self.num_nodes,
+            'embedding_dim': self.config.model.emb_dim,
+            'num_modalities': self.config.model.modal_num,
+            'user_features': list(self.user_features.keys()),
+            'item_features': list(self.item_features.keys())
+        }
+
 
 
 

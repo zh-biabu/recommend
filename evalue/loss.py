@@ -93,7 +93,7 @@ def l2_regularization(parameters: Iterable[torch.nn.Parameter], weight: float) -
 
 
 def compute_info_bpr_loss(a_embeddings, b_embeddings, pos_edges, neg_items, reduction='mean', hard_negs=None):
-    
+
     if isinstance(pos_edges, list):
         pos_edges = np.array(pos_edges)
 
@@ -106,11 +106,12 @@ def compute_info_bpr_loss(a_embeddings, b_embeddings, pos_edges, neg_items, redu
     embedded_a = a_embeddings[a_indices]
     embedded_b = b_embeddings[b_indices]
     embedded_neg_b = b_embeddings[neg_items]
-    print(embedded_a.shape,embedded_b.shape,embedded_neg_b.shape)
+    
 
     embedded_combined_b = torch.cat([embedded_b.unsqueeze(1), embedded_neg_b], 1)
 
     logits = (embedded_combined_b @ embedded_a.unsqueeze(-1)).squeeze(-1)
+
     info_bpr_loss = F.cross_entropy(logits, torch.zeros([num_pos_edges], dtype=torch.int64).to(device), reduction=reduction)
 
     return info_bpr_loss

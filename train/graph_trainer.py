@@ -251,21 +251,20 @@ class GraphTrainer:
         }
 
     def _loss_func(self, outputs, batch):
-        if 'loss' in outputs:
-            loss = outputs["loss"]
-        else:
-            # 支持正负样本BPR损失
-            user_emb = outputs.get('user_embeddings', outputs.get('embeddings'))
-            pos_item_emb = outputs.get('pos_item_embeddings')
-            neg_item_emb = outputs.get('neg_item_embeddings')
-            if user_emb is not None and pos_item_emb is not None and neg_item_emb is not None:
-                # print(user_emb.shape, neg_item_emb.shape)
-                pos_scores = torch.sum(user_emb * pos_item_emb, dim=-1)
-                neg_scores = torch.sum(user_emb.unsqueeze(1) * neg_item_emb, dim=-1)
-                loss = bpr_loss(pos_scores, neg_scores)
-            else:
-                # Fallback: compute loss from batch data
-                loss = self._compute_loss_from_batch(batch, outputs)
+
+        user_embeddings = outputs.get('user_embeddings')
+        item_embeddings = outputs.get('item_embeddings')
+        user_ids = batch.get('user_ids', torch.tensor([], dtype=torch.long))
+        item_ids = batch.get('item_ids', torch.tensor([], dtype=torch.long))
+        neg_items_ids = batch.get('neg_items', torch.tensor([], dtype=torch.long))
+        if  not (len(user_ids)>0 and len(item_ids)>0 and len(neg_items_ids)>0):
+            raise Exception("batch error, recive null user or item or neg_items")
+        pos_user_emb = user_embeddings[user_ids]
+        pos_item_emb = item_embeddings[item_ids]
+        neg_item_emb = item_embeddings[neg_items_ids] 
+        pos_scores = torch.sum(pos_user_emb * pos_item_emb, dim=-1)
+        neg_scores = torch.sum(pos_user_emb.unsqueeze(1) * neg_item_emb, dim=-1)
+        loss = bpr_loss(pos_scores, neg_scores)
         return loss
     
 

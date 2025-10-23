@@ -1,0 +1,86 @@
+2025-10-23 12:10:48 - torch._inductor.config - INFO - compile_threads set to 1 for win32
+2025-10-23 12:10:55 - GraphTrainer - INFO - Starting training...
+2025-10-23 12:10:55 - GraphTrainer - INFO - 模型: MMGCN
+2025-10-23 12:10:55 - GraphTrainer - INFO - 总参数量: 2,053,256
+2025-10-23 12:10:55 - GraphTrainer - INFO - 可训练参数量: 2,053,256
+2025-10-23 12:10:55 - GraphTrainer - INFO - ============================================================
+2025-10-23 12:10:55 - GraphTrainer - INFO - 开始第 1/50 轮训练
+2025-10-23 12:10:55 - GraphTrainer - INFO - ============================================================
+2025-10-23 12:13:32 - torch._dynamo.eval_frame - INFO - TorchDynamo attempted to trace the following frames: [
+
+]
+2025-10-23 12:13:32 - torch._dynamo.utils - INFO - TorchDynamo compilation metrics:
+Function, Runtimes (s)
+2025-10-23 12:24:36 - torch._inductor.config - INFO - compile_threads set to 1 for win32
+2025-10-23 12:24:43 - GraphTrainer - INFO - Starting training...
+2025-10-23 12:24:43 - GraphTrainer - INFO - 模型: MMGCN
+2025-10-23 12:24:43 - GraphTrainer - INFO - 总参数量: 2,053,256
+2025-10-23 12:24:43 - GraphTrainer - INFO - 可训练参数量: 2,053,256
+2025-10-23 12:24:43 - GraphTrainer - INFO - ============================================================
+2025-10-23 12:24:43 - GraphTrainer - INFO - 开始第 1/50 轮训练
+2025-10-23 12:24:43 - GraphTrainer - INFO - ============================================================
+2025-10-23 12:26:43 - torch._dynamo.eval_frame - INFO - TorchDynamo attempted to trace the following frames: [
+
+]
+2025-10-23 12:26:43 - torch._dynamo.utils - INFO - TorchDynamo compilation metrics:
+Function, Runtimes (s)
+2025-10-23 12:28:32 - torch._inductor.config - INFO - compile_threads set to 1 for win32
+2025-10-23 12:28:39 - GraphTrainer - INFO - Starting training...
+2025-10-23 12:28:39 - GraphTrainer - INFO - 模型: MMGCN
+2025-10-23 12:28:39 - GraphTrainer - INFO - 总参数量: 2,053,256
+2025-10-23 12:28:39 - GraphTrainer - INFO - 可训练参数量: 2,053,256
+2025-10-23 12:28:39 - GraphTrainer - INFO - ============================================================
+2025-10-23 12:28:39 - GraphTrainer - INFO - 开始第 1/50 轮训练
+2025-10-23 12:28:39 - GraphTrainer - INFO - ============================================================
+2025-10-23 12:30:34 - torch._dynamo.eval_frame - INFO - TorchDynamo attempted to trace the following frames: [
+
+]
+2025-10-23 12:30:34 - torch._dynamo.utils - INFO - TorchDynamo compilation metrics:
+Function, Runtimes (s)
+2025-10-23 12:34:43 - torch._inductor.config - INFO - compile_threads set to 1 for win32
+2025-10-23 12:34:49 - GraphTrainer - INFO - Starting training...
+2025-10-23 12:34:49 - GraphTrainer - INFO - 模型: MMGCN
+2025-10-23 12:34:49 - GraphTrainer - INFO - 总参数量: 2,053,256
+2025-10-23 12:34:49 - GraphTrainer - INFO - 可训练参数量: 2,053,256
+2025-10-23 12:34:49 - GraphTrainer - INFO - ============================================================
+2025-10-23 12:34:49 - GraphTrainer - INFO - 开始第 1/50 轮训练
+2025-10-23 12:34:49 - GraphTrainer - INFO - ============================================================
+2025-10-23 12:45:14 - torch._dynamo.eval_frame - INFO - TorchDynamo attempted to trace the following frames: [
+
+]
+2025-10-23 12:45:14 - torch._dynamo.utils - INFO - TorchDynamo compilation metrics:
+Function, Runtimes (s)
+2025-10-23 13:20:46 - torch._inductor.config - INFO - compile_threads set to 1 for win32
+2025-10-23 13:20:51 - GraphTrainer - INFO - Starting training...
+2025-10-23 13:20:51 - GraphTrainer - INFO - 模型: MIG
+2025-10-23 13:20:51 - GraphTrainer - INFO - 总参数量: 937,344
+2025-10-23 13:20:51 - GraphTrainer - INFO - 可训练参数量: 933,184
+2025-10-23 13:20:51 - GraphTrainer - INFO - ============================================================
+2025-10-23 13:20:51 - GraphTrainer - INFO - 开始第 1/50 轮训练
+2025-10-23 13:20:51 - GraphTrainer - INFO - ============================================================
+2025-10-23 13:22:34 - torch._dynamo.eval_frame - INFO - TorchDynamo attempted to trace the following frames: [
+
+]
+2025-10-23 13:22:34 - torch._dynamo.utils - INFO - TorchDynamo compilation metrics:
+Function, Runtimes (s)
+2025-10-23 13:24:35 - torch._inductor.config - INFO - compile_threads set to 1 for win32
+2025-10-23 13:24:38 - GraphTrainer - INFO - Starting training...
+2025-10-23 13:24:38 - GraphTrainer - INFO - 模型: MIG
+2025-10-23 13:24:38 - GraphTrainer - INFO - 总参数量: 937,344
+2025-10-23 13:24:38 - GraphTrainer - INFO - 可训练参数量: 933,184
+2025-10-23 13:24:38 - GraphTrainer - INFO - ============================================================
+2025-10-23 13:24:38 - GraphTrainer - INFO - 开始第 1/50 轮训练
+2025-10-23 13:24:38 - GraphTrainer - INFO - ============================================================
+2025-10-23 13:25:54 - torch._dynamo.eval_frame - INFO - TorchDynamo attempted to trace the following frames: [
+
+]
+2025-10-23 13:25:54 - torch._dynamo.utils - INFO - TorchDynamo compilation metrics:
+Function, Runtimes (s)
+2025-10-23 13:29:52 - torch._inductor.config - INFO - compile_threads set to 1 for win32
+2025-10-23 13:29:56 - GraphTrainer - INFO - Starting training...
+2025-10-23 13:29:56 - GraphTrainer - INFO - 模型: MIG
+2025-10-23 13:29:56 - GraphTrainer - INFO - 总参数量: 937,344
+2025-10-23 13:29:56 - GraphTrainer - INFO - 可训练参数量: 933,184
+2025-10-23 13:29:56 - GraphTrainer - INFO - ============================================================
+2025-10-23 13:29:56 - GraphTrainer - INFO - 开始第 1/50 轮训练
+2025-10-23 13:29:56 - GraphTrainer - INFO - ============================================================

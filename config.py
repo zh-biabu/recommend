@@ -36,7 +36,7 @@ class DataConfig:
 @dataclass
 class ModelConfig:
     """Model architecture configuration."""
-    model_name: str = "mig"
+    model_name: str = "MIG"
     modal_num: int = 2
     emb_dim: int = 64
     layer_num: int = 2
@@ -176,6 +176,7 @@ def get_baby_config() -> Config:
     config.training.learning_rate = 0.001
     config.data.num_users=19445
     config.data.num_items=7050
+    config.graph.weight_feature = [None]
     return config
 
 

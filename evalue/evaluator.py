@@ -48,7 +48,7 @@ class Verifier:
         all_scores = []
         all_targets = []
 
-        outputs = model({}, return_embeddings=True)
+        outputs = model({})
         user_embeddings = outputs["user_embeddings"]
         item_embeddings = outputs["item_embeddings"]
         pre_score = (torch.matmul(user_embeddings, item_embeddings.T).to("cpu")*self.mask)
@@ -91,7 +91,7 @@ class Tester:
         all_scores = []
         all_targets = []
 
-        outputs = model({}, return_embeddings=True)
+        outputs = model({})
         user_embeddings = outputs["user_embeddings"]
         item_embeddings = outputs["item_embeddings"]
         pre_score = (torch.matmul(user_embeddings, item_embeddings.T).to("cpu")*self.mask)

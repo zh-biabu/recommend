@@ -129,7 +129,7 @@ class MGDCF(nn.Module):
     def forward(self, g, x, return_all=False):
 
         CACHE_KEY = MGDCF.CACHE_KEY
-        MGDCF.norm_adj(g)
+        # MGDCF.norm_adj(g)
 
         edge_weight = g.edata[CACHE_KEY]
         dropped_edge_weight = self.edge_dropout(edge_weight)
