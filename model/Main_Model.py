@@ -297,6 +297,8 @@ class MIG(nn.Module):
         self.num_items = config.data.num_items
         self.num_nodes = self.num_users + self.num_items
         self.device = config.system.device
+        self.use_rp = True
+        self.embedding_size = config.model.emb_dim
 
         self.user_features = user_features or {}
         self.item_features = item_features or {}
@@ -304,27 +306,28 @@ class MIG(nn.Module):
         self.v_feat = item_features["image_feat"]
         self.t_feat = item_features["text_feat"]
         if self.use_rp:
-            v_feat = self.random_project(self.v_feat, self.t_feat.size(-1))
+            self.v_feat = self.random_project(self.v_feat, self.t_feat.size(-1))
 
-        self.v_feat.to(self.device)
-        self.t_feat.to(self.device)
-        self.user_embeddings = nn.Embedding(self.num_users, config.model.emb_dim, device=self.device)
-        self.item_embeddings = nn.Embedding(self.num_items, config.model.emb_dim, device=self.device)
+        self.v_feat = self.v_feat.to(self.device)
+        self.t_feat = self.t_feat.to(self.device)
+        self.user_embeddings = torch.randn((self.num_users, config.model.emb_dim), device=self.device)
+        self.item_embeddings = torch.randn((self.num_items, config.model.emb_dim), device=self.device)
  
         self.k_e = 4
         self.k_t = 2
         self.k_v = 1
         self.alpha, self.beta = 0.1, 0.9
-        self.input_feat_drop_rate=0.3,
-        self.feat_drop_rate=0.3,
-        self.user_x_drop_rate=0.3,
-        self.item_x_drop_rate=0.3,
-        self.edge_drop_rate=0.2,
-        self.z_drop_rate=0.2,
-        self.use_rp=True,
-        self.use_item_emb=False,
-        self.num_clusters=5,
+        self.input_feat_drop_rate=0.3
+        self.feat_drop_rate=0.3
+        self.user_x_drop_rate=0.3
+        self.item_x_drop_rate=0.3
+        self.edge_drop_rate=0.2
+        self.z_drop_rate=0.2
+        self.use_rp=True
+        self.use_item_emb=False
+        self.num_clusters=5
         self.num_samples=10
+        self.feat_hidden_units = 512
 
         
 
@@ -347,13 +350,13 @@ class MIG(nn.Module):
         z_drop_rate=self.z_drop_rate,
         user_in_channels=self.embedding_size,
         item_v_in_channels=self.v_feat.size(-1),
-        item_v_hidden_channels_list=[config.feat_hidden_units, self.embedding_size], 
+        item_v_hidden_channels_list=[self.feat_hidden_units, self.embedding_size], 
         item_t_in_channels=self.t_feat.size(-1), 
-        item_t_hidden_channels_list=[config.feat_hidden_units, self.embedding_size], 
+        item_t_hidden_channels_list=[self.feat_hidden_units, self.embedding_size], 
 
-        bn=config.bn,
-        num_clusters=config.num_clusters,
-        num_samples=config.num_samples
+        bn=True,
+        num_clusters=self.num_clusters,
+        num_samples=self.num_samples
     ).to(self.device)
 
         self._graph_cache = None
@@ -378,8 +381,10 @@ class MIG(nn.Module):
         )
         return self._graph_cache
     
-    def forward(self,batch):
+    def forward(self,batch, return_embeddings=True):
         result = {}
+        self._graph_cache = self._graph_cache.to(self.device)
+        print(self._graph_cache.device, self.v_feat.device, self.t_feat.device)
         virtual_h, emb_h, t_h, v_h, encoded_t, encoded_v, z_memory_h = self.model(self._graph_cache, self.user_embeddings, self.v_feat, self.t_feat, 
                                                                                 item_embeddings=self.item_embeddings if self.use_item_emb else None, 
                                                                                 return_all=True)

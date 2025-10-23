@@ -36,7 +36,7 @@ class DataConfig:
 @dataclass
 class ModelConfig:
     """Model architecture configuration."""
-    model_name: str = "MMGCN"
+    model_name: str = "mig"
     modal_num: int = 2
     emb_dim: int = 64
     layer_num: int = 2
