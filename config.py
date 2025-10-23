@@ -172,7 +172,7 @@ def get_baby_config() -> Config:
     config.data.rating_col = "rating"
     config.data.batch_size = 512
     config.model.emb_dim = 64
-    config.training.epochs = 50
+    config.training.epochs = 100
     config.training.learning_rate = 0.001
     config.data.num_users=19445
     config.data.num_items=7050

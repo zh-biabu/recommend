@@ -291,7 +291,7 @@ class MIG(nn.Module):
             self.v_feat = self.random_project(self.v_feat, self.t_feat.size(-1))
 
         self.v_feat = self.v_feat.to(self.device)
-        self.tfeat  = self.t_feat.to(self.device)
+        self.t_feat  = self.t_feat.to(self.device)
         self.user_embeddings = torch.randn((self.num_users, config.model.emb_dim), device=self.device)
         self.item_embeddings = torch.randn((self.num_items, config.model.emb_dim), device=self.device)
  

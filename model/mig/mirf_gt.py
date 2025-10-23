@@ -333,7 +333,6 @@ class MIGGT(nn.Module):
                 output_bn=True
             )
         )
-
        
         self.input_feat_dropout = nn.Dropout(input_feat_drop_rate)
 
@@ -350,7 +349,6 @@ class MIGGT(nn.Module):
         item_t_feat = self.input_feat_dropout(item_t_feat)
 
       
-
         encoded_t = self.t_ff(item_t_feat)
         encoded_v = self.v_ff(item_v_feat)
 
