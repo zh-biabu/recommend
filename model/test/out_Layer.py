@@ -35,7 +35,7 @@ class MGCN(nn.Module):
             agg_X = f(X, agg_X)
         return agg_X + self.dropout(self.active(self.W_o(emb)))
 
-class MMGCN(nn.Module):
+class TEST(nn.Module):
     def __init__(self, modal_num, emb_num, layer_num, dropout):
         super().__init__()
         self.modal_num = modal_num

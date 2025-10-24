@@ -9,7 +9,7 @@ from .metric import (
 from .loss import (
     bpr_loss, pairwise_hinge_loss, bce_with_logits_loss,
     cross_entropy_loss, info_nce_loss, l2_regularization, 
-    compute_info_bpr_loss, compute_l2_loss
+    compute_info_bpr_loss, compute_l2_loss, mig_loss_func, mmgcn_loss
 )
 from .evaluator import Verifier,Tester
 
@@ -28,5 +28,7 @@ __all__ = [
     'info_nce_loss',
     'l2_regularization',
     "Verifier",
-    "Tester"
+    "Tester",
+    "mig_loss_func",
+    "mmgcn_loss"
 ]

@@ -3,6 +3,7 @@ Enhanced MMFCN model wrapper with proper integration for the training pipeline.
 Handles multi-modal features and provides a unified interface.
 """
 
+from turtle import forward
 import torch
 import torch.nn as nn
 import os
@@ -10,14 +11,17 @@ import sys
 from typing import Dict, List, Tuple, Optional, Any
 
 # Add model paths to sys.path for imports
-from .mmgcn.graph_constructor import GraphConstructor
-from .mmgcn.out_Layer import MMGCN
+from .test.graph_constructor import GraphConstructor
+from .test.out_Layer import TEST
 
 from .mig.mirf_gt import MIGGT
 from .mig.mgdcf import MGDCF
 
+from .mmgcn.graph import Graph
+from .mmgcn.net import Net
 
-class MMGCNModel(nn.Module):
+
+class TESTModel(nn.Module):
     """Enhanced MMFCN model wrapper for graph-based recommendation."""
     
     def __init__(
@@ -67,7 +71,7 @@ class MMGCNModel(nn.Module):
         self.embs = self.emb.weight.unsqueeze(0).expand(self.modal_num, -1, -1)
 
         # Initialize MMGCN model
-        self.mmgcn = MMGCN(
+        self.test = TEST(
             modal_num=self.modal_num,
             emb_num=config.model.emb_dim,
             layer_num=config.model.layer_num,
@@ -141,7 +145,7 @@ class MMGCNModel(nn.Module):
 
         self.Xs = [linear(x) for linear, x in zip(self.linears, self.feats)]
         # try:
-        node_embeddings = self.mmgcn(g, self.Xs, self.embs, self.ks, self.alphas)
+        node_embeddings = self.test(g, self.Xs, self.embs, self.ks, self.alphas)
         # print(node_embeddings)
         # print(input())
         # except Exception as e:
@@ -242,7 +246,7 @@ class MMGCNModel(nn.Module):
         trainable_params = sum(p.numel() for p in self.parameters() if p.requires_grad)
         
         return {
-            'model_name': 'MMFCN',
+            'model_name': 'TEST',
             'total_parameters': total_params,
             'trainable_parameters': trainable_params,
             'num_users': self.num_users,
@@ -263,14 +267,7 @@ class MIG(nn.Module):
         item_features: Optional[Dict[str, torch.Tensor]] = None
     ):
         """
-        Initialize MMFCN model.
-        
-        Args:
-            config: Configuration object
-            num_users: Number of users
-            num_items: Number of items
-            user_features: User feature tensors
-            item_features: Item feature tensors
+        mig_gt
         """
         super().__init__()
 
@@ -400,6 +397,95 @@ class MIG(nn.Module):
         trainable_params = sum(p.numel() for p in self.parameters() if p.requires_grad)
         
         return {
+            'model_name': 'MIG',
+            'total_parameters': total_params,
+            'trainable_parameters': trainable_params,
+            'num_users': self.num_users,
+            'num_items': self.num_items,
+            'num_nodes': self.num_nodes,
+            'embedding_dim': self.config.model.emb_dim,
+            'num_modalities': self.config.model.modal_num,
+            'user_features': list(self.user_features.keys()),
+            'item_features': list(self.item_features.keys())
+        }
+
+class MMGCN(nn.Module):
+    """
+    MMGCN
+    """
+    def __init__(
+        self,
+        config,
+        user_features: Optional[Dict[str, torch.Tensor]] = None,
+        item_features: Optional[Dict[str, torch.Tensor]] = None
+    ):
+        super().__init__()
+        self.config = config
+        self.num_users = config.data.num_users
+        self.num_items = config.data.num_items
+        self.num_nodes = self.num_users + self.num_items
+        self.modal_num = config.model.modal_num
+        self.device = config.system.device
+        self.hidden_dim = config.model.hidden_dim
+        self.emb_dim = config.model.emb_dim
+        self.concat = config.model.concat
+        self.k = config.model.k
+
+        self.user_features = user_features or {}
+        self.item_features = item_features or {}
+
+        self.node_emb = torch.randn((self.num_nodes, self.emb_dim), requires_grad=True)
+
+        self.dim_feats = []
+        self.feats =[]
+        for feat in item_features.values():
+            self.dim_feats.append(feat.size(1))
+            self.feats.append(feat.to(self.device))
+
+        self.model = Net(
+            modal_num = self.modal_num, 
+            dim_feats = self.dim_feats, 
+            hidden_dim = self.hidden_dim, 
+            emb_dim = self.emb_dim, 
+            num_users = self.num_users, 
+            num_items = self.num_items, 
+            concat = self.concat, 
+            k=self.k
+        )
+
+        self.graph = Graph(
+            add_self_loops=config.graph.add_self_loops,
+            normalize_adj=config.graph.normalize_adj
+        )
+
+
+        self._graph_cache = None
+
+    def build_graph(self, interactions):
+        self._graph_cache = self.graph.build_graph(interactions, self.num_users, self.num_items)
+        return self._graph_cache
+
+    def creat_feature_weight(self):
+        return
+
+    def forward(self, batch):
+        result = {}
+        emb, pres = self.model(self.feats, self.node_emb, self.graph)
+
+        result["user_embeddings"] = emb[: self.num_users]
+        result["item_embeddings"] = emb[self.num_users: ]
+        result["id_embeddings"] = self.node_emb
+        result["pres"] = pres
+        return result
+
+    
+    
+    def get_model_info(self) -> Dict[str, Any]:
+        """Get model information."""
+        total_params = sum(p.numel() for p in self.parameters())
+        trainable_params = sum(p.numel() for p in self.parameters() if p.requires_grad)
+        
+        return {
             'model_name': 'MMFCN',
             'total_parameters': total_params,
             'trainable_parameters': trainable_params,
@@ -411,6 +497,11 @@ class MIG(nn.Module):
             'user_features': list(self.user_features.keys()),
             'item_features': list(self.item_features.keys())
         }
+
+
+
+
+
 
 
 
@@ -438,8 +529,8 @@ class ModelFactory:
         Returns:
             Initialized model
         """
-        if config.model.model_name.lower() == 'mmgcn':
-            return MMGCNModel(
+        if config.model.model_name.lower() == 'test':
+            return TESTModel(
                 config=config,
                 user_features=user_features,
                 item_features=item_features
@@ -450,36 +541,11 @@ class ModelFactory:
                 user_features=user_features,
                 item_features=item_features
             )
+        if config.model.model_name.lower() == "mmgcn":
+            return MMGCN(
+                config=config,
+                user_features=user_features,
+                item_features=item_features
+            )
         else:
             raise ValueError(f"Unknown model: {config.model.model_name}")
-
-
-if __name__ == "__main__":
-    # Test the model
-    import sys
-    sys.path.append(r"F:\project")
-    from recommend.config import get_config
-    
-    config = get_config('baby')
-    model = MMGCNModel(
-        config=config,
-        num_users=1000,
-        num_items=500,
-        user_features={'image': torch.randn(1000, 64), 'text': torch.randn(1000, 128)},
-        item_features={'image': torch.randn(500, 64), 'text': torch.randn(500, 128)}
-    )
-    
-    # Build graph
-    interactions = [(i % 1000, i % 500, 1.0) for i in range(10000)]
-    graph = model.build_graph(interactions)
-    
-    # Test forward pass
-    batch = {
-        'user_ids': torch.tensor([0, 1, 2]),
-        'item_ids': torch.tensor([0, 1, 2])  # Add offset
-    }
-    
-    result = model.forward(batch)
-    print("Model test successful!")
-    print(f"Output shape: {result['scores']}")
-    print(f"Model info: {model.get_model_info()}")

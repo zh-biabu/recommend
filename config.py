@@ -36,13 +36,16 @@ class DataConfig:
 @dataclass
 class ModelConfig:
     """Model architecture configuration."""
-    model_name: str = "MIG"
+    model_name: str = "MMGCN"
     modal_num: int = 2
     emb_dim: int = 64
     layer_num: int = 2
     dropout: float = 0.3
     activation: str = "prelu"
     use_batch_norm: bool = True
+    hidden_dim: int = 512
+    concat: bool = True
+    k: int = 3
 
 
 @dataclass

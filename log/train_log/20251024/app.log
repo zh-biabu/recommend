@@ -1,0 +1,39 @@
+2025-10-24 15:33:29 - torch._inductor.config - INFO - compile_threads set to 1 for win32
+2025-10-24 15:33:37 - GraphTrainer - INFO - Starting training...
+2025-10-24 15:33:38 - GraphTrainer - INFO - 模型: MMGCN
+2025-10-24 15:33:38 - GraphTrainer - INFO - 总参数量: 2,483,968
+2025-10-24 15:33:38 - GraphTrainer - INFO - 可训练参数量: 2,483,968
+2025-10-24 15:33:38 - GraphTrainer - INFO - ============================================================
+2025-10-24 15:33:38 - GraphTrainer - INFO - 开始第 1/100 轮训练
+2025-10-24 15:33:38 - GraphTrainer - INFO - ============================================================
+2025-10-24 15:36:13 - torch._dynamo.eval_frame - INFO - TorchDynamo attempted to trace the following frames: [
+
+]
+2025-10-24 15:36:13 - torch._dynamo.utils - INFO - TorchDynamo compilation metrics:
+Function, Runtimes (s)
+2025-10-24 15:38:45 - torch._inductor.config - INFO - compile_threads set to 1 for win32
+2025-10-24 15:38:48 - GraphTrainer - INFO - Starting training...
+2025-10-24 15:38:48 - GraphTrainer - INFO - 模型: MMGCN
+2025-10-24 15:38:48 - GraphTrainer - INFO - 总参数量: 2,483,968
+2025-10-24 15:38:48 - GraphTrainer - INFO - 可训练参数量: 2,483,968
+2025-10-24 15:38:48 - GraphTrainer - INFO - ============================================================
+2025-10-24 15:38:48 - GraphTrainer - INFO - 开始第 1/100 轮训练
+2025-10-24 15:38:48 - GraphTrainer - INFO - ============================================================
+2025-10-24 15:40:09 - torch._dynamo.eval_frame - INFO - TorchDynamo attempted to trace the following frames: [
+
+]
+2025-10-24 15:40:09 - torch._dynamo.utils - INFO - TorchDynamo compilation metrics:
+Function, Runtimes (s)
+2025-10-24 15:43:52 - torch._inductor.config - INFO - compile_threads set to 1 for win32
+2025-10-24 15:43:56 - GraphTrainer - INFO - Starting training...
+2025-10-24 15:43:56 - GraphTrainer - INFO - 模型: MMGCN
+2025-10-24 15:43:56 - GraphTrainer - INFO - 总参数量: 2,483,968
+2025-10-24 15:43:56 - GraphTrainer - INFO - 可训练参数量: 2,483,968
+2025-10-24 15:43:56 - GraphTrainer - INFO - ============================================================
+2025-10-24 15:43:56 - GraphTrainer - INFO - 开始第 1/100 轮训练
+2025-10-24 15:43:56 - GraphTrainer - INFO - ============================================================
+2025-10-24 15:47:46 - torch._dynamo.eval_frame - INFO - TorchDynamo attempted to trace the following frames: [
+
+]
+2025-10-24 15:47:46 - torch._dynamo.utils - INFO - TorchDynamo compilation metrics:
+Function, Runtimes (s)

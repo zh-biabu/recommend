@@ -124,7 +124,49 @@ def compute_l2_loss(params):
     for param in params:
         l2_loss += param.pow(2).sum() * 0.5
     return l2_loss
+
+
+def mig_loss_func(outputs, batch):
+
+    user_h = outputs["user_embeddings"]
+    item_h = outputs["item_embeddings"]
+    z_memory_h = outputs["z_memory_h"]
+    user_ids = batch.get('user_ids', torch.tensor([], dtype=torch.long))
+    item_ids = batch.get('item_ids', torch.tensor([], dtype=torch.long))
+    neg_items = batch.get('neg_items', torch.tensor([], dtype=torch.long))
+    batch = torch.cat([user_ids.unsqueeze(1), item_ids.unsqueeze(1)],dim=1)
+    num_users = user_h.size(0)
     
+
+
+    mf_losses = compute_info_bpr_loss(user_h, item_h, batch, neg_items, reduction="none")
+    l2_loss = compute_l2_loss([user_h, item_h])
+
+    loss = mf_losses.sum() + l2_loss * 1e-5
+    pos_user_h = user_h[batch[:, 0]]
+    pos_z_memory_h = z_memory_h[batch[:, 1] + num_users]  
+    unsmooth_logits = (pos_user_h.unsqueeze(1) @ pos_z_memory_h.permute(0, 2, 1)).squeeze(1)
+    unsmooth_loss = F.cross_entropy(unsmooth_logits, torch.zeros([batch.size(0)], dtype=torch.long).to(unsmooth_logits.device), reduction="none").sum()
+    loss = loss + unsmooth_loss
+    return loss
+
+def mmgcn_loss(outputs, batch):
+    for v in outputs.values():
+        v.to("cpu")
+    user_tensor = batch.get('user_ids', torch.tensor([], dtype=torch.long))
+    item_tensor = batch.get('item_ids', torch.tensor([], dtype=torch.long))
+    user_h = outputs["user_embeddings"]
+    item_h = outputs["item_embeddings"]
+    id_embedding = outputs["id_embedding"]
+    user_score = user_h[user_tensor]
+    item_score = item_h[item_tensor]
+    score = torch.sum(user_score*item_score, dim=1).view(-1, 2)
+    loss = -torch.mean(torch.log(torch.sigmoid(torch.matmul(score, torch.tensor([[1.0],[-1.0]])))))
+    reg_embedding_loss = (id_embedding[user_tensor]**2 + id_embedding[item_tensor]**2).mean()
+    for preference in outputs["pres"]:
+        reg_embedding_loss += (preference**2).mean()
+    reg_loss =  1e-5 * (reg_embedding_loss)
+    return loss+reg_loss
 
 
 
@@ -136,7 +178,9 @@ __all__ = [
     "info_nce_loss",
     "l2_regularization",
     "compute_info_bpr_loss",
-    "compute_l2_loss"
+    "compute_l2_loss",
+    "mig_loss_func",
+    "mmgcn_loss"
 ]
 
 

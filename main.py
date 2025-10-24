@@ -24,7 +24,7 @@ from model import ModelFactory
 # from model.graph_constructor import GraphConstructor
 from train import GraphTrainer
 from log.deep_learning_logger import get_logger
-from evalue import Verifier, Tester, compute_info_bpr_loss, compute_l2_loss
+from evalue import Verifier, Tester, mig_loss_func
 
 
 def set_seed(seed: int):
@@ -132,30 +132,6 @@ def mask_index(config, target_loader, need_mask_loaders):
             mask[user_id][item_id] = -float("inf")
             
     return target,mask
-
-def mig_loss_func(outputs, batch):
-
-    user_h = outputs["user_embeddings"]
-    item_h = outputs["item_embeddings"]
-    z_memory_h = outputs["z_memory_h"]
-    user_ids = batch.get('user_ids', torch.tensor([], dtype=torch.long))
-    item_ids = batch.get('item_ids', torch.tensor([], dtype=torch.long))
-    neg_items = batch.get('neg_items', torch.tensor([], dtype=torch.long))
-    batch = torch.cat([user_ids.unsqueeze(1), item_ids.unsqueeze(1)],dim=1)
-    num_users = user_h.size(0)
-    
-
-
-    mf_losses = compute_info_bpr_loss(user_h, item_h, batch, neg_items, reduction="none")
-    l2_loss = compute_l2_loss([user_h, item_h])
-
-    loss = mf_losses.sum() + l2_loss * 1e-5
-    pos_user_h = user_h[batch[:, 0]]
-    pos_z_memory_h = z_memory_h[batch[:, 1] + num_users]  
-    unsmooth_logits = (pos_user_h.unsqueeze(1) @ pos_z_memory_h.permute(0, 2, 1)).squeeze(1)
-    unsmooth_loss = F.cross_entropy(unsmooth_logits, torch.zeros([batch.size(0)], dtype=torch.long).to(unsmooth_logits.device), reduction="none").sum()
-    loss = loss + unsmooth_loss
-    return loss
 
  
 
@@ -318,7 +294,7 @@ def main():
         val_target, val_mask = mask_index(config, val_loader, [train_loader, test_loader])
         test_target, test_mask = mask_index(config, test_loader,[train_loader, val_loader])
 
-        trainer = GraphTrainer(model, train_loader, config, loss_func=mig_loss_func)
+        trainer = GraphTrainer(model, train_loader, config, loss_func=None)
         verifier = Verifier(config, val_loader,val_target, val_mask)
         tester = Tester(config, test_loader,test_target, test_mask)
 
