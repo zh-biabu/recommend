@@ -33,7 +33,7 @@ class GCN(nn.Module):
     def forward(self, feat, node_emb, g):
         feat = self.trans(feat)
         feat = torch.cat([self.user_feat_emb, feat], dim=0)
-        # feat = F.normalize(feat)
+        feat = F.normalize(feat)
 
         for i in range(self.k):
             h = F.leaky_relu(g.func(feat, self.ws[i]))

@@ -43,7 +43,7 @@ class ModelConfig:
     dropout: float = 0.3
     activation: str = "prelu"
     use_batch_norm: bool = True
-    hidden_dim: int = 512
+    hidden_dim: int = 256
     concat: bool = False
     k: int = 3
 
@@ -52,7 +52,7 @@ class ModelConfig:
 class TrainingConfig:
     """Training configuration."""
     epochs: int = 100
-    learning_rate: float = 0.001
+    learning_rate: float = 0.0001
     weight_decay: float = 1e-4
     optimizer: str = "adam"
     scheduler: str = "plateau"

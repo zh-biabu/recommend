@@ -434,7 +434,7 @@ class MMGCN(nn.Module):
         self.user_features = user_features or {}
         self.item_features = item_features or {}
 
-        self.node_emb = nn.Parameter(torch.randn((self.num_nodes, self.emb_dim), dtype=torch.float32))
+        self.node_emb = nn.init.xavier_normal_(torch.randn((self.num_nodes, self.emb_dim), dtype=torch.float32, requires_grad=True)).to(self.device)
 
         self.dim_feats = []
         self.feats =[]

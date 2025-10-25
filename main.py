@@ -127,12 +127,13 @@ def mask_index(config, target_loader, need_mask_loaders):
     for user_id, item_id in target_cache.items():
         target[user_id][item_id] = 1
 
+
     for df in need_mask_df:
         mask_cache = df.groupby(user_col)[item_col].apply(list).to_dict()
         for user_id, item_id in mask_cache.items():
             col_id.extend(item_id)
             row_id.extend([user_id] * len(item_id))
-    mask = (row_id, col_id)     
+    mask = (row_id, col_id)
     return target, mask
 
  
@@ -293,8 +294,8 @@ def main():
         # init trainer,verifier,tester
         print(f"init trainer,verifier,tester")
 
-        val_target, val_mask = mask_index(config, val_loader, [train_loader, test_loader])
-        test_target, test_mask = mask_index(config, test_loader,[train_loader, val_loader])
+        val_target, val_mask = mask_index(config, val_loader, [train_loader])
+        test_target, test_mask = mask_index(config, test_loader,[train_loader])
 
         trainer = GraphTrainer(model, train_loader, config, loss_func=None)
         verifier = Verifier(config, val_loader,val_target, val_mask)
