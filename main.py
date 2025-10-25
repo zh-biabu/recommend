@@ -24,7 +24,7 @@ from model import ModelFactory
 # from model.graph_constructor import GraphConstructor
 from train import GraphTrainer
 from log.deep_learning_logger import get_logger
-from evalue import Verifier, Tester, mig_loss_func
+from evalue import Verifier, Tester, mig_loss_func, mmgcn_loss
 
 
 def set_seed(seed: int):
@@ -297,7 +297,7 @@ def main():
         val_target, val_mask = mask_index(config, val_loader, [train_loader])
         test_target, test_mask = mask_index(config, test_loader,[train_loader])
 
-        trainer = GraphTrainer(model, train_loader, config, loss_func=None)
+        trainer = GraphTrainer(model, train_loader, config, loss_func=mmgcn_loss)
         verifier = Verifier(config, val_loader,val_target, val_mask)
         tester = Tester(config, test_loader,test_target, test_mask)
 

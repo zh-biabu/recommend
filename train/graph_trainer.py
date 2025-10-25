@@ -200,7 +200,7 @@ class GraphTrainer:
                     self.val_metrics.append(val_metrics)
                     self.logger.log_validation_results(val_metrics)
                     # Update best model
-                    primary_metric = f"{self.config.evaluation.main_metric}@{self.config.evaluation.k_values[0]}"
+                    primary_metric = f"{self.config.evaluation.main_metric}@{self.config.evaluation.k_values[-1]}"
                     if primary_metric in val_metrics:
                         current_metric = val_metrics[primary_metric]
                         if current_metric > self.best_val_metric:
