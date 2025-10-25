@@ -120,7 +120,8 @@ def mask_index(config, target_loader, need_mask_loaders):
     target_df = target_loader.dataset.data
     need_mask_df = [loader.dataset.data for loader in need_mask_loaders]
     target = torch.zeros((num_users, num_items))
-    mask = torch.ones((num_users, num_items))
+    col_id = []
+    row_id = []
     target_cache = target_df.groupby(user_col)[item_col].apply(list).to_dict()
 
     for user_id, item_id in target_cache.items():
@@ -129,9 +130,10 @@ def mask_index(config, target_loader, need_mask_loaders):
     for df in need_mask_df:
         mask_cache = df.groupby(user_col)[item_col].apply(list).to_dict()
         for user_id, item_id in mask_cache.items():
-            mask[user_id][item_id] = -float("inf")
-            
-    return target,mask
+            col_id.extend(item_id)
+            row_id.extend([user_id] * len(item_id))
+    mask = (row_id, col_id)     
+    return target, mask
 
  
 

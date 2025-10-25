@@ -90,9 +90,13 @@ class Graph:
         self.g = dgl.graph((src, dst), num_nodes=self.num_nodes)
         
         return self.g
+
+    def move_to_device(self, device):
+        self.g = self.g.to(device)
     
     def func(self, feat, w):
         self.w = w
+        # print(self.w.device, feat.device)
         with self.g.local_scope():
             self.g.ndata["feat"] = feat 
             self.g.update_all(self.message, fn.mean("h", "feat"))

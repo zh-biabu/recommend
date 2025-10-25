@@ -19,7 +19,7 @@ class DataConfig:
     rating_col: Optional[str] = None
     timestamp_col: Optional[str] = None
     negative_sampling: bool = True
-    neg_ratio: int = 100
+    neg_ratio: int = 1
     train_ratio: float = 0.8
     val_ratio: float = 0.1
     test_ratio: float = 0.1
@@ -44,7 +44,7 @@ class ModelConfig:
     activation: str = "prelu"
     use_batch_norm: bool = True
     hidden_dim: int = 512
-    concat: bool = True
+    concat: bool = False
     k: int = 3
 
 

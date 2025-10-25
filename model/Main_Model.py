@@ -434,7 +434,7 @@ class MMGCN(nn.Module):
         self.user_features = user_features or {}
         self.item_features = item_features or {}
 
-        self.node_emb = torch.randn((self.num_nodes, self.emb_dim), requires_grad=True)
+        self.node_emb = nn.Parameter(torch.randn((self.num_nodes, self.emb_dim), dtype=torch.float32))
 
         self.dim_feats = []
         self.feats =[]
@@ -450,8 +450,12 @@ class MMGCN(nn.Module):
             num_users = self.num_users, 
             num_items = self.num_items, 
             concat = self.concat, 
-            k=self.k
+            k=self.k,
+            device = self.device
         )
+
+        self._initialize_parameters()
+
 
         self.graph = Graph(
             add_self_loops=config.graph.add_self_loops,
@@ -460,12 +464,23 @@ class MMGCN(nn.Module):
 
 
         self._graph_cache = None
+    
+    def _initialize_parameters(self):
+        """Initialize model parameters."""
+        for module in self.modules():
+            if isinstance(module, nn.Linear):
+                nn.init.xavier_uniform_(module.weight)
+                if module.bias is not None:
+                    nn.init.zeros_(module.bias)
+            elif isinstance(module, nn.Embedding):
+                nn.init.normal_(module.weight, std=0.1)
 
     def build_graph(self, interactions):
         self._graph_cache = self.graph.build_graph(interactions, self.num_users, self.num_items)
         return self._graph_cache
 
     def creat_feature_weight(self):
+        self.graph.move_to_device(self.device)
         return
 
     def forward(self, batch):

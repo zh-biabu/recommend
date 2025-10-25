@@ -25,7 +25,7 @@ class Verifier:
         self.config = config
         self.loader = loader
         self.target = target
-        self.mask = mask
+        self.row_id, self.col_id = mask
 
         self.metrics = config.evaluation.metrics # 要计算的指标列表
         self.device = config.system.device
@@ -51,7 +51,8 @@ class Verifier:
         outputs = model({})
         user_embeddings = outputs["user_embeddings"]
         item_embeddings = outputs["item_embeddings"]
-        pre_score = (torch.matmul(user_embeddings, item_embeddings.T).to("cpu")*self.mask)
+        pre_score = (torch.matmul(user_embeddings, item_embeddings.T).to("cpu"))
+        pre_score[self.row_id, self.col_id] = -1e10
         
 
         # 计算各项指标
@@ -70,7 +71,7 @@ class Tester:
         self.config = config
         self.loader = loader
         self.target = target
-        self.mask = mask
+        self.row_id, self.col_id = mask
 
         self.metrics = config.evaluation.metrics # 要计算的指标列表
         self.device = config.system.device
@@ -94,7 +95,9 @@ class Tester:
         outputs = model({})
         user_embeddings = outputs["user_embeddings"]
         item_embeddings = outputs["item_embeddings"]
-        pre_score = (torch.matmul(user_embeddings, item_embeddings.T).to("cpu")*self.mask)
+        pre_score = (torch.matmul(user_embeddings, item_embeddings.T).to("cpu"))
+        pre_score[self.row_id, self.col_id] = -1e10
+        
         
 
         # 计算各项指标

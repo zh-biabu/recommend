@@ -11,7 +11,6 @@ import random
 from torch.utils.data import Dataset, DataLoader
 from typing import Dict, List, Tuple, Optional, Any
 import pickle
-from sklearn.model_selection import train_test_split
 from collections import defaultdict
 import warnings
 

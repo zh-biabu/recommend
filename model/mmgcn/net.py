@@ -7,23 +7,23 @@ from torch.onnx.symbolic_opset9 import dim
 
 
 class GCN(nn.Module):
-    def __init__(self, dim_feat, hidden_dim, emb_dim, num_users, num_items, concat, k=3):
+    def __init__(self, dim_feat, hidden_dim, emb_dim, num_users, num_items, concat, k=3, device="cpu"):
         super().__init__()
 
         self.concat = concat
         self.k = k
 
-        self.user_feat_emb = torch.randn((num_users, hidden_dim), dtype=torch.float32, requires_grad=True)
+        self.user_feat_emb = nn.init.xavier_normal_(torch.randn((num_users, hidden_dim), dtype=torch.float32, requires_grad=True)).to(device)
         self.trans = nn.Linear(dim_feat, hidden_dim)
         
-        self.ws = [torch.randn((hidden_dim, hidden_dim), dtype=torch.float32, requires_grad=True)]
+        self.ws = [nn.init.xavier_normal_(torch.randn((hidden_dim, hidden_dim), dtype=torch.float32, requires_grad=True)).to(device)]
         self.des = nn.ModuleList([nn.Linear(hidden_dim, emb_dim)])
         if concat:
             self.outs = nn.ModuleList([nn.Linear(hidden_dim + emb_dim, emb_dim)])
         else:
             self.outs = nn.ModuleList([nn.Linear(hidden_dim, emb_dim)])
         for _ in range(k-1):
-            self.ws.append(torch.randn((emb_dim,emb_dim), dtype=torch.float32, requires_grad=True))
+            self.ws.append(nn.init.xavier_normal_(torch.randn((emb_dim,emb_dim), dtype=torch.float32, requires_grad=True)).to(device))
             self.des.append(nn.Linear(emb_dim, emb_dim))
             if concat:
                 self.outs.append(nn.Linear(emb_dim + emb_dim, emb_dim))
@@ -32,7 +32,7 @@ class GCN(nn.Module):
     
     def forward(self, feat, node_emb, g):
         feat = self.trans(feat)
-        feat = torch.cat([feat, self.user_feat_emb], dim=0)
+        feat = torch.cat([self.user_feat_emb, feat], dim=0)
         # feat = F.normalize(feat)
 
         for i in range(self.k):
@@ -42,18 +42,19 @@ class GCN(nn.Module):
                 feat = self.outs[i](torch.cat([h,u], dim=1))
             else:
                 feat = self.outs[i](h) + u
+            feat = F.leaky_relu(feat)
         return feat, self.user_feat_emb
 
 
 
 class Net(nn.Module):
-    def __init__(self, modal_num, dim_feats, hidden_dim, emb_dim, num_users, num_items, concat, k=3):
+    def __init__(self, modal_num, dim_feats, hidden_dim, emb_dim, num_users, num_items, concat, k=3, device="cpu"):
         super().__init__()
         self.gcns = nn.ModuleList()
         for i in range(modal_num):
             self.gcns.append(
                 GCN(
-                    dim_feats[i], hidden_dim, emb_dim, num_users, num_items, concat, k
+                    dim_feats[i], hidden_dim, emb_dim, num_users, num_items, concat, k, device
                 )
             )
     
