@@ -165,8 +165,9 @@ def mmgcn_loss(outputs, batch):
     loss = -torch.mean(torch.log(torch.sigmoid(score - neg_score)))
     reg_embedding_loss = (2* id_embedding[user_tensor]**2 + id_embedding[item_tensor]**2 + id_embedding[item_tensor]**2).mean()/2
     # for preference in outputs["pres"]:
-    reg_embedding_loss += (outputs["pres"][0]**2).mean()
+    reg_embedding_loss += (outputs["pres"]**2).mean()
     reg_loss =  1e-3 * (reg_embedding_loss)
+    print(reg_loss)
     return loss+reg_loss
 
 
