@@ -19,7 +19,7 @@ import torch_geometric
 # from common.init import xavier_uniform_initialization
 
 
-class Net(nn.Module):
+class Net_rec(nn.Module):
     def __init__(self, num_users, num_items, emb_dim, dim_feats, device):
         super().__init__()
         self.num_user = num_users

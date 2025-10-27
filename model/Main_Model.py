@@ -20,6 +20,8 @@ from .mig.mgdcf import MGDCF
 from .mmgcn.graph import Graph
 from .mmgcn.net import Net
 
+from .mmgcn_rec.net import Net_rec
+
 
 class TESTModel(nn.Module):
     """Enhanced MMFCN model wrapper for graph-based recommendation."""
@@ -516,110 +518,110 @@ class MMGCN(nn.Module):
         }
 
 
-# class MMGCN(nn.Module):
-#     """
-#     MMGCN
-#     """
-#     def __init__(
-#         self,
-#         config,
-#         user_features: Optional[Dict[str, torch.Tensor]] = None,
-#         item_features: Optional[Dict[str, torch.Tensor]] = None
-#     ):
-#         super().__init__()
-#         self.config = config
-#         self.num_users = config.data.num_users
-#         self.num_items = config.data.num_items
-#         self.num_nodes = self.num_users + self.num_items
-#         self.modal_num = config.model.modal_num
-#         self.device = config.system.device
-#         self.hidden_dim = config.model.hidden_dim
-#         self.emb_dim = config.model.emb_dim
-#         self.concat = config.model.concat
-#         self.k = config.model.k
+class MMGCN_rec(nn.Module):
+    """
+    MMGCN_rec
+    """
+    def __init__(
+        self,
+        config,
+        user_features: Optional[Dict[str, torch.Tensor]] = None,
+        item_features: Optional[Dict[str, torch.Tensor]] = None
+    ):
+        super().__init__()
+        self.config = config
+        self.num_users = config.data.num_users
+        self.num_items = config.data.num_items
+        self.num_nodes = self.num_users + self.num_items
+        self.modal_num = config.model.modal_num
+        self.device = config.system.device
+        self.hidden_dim = config.model.hidden_dim
+        self.emb_dim = config.model.emb_dim
+        self.concat = config.model.concat
+        self.k = config.model.k
 
-#         self.user_features = user_features or {}
-#         self.item_features = item_features or {}
+        self.user_features = user_features or {}
+        self.item_features = item_features or {}
 
-#         self.node_emb = nn.init.xavier_normal_(torch.randn((self.num_nodes, self.emb_dim), dtype=torch.float32, requires_grad=True)).to(self.device)
+        self.node_emb = nn.init.xavier_normal_(torch.randn((self.num_nodes, self.emb_dim), dtype=torch.float32, requires_grad=True)).to(self.device)
 
-#         self.dim_feats = []
-#         self.feats =[]
-#         for feat in item_features.values():
-#             self.dim_feats.append(feat.size(1))
-#             self.feats.append(feat.to(self.device))
+        self.dim_feats = []
+        self.feats =[]
+        for feat in item_features.values():
+            self.dim_feats.append(feat.size(1))
+            self.feats.append(feat.to(self.device))
 
-#         self.model = Net(
-#             # num_users, num_items, emb_dim, dim_feats, device
-#             dim_feats = self.dim_feats, 
-#             # hidden_dim = self.hidden_dim, 
-#             emb_dim = self.emb_dim, 
-#             num_users = self.num_users, 
-#             num_items = self.num_items, 
-#             # concat = self.concat, 
-#             # k=self.k,
-#             device = self.device
-#         )
+        self.model = Net_rec(
+            # num_users, num_items, emb_dim, dim_feats, device
+            dim_feats = self.dim_feats, 
+            # hidden_dim = self.hidden_dim, 
+            emb_dim = self.emb_dim, 
+            num_users = self.num_users, 
+            num_items = self.num_items, 
+            # concat = self.concat, 
+            # k=self.k,
+            device = self.device
+        )
 
-#         self._initialize_parameters()
-
-
-#         # self.graph = Graph(
-#         #     add_self_loops=config.graph.add_self_loops,
-#         #     normalize_adj=config.graph.normalize_adj
-#         # )
+        self._initialize_parameters()
 
 
-#         self._graph_cache = None
+        # self.graph = Graph(
+        #     add_self_loops=config.graph.add_self_loops,
+        #     normalize_adj=config.graph.normalize_adj
+        # )
+
+
+        self._graph_cache = None
     
-#     def _initialize_parameters(self):
-#         """Initialize model parameters."""
-#         for module in self.modules():
-#             if isinstance(module, nn.Linear):
-#                 nn.init.xavier_uniform_(module.weight)
-#                 if module.bias is not None:
-#                     nn.init.zeros_(module.bias)
-#             elif isinstance(module, nn.Embedding):
-#                 nn.init.normal_(module.weight, std=0.1)
+    def _initialize_parameters(self):
+        """Initialize model parameters."""
+        for module in self.modules():
+            if isinstance(module, nn.Linear):
+                nn.init.xavier_uniform_(module.weight)
+                if module.bias is not None:
+                    nn.init.zeros_(module.bias)
+            elif isinstance(module, nn.Embedding):
+                nn.init.normal_(module.weight, std=0.1)
 
-#     def build_graph(self, interactions):
-#         # self._graph_cache = self.graph.build_graph(interactions, self.num_users, self.num_items)
-#         self.edge_index = torch.tensor(interactions, dtype = torch.long)[: , :2].to(self.device).T
-#         return None
+    def build_graph(self, interactions):
+        # self._graph_cache = self.graph.build_graph(interactions, self.num_users, self.num_items)
+        self.edge_index = torch.tensor(interactions, dtype = torch.long)[: , :2].to(self.device).T
+        return None
 
-#     def creat_feature_weight(self):
-#         # self.graph.move_to_device(self.device)
-#         return
+    def creat_feature_weight(self):
+        # self.graph.move_to_device(self.device)
+        return
 
-#     def forward(self, batch):
-#         result = {}
-#         emb, pres = self.model(self.edge_index, self.feats, self.node_emb)
+    def forward(self, batch):
+        result = {}
+        emb, pres = self.model(self.edge_index, self.feats, self.node_emb)
 
-#         result["user_embeddings"] = emb[: self.num_users]
-#         result["item_embeddings"] = emb[self.num_users: ]
-#         result["id_embeddings"] = self.node_emb
-#         result["pres"] = pres
-#         return result
+        result["user_embeddings"] = emb[: self.num_users]
+        result["item_embeddings"] = emb[self.num_users: ]
+        result["id_embeddings"] = self.node_emb
+        result["pres"] = pres
+        return result
 
     
     
-#     def get_model_info(self) -> Dict[str, Any]:
-#         """Get model information."""
-#         total_params = sum(p.numel() for p in self.parameters())
-#         trainable_params = sum(p.numel() for p in self.parameters() if p.requires_grad)
+    def get_model_info(self) -> Dict[str, Any]:
+        """Get model information."""
+        total_params = sum(p.numel() for p in self.parameters())
+        trainable_params = sum(p.numel() for p in self.parameters() if p.requires_grad)
         
-#         return {
-#             'model_name': 'MMFCN',
-#             'total_parameters': total_params,
-#             'trainable_parameters': trainable_params,
-#             'num_users': self.num_users,
-#             'num_items': self.num_items,
-#             'num_nodes': self.num_nodes,
-#             'embedding_dim': self.config.model.emb_dim,
-#             'num_modalities': self.config.model.modal_num,
-#             'user_features': list(self.user_features.keys()),
-#             'item_features': list(self.item_features.keys())
-#         }
+        return {
+            'model_name': 'MMFCN',
+            'total_parameters': total_params,
+            'trainable_parameters': trainable_params,
+            'num_users': self.num_users,
+            'num_items': self.num_items,
+            'num_nodes': self.num_nodes,
+            'embedding_dim': self.config.model.emb_dim,
+            'num_modalities': self.config.model.modal_num,
+            'user_features': list(self.user_features.keys()),
+            'item_features': list(self.item_features.keys())
+        }
 
 
 
@@ -666,6 +668,12 @@ class ModelFactory:
             )
         if config.model.model_name.lower() == "mmgcn":
             return MMGCN(
+                config=config,
+                user_features=user_features,
+                item_features=item_features
+            )
+        if config.model.model_name.lower() == "mmgcn_rec":
+            return MMGCN_rec(
                 config=config,
                 user_features=user_features,
                 item_features=item_features

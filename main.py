@@ -106,8 +106,10 @@ def build_graph_and_model(config, train_loader, user_features, item_features):
     graph = model.build_graph(interactions)
     model.creat_feature_weight()
 
-    
-    print(f"Graph built from training data only: {graph.num_nodes()} nodes, {graph.num_edges()} edges")
+    try:
+        print(f"Graph built from training data only: {graph.num_nodes()} nodes, {graph.num_edges()} edges")
+    except Exception as e:
+        pass
     print("⚠️  Important: Graph constructed using only training data to prevent data leakage")
     
     return model, graph
