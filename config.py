@@ -36,14 +36,14 @@ class DataConfig:
 @dataclass
 class ModelConfig:
     """Model architecture configuration."""
-    model_name: str = "MMGCN"
+    model_name: str = "MMGCN_rec"
     modal_num: int = 2
     emb_dim: int = 64
     layer_num: int = 2
     dropout: float = 0.3
     activation: str = "prelu"
     use_batch_norm: bool = True
-    hidden_dim: int = 256
+    hidden_dim: int = 2048
     concat: bool = False
     k: int = 3
 
@@ -51,9 +51,9 @@ class ModelConfig:
 @dataclass
 class TrainingConfig:
     """Training configuration."""
-    epochs: int = 100
-    learning_rate: float = 0.0001
-    weight_decay: float = 1e-4
+    epochs: int = 1000
+    learning_rate: float = 0.01
+    weight_decay: float = 0
     optimizer: str = "adam"
     scheduler: str = "plateau"
     scheduler_patience: int = 10
@@ -71,8 +71,8 @@ class EvaluationConfig:
     metrics: list = None
     k_values: list = None
     test_batch_size: int = 512
-    num_negatives: int = 100
-    main_metric: str = "ndcg"
+    num_negatives: int = 1
+    main_metric: str = "recall"
     
     def __post_init__(self):
         if self.metrics is None:
@@ -173,10 +173,10 @@ def get_baby_config() -> Config:
     config.data.user_col = "userID"
     config.data.item_col = "itemID"
     config.data.rating_col = "rating"
-    config.data.batch_size = 512
+    config.data.batch_size = 2048
     config.model.emb_dim = 64
-    config.training.epochs = 100
-    config.training.learning_rate = 0.001
+    config.training.epochs = 1000
+    config.training.learning_rate = 0.0001
     config.data.num_users=19445
     config.data.num_items=7050
     config.graph.weight_feature = [None]

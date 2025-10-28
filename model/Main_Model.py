@@ -9,6 +9,7 @@ import torch.nn as nn
 import os
 import sys
 from typing import Dict, List, Tuple, Optional, Any
+import numpy as np
 
 # Add model paths to sys.path for imports
 from .test.graph_constructor import GraphConstructor
@@ -291,8 +292,10 @@ class MIG(nn.Module):
 
         self.v_feat = self.v_feat.to(self.device)
         self.t_feat  = self.t_feat.to(self.device)
-        self.user_embeddings = torch.randn((self.num_users, config.model.emb_dim), device=self.device)
-        self.item_embeddings = torch.randn((self.num_items, config.model.emb_dim), device=self.device)
+        self.user_embeddings = np.random.randn(self.num_users, self.embedding_size) / np.sqrt(self.embedding_size)
+        self.user_embeddings = torch.tensor(self.user_embeddings, dtype=torch.float32, requires_grad=True, device=self.device)
+        self.item_embeddings = np.random.randn(self.num_items, self.embedding_size) / np.sqrt(self.embedding_size)
+        self.item_embeddings = torch.tensor(self.item_embeddings, dtype=torch.float32, requires_grad=True, device=self.device)
  
         self.k_e = 4
         self.k_t = 2
@@ -563,7 +566,7 @@ class MMGCN_rec(nn.Module):
             device = self.device
         )
 
-        self._initialize_parameters()
+        # self._initialize_parameters()
 
 
         # self.graph = Graph(
@@ -586,7 +589,9 @@ class MMGCN_rec(nn.Module):
 
     def build_graph(self, interactions):
         # self._graph_cache = self.graph.build_graph(interactions, self.num_users, self.num_items)
-        self.edge_index = torch.tensor(interactions, dtype = torch.long)[: , :2].to(self.device).T
+        edge_index = torch.tensor(interactions, dtype = torch.long)[: , :2].T.contiguous().to(self.device)
+        self.edge_index = torch.cat([edge_index, edge_index[[1, 0]]], dim = 1)
+        print(self.edge_index.size(1))
         return None
 
     def creat_feature_weight(self):

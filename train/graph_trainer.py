@@ -77,6 +77,7 @@ class GraphTrainer:
     
     def _setup_optimizer(self):
         """Setup optimizer based on config."""
+        # print(self.config.training.weight_decay,"test")
         if self.config.training.optimizer.lower() == "adam":
             self.optimizer = torch.optim.Adam(
                 self.model.parameters(),
@@ -112,8 +113,8 @@ class GraphTrainer:
         elif self.config.training.scheduler.lower() == "step":
             self.scheduler = torch.optim.lr_scheduler.StepLR(
                 self.optimizer,
-                step_size=30,
-                gamma=0.1
+                step_size=1,
+                gamma=0.9
             )
         elif self.config.training.scheduler.lower() == "cosine":
             self.scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(
@@ -217,6 +218,7 @@ class GraphTrainer:
                         self.scheduler.step(current_metric)
                     elif self.scheduler:
                         self.scheduler.step()
+
                     # Log to tensorboard
                     self.writer.add_scalar('Loss/Train', train_loss, epoch)
                     for metric_name, value in val_metrics.items():

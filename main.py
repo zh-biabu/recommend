@@ -288,6 +288,8 @@ def main():
         # Build graph and model
         model, graph = build_graph_and_model(config, train_loader, user_features, item_features)
         model = model.to(device)
+
+        # print(model)
         
         # Get model info
         model_info = model.get_model_info()

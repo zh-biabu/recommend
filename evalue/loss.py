@@ -106,7 +106,7 @@ def compute_info_bpr_loss(a_embeddings, b_embeddings, pos_edges, neg_items, redu
     embedded_a = a_embeddings[a_indices]
     embedded_b = b_embeddings[b_indices]
     embedded_neg_b = b_embeddings[neg_items]
-    
+    # print(embedded_a.shape, embedded_b.shape, embedded_neg_b.shape)
 
     embedded_combined_b = torch.cat([embedded_b.unsqueeze(1), embedded_neg_b], 1)
 
@@ -141,7 +141,7 @@ def mig_loss_func(outputs, batch):
 
     mf_losses = compute_info_bpr_loss(user_h, item_h, batch, neg_items, reduction="none")
     l2_loss = compute_l2_loss([user_h, item_h])
-
+    # print(l2_loss, mf_losses.mean())
     loss = mf_losses.sum() + l2_loss * 1e-5
     pos_user_h = user_h[batch[:, 0]]
     pos_z_memory_h = z_memory_h[batch[:, 1] + num_users]  
@@ -153,21 +153,21 @@ def mig_loss_func(outputs, batch):
 def mmgcn_loss(outputs, batch):
     user_tensor = batch.get('user_ids', torch.tensor([], dtype=torch.long))
     item_tensor = batch.get('item_ids', torch.tensor([], dtype=torch.long))
-    neg_tensor = batch.get('neg_items', torch.tensor([], dtype=torch.long)).view(-1)
+    neg_tensor = batch.get('neg_items', torch.tensor([], dtype=torch.long)).contiguous().view(-1)
     user_h = outputs["user_embeddings"]
     item_h = outputs["item_embeddings"]
     id_embedding = outputs["id_embeddings"]
-    user_score = user_h[user_tensor]
-    item_score = item_h[item_tensor]
-    neg_score = item_h[neg_tensor]
-    score = torch.sum(user_score*item_score, dim=1)
-    neg_score = torch.sum(user_score*neg_score, dim=1)
+    user_emb = user_h[user_tensor]
+    item_emb = item_h[item_tensor]
+    neg_emb = item_h[neg_tensor]
+    score = torch.sum(user_emb*item_emb, dim=1)
+    neg_score = torch.sum(user_emb*neg_emb, dim=1)
     loss = -torch.mean(torch.log(torch.sigmoid(score - neg_score)))
     reg_embedding_loss = (2* id_embedding[user_tensor]**2 + id_embedding[item_tensor]**2 + id_embedding[item_tensor]**2).mean()/2
     # for preference in outputs["pres"]:
     reg_embedding_loss += (outputs["pres"]**2).mean()
-    reg_loss =  1e-3 * (reg_embedding_loss)
-    print(reg_loss)
+    reg_loss =  0 * (reg_embedding_loss)
+    # print(reg_loss)
     return loss+reg_loss
 
 
