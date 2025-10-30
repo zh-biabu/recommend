@@ -151,24 +151,26 @@ def mig_loss_func(outputs, batch):
     return loss
 
 def mmgcn_loss(outputs, batch):
-    user_tensor = batch.get('user_ids', torch.tensor([], dtype=torch.long))
-    item_tensor = batch.get('item_ids', torch.tensor([], dtype=torch.long))
-    neg_tensor = batch.get('neg_items', torch.tensor([], dtype=torch.long)).contiguous().view(-1)
+    batch_users = batch.get('user_ids', torch.tensor([], dtype=torch.long))
+    pos_items = batch.get('item_ids', torch.tensor([], dtype=torch.long))
+    neg_items = batch.get('neg_items', torch.tensor([], dtype=torch.long)).reshape(-1)
+    user_tensor = batch_users.repeat_interleave(2)
+    stacked_items = torch.stack((pos_items, neg_items))
+    item_tensor = stacked_items.t().contiguous().view(-1)
     user_h = outputs["user_embeddings"]
     item_h = outputs["item_embeddings"]
     id_embedding = outputs["id_embeddings"]
     user_emb = user_h[user_tensor]
     item_emb = item_h[item_tensor]
-    neg_emb = item_h[neg_tensor]
-    score = torch.sum(user_emb*item_emb, dim=1)
-    neg_score = torch.sum(user_emb*neg_emb, dim=1)
-    loss = -torch.mean(torch.log(torch.sigmoid(score - neg_score)))
-    reg_embedding_loss = (2* id_embedding[user_tensor]**2 + id_embedding[item_tensor]**2 + id_embedding[item_tensor]**2).mean()/2
+    score = torch.sum(user_emb*item_emb, dim=1).view((-1,2))
+    device = score.device
+    loss = -torch.mean(torch.log(torch.sigmoid(torch.matmul(score, torch.tensor([[1.0], [-1.0]]).to(device)))))
+    reg_embedding_loss = (id_embedding[user_tensor]**2 + id_embedding[item_tensor]**2).mean()
     # for preference in outputs["pres"]:
     reg_embedding_loss += (outputs["pres"]**2).mean()
     reg_loss =  0 * (reg_embedding_loss)
     # print(reg_loss)
-    return loss+reg_loss
+    return loss + reg_loss
 
 
 

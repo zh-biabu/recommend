@@ -546,14 +546,14 @@ class MMGCN_rec(nn.Module):
         self.user_features = user_features or {}
         self.item_features = item_features or {}
 
-        self.node_emb = nn.init.xavier_normal_(torch.randn((self.num_nodes, self.emb_dim), dtype=torch.float32, requires_grad=True)).to(self.device)
+        self.node_emb = nn.init.xavier_normal_(torch.rand((self.num_nodes, self.emb_dim), requires_grad=True)).to(self.device)
 
         self.dim_feats = []
         self.feats =[]
         for feat in item_features.values():
             self.dim_feats.append(feat.size(1))
             self.feats.append(feat.to(self.device))
-
+        
         self.model = Net_rec(
             # num_users, num_items, emb_dim, dim_feats, device
             dim_feats = self.dim_feats, 
@@ -590,8 +590,8 @@ class MMGCN_rec(nn.Module):
     def build_graph(self, interactions):
         # self._graph_cache = self.graph.build_graph(interactions, self.num_users, self.num_items)
         edge_index = torch.tensor(interactions, dtype = torch.long)[: , :2].T.contiguous().to(self.device)
+        edge_index[1] += self.num_users
         self.edge_index = torch.cat([edge_index, edge_index[[1, 0]]], dim = 1)
-        print(self.edge_index.size(1))
         return None
 
     def creat_feature_weight(self):

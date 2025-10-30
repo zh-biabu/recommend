@@ -80,7 +80,7 @@ class GraphTrainer:
         # print(self.config.training.weight_decay,"test")
         if self.config.training.optimizer.lower() == "adam":
             self.optimizer = torch.optim.Adam(
-                self.model.parameters(),
+                list(self.model.parameters()),
                 lr=self.config.training.learning_rate,
                 weight_decay=self.config.training.weight_decay
             )

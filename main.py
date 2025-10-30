@@ -61,8 +61,7 @@ def prepare_data(config):
     train_dataset = train_loader.dataset
     
     # Extract features
-    user_features = train_dataset.user_features
-    item_features = train_dataset.item_features
+    user_features, item_features = train_loader.dataset.get_features()
     
     print(f"Data loaded: {config.data.num_users} users, {config.data.num_items} items")
     print(f"User features: {list(user_features.keys())}")
@@ -119,8 +118,8 @@ def mask_index(config, target_loader, need_mask_loaders):
     item_col = config.data.item_col
     num_users = config.data.num_users
     num_items = config.data.num_items
-    target_df = target_loader.dataset.data
-    need_mask_df = [loader.dataset.data for loader in need_mask_loaders]
+    target_df = target_loader.dataset.df
+    need_mask_df = [loader.dataset.df for loader in need_mask_loaders]
     target = torch.zeros((num_users, num_items))
     col_id = []
     row_id = []
@@ -289,7 +288,8 @@ def main():
         model, graph = build_graph_and_model(config, train_loader, user_features, item_features)
         model = model.to(device)
 
-        # print(model)
+        print(model)
+        # print(model.__dict__)
         
         # Get model info
         model_info = model.get_model_info()

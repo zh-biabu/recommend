@@ -34,7 +34,7 @@ class Net_rec(nn.Module):
         self.num_modal= 2
 
         self.v_gcn = GCN(self.num_user, self.num_item, self.dim_feats[0], dim_x, self.aggr_mode,
-                            self.concate, has_id=has_id, dim_latent=256, device=self.device)
+                            self.concate, has_id=has_id, dim_latent=512, device=self.device)
 
         self.t_gcn = GCN(self.num_user, self.num_item, self.dim_feats[1], dim_x,
                             self.aggr_mode, self.concate, has_id=has_id, device=self.device)

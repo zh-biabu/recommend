@@ -13,12 +13,15 @@ from dataclasses import dataclass, asdict
 @dataclass
 class DataConfig:
     """Data loading and preprocessing configuration."""
-    data_path: str = "../autodl-tmp/data/scale_data/baby"
+    data_path: str = "../autodl-tmp/data/ori_data/baby"
     user_col: str = "userID"
     item_col: str = "itemID"
     rating_col: Optional[str] = None
     timestamp_col: Optional[str] = None
+    splitting_label: str = "x_label"
+    filter_out_new_users: bool = True
     negative_sampling: bool = True
+    sep: Optional[str] = "\t"
     neg_ratio: int = 1
     train_ratio: float = 0.8
     val_ratio: float = 0.1
@@ -43,7 +46,7 @@ class ModelConfig:
     dropout: float = 0.3
     activation: str = "prelu"
     use_batch_norm: bool = True
-    hidden_dim: int = 2048
+    hidden_dim: int = 512
     concat: bool = False
     k: int = 3
 
@@ -52,7 +55,7 @@ class ModelConfig:
 class TrainingConfig:
     """Training configuration."""
     epochs: int = 1000
-    learning_rate: float = 0.01
+    learning_rate: float = 0.0001
     weight_decay: float = 0
     optimizer: str = "adam"
     scheduler: str = "plateau"
@@ -169,14 +172,13 @@ class Config:
 def get_baby_config() -> Config:
     """Get configuration for baby dataset."""
     config = Config()
-    config.data.data_path = "../autodl-tmp/data/scale_data/baby"
+    config.data.data_path = "../autodl-tmp/data/ori_data/baby"
     config.data.user_col = "userID"
     config.data.item_col = "itemID"
     config.data.rating_col = "rating"
     config.data.batch_size = 2048
     config.model.emb_dim = 64
     config.training.epochs = 1000
-    config.training.learning_rate = 0.0001
     config.data.num_users=19445
     config.data.num_items=7050
     config.graph.weight_feature = [None]
