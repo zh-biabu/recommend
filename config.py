@@ -6,7 +6,7 @@ Supports YAML, JSON, and Python dictionary configurations.
 import os
 import yaml
 import json
-from typing import Dict, Any, Optional
+from typing import Dict, Any, Optional, Tuple
 from dataclasses import dataclass, asdict
 
 
@@ -39,7 +39,7 @@ class DataConfig:
 @dataclass
 class ModelConfig:
     """Model architecture configuration."""
-    model_name: str = "MMGCN_rec"
+    model_name: str = "FastMMGCN"
     modal_num: int = 2
     emb_dim: int = 64
     layer_num: int = 2
@@ -105,6 +105,8 @@ class GraphConfig:
     normalize_adj: bool = True
     edge_weight_type: str = "cosine"  # cosine, dot, uniform
     max_neighbors: int = 50
+    user_ks: Tuple[int] = ()
+    item_ks: Tuple[int] = (3, 3)
 
 
 class Config:

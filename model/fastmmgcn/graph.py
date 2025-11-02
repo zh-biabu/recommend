@@ -13,7 +13,8 @@ class Graph:
     def __init__(
         self,
         num_users: int = 0,
-        num_items: int = 0
+        num_items: int = 0,
+        device: str = "cpu"
     ):
         """
         Initialize graph constructor.
@@ -29,6 +30,7 @@ class Graph:
         self.num_users = num_users
         self.num_items = num_items
         self.num_nodes = num_users + num_items
+        self.device = device
 
         self.weight_cache = "weight"
         
@@ -46,13 +48,13 @@ class Graph:
         for u, v, w in interactions:
             adjacency_matrix[u][v] = 1
 
-        adjacency_matrix = torch.tensor(adjacency_matrix, dtype=torch.long)
+        adjacency_matrix = torch.tensor(adjacency_matrix, dtype=torch.float32)
         
-        
+
         inter = torch.tensor(interactions, dtype = torch.long)[: , :2].T.contiguous()
         inter[1] += self.num_users
         inter = torch.cat([inter, inter[[1, 0]]], dim = 1)
-        self.g = dgl.graph(inter)
+        self.g = dgl.graph((inter[0], inter[1]))
 
         double_adjacency_matrix_u = torch.matmul(adjacency_matrix, adjacency_matrix.T)
         u_src, u_dst = torch.nonzero(double_adjacency_matrix_u, as_tuple=True)
@@ -63,6 +65,10 @@ class Graph:
         self.user_g.edata["times"] = double_adjacency_matrix_u[u_src, u_dst]
         self.item_g = dgl.graph((i_src, i_dst), num_nodes=self.num_items)
         self.item_g.edata["times"] = double_adjacency_matrix_i[i_src, i_dst]
+
+        self.g = self.g.to(self.device)
+        self.user_g = self.user_g.to(self.device)
+        self.item_g = self.item_g.to(self.device)
 
         return self.g, self.user_g, self.item_g
     
@@ -75,18 +81,19 @@ class Graph:
 
         self.user_ks = user_ks
         self.item_ks = item_ks
-
+        print("1")
         for modal_name, features in user_features.items():
             self.user_g.ndata[modal_name] = features
             self.user_modals_name.append(modal_name)
         for modal_name, features in item_features.items():
             self.item_g.ndata[modal_name] = features
             self.item_modals_name.append(modal_name)
-        
+        print(2)
         for i, modal_name in enumerate(self.user_modals_name):
             self._adj_norm("user", modal_name, self.user_ks[i])
         for i, modal_name in enumerate(self.item_modals_name):
             self._adj_norm("item", modal_name, self.item_ks[i])
+        
         return
     
     def _adj_norm(self, graph_name, modal_name, k):
@@ -155,7 +162,7 @@ class Graph:
                  
     
     def _clip(self, edges):
-
+        print("cliping")
         weights = edges.edata[self.weight_key]
         num_edges = weights.shape[0]
 
@@ -171,7 +178,7 @@ class Graph:
         return {self.weight_key: weights}
 
     def _norm(self, edges):
-
+        print("norming")
         weights = edges.edata[self.weight_key]
         D_u = edges.src["out_edge_sum"]
         D_v = edges.dst["in_edge_sum"]
@@ -183,10 +190,10 @@ class Graph:
     def func_train(self, item_emb, feats_name, alphas, k):
         feats = []
         eweights = []
-        alphas = torch.softmax(alphas)
+        alphas = torch.softmax(alphas, dim=0)
         self.k = k
-        
-        for i,name in enumerate(feats_name):
+        print(feats_name)
+        for i, name in enumerate(feats_name):
             feats.append(self.item_g.ndata[name] * alphas[i])
             eweights.append(self.item_g.ndata[f"{name}_weight"] * alphas[i])
         feats_emb = torch.cat(feats, dim=1)

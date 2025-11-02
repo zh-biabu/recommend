@@ -301,7 +301,7 @@ def main():
         val_target, val_mask = mask_index(config, val_loader, [train_loader])
         test_target, test_mask = mask_index(config, test_loader,[train_loader])
 
-        trainer = GraphTrainer(model, train_loader, config, loss_func=mmgcn_loss)
+        trainer = GraphTrainer(model, train_loader, config, loss_func=model.loss_func)
         verifier = Verifier(config, val_loader,val_target, val_mask)
         tester = Tester(config, test_loader,test_target, test_mask)
 
