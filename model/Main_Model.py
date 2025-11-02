@@ -628,8 +628,92 @@ class MMGCN_rec(nn.Module):
             'item_features': list(self.item_features.keys())
         }
 
+class FastMMGCN(nn.Module):
+    def __init__(
+        self,        
+        config,
+        user_features: Optional[Dict[str, torch.Tensor]] = None,
+        item_features: Optional[Dict[str, torch.Tensor]] = None
+        )
+        super().__init__()
+
+        self.config = config
+        self.user_features = user_features or {}
+        self.item_features = item_features or {}
+        self.num_users = config.data.num_users
+        self.num_items = config.data.num_items
+
+        l=0
+        for feat in self.item_features:
+            l += feat.size(-1)
+
+        self.user_ks = config.graph.user_ks
+        self.item_ks = config.graph.item_ks
+
+        self.user_emb = nn.Embedding((self.num_users, self.emb_dim))
+        self.item_emb = nn.Embedding((self.num_items, self.emb_dim))
+
+        self.feats_name = list(self.item_features.keys())
+        
+        self.alphas = nn.Parameter(torch.randn(len(self.item_features)))
+
+        self.graph = Graph(self.num_users, self.num_items)
+
+        self.w = nn.parameter(torch.randn((l, self.emb_dim), dtype=torch.float32))
+        
 
 
+    def build_graph(self, interactions):
+        self.g, self.user_g, self.item_g = self.graph.build_graph(interactions)
+        return self.g
+        
+    
+    def creat_feature_weight(self):
+        self.creat_feature_weight(self.user_features, self.item_features, self.user_ks, self.item_ks)
+        return
+
+
+    def forward(self, batch, mode="train"):
+        result = {}
+        if mode == "train":
+            result["item_embeddings"] = torch.matmul(self.graph.func_tarin(self.item_emb, self.feats_name, self.alphas, k=2), self.w)
+            result["user_embeddings"] = self.user_emb
+
+        elif mode == "test":
+            emb = self.graph.func_test(self.user_emb, self.item_emb, self.feats_name, self.alphas, self.w)
+            result["item_embeddings"], result["user_embeddings"] = emb[: self.num_users], emb[self.num_users: ]
+        return result
+
+    def loss_func(self, result, batch):
+        user_emb, item_emb = result["item_embeddings"], result["user_embeddings"]
+        batch_users = batch.get('user_ids', torch.tensor([], dtype=torch.long))
+        pos_items = batch.get('item_ids', torch.tensor([], dtype=torch.long))
+        neg_items = batch.get('neg_items', torch.tensor([], dtype=torch.long)).reshape(-1)
+        users = user_emb[batch_users]
+        items = item_emb[pos_items]
+        negs = item_emb[neg_items]
+        pos_score = torch.sum(users * items, dim=1)
+        neg_score = torch.sum(users * negs, dim=1)
+        loss = -torch.mean(torch.log(torch.sigmoid(pos_score - neg_score)))
+        return loss
+
+    def get_model_info(self) -> Dict[str, Any]:
+        """Get model information."""
+        total_params = sum(p.numel() for p in self.parameters())
+        trainable_params = sum(p.numel() for p in self.parameters() if p.requires_grad)
+        
+        return {
+            'model_name': 'MMFCN',
+            'total_parameters': total_params,
+            'trainable_parameters': trainable_params,
+            'num_users': self.num_users,
+            'num_items': self.num_items,
+            'num_nodes': self.num_nodes,
+            'embedding_dim': self.config.model.emb_dim,
+            'num_modalities': self.config.model.modal_num,
+            'user_features': list(self.user_features.keys()),
+            'item_features': list(self.item_features.keys())
+        }
 
 
 
@@ -679,6 +763,12 @@ class ModelFactory:
             )
         if config.model.model_name.lower() == "mmgcn_rec":
             return MMGCN_rec(
+                config=config,
+                user_features=user_features,
+                item_features=item_features
+            )
+        if config.model.model_name.lower() == "fastmmgcn":
+            return FastMMGCN(
                 config=config,
                 user_features=user_features,
                 item_features=item_features
