@@ -647,24 +647,15 @@ class FastMMGCN(nn.Module):
         self.emb_dim = config.model.emb_dim
         self.device = config.system.device
 
-        l=0
-        for k, feat in self.item_features.items():
-            self.item_features[k] = feat.to(self.device)
-            l += feat.size(-1)
-
         self.user_ks = config.graph.user_ks
         self.item_ks = config.graph.item_ks
 
         self.user_emb = nn.Embedding(self.num_users, self.emb_dim)
         self.item_emb = nn.Embedding(self.num_items, self.emb_dim)
-
-        self.feats_name = list(self.item_features.keys())
         
-        self.alphas = nn.Parameter(torch.randn(len(self.item_features)))
+        self.graph = Graph(self.num_users, self.num_items, self.device, self.user_features, self.item_features, self.user_ks, self.item_ks)
 
-        self.graph = Graph(self.num_users, self.num_items, self.device)
-
-        self.w = nn.Parameter(torch.randn((l, self.emb_dim), dtype=torch.float32))
+        
         
 
 
@@ -674,18 +665,18 @@ class FastMMGCN(nn.Module):
         
     
     def creat_feature_weight(self):
-        self.graph.creat_feature_weight(self.user_features, self.item_features, self.user_ks, self.item_ks)
+        self.graph.creat_feature_weight()
         return
 
 
     def forward(self, batch, mode="train"):
         result = {}
         if mode == "train":
-            result["item_embeddings"] = torch.matmul(self.graph.func_train(self.item_emb, self.feats_name, self.alphas, k=2), self.w)
+            result["item_embeddings"] = self.graph.func_train(k=2)
             result["user_embeddings"] = self.user_emb
 
         elif mode == "test":
-            emb = self.graph.func_test(self.user_emb, self.item_emb, self.feats_name, self.alphas, self.w)
+            emb = self.graph.func_test(self.user_emb, self.item_emb)
             result["item_embeddings"], result["user_embeddings"] = emb[: self.num_users], emb[self.num_users: ]
         return result
 

@@ -7,14 +7,18 @@ from typing import Dict, List, Tuple, Optional, Any
 from collections import defaultdict
 
 
-class Graph:
+class Graph(nn.Module):
     """Constructs and manages recommendation graphs with multi-modal features."""
 
     def __init__(
         self,
         num_users: int = 0,
         num_items: int = 0,
-        device: str = "cpu"
+        device: str = "cpu",
+        user_features: Optional[Dict[str, torch.Tensor]] = None, 
+        item_features: Optional[Dict[str, torch.Tensor]] = None, 
+        user_ks: Tuple[int] = (), 
+        item_ks: Tuple[int] = (3, 3)
     ):
         """
         Initialize graph constructor.
@@ -31,6 +35,20 @@ class Graph:
         self.num_items = num_items
         self.num_nodes = num_users + num_items
         self.device = device
+        self.user_features = user_features or {}
+        self.item_features = item_features or {}
+
+        l=0
+        self.feats = []
+        for k, feat in self.item_features.items():
+            self.item_features[k] = feat.to(self.device)
+            l += feat.size(-1)
+            self.feats.append(feat)
+        
+        self.feats = torch.stack(self.feats, dim=0)
+
+        self.item_feats_name = list(self.item_features.keys())
+        self.user_feats_name = list(self.user_features.keys())
 
         self.weight_cache = "weight"
         
@@ -38,12 +56,19 @@ class Graph:
         self.user_g = None
         self.item_g = None
 
+        self.trans = nn.Linear(l, self.emb_dim)
+
+        self.alphas = nn.Parameter(torch.randn(len(self.item_features)))
+
+
+
+
     
     def build_graph(
         self,
         interactions: List[Tuple[int, int, float]],
     ) -> dgl.DGLGraph:
-
+        self.num_inter = len(interactions)
         adjacency_matrix = np.zeros((self.num_users, self.num_items), dtype=np.float32)
         for u, v, w in interactions:
             adjacency_matrix[u][v] = 1
@@ -62,37 +87,44 @@ class Graph:
         i_src, i_dst = torch.nonzero(double_adjacency_matrix_i, as_tuple=True)
 
         self.user_g = dgl.graph((u_src, u_dst), num_nodes=self.num_users)
-        self.user_g.edata["times"] = double_adjacency_matrix_u[u_src, u_dst]
+        # self.user_g.edata["times"] = double_adjacency_matrix_u[u_src, u_dst]
         self.item_g = dgl.graph((i_src, i_dst), num_nodes=self.num_items)
-        self.item_g.edata["times"] = double_adjacency_matrix_i[i_src, i_dst]
+        # self.item_g.edata["times"] = double_adjacency_matrix_i[i_src, i_dst]
 
-        self.g = self.g.to(self.device)
-        self.user_g = self.user_g.to(self.device)
-        self.item_g = self.item_g.to(self.device)
+        # self.g = self.g.to(self.device)
+        # self.user_g = self.user_g.to(self.device)
+        # self.item_g = self.item_g.to(self.device)
 
         return self.g, self.user_g, self.item_g
     
-    def creat_feature_weight(self, user_features: Dict[str, torch.Tensor], item_features: Dict[str, torch.Tensor], user_ks, item_ks):
-        self.user_features = user_features
-        self.item_features = item_features
+    def creat_feature_weight(self):
 
-        self.user_modals_name = []
-        self.item_modals_name = []
-
-        self.user_ks = user_ks
-        self.item_ks = item_ks
         print("1")
-        for modal_name, features in user_features.items():
-            self.user_g.ndata[modal_name] = features
-            self.user_modals_name.append(modal_name)
-        for modal_name, features in item_features.items():
-            self.item_g.ndata[modal_name] = features
-            self.item_modals_name.append(modal_name)
-        print(2)
-        for i, modal_name in enumerate(self.user_modals_name):
-            self._adj_norm("user", modal_name, self.user_ks[i])
-        for i, modal_name in enumerate(self.item_modals_name):
-            self._adj_norm("item", modal_name, self.item_ks[i])
+        i=0
+        j=0
+        s_u = []
+        s_i = []
+        # self.user_g = self.user_g.to(self.device)
+        # with self.user_g.local_scope():
+        #     for modal_name, features in self.user_features.items():
+        #         self.user_g.ndata[modal_name] = features
+        #         weight = self._adj_norm("user", modal_name, self.user_ks[i])                
+        #         s_u.append(weight)
+        #         i += 1
+        # self.user_g = self.user_g.to("cpu")
+
+        self.item_g = self.item_g.to(self.device)
+        with self.item_g.local_scope():
+            for modal_name, features in self.item_features.items():
+                self.item_g.ndata[modal_name] = features
+                weight = self._adj_norm("item", modal_name, self.item_ks[j])
+                s_i.append(weight)
+                j+=1
+        s_i = torch.stack(s_i, dim=1)
+        self.item_g.edata["weight"] = s_i
+        self.item_g = self.item_g.to("cpu")
+        
+
         
         return
     
@@ -105,38 +137,19 @@ class Graph:
             
             self.user_g.apply_edges(self._edge_weight_fn)
             self.user_g.apply_edges(self._clip)
-            self.user_g.update_all(
-                fn.copy_u(self.weight_key, "m"), 
-                fn.sum("m", "in_edge_sum") 
-            )
-            reversed_graph = dgl.reverse(self.user_g, copy_ndata=True)
-            reversed_graph.update_all(
-                fn.copy_u(self.weight_key, "m"), 
-                fn.sum("m", "out_edge_sum") 
-            )
-            self.user_g.ndata["out_edge_sum"] = reversed_graph.ndata["out_edge_sum"]
-            del reversed_graph
+            self.user_g.update_all(fn.copy_e(self.weight_key, "m"), fn.sum("m", "in_weight"))
             self.user_g.apply_edges(self._norm)
-            del self.user_g.ndata["in_edge_sum"]
-            del self.user_g.ndata["out_edge_sum"]
+            return self.user_g.edata[self.weight_key]
+            
+
         else:
             
             self.item_g.apply_edges(self._edge_weight_fn)
             self.item_g.apply_edges(self._clip)
-            self.item_g.update_all(
-                fn.copy_u(self.weight_key, "m"), 
-                fn.sum("m", "in_edge_sum") 
-            )
-            reversed_graph = dgl.reverse(self.item_g, copy_ndata=True)
-            reversed_graph.update_all(
-                fn.copy_u(self.weight_key, "m"), 
-                fn.sum("m", "out_edge_sum") 
-            )
-            self.item_g.ndata["out_edge_sum"] = reversed_graph.ndata["out_edge_sum"]
-            del reversed_graph
+            self.item_g.update_all(fn.copy_e(self.weight_key, "m"), fn.sum("m", "in_weight"))
             self.item_g.apply_edges(self._norm)
-            del self.item_g.ndata["in_edge_sum"]
-            del self.item_g.ndata["out_edge_sum"]
+            return self.item_g.edata[self.weight_key]
+
             
 
 
@@ -156,9 +169,9 @@ class Graph:
         
         # 3. 除以模长乘积（加epsilon避免除零错误）
         epsilon = 1e-8  # 微小值，防止分母为0
-        score = dot_product / (norm_u * norm_v + epsilon)
+        score = torch.sigmoid(dot_product) / (norm_u * norm_v + epsilon)
         
-        return {f"{self.cur_modal_name}_weight": torch.sigmoid(score)}  
+        return {f"{self.cur_modal_name}_weight": torch.sigmoid(score)}
                  
     
     def _clip(self, edges):
@@ -176,56 +189,43 @@ class Graph:
             weights = weights * mask.float()
 
         return {self.weight_key: weights}
-
+    
     def _norm(self, edges):
-        print("norming")
-        weights = edges.edata[self.weight_key]
-        D_u = edges.src["out_edge_sum"]
-        D_v = edges.dst["in_edge_sum"]
-        epsilon = 1e-8
-        weights = weights / torch.sqrt((D_u+ epsilon) * (D_v+ epsilon))
+        return {self.weight_key: self.weight_key/(torch.sqrt(edges.src["in_weight"]+1e-8)*torch.sqrt(edges.dst["in_weight"]+1e-8))}
 
-        return {self.weight_key: weights}
 
-    def func_train(self, item_emb, feats_name, alphas, k):
-        feats = []
-        eweights = []
-        alphas = torch.softmax(alphas, dim=0)
+    def func_train(self, item_emb, k):
+        self.item_g = self.item_g.to(self.device)
+        alphas = torch.softmax(self.alphas, dim=0)
+        feats = self.trans(torch.cat(self.feats * alphas))
         self.k = k
-        print(feats_name)
-        for i, name in enumerate(feats_name):
-            feats.append(self.item_g.ndata[name] * alphas[i])
-            eweights.append(self.item_g.ndata[f"{name}_weight"] * alphas[i])
-        feats_emb = torch.cat(feats, dim=1)
-        eweight = sum(eweights)
         with self.item_g.local_scope():
-            self.item_g.edata["weight"] = eweight
-            self.item_g.ndata["feat"] = feats_emb
-            self.item_g.update_all(fn.u_mul_e("feat", "m"), self.reduce_func, self.apply_func)
-            feat_emb = self.item_g.ndata["feat"]
+            self.item_g.edata["weight"] = torch. sum(self.item_g.edata["weight"].view((self.num_inter, -1)) * alphas, dim=1)
+            self.item_g.ndata["feat"] = feats + item_emb
+            self.item_g.update_all(fn.u_mul_e("feat", "weight", "m"), self.reduce_func)
+            feat_emb = self.item_g.ndata["h"]
+        self.item_g.to("cpu")
         return feat_emb
 
     def reduce_func(self, nodes):
         return {"h": torch.sum(nodes.mailbox["m"], dim=1)/self.k}
 
-    def apply_func(self, nodes):
-        return {"feat": nodes.data["feat"] + nodes.data["h"]}
+    # def apply_func(self, nodes):
+    #     return {"feat": nodes.data["feat"] + nodes.data["h"]}
 
 
-    def func_test(self, user_emb, item_emb, feats_name, alphas, w):
+    def func_test(self, user_emb, item_emb):
         user_emb = user_emb.weight
         item_emb = item_emb.weight
-        feats = []
-        # node_emb = torch.cat([user_emb, item_emb], dim=0)
-        for i,name in enumerate(feats_name):
-            feats.append(self.item_g.ndata[name] * alphas[i])
-        feats_emb = torch.matmul(torch.cat(feats, dim=1), w)
-        item_emb = item_emb + feats_emb
+        self.g = self.g.to(self.device)
+        alphas = torch.softmax(self.alphas, dim=0)
+        feats = self.trans(torch.cat(self.feats * alphas))
+        item_emb = item_emb + feats
         node_emb = torch.cat([user_emb, item_emb], dim=0)
         
         with self.g.local_scope():
             self.g.ndata["emb"] = node_emb
-            self.g.update_all(fn.copy_u("emb", "m"), fn.sum("m", "h"))
+            self.g.update_all(fn.copy_u("emb", "m"), fn.mean("m", "h"))
             self.g.apply_nodes(self._conbin)
             emb = self.g.ndata["emb"]
         return emb
