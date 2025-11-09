@@ -18,7 +18,8 @@ class Graph(nn.Module):
         user_features: Optional[Dict[str, torch.Tensor]] = None, 
         item_features: Optional[Dict[str, torch.Tensor]] = None, 
         user_ks: Tuple[int] = (), 
-        item_ks: Tuple[int] = (3, 3)
+        item_ks: Tuple[int] = (3, 3),
+        emb_dim: int = 256
     ):
         """
         Initialize graph constructor.
@@ -31,12 +32,16 @@ class Graph(nn.Module):
             normalize_adj: Whether to normalize adjacency matrix
             max_neighbors: Maximum number of neighbors to keep
         """
+        super().__init__()
         self.num_users = num_users
         self.num_items = num_items
         self.num_nodes = num_users + num_items
         self.device = device
         self.user_features = user_features or {}
         self.item_features = item_features or {}
+        self.user_ks = user_ks, 
+        self.item_ks = item_ks,
+        self.emb_dim = emb_dim
 
         l=0
         self.feats = []
@@ -45,7 +50,7 @@ class Graph(nn.Module):
             l += feat.size(-1)
             self.feats.append(feat)
         
-        self.feats = torch.stack(self.feats, dim=0)
+        # self.feats = torch.stack(self.feats, dim=0)
 
         self.item_feats_name = list(self.item_features.keys())
         self.user_feats_name = list(self.user_features.keys())
@@ -56,7 +61,7 @@ class Graph(nn.Module):
         self.user_g = None
         self.item_g = None
 
-        self.trans = nn.Linear(l, self.emb_dim)
+        self.trans = nn.Linear(l, emb_dim)
 
         self.alphas = nn.Parameter(torch.randn(len(self.item_features)))
 
@@ -123,9 +128,7 @@ class Graph(nn.Module):
         s_i = torch.stack(s_i, dim=1)
         self.item_g.edata["weight"] = s_i
         self.item_g = self.item_g.to("cpu")
-        
-
-        
+    
         return
     
     def _adj_norm(self, graph_name, modal_name, k):
@@ -143,7 +146,7 @@ class Graph(nn.Module):
             
 
         else:
-            
+            print("adj_norm")
             self.item_g.apply_edges(self._edge_weight_fn)
             self.item_g.apply_edges(self._clip)
             self.item_g.update_all(fn.copy_e(self.weight_key, "m"), fn.sum("m", "in_weight"))
@@ -156,21 +159,17 @@ class Graph(nn.Module):
         
         
     def _edge_weight_fn(self, edges):
-        # 获取源节点和目标节点的特征
-        u = edges.src[self.cur_modal_name]  # 源节点特征，形状：(num_edges, d)
-        v = edges.dst[self.cur_modal_name]  # 目标节点特征，形状：(num_edges, d)
-        
         # 1. 计算点积（原始score）
-        dot_product = torch.sum(u * v, dim=1).squeeze()  # 形状：(num_edges,)
-        
+        dot_product = torch.sum(edges.src[self.cur_modal_name] * edges.dst[self.cur_modal_name], dim=1).squeeze()  # 形状：(num_edges,)
+        print("dot succsses")
         # 2. 计算源节点和目标节点特征的L2范数（模长）
-        norm_u = torch.norm(u, dim=1)  # 源节点模长，形状：(num_edges,)
-        norm_v = torch.norm(v, dim=1)  # 目标节点模长，形状：(num_edges,)
+        norm_u = torch.norm(edges.src[self.cur_modal_name], dim=1)  # 源节点模长，形状：(num_edges,)
+        norm_v = torch.norm(edges.dst[self.cur_modal_name], dim=1)  # 目标节点模长，形状：(num_edges,)
         
         # 3. 除以模长乘积（加epsilon避免除零错误）
         epsilon = 1e-8  # 微小值，防止分母为0
         score = torch.sigmoid(dot_product) / (norm_u * norm_v + epsilon)
-        
+        print("edge success")
         return {f"{self.cur_modal_name}_weight": torch.sigmoid(score)}
                  
     
@@ -197,7 +196,7 @@ class Graph(nn.Module):
     def func_train(self, item_emb, k):
         self.item_g = self.item_g.to(self.device)
         alphas = torch.softmax(self.alphas, dim=0)
-        feats = self.trans(torch.cat(self.feats * alphas))
+        feats = self.trans(torch.cat([feats[i] * alphas[i] for i in range(len(feats))], dim=1))
         self.k = k
         with self.item_g.local_scope():
             self.item_g.edata["weight"] = torch. sum(self.item_g.edata["weight"].view((self.num_inter, -1)) * alphas, dim=1)
@@ -219,7 +218,7 @@ class Graph(nn.Module):
         item_emb = item_emb.weight
         self.g = self.g.to(self.device)
         alphas = torch.softmax(self.alphas, dim=0)
-        feats = self.trans(torch.cat(self.feats * alphas))
+        feats = self.trans(torch.cat([feats[i] * alphas[i] for i in range(len(feats))], dim=1))
         item_emb = item_emb + feats
         node_emb = torch.cat([user_emb, item_emb], dim=0)
         

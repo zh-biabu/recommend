@@ -653,7 +653,7 @@ class FastMMGCN(nn.Module):
         self.user_emb = nn.Embedding(self.num_users, self.emb_dim)
         self.item_emb = nn.Embedding(self.num_items, self.emb_dim)
         
-        self.graph = Graph(self.num_users, self.num_items, self.device, self.user_features, self.item_features, self.user_ks, self.item_ks)
+        self.graph = Graph(self.num_users, self.num_items, self.device, self.user_features, self.item_features, self.user_ks, self.item_ks, self.emb_dim)
 
         
         
