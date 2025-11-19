@@ -1,0 +1,306 @@
+2025-11-09 16:20:35 - GraphTrainer - INFO - Starting training...
+2025-11-09 16:20:35 - GraphTrainer - INFO - 模型: FastMMGCN
+2025-11-09 16:20:35 - GraphTrainer - INFO - 总参数量: 1,982,466
+2025-11-09 16:20:35 - GraphTrainer - INFO - 可训练参数量: 1,982,466
+2025-11-09 16:20:35 - GraphTrainer - INFO - ============================================================
+2025-11-09 16:20:35 - GraphTrainer - INFO - 开始第 1/1000 轮训练
+2025-11-09 16:20:35 - GraphTrainer - INFO - ============================================================
+2025-11-09 16:23:48 - GraphTrainer - INFO - Starting training...
+2025-11-09 16:23:48 - GraphTrainer - INFO - 模型: FastMMGCN
+2025-11-09 16:23:48 - GraphTrainer - INFO - 总参数量: 1,982,466
+2025-11-09 16:23:48 - GraphTrainer - INFO - 可训练参数量: 1,982,466
+2025-11-09 16:23:48 - GraphTrainer - INFO - ============================================================
+2025-11-09 16:23:48 - GraphTrainer - INFO - 开始第 1/1000 轮训练
+2025-11-09 16:23:48 - GraphTrainer - INFO - ============================================================
+2025-11-09 16:23:49 - torch._dynamo.utils - INFO - TorchDynamo compilation metrics:
+Function, Runtimes (s)
+2025-11-09 16:25:43 - GraphTrainer - INFO - Starting training...
+2025-11-09 16:25:43 - GraphTrainer - INFO - 模型: FastMMGCN
+2025-11-09 16:25:43 - GraphTrainer - INFO - 总参数量: 1,982,466
+2025-11-09 16:25:43 - GraphTrainer - INFO - 可训练参数量: 1,982,466
+2025-11-09 16:25:43 - GraphTrainer - INFO - ============================================================
+2025-11-09 16:25:43 - GraphTrainer - INFO - 开始第 1/1000 轮训练
+2025-11-09 16:25:43 - GraphTrainer - INFO - ============================================================
+2025-11-09 16:25:44 - torch._dynamo.utils - INFO - TorchDynamo compilation metrics:
+Function, Runtimes (s)
+2025-11-09 16:26:52 - GraphTrainer - INFO - Starting training...
+2025-11-09 16:26:52 - GraphTrainer - INFO - 模型: FastMMGCN
+2025-11-09 16:26:52 - GraphTrainer - INFO - 总参数量: 1,982,466
+2025-11-09 16:26:52 - GraphTrainer - INFO - 可训练参数量: 1,982,466
+2025-11-09 16:26:52 - GraphTrainer - INFO - ============================================================
+2025-11-09 16:26:52 - GraphTrainer - INFO - 开始第 1/1000 轮训练
+2025-11-09 16:26:52 - GraphTrainer - INFO - ============================================================
+2025-11-09 16:26:53 - torch._dynamo.utils - INFO - TorchDynamo compilation metrics:
+Function, Runtimes (s)
+2025-11-09 16:30:59 - GraphTrainer - INFO - Starting training...
+2025-11-09 16:30:59 - GraphTrainer - INFO - 模型: FastMMGCN
+2025-11-09 16:30:59 - GraphTrainer - INFO - 总参数量: 1,982,466
+2025-11-09 16:30:59 - GraphTrainer - INFO - 可训练参数量: 1,982,466
+2025-11-09 16:30:59 - GraphTrainer - INFO - ============================================================
+2025-11-09 16:30:59 - GraphTrainer - INFO - 开始第 1/1000 轮训练
+2025-11-09 16:30:59 - GraphTrainer - INFO - ============================================================
+2025-11-09 16:31:01 - torch._dynamo.utils - INFO - TorchDynamo compilation metrics:
+Function, Runtimes (s)
+2025-11-09 16:32:27 - GraphTrainer - INFO - Starting training...
+2025-11-09 16:32:27 - GraphTrainer - INFO - 模型: FastMMGCN
+2025-11-09 16:32:27 - GraphTrainer - INFO - 总参数量: 1,982,466
+2025-11-09 16:32:27 - GraphTrainer - INFO - 可训练参数量: 1,982,466
+2025-11-09 16:32:27 - GraphTrainer - INFO - ============================================================
+2025-11-09 16:32:27 - GraphTrainer - INFO - 开始第 1/1000 轮训练
+2025-11-09 16:32:27 - GraphTrainer - INFO - ============================================================
+2025-11-09 16:32:29 - torch._dynamo.utils - INFO - TorchDynamo compilation metrics:
+Function, Runtimes (s)
+2025-11-09 16:35:02 - GraphTrainer - INFO - Starting training...
+2025-11-09 16:35:02 - GraphTrainer - INFO - 模型: FastMMGCN
+2025-11-09 16:35:02 - GraphTrainer - INFO - 总参数量: 1,982,466
+2025-11-09 16:35:02 - GraphTrainer - INFO - 可训练参数量: 1,982,466
+2025-11-09 16:35:02 - GraphTrainer - INFO - ============================================================
+2025-11-09 16:35:02 - GraphTrainer - INFO - 开始第 1/1000 轮训练
+2025-11-09 16:35:02 - GraphTrainer - INFO - ============================================================
+2025-11-09 16:35:04 - torch._dynamo.utils - INFO - TorchDynamo compilation metrics:
+Function, Runtimes (s)
+2025-11-09 16:37:47 - GraphTrainer - INFO - Starting training...
+2025-11-09 16:37:47 - GraphTrainer - INFO - 模型: FastMMGCN
+2025-11-09 16:37:47 - GraphTrainer - INFO - 总参数量: 1,982,466
+2025-11-09 16:37:47 - GraphTrainer - INFO - 可训练参数量: 1,982,466
+2025-11-09 16:37:47 - GraphTrainer - INFO - ============================================================
+2025-11-09 16:37:47 - GraphTrainer - INFO - 开始第 1/1000 轮训练
+2025-11-09 16:37:47 - GraphTrainer - INFO - ============================================================
+2025-11-09 16:40:40 - GraphTrainer - INFO - Starting training...
+2025-11-09 16:40:40 - GraphTrainer - INFO - 模型: FastMMGCN
+2025-11-09 16:40:40 - GraphTrainer - INFO - 总参数量: 1,982,466
+2025-11-09 16:40:40 - GraphTrainer - INFO - 可训练参数量: 1,982,466
+2025-11-09 16:40:40 - GraphTrainer - INFO - ============================================================
+2025-11-09 16:40:40 - GraphTrainer - INFO - 开始第 1/1000 轮训练
+2025-11-09 16:40:40 - GraphTrainer - INFO - ============================================================
+2025-11-09 16:42:06 - GraphTrainer - INFO - Starting training...
+2025-11-09 16:42:06 - GraphTrainer - INFO - 模型: FastMMGCN
+2025-11-09 16:42:06 - GraphTrainer - INFO - 总参数量: 1,982,466
+2025-11-09 16:42:06 - GraphTrainer - INFO - 可训练参数量: 1,982,466
+2025-11-09 16:42:06 - GraphTrainer - INFO - ============================================================
+2025-11-09 16:42:06 - GraphTrainer - INFO - 开始第 1/1000 轮训练
+2025-11-09 16:42:06 - GraphTrainer - INFO - ============================================================
+2025-11-09 16:42:09 - torch._dynamo.utils - INFO - TorchDynamo compilation metrics:
+Function, Runtimes (s)
+2025-11-09 16:44:07 - GraphTrainer - INFO - Starting training...
+2025-11-09 16:44:07 - GraphTrainer - INFO - 模型: FastMMGCN
+2025-11-09 16:44:07 - GraphTrainer - INFO - 总参数量: 1,982,466
+2025-11-09 16:44:07 - GraphTrainer - INFO - 可训练参数量: 1,982,466
+2025-11-09 16:44:07 - GraphTrainer - INFO - ============================================================
+2025-11-09 16:44:07 - GraphTrainer - INFO - 开始第 1/1000 轮训练
+2025-11-09 16:44:07 - GraphTrainer - INFO - ============================================================
+2025-11-09 16:44:10 - torch._dynamo.utils - INFO - TorchDynamo compilation metrics:
+Function, Runtimes (s)
+2025-11-09 16:46:14 - GraphTrainer - INFO - Starting training...
+2025-11-09 16:46:14 - GraphTrainer - INFO - 模型: FastMMGCN
+2025-11-09 16:46:14 - GraphTrainer - INFO - 总参数量: 1,982,466
+2025-11-09 16:46:14 - GraphTrainer - INFO - 可训练参数量: 1,982,466
+2025-11-09 16:46:14 - GraphTrainer - INFO - ============================================================
+2025-11-09 16:46:14 - GraphTrainer - INFO - 开始第 1/1000 轮训练
+2025-11-09 16:46:14 - GraphTrainer - INFO - ============================================================
+2025-11-09 16:46:17 - torch._dynamo.utils - INFO - TorchDynamo compilation metrics:
+Function, Runtimes (s)
+2025-11-09 16:48:00 - GraphTrainer - INFO - Starting training...
+2025-11-09 16:48:00 - GraphTrainer - INFO - 模型: FastMMGCN
+2025-11-09 16:48:00 - GraphTrainer - INFO - 总参数量: 1,982,466
+2025-11-09 16:48:00 - GraphTrainer - INFO - 可训练参数量: 1,982,466
+2025-11-09 16:48:00 - GraphTrainer - INFO - ============================================================
+2025-11-09 16:48:00 - GraphTrainer - INFO - 开始第 1/1000 轮训练
+2025-11-09 16:48:00 - GraphTrainer - INFO - ============================================================
+2025-11-09 16:48:03 - torch._dynamo.utils - INFO - TorchDynamo compilation metrics:
+Function, Runtimes (s)
+2025-11-09 16:50:58 - GraphTrainer - INFO - Starting training...
+2025-11-09 16:50:58 - GraphTrainer - INFO - 模型: FastMMGCN
+2025-11-09 16:50:58 - GraphTrainer - INFO - 总参数量: 1,982,466
+2025-11-09 16:50:58 - GraphTrainer - INFO - 可训练参数量: 1,982,466
+2025-11-09 16:50:58 - GraphTrainer - INFO - ============================================================
+2025-11-09 16:50:58 - GraphTrainer - INFO - 开始第 1/1000 轮训练
+2025-11-09 16:50:58 - GraphTrainer - INFO - ============================================================
+2025-11-09 16:51:01 - torch._dynamo.utils - INFO - TorchDynamo compilation metrics:
+Function, Runtimes (s)
+2025-11-09 16:54:48 - GraphTrainer - INFO - Starting training...
+2025-11-09 16:54:48 - GraphTrainer - INFO - 模型: FastMMGCN
+2025-11-09 16:54:48 - GraphTrainer - INFO - 总参数量: 1,982,466
+2025-11-09 16:54:48 - GraphTrainer - INFO - 可训练参数量: 1,982,466
+2025-11-09 16:54:48 - GraphTrainer - INFO - ============================================================
+2025-11-09 16:54:48 - GraphTrainer - INFO - 开始第 1/1000 轮训练
+2025-11-09 16:54:48 - GraphTrainer - INFO - ============================================================
+2025-11-09 16:55:55 - GraphTrainer - INFO - 验证结果:
+2025-11-09 16:55:55 - GraphTrainer - INFO -   precision@5: 0.000802
+2025-11-09 16:55:55 - GraphTrainer - INFO -   recall@5: 0.003859
+2025-11-09 16:55:55 - GraphTrainer - INFO -   hit_rate@5: 0.004011
+2025-11-09 16:55:55 - GraphTrainer - INFO -   ndcg@5: 0.002388
+2025-11-09 16:55:55 - GraphTrainer - INFO -   map@5: 0.001868
+2025-11-09 16:55:55 - GraphTrainer - INFO -   mrr@5: 0.001995
+2025-11-09 16:55:55 - GraphTrainer - INFO -   precision@10: 0.000725
+2025-11-09 16:55:55 - GraphTrainer - INFO -   recall@10: 0.006983
+2025-11-09 16:55:55 - GraphTrainer - INFO -   hit_rate@10: 0.007251
+2025-11-09 16:55:55 - GraphTrainer - INFO -   ndcg@10: 0.003399
+2025-11-09 16:55:55 - GraphTrainer - INFO -   map@10: 0.002278
+2025-11-09 16:55:55 - GraphTrainer - INFO -   mrr@10: 0.002420
+2025-11-09 16:55:55 - GraphTrainer - INFO -   precision@20: 0.000581
+2025-11-09 16:55:55 - GraphTrainer - INFO -   recall@20: 0.011226
+2025-11-09 16:55:55 - GraphTrainer - INFO -   hit_rate@20: 0.011623
+2025-11-09 16:55:55 - GraphTrainer - INFO -   ndcg@20: 0.004478
+2025-11-09 16:55:55 - GraphTrainer - INFO -   map@20: 0.002572
+2025-11-09 16:55:55 - GraphTrainer - INFO -   mrr@20: 0.002722
+2025-11-09 16:55:55 - GraphTrainer - INFO - 第 1 轮训练完成
+2025-11-09 16:55:55 - GraphTrainer - INFO - train_loss: 4.463981
+2025-11-09 16:55:55 - GraphTrainer - INFO - precision@5: 0.000802
+2025-11-09 16:55:55 - GraphTrainer - INFO - recall@5: 0.003859
+2025-11-09 16:55:55 - GraphTrainer - INFO - hit_rate@5: 0.004011
+2025-11-09 16:55:55 - GraphTrainer - INFO - ndcg@5: 0.002388
+2025-11-09 16:55:55 - GraphTrainer - INFO - map@5: 0.001868
+2025-11-09 16:55:55 - GraphTrainer - INFO - mrr@5: 0.001995
+2025-11-09 16:55:55 - GraphTrainer - INFO - precision@10: 0.000725
+2025-11-09 16:55:55 - GraphTrainer - INFO - recall@10: 0.006983
+2025-11-09 16:55:55 - GraphTrainer - INFO - hit_rate@10: 0.007251
+2025-11-09 16:55:55 - GraphTrainer - INFO - ndcg@10: 0.003399
+2025-11-09 16:55:55 - GraphTrainer - INFO - map@10: 0.002278
+2025-11-09 16:55:55 - GraphTrainer - INFO - mrr@10: 0.002420
+2025-11-09 16:55:55 - GraphTrainer - INFO - precision@20: 0.000581
+2025-11-09 16:55:55 - GraphTrainer - INFO - recall@20: 0.011226
+2025-11-09 16:55:55 - GraphTrainer - INFO - hit_rate@20: 0.011623
+2025-11-09 16:55:55 - GraphTrainer - INFO - ndcg@20: 0.004478
+2025-11-09 16:55:55 - GraphTrainer - INFO - map@20: 0.002572
+2025-11-09 16:55:55 - GraphTrainer - INFO - mrr@20: 0.002722
+2025-11-09 16:55:55 - GraphTrainer - INFO - ------------------------------------------------------------
+2025-11-09 16:55:55 - GraphTrainer - INFO - ============================================================
+2025-11-09 16:55:55 - GraphTrainer - INFO - 开始第 2/1000 轮训练
+2025-11-09 16:55:55 - GraphTrainer - INFO - ============================================================
+2025-11-09 16:57:02 - GraphTrainer - INFO - 验证结果:
+2025-11-09 16:57:02 - GraphTrainer - INFO -   precision@5: 0.000864
+2025-11-09 16:57:02 - GraphTrainer - INFO -   recall@5: 0.004148
+2025-11-09 16:57:02 - GraphTrainer - INFO -   hit_rate@5: 0.004320
+2025-11-09 16:57:02 - GraphTrainer - INFO -   ndcg@5: 0.002693
+2025-11-09 16:57:02 - GraphTrainer - INFO -   map@5: 0.002173
+2025-11-09 16:57:02 - GraphTrainer - INFO -   mrr@5: 0.002305
+2025-11-09 16:57:02 - GraphTrainer - INFO -   precision@10: 0.000771
+2025-11-09 16:57:02 - GraphTrainer - INFO -   recall@10: 0.007491
+2025-11-09 16:57:02 - GraphTrainer - INFO -   hit_rate@10: 0.007714
+2025-11-09 16:57:02 - GraphTrainer - INFO -   ndcg@10: 0.003759
+2025-11-09 16:57:02 - GraphTrainer - INFO -   map@10: 0.002600
+2025-11-09 16:57:02 - GraphTrainer - INFO -   mrr@10: 0.002739
+2025-11-09 16:57:02 - GraphTrainer - INFO -   precision@20: 0.000622
+2025-11-09 16:57:02 - GraphTrainer - INFO -   recall@20: 0.011965
+2025-11-09 16:57:02 - GraphTrainer - INFO -   hit_rate@20: 0.012394
+2025-11-09 16:57:02 - GraphTrainer - INFO -   ndcg@20: 0.004901
+2025-11-09 16:57:02 - GraphTrainer - INFO -   map@20: 0.002910
+2025-11-09 16:57:02 - GraphTrainer - INFO -   mrr@20: 0.003061
+2025-11-09 16:57:02 - GraphTrainer - INFO - 第 2 轮训练完成
+2025-11-09 16:57:02 - GraphTrainer - INFO - train_loss: 4.423336
+2025-11-09 16:57:02 - GraphTrainer - INFO - precision@5: 0.000864
+2025-11-09 16:57:02 - GraphTrainer - INFO - recall@5: 0.004148
+2025-11-09 16:57:02 - GraphTrainer - INFO - hit_rate@5: 0.004320
+2025-11-09 16:57:02 - GraphTrainer - INFO - ndcg@5: 0.002693
+2025-11-09 16:57:02 - GraphTrainer - INFO - map@5: 0.002173
+2025-11-09 16:57:02 - GraphTrainer - INFO - mrr@5: 0.002305
+2025-11-09 16:57:02 - GraphTrainer - INFO - precision@10: 0.000771
+2025-11-09 16:57:02 - GraphTrainer - INFO - recall@10: 0.007491
+2025-11-09 16:57:02 - GraphTrainer - INFO - hit_rate@10: 0.007714
+2025-11-09 16:57:02 - GraphTrainer - INFO - ndcg@10: 0.003759
+2025-11-09 16:57:02 - GraphTrainer - INFO - map@10: 0.002600
+2025-11-09 16:57:02 - GraphTrainer - INFO - mrr@10: 0.002739
+2025-11-09 16:57:02 - GraphTrainer - INFO - precision@20: 0.000622
+2025-11-09 16:57:02 - GraphTrainer - INFO - recall@20: 0.011965
+2025-11-09 16:57:02 - GraphTrainer - INFO - hit_rate@20: 0.012394
+2025-11-09 16:57:02 - GraphTrainer - INFO - ndcg@20: 0.004901
+2025-11-09 16:57:02 - GraphTrainer - INFO - map@20: 0.002910
+2025-11-09 16:57:02 - GraphTrainer - INFO - mrr@20: 0.003061
+2025-11-09 16:57:02 - GraphTrainer - INFO - ------------------------------------------------------------
+2025-11-09 16:57:02 - GraphTrainer - INFO - ============================================================
+2025-11-09 16:57:02 - GraphTrainer - INFO - 开始第 3/1000 轮训练
+2025-11-09 16:57:02 - GraphTrainer - INFO - ============================================================
+2025-11-09 16:58:09 - GraphTrainer - INFO - 验证结果:
+2025-11-09 16:58:09 - GraphTrainer - INFO -   precision@5: 0.000843
+2025-11-09 16:58:09 - GraphTrainer - INFO -   recall@5: 0.003968
+2025-11-09 16:58:09 - GraphTrainer - INFO -   hit_rate@5: 0.004217
+2025-11-09 16:58:09 - GraphTrainer - INFO -   ndcg@5: 0.002575
+2025-11-09 16:58:09 - GraphTrainer - INFO -   map@5: 0.002068
+2025-11-09 16:58:09 - GraphTrainer - INFO -   mrr@5: 0.002209
+2025-11-09 16:58:09 - GraphTrainer - INFO -   precision@10: 0.000756
+2025-11-09 16:58:09 - GraphTrainer - INFO -   recall@10: 0.007247
+2025-11-09 16:58:09 - GraphTrainer - INFO -   hit_rate@10: 0.007560
+2025-11-09 16:58:09 - GraphTrainer - INFO -   ndcg@10: 0.003628
+2025-11-09 16:58:09 - GraphTrainer - INFO -   map@10: 0.002494
+2025-11-09 16:58:09 - GraphTrainer - INFO -   mrr@10: 0.002644
+2025-11-09 16:58:09 - GraphTrainer - INFO -   precision@20: 0.000602
+2025-11-09 16:58:09 - GraphTrainer - INFO -   recall@20: 0.011455
+2025-11-09 16:58:09 - GraphTrainer - INFO -   hit_rate@20: 0.012034
+2025-11-09 16:58:09 - GraphTrainer - INFO -   ndcg@20: 0.004692
+2025-11-09 16:58:09 - GraphTrainer - INFO -   map@20: 0.002774
+2025-11-09 16:58:09 - GraphTrainer - INFO -   mrr@20: 0.002943
+2025-11-09 16:58:09 - GraphTrainer - INFO - 第 3 轮训练完成
+2025-11-09 16:58:09 - GraphTrainer - INFO - train_loss: 4.423725
+2025-11-09 16:58:09 - GraphTrainer - INFO - precision@5: 0.000843
+2025-11-09 16:58:09 - GraphTrainer - INFO - recall@5: 0.003968
+2025-11-09 16:58:09 - GraphTrainer - INFO - hit_rate@5: 0.004217
+2025-11-09 16:58:09 - GraphTrainer - INFO - ndcg@5: 0.002575
+2025-11-09 16:58:09 - GraphTrainer - INFO - map@5: 0.002068
+2025-11-09 16:58:09 - GraphTrainer - INFO - mrr@5: 0.002209
+2025-11-09 16:58:09 - GraphTrainer - INFO - precision@10: 0.000756
+2025-11-09 16:58:09 - GraphTrainer - INFO - recall@10: 0.007247
+2025-11-09 16:58:09 - GraphTrainer - INFO - hit_rate@10: 0.007560
+2025-11-09 16:58:09 - GraphTrainer - INFO - ndcg@10: 0.003628
+2025-11-09 16:58:09 - GraphTrainer - INFO - map@10: 0.002494
+2025-11-09 16:58:09 - GraphTrainer - INFO - mrr@10: 0.002644
+2025-11-09 16:58:09 - GraphTrainer - INFO - precision@20: 0.000602
+2025-11-09 16:58:09 - GraphTrainer - INFO - recall@20: 0.011455
+2025-11-09 16:58:09 - GraphTrainer - INFO - hit_rate@20: 0.012034
+2025-11-09 16:58:09 - GraphTrainer - INFO - ndcg@20: 0.004692
+2025-11-09 16:58:09 - GraphTrainer - INFO - map@20: 0.002774
+2025-11-09 16:58:09 - GraphTrainer - INFO - mrr@20: 0.002943
+2025-11-09 16:58:09 - GraphTrainer - INFO - ------------------------------------------------------------
+2025-11-09 16:58:09 - GraphTrainer - INFO - ============================================================
+2025-11-09 16:58:09 - GraphTrainer - INFO - 开始第 4/1000 轮训练
+2025-11-09 16:58:09 - GraphTrainer - INFO - ============================================================
+2025-11-09 17:02:01 - GraphTrainer - INFO - Starting training...
+2025-11-09 17:02:01 - GraphTrainer - INFO - 模型: FastMMGCN
+2025-11-09 17:02:01 - GraphTrainer - INFO - 总参数量: 1,982,466
+2025-11-09 17:02:01 - GraphTrainer - INFO - 可训练参数量: 1,982,466
+2025-11-09 17:02:01 - GraphTrainer - INFO - ============================================================
+2025-11-09 17:02:01 - GraphTrainer - INFO - 开始第 1/1000 轮训练
+2025-11-09 17:02:01 - GraphTrainer - INFO - ============================================================
+2025-11-09 17:02:03 - torch._dynamo.utils - INFO - TorchDynamo compilation metrics:
+Function, Runtimes (s)
+2025-11-09 17:03:03 - GraphTrainer - INFO - Starting training...
+2025-11-09 17:03:03 - GraphTrainer - INFO - 模型: FastMMGCN
+2025-11-09 17:03:03 - GraphTrainer - INFO - 总参数量: 1,982,466
+2025-11-09 17:03:03 - GraphTrainer - INFO - 可训练参数量: 1,982,466
+2025-11-09 17:03:03 - GraphTrainer - INFO - ============================================================
+2025-11-09 17:03:03 - GraphTrainer - INFO - 开始第 1/1000 轮训练
+2025-11-09 17:03:03 - GraphTrainer - INFO - ============================================================
+2025-11-09 17:03:06 - torch._dynamo.utils - INFO - TorchDynamo compilation metrics:
+Function, Runtimes (s)
+2025-11-09 17:04:45 - GraphTrainer - INFO - Starting training...
+2025-11-09 17:04:45 - GraphTrainer - INFO - 模型: FastMMGCN
+2025-11-09 17:04:45 - GraphTrainer - INFO - 总参数量: 1,982,466
+2025-11-09 17:04:45 - GraphTrainer - INFO - 可训练参数量: 1,982,466
+2025-11-09 17:04:45 - GraphTrainer - INFO - ============================================================
+2025-11-09 17:04:45 - GraphTrainer - INFO - 开始第 1/1000 轮训练
+2025-11-09 17:04:45 - GraphTrainer - INFO - ============================================================
+2025-11-09 17:04:48 - torch._dynamo.utils - INFO - TorchDynamo compilation metrics:
+Function, Runtimes (s)
+2025-11-09 17:28:44 - GraphTrainer - INFO - Starting training...
+2025-11-09 17:28:44 - GraphTrainer - INFO - 模型: FastMMGCN
+2025-11-09 17:28:44 - GraphTrainer - INFO - 总参数量: 1,982,466
+2025-11-09 17:28:44 - GraphTrainer - INFO - 可训练参数量: 1,982,466
+2025-11-09 17:28:44 - GraphTrainer - INFO - ============================================================
+2025-11-09 17:28:44 - GraphTrainer - INFO - 开始第 1/1000 轮训练
+2025-11-09 17:28:44 - GraphTrainer - INFO - ============================================================
+2025-11-09 17:28:47 - torch._dynamo.utils - INFO - TorchDynamo compilation metrics:
+Function, Runtimes (s)
+2025-11-09 17:30:58 - GraphTrainer - INFO - Starting training...
+2025-11-09 17:30:58 - GraphTrainer - INFO - 模型: FastMMGCN
+2025-11-09 17:30:58 - GraphTrainer - INFO - 总参数量: 1,982,466
+2025-11-09 17:30:58 - GraphTrainer - INFO - 可训练参数量: 1,982,466
+2025-11-09 17:30:58 - GraphTrainer - INFO - ============================================================
+2025-11-09 17:30:58 - GraphTrainer - INFO - 开始第 1/1000 轮训练
+2025-11-09 17:30:58 - GraphTrainer - INFO - ============================================================
+2025-11-09 17:32:54 - GraphTrainer - INFO - Starting training...
+2025-11-09 17:32:54 - GraphTrainer - INFO - 模型: FastMMGCN
+2025-11-09 17:32:54 - GraphTrainer - INFO - 总参数量: 1,982,466
+2025-11-09 17:32:54 - GraphTrainer - INFO - 可训练参数量: 1,982,466
+2025-11-09 17:32:54 - GraphTrainer - INFO - ============================================================
+2025-11-09 17:32:54 - GraphTrainer - INFO - 开始第 1/1000 轮训练
+2025-11-09 17:32:54 - GraphTrainer - INFO - ============================================================

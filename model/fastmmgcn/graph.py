@@ -39,16 +39,16 @@ class Graph(nn.Module):
         self.device = device
         self.user_features = user_features or {}
         self.item_features = item_features or {}
-        self.user_ks = user_ks, 
-        self.item_ks = item_ks,
+        self.user_ks = user_ks
+        self.item_ks = item_ks
         self.emb_dim = emb_dim
-
+        self.edge_dropout = nn.Dropout(0.5)
         l=0
         self.feats = []
         for k, feat in self.item_features.items():
-            self.item_features[k] = feat.to(self.device)
+            # self.item_features[k] = feat.to(self.device)
             l += feat.size(-1)
-            self.feats.append(feat)
+            self.feats.append(feat.to(self.device))
         
         # self.feats = torch.stack(self.feats, dim=0)
 
@@ -61,9 +61,13 @@ class Graph(nn.Module):
         self.user_g = None
         self.item_g = None
 
-        self.trans = nn.Linear(l, emb_dim)
-
-        self.alphas = nn.Parameter(torch.randn(len(self.item_features)))
+        self.trans = nn.Sequential(
+                        nn.Linear(l, 256),
+                        nn.ReLU(),                   
+                        nn.Linear(256, emb_dim)  
+                    )
+        self.activate = nn.ReLU()
+        # self.alphas = nn.Parameter(torch.randn(len(self.item_features)))
 
 
 
@@ -74,137 +78,61 @@ class Graph(nn.Module):
         interactions: List[Tuple[int, int, float]],
     ) -> dgl.DGLGraph:
         self.num_inter = len(interactions)
-        adjacency_matrix = np.zeros((self.num_users, self.num_items), dtype=np.float32)
-        for u, v, w in interactions:
-            adjacency_matrix[u][v] = 1
+        # adjacency_matrix = np.zeros((self.num_users, self.num_items), dtype=np.float32)
+        # for u, v, w in interactions:
+        #     adjacency_matrix[u][v] = 1
 
-        adjacency_matrix = torch.tensor(adjacency_matrix, dtype=torch.float32)
+        # adjacency_matrix = torch.tensor(adjacency_matrix, dtype=torch.float32)
         
 
         inter = torch.tensor(interactions, dtype = torch.long)[: , :2].T.contiguous()
         inter[1] += self.num_users
         inter = torch.cat([inter, inter[[1, 0]]], dim = 1)
-        self.g = dgl.graph((inter[0], inter[1]))
-
-        double_adjacency_matrix_u = torch.matmul(adjacency_matrix, adjacency_matrix.T)
-        u_src, u_dst = torch.nonzero(double_adjacency_matrix_u, as_tuple=True)
-        double_adjacency_matrix_i = torch.matmul(adjacency_matrix.T, adjacency_matrix)
-        i_src, i_dst = torch.nonzero(double_adjacency_matrix_i, as_tuple=True)
-
-        self.user_g = dgl.graph((u_src, u_dst), num_nodes=self.num_users)
-        # self.user_g.edata["times"] = double_adjacency_matrix_u[u_src, u_dst]
-        self.item_g = dgl.graph((i_src, i_dst), num_nodes=self.num_items)
-        # self.item_g.edata["times"] = double_adjacency_matrix_i[i_src, i_dst]
-
-        # self.g = self.g.to(self.device)
-        # self.user_g = self.user_g.to(self.device)
-        # self.item_g = self.item_g.to(self.device)
-
-        return self.g, self.user_g, self.item_g
-    
-    def creat_feature_weight(self):
-
-        print("1")
-        i=0
-        j=0
-        s_u = []
-        s_i = []
-        # self.user_g = self.user_g.to(self.device)
-        # with self.user_g.local_scope():
-        #     for modal_name, features in self.user_features.items():
-        #         self.user_g.ndata[modal_name] = features
-        #         weight = self._adj_norm("user", modal_name, self.user_ks[i])                
-        #         s_u.append(weight)
-        #         i += 1
-        # self.user_g = self.user_g.to("cpu")
-
-        self.item_g = self.item_g.to(self.device)
-        with self.item_g.local_scope():
-            for modal_name, features in self.item_features.items():
-                self.item_g.ndata[modal_name] = features
-                weight = self._adj_norm("item", modal_name, self.item_ks[j])
-                s_i.append(weight)
-                j+=1
-        s_i = torch.stack(s_i, dim=1)
-        self.item_g.edata["weight"] = s_i
-        self.item_g = self.item_g.to("cpu")
-    
-        return
-    
-    def _adj_norm(self, graph_name, modal_name, k):
-        self.cur_modal_name = modal_name
-        self.k=k
-        self.weight_key = f"{self.cur_modal_name}_weight"
-
-        if graph_name == "user":
-            
-            self.user_g.apply_edges(self._edge_weight_fn)
-            self.user_g.apply_edges(self._clip)
-            self.user_g.update_all(fn.copy_e(self.weight_key, "m"), fn.sum("m", "in_weight"))
-            self.user_g.apply_edges(self._norm)
-            return self.user_g.edata[self.weight_key]
-            
-
-        else:
-            print("adj_norm")
-            self.item_g.apply_edges(self._edge_weight_fn)
-            self.item_g.apply_edges(self._clip)
-            self.item_g.update_all(fn.copy_e(self.weight_key, "m"), fn.sum("m", "in_weight"))
-            self.item_g.apply_edges(self._norm)
-            return self.item_g.edata[self.weight_key]
-
-            
-
-
+        self.g = dgl.graph((inter[0], inter[1])).to(self.device)
+        self.v_g, self.t_g = self.build_item_g()
         
-        
-    def _edge_weight_fn(self, edges):
-        # 1. 计算点积（原始score）
-        dot_product = torch.sum(edges.src[self.cur_modal_name] * edges.dst[self.cur_modal_name], dim=1).squeeze()  # 形状：(num_edges,)
-        print("dot succsses")
-        # 2. 计算源节点和目标节点特征的L2范数（模长）
-        norm_u = torch.norm(edges.src[self.cur_modal_name], dim=1)  # 源节点模长，形状：(num_edges,)
-        norm_v = torch.norm(edges.dst[self.cur_modal_name], dim=1)  # 目标节点模长，形状：(num_edges,)
-        
-        # 3. 除以模长乘积（加epsilon避免除零错误）
-        epsilon = 1e-8  # 微小值，防止分母为0
-        score = torch.sigmoid(dot_product) / (norm_u * norm_v + epsilon)
-        print("edge success")
-        return {f"{self.cur_modal_name}_weight": torch.sigmoid(score)}
-                 
-    
-    def _clip(self, edges):
-        print("cliping")
-        weights = edges.edata[self.weight_key]
-        num_edges = weights.shape[0]
 
-        if num_edges > self.k:
 
-            mask = torch.zeros(num_edges, dtype=torch.bool)
+        return self.g
 
-            _, index = torch.topk(edges.edata[self.weight_key], k=self.k)
-
-            mask[index] = True
-            weights = weights * mask.float()
-
-        return {self.weight_key: weights}
-    
-    def _norm(self, edges):
-        return {self.weight_key: self.weight_key/(torch.sqrt(edges.src["in_weight"]+1e-8)*torch.sqrt(edges.dst["in_weight"]+1e-8))}
+    def build_item_g(self):
+        gs = []
+        for j, feat in enumerate(self.feats):
+            dig = torch.sqrt(torch.sum(feat** 2, dim=1, keepdim=True))
+            normalized_feat = feat / dig
+            score = normalized_feat @ normalized_feat.T
+            mask = torch.zeros_like(score, dtype=torch.bool, device=self.device)
+            _ , k_index = torch.topk(score, self.item_ks[j])
+            n, k = k_index.shape
+            row_indices = torch.arange(n).unsqueeze(1).repeat(1, k)
+            mask[row_indices, k_index] = True
+            score = score * mask
+            degree = score.sum(dim=1)
+            degree_matrix = torch.diag(degree)
+            degree_safe = degree + 1e-8
+            degree_inv = torch.diag(1.0 / degree_safe)
+            score = degree_inv @ score
+            dst, src = score.nonzero().t()
+            edge_weights = score[dst, src]
+            g = dgl.graph((src, dst)).to(self.device)
+            g.edata['weight'] = edge_weights
+            gs.append(g)
+        return gs
 
 
     def func_train(self, item_emb, k):
-        self.item_g = self.item_g.to(self.device)
-        alphas = torch.softmax(self.alphas, dim=0)
-        feats = self.trans(torch.cat([feats[i] * alphas[i] for i in range(len(feats))], dim=1))
-        self.k = k
-        with self.item_g.local_scope():
-            self.item_g.edata["weight"] = torch. sum(self.item_g.edata["weight"].view((self.num_inter, -1)) * alphas, dim=1)
-            self.item_g.ndata["feat"] = feats + item_emb
-            self.item_g.update_all(fn.u_mul_e("feat", "weight", "m"), self.reduce_func)
-            feat_emb = self.item_g.ndata["h"]
-        self.item_g.to("cpu")
+        # self.item_g = self.item_g.to(self.device)
+        
+        # alphas = torch.softmax(self.alphas, dim=0)
+        hs = []
+        for feat in self.feats:
+            h = self.gcn(feat)
+            hs.append(h)
+        h = torch.cat(hs, dim=1)
+        feat_emb = self.activate(self.trans(h)) + self.gcn(item_emb)
         return feat_emb
+    
+    def 
 
     def reduce_func(self, nodes):
         return {"h": torch.sum(nodes.mailbox["m"], dim=1)/self.k}
@@ -216,9 +144,9 @@ class Graph(nn.Module):
     def func_test(self, user_emb, item_emb):
         user_emb = user_emb.weight
         item_emb = item_emb.weight
-        self.g = self.g.to(self.device)
+        # self.g = self.g.to(self.device)
         alphas = torch.softmax(self.alphas, dim=0)
-        feats = self.trans(torch.cat([feats[i] * alphas[i] for i in range(len(feats))], dim=1))
+        feats = self.activate(self.trans(torch.cat([self.feats[i].to(self.device) * alphas[i] for i in range(len(self.feats))], dim=1)))
         item_emb = item_emb + feats
         node_emb = torch.cat([user_emb, item_emb], dim=0)
         

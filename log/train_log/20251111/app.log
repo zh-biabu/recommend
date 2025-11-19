@@ -1,0 +1,862 @@
+2025-11-11 23:30:27 - GraphTrainer - INFO - 验证结果:
+2025-11-11 23:30:27 - GraphTrainer - INFO -   precision@5: 0.002242
+2025-11-11 23:30:27 - GraphTrainer - INFO -   recall@5: 0.010434
+2025-11-11 23:30:27 - GraphTrainer - INFO -   hit_rate@5: 0.011211
+2025-11-11 23:30:27 - GraphTrainer - INFO -   ndcg@5: 0.006863
+2025-11-11 23:30:27 - GraphTrainer - INFO -   map@5: 0.005580
+2025-11-11 23:30:27 - GraphTrainer - INFO -   mrr@5: 0.005888
+2025-11-11 23:30:27 - GraphTrainer - INFO -   precision@10: 0.001733
+2025-11-11 23:30:27 - GraphTrainer - INFO -   recall@10: 0.015843
+2025-11-11 23:30:27 - GraphTrainer - INFO -   hit_rate@10: 0.017331
+2025-11-11 23:30:27 - GraphTrainer - INFO -   ndcg@10: 0.008627
+2025-11-11 23:30:27 - GraphTrainer - INFO -   map@10: 0.006273
+2025-11-11 23:30:27 - GraphTrainer - INFO -   mrr@10: 0.006672
+2025-11-11 23:30:27 - GraphTrainer - INFO -   precision@20: 0.001386
+2025-11-11 23:30:27 - GraphTrainer - INFO -   recall@20: 0.025533
+2025-11-11 23:30:27 - GraphTrainer - INFO -   hit_rate@20: 0.027411
+2025-11-11 23:30:27 - GraphTrainer - INFO -   ndcg@20: 0.011093
+2025-11-11 23:30:27 - GraphTrainer - INFO -   map@20: 0.006938
+2025-11-11 23:30:27 - GraphTrainer - INFO -   mrr@20: 0.007354
+2025-11-11 23:30:27 - GraphTrainer - INFO - 第 50 轮训练完成
+2025-11-11 23:30:27 - GraphTrainer - INFO - train_loss: 0.030937
+2025-11-11 23:30:27 - GraphTrainer - INFO - precision@5: 0.002242
+2025-11-11 23:30:27 - GraphTrainer - INFO - recall@5: 0.010434
+2025-11-11 23:30:27 - GraphTrainer - INFO - hit_rate@5: 0.011211
+2025-11-11 23:30:27 - GraphTrainer - INFO - ndcg@5: 0.006863
+2025-11-11 23:30:27 - GraphTrainer - INFO - map@5: 0.005580
+2025-11-11 23:30:27 - GraphTrainer - INFO - mrr@5: 0.005888
+2025-11-11 23:30:27 - GraphTrainer - INFO - precision@10: 0.001733
+2025-11-11 23:30:27 - GraphTrainer - INFO - recall@10: 0.015843
+2025-11-11 23:30:27 - GraphTrainer - INFO - hit_rate@10: 0.017331
+2025-11-11 23:30:27 - GraphTrainer - INFO - ndcg@10: 0.008627
+2025-11-11 23:30:27 - GraphTrainer - INFO - map@10: 0.006273
+2025-11-11 23:30:27 - GraphTrainer - INFO - mrr@10: 0.006672
+2025-11-11 23:30:27 - GraphTrainer - INFO - precision@20: 0.001386
+2025-11-11 23:30:27 - GraphTrainer - INFO - recall@20: 0.025533
+2025-11-11 23:30:27 - GraphTrainer - INFO - hit_rate@20: 0.027411
+2025-11-11 23:30:27 - GraphTrainer - INFO - ndcg@20: 0.011093
+2025-11-11 23:30:27 - GraphTrainer - INFO - map@20: 0.006938
+2025-11-11 23:30:27 - GraphTrainer - INFO - mrr@20: 0.007354
+2025-11-11 23:30:27 - GraphTrainer - INFO - ------------------------------------------------------------
+2025-11-11 23:30:27 - GraphTrainer - INFO - 检查点已保存: Epoch 50 -> ./checkpoints/checkpoint_epoch_50.pth
+2025-11-11 23:30:27 - GraphTrainer - INFO - ============================================================
+2025-11-11 23:30:27 - GraphTrainer - INFO - 开始第 51/1000 轮训练
+2025-11-11 23:30:27 - GraphTrainer - INFO - ============================================================
+2025-11-11 23:31:37 - GraphTrainer - INFO - 验证结果:
+2025-11-11 23:31:37 - GraphTrainer - INFO -   precision@5: 0.002057
+2025-11-11 23:31:37 - GraphTrainer - INFO -   recall@5: 0.009571
+2025-11-11 23:31:37 - GraphTrainer - INFO -   hit_rate@5: 0.010285
+2025-11-11 23:31:37 - GraphTrainer - INFO -   ndcg@5: 0.006344
+2025-11-11 23:31:37 - GraphTrainer - INFO -   map@5: 0.005165
+2025-11-11 23:31:37 - GraphTrainer - INFO -   mrr@5: 0.005444
+2025-11-11 23:31:37 - GraphTrainer - INFO -   precision@10: 0.001785
+2025-11-11 23:31:37 - GraphTrainer - INFO -   recall@10: 0.016327
+2025-11-11 23:31:37 - GraphTrainer - INFO -   hit_rate@10: 0.017742
+2025-11-11 23:31:37 - GraphTrainer - INFO -   ndcg@10: 0.008599
+2025-11-11 23:31:37 - GraphTrainer - INFO -   map@10: 0.006095
+2025-11-11 23:31:37 - GraphTrainer - INFO -   mrr@10: 0.006462
+2025-11-11 23:31:37 - GraphTrainer - INFO -   precision@20: 0.001365
+2025-11-11 23:31:37 - GraphTrainer - INFO -   recall@20: 0.025000
+2025-11-11 23:31:37 - GraphTrainer - INFO -   hit_rate@20: 0.027154
+2025-11-11 23:31:37 - GraphTrainer - INFO -   ndcg@20: 0.010803
+2025-11-11 23:31:37 - GraphTrainer - INFO -   map@20: 0.006675
+2025-11-11 23:31:37 - GraphTrainer - INFO -   mrr@20: 0.007092
+2025-11-11 23:31:37 - GraphTrainer - INFO - 第 51 轮训练完成
+2025-11-11 23:31:37 - GraphTrainer - INFO - train_loss: 0.029495
+2025-11-11 23:31:37 - GraphTrainer - INFO - precision@5: 0.002057
+2025-11-11 23:31:37 - GraphTrainer - INFO - recall@5: 0.009571
+2025-11-11 23:31:37 - GraphTrainer - INFO - hit_rate@5: 0.010285
+2025-11-11 23:31:37 - GraphTrainer - INFO - ndcg@5: 0.006344
+2025-11-11 23:31:37 - GraphTrainer - INFO - map@5: 0.005165
+2025-11-11 23:31:37 - GraphTrainer - INFO - mrr@5: 0.005444
+2025-11-11 23:31:37 - GraphTrainer - INFO - precision@10: 0.001785
+2025-11-11 23:31:37 - GraphTrainer - INFO - recall@10: 0.016327
+2025-11-11 23:31:37 - GraphTrainer - INFO - hit_rate@10: 0.017742
+2025-11-11 23:31:37 - GraphTrainer - INFO - ndcg@10: 0.008599
+2025-11-11 23:31:37 - GraphTrainer - INFO - map@10: 0.006095
+2025-11-11 23:31:37 - GraphTrainer - INFO - mrr@10: 0.006462
+2025-11-11 23:31:37 - GraphTrainer - INFO - precision@20: 0.001365
+2025-11-11 23:31:37 - GraphTrainer - INFO - recall@20: 0.025000
+2025-11-11 23:31:37 - GraphTrainer - INFO - hit_rate@20: 0.027154
+2025-11-11 23:31:37 - GraphTrainer - INFO - ndcg@20: 0.010803
+2025-11-11 23:31:37 - GraphTrainer - INFO - map@20: 0.006675
+2025-11-11 23:31:37 - GraphTrainer - INFO - mrr@20: 0.007092
+2025-11-11 23:31:37 - GraphTrainer - INFO - ------------------------------------------------------------
+2025-11-11 23:31:37 - GraphTrainer - INFO - ============================================================
+2025-11-11 23:31:37 - GraphTrainer - INFO - 开始第 52/1000 轮训练
+2025-11-11 23:31:37 - GraphTrainer - INFO - ============================================================
+2025-11-11 23:32:47 - GraphTrainer - INFO - 验证结果:
+2025-11-11 23:32:47 - GraphTrainer - INFO -   precision@5: 0.002211
+2025-11-11 23:32:47 - GraphTrainer - INFO -   recall@5: 0.010184
+2025-11-11 23:32:47 - GraphTrainer - INFO -   hit_rate@5: 0.011005
+2025-11-11 23:32:47 - GraphTrainer - INFO -   ndcg@5: 0.006639
+2025-11-11 23:32:47 - GraphTrainer - INFO -   map@5: 0.005358
+2025-11-11 23:32:47 - GraphTrainer - INFO -   mrr@5: 0.005685
+2025-11-11 23:32:47 - GraphTrainer - INFO -   precision@10: 0.001754
+2025-11-11 23:32:47 - GraphTrainer - INFO -   recall@10: 0.016248
+2025-11-11 23:32:47 - GraphTrainer - INFO -   hit_rate@10: 0.017485
+2025-11-11 23:32:47 - GraphTrainer - INFO -   ndcg@10: 0.008601
+2025-11-11 23:32:47 - GraphTrainer - INFO -   map@10: 0.006141
+2025-11-11 23:32:47 - GraphTrainer - INFO -   mrr@10: 0.006524
+2025-11-11 23:32:47 - GraphTrainer - INFO -   precision@20: 0.001363
+2025-11-11 23:32:47 - GraphTrainer - INFO -   recall@20: 0.025104
+2025-11-11 23:32:47 - GraphTrainer - INFO -   hit_rate@20: 0.027154
+2025-11-11 23:32:47 - GraphTrainer - INFO -   ndcg@20: 0.010872
+2025-11-11 23:32:47 - GraphTrainer - INFO -   map@20: 0.006746
+2025-11-11 23:32:47 - GraphTrainer - INFO -   mrr@20: 0.007186
+2025-11-11 23:32:47 - GraphTrainer - INFO - 第 52 轮训练完成
+2025-11-11 23:32:47 - GraphTrainer - INFO - train_loss: 0.028575
+2025-11-11 23:32:47 - GraphTrainer - INFO - precision@5: 0.002211
+2025-11-11 23:32:47 - GraphTrainer - INFO - recall@5: 0.010184
+2025-11-11 23:32:47 - GraphTrainer - INFO - hit_rate@5: 0.011005
+2025-11-11 23:32:47 - GraphTrainer - INFO - ndcg@5: 0.006639
+2025-11-11 23:32:47 - GraphTrainer - INFO - map@5: 0.005358
+2025-11-11 23:32:47 - GraphTrainer - INFO - mrr@5: 0.005685
+2025-11-11 23:32:47 - GraphTrainer - INFO - precision@10: 0.001754
+2025-11-11 23:32:47 - GraphTrainer - INFO - recall@10: 0.016248
+2025-11-11 23:32:47 - GraphTrainer - INFO - hit_rate@10: 0.017485
+2025-11-11 23:32:47 - GraphTrainer - INFO - ndcg@10: 0.008601
+2025-11-11 23:32:47 - GraphTrainer - INFO - map@10: 0.006141
+2025-11-11 23:32:47 - GraphTrainer - INFO - mrr@10: 0.006524
+2025-11-11 23:32:47 - GraphTrainer - INFO - precision@20: 0.001363
+2025-11-11 23:32:47 - GraphTrainer - INFO - recall@20: 0.025104
+2025-11-11 23:32:47 - GraphTrainer - INFO - hit_rate@20: 0.027154
+2025-11-11 23:32:47 - GraphTrainer - INFO - ndcg@20: 0.010872
+2025-11-11 23:32:47 - GraphTrainer - INFO - map@20: 0.006746
+2025-11-11 23:32:47 - GraphTrainer - INFO - mrr@20: 0.007186
+2025-11-11 23:32:47 - GraphTrainer - INFO - ------------------------------------------------------------
+2025-11-11 23:32:47 - GraphTrainer - INFO - ============================================================
+2025-11-11 23:32:47 - GraphTrainer - INFO - 开始第 53/1000 轮训练
+2025-11-11 23:32:47 - GraphTrainer - INFO - ============================================================
+2025-11-11 23:33:57 - GraphTrainer - INFO - 验证结果:
+2025-11-11 23:33:57 - GraphTrainer - INFO -   precision@5: 0.002181
+2025-11-11 23:33:57 - GraphTrainer - INFO -   recall@5: 0.010060
+2025-11-11 23:33:57 - GraphTrainer - INFO -   hit_rate@5: 0.010903
+2025-11-11 23:33:57 - GraphTrainer - INFO -   ndcg@5: 0.006714
+2025-11-11 23:33:57 - GraphTrainer - INFO -   map@5: 0.005487
+2025-11-11 23:33:57 - GraphTrainer - INFO -   mrr@5: 0.005843
+2025-11-11 23:33:57 - GraphTrainer - INFO -   precision@10: 0.001908
+2025-11-11 23:33:57 - GraphTrainer - INFO -   recall@10: 0.017447
+2025-11-11 23:33:57 - GraphTrainer - INFO -   hit_rate@10: 0.018977
+2025-11-11 23:33:57 - GraphTrainer - INFO -   ndcg@10: 0.009121
+2025-11-11 23:33:57 - GraphTrainer - INFO -   map@10: 0.006448
+2025-11-11 23:33:57 - GraphTrainer - INFO -   mrr@10: 0.006886
+2025-11-11 23:33:57 - GraphTrainer - INFO -   precision@20: 0.001461
+2025-11-11 23:33:57 - GraphTrainer - INFO -   recall@20: 0.027040
+2025-11-11 23:33:57 - GraphTrainer - INFO -   hit_rate@20: 0.029056
+2025-11-11 23:33:57 - GraphTrainer - INFO -   ndcg@20: 0.011550
+2025-11-11 23:33:57 - GraphTrainer - INFO -   map@20: 0.007095
+2025-11-11 23:33:57 - GraphTrainer - INFO -   mrr@20: 0.007567
+2025-11-11 23:33:57 - GraphTrainer - INFO - 第 53 轮训练完成
+2025-11-11 23:33:57 - GraphTrainer - INFO - train_loss: 0.026946
+2025-11-11 23:33:57 - GraphTrainer - INFO - precision@5: 0.002181
+2025-11-11 23:33:57 - GraphTrainer - INFO - recall@5: 0.010060
+2025-11-11 23:33:57 - GraphTrainer - INFO - hit_rate@5: 0.010903
+2025-11-11 23:33:57 - GraphTrainer - INFO - ndcg@5: 0.006714
+2025-11-11 23:33:57 - GraphTrainer - INFO - map@5: 0.005487
+2025-11-11 23:33:57 - GraphTrainer - INFO - mrr@5: 0.005843
+2025-11-11 23:33:57 - GraphTrainer - INFO - precision@10: 0.001908
+2025-11-11 23:33:57 - GraphTrainer - INFO - recall@10: 0.017447
+2025-11-11 23:33:57 - GraphTrainer - INFO - hit_rate@10: 0.018977
+2025-11-11 23:33:57 - GraphTrainer - INFO - ndcg@10: 0.009121
+2025-11-11 23:33:57 - GraphTrainer - INFO - map@10: 0.006448
+2025-11-11 23:33:57 - GraphTrainer - INFO - mrr@10: 0.006886
+2025-11-11 23:33:57 - GraphTrainer - INFO - precision@20: 0.001461
+2025-11-11 23:33:57 - GraphTrainer - INFO - recall@20: 0.027040
+2025-11-11 23:33:57 - GraphTrainer - INFO - hit_rate@20: 0.029056
+2025-11-11 23:33:57 - GraphTrainer - INFO - ndcg@20: 0.011550
+2025-11-11 23:33:57 - GraphTrainer - INFO - map@20: 0.007095
+2025-11-11 23:33:57 - GraphTrainer - INFO - mrr@20: 0.007567
+2025-11-11 23:33:57 - GraphTrainer - INFO - ------------------------------------------------------------
+2025-11-11 23:33:57 - GraphTrainer - INFO - ============================================================
+2025-11-11 23:33:57 - GraphTrainer - INFO - 开始第 54/1000 轮训练
+2025-11-11 23:33:57 - GraphTrainer - INFO - ============================================================
+2025-11-11 23:35:06 - GraphTrainer - INFO - 验证结果:
+2025-11-11 23:35:06 - GraphTrainer - INFO -   precision@5: 0.002211
+2025-11-11 23:35:06 - GraphTrainer - INFO -   recall@5: 0.010224
+2025-11-11 23:35:06 - GraphTrainer - INFO -   hit_rate@5: 0.011057
+2025-11-11 23:35:06 - GraphTrainer - INFO -   ndcg@5: 0.006821
+2025-11-11 23:35:06 - GraphTrainer - INFO -   map@5: 0.005562
+2025-11-11 23:35:06 - GraphTrainer - INFO -   mrr@5: 0.005932
+2025-11-11 23:35:06 - GraphTrainer - INFO -   precision@10: 0.001800
+2025-11-11 23:35:06 - GraphTrainer - INFO -   recall@10: 0.016649
+2025-11-11 23:35:06 - GraphTrainer - INFO -   hit_rate@10: 0.017999
+2025-11-11 23:35:06 - GraphTrainer - INFO -   ndcg@10: 0.008917
+2025-11-11 23:35:06 - GraphTrainer - INFO -   map@10: 0.006405
+2025-11-11 23:35:06 - GraphTrainer - INFO -   mrr@10: 0.006841
+2025-11-11 23:35:06 - GraphTrainer - INFO -   precision@20: 0.001414
+2025-11-11 23:35:06 - GraphTrainer - INFO -   recall@20: 0.026114
+2025-11-11 23:35:06 - GraphTrainer - INFO -   hit_rate@20: 0.028131
+2025-11-11 23:35:06 - GraphTrainer - INFO -   ndcg@20: 0.011334
+2025-11-11 23:35:06 - GraphTrainer - INFO -   map@20: 0.007052
+2025-11-11 23:35:06 - GraphTrainer - INFO -   mrr@20: 0.007530
+2025-11-11 23:35:06 - GraphTrainer - INFO - 第 54 轮训练完成
+2025-11-11 23:35:06 - GraphTrainer - INFO - train_loss: 0.028522
+2025-11-11 23:35:06 - GraphTrainer - INFO - precision@5: 0.002211
+2025-11-11 23:35:06 - GraphTrainer - INFO - recall@5: 0.010224
+2025-11-11 23:35:06 - GraphTrainer - INFO - hit_rate@5: 0.011057
+2025-11-11 23:35:06 - GraphTrainer - INFO - ndcg@5: 0.006821
+2025-11-11 23:35:06 - GraphTrainer - INFO - map@5: 0.005562
+2025-11-11 23:35:06 - GraphTrainer - INFO - mrr@5: 0.005932
+2025-11-11 23:35:06 - GraphTrainer - INFO - precision@10: 0.001800
+2025-11-11 23:35:06 - GraphTrainer - INFO - recall@10: 0.016649
+2025-11-11 23:35:06 - GraphTrainer - INFO - hit_rate@10: 0.017999
+2025-11-11 23:35:06 - GraphTrainer - INFO - ndcg@10: 0.008917
+2025-11-11 23:35:06 - GraphTrainer - INFO - map@10: 0.006405
+2025-11-11 23:35:06 - GraphTrainer - INFO - mrr@10: 0.006841
+2025-11-11 23:35:06 - GraphTrainer - INFO - precision@20: 0.001414
+2025-11-11 23:35:06 - GraphTrainer - INFO - recall@20: 0.026114
+2025-11-11 23:35:06 - GraphTrainer - INFO - hit_rate@20: 0.028131
+2025-11-11 23:35:06 - GraphTrainer - INFO - ndcg@20: 0.011334
+2025-11-11 23:35:06 - GraphTrainer - INFO - map@20: 0.007052
+2025-11-11 23:35:06 - GraphTrainer - INFO - mrr@20: 0.007530
+2025-11-11 23:35:06 - GraphTrainer - INFO - ------------------------------------------------------------
+2025-11-11 23:35:06 - GraphTrainer - INFO - ============================================================
+2025-11-11 23:35:06 - GraphTrainer - INFO - 开始第 55/1000 轮训练
+2025-11-11 23:35:06 - GraphTrainer - INFO - ============================================================
+2025-11-11 23:36:16 - GraphTrainer - INFO - 验证结果:
+2025-11-11 23:36:16 - GraphTrainer - INFO -   precision@5: 0.002150
+2025-11-11 23:36:16 - GraphTrainer - INFO -   recall@5: 0.010113
+2025-11-11 23:36:16 - GraphTrainer - INFO -   hit_rate@5: 0.010748
+2025-11-11 23:36:16 - GraphTrainer - INFO -   ndcg@5: 0.006699
+2025-11-11 23:36:16 - GraphTrainer - INFO -   map@5: 0.005475
+2025-11-11 23:36:16 - GraphTrainer - INFO -   mrr@5: 0.005786
+2025-11-11 23:36:16 - GraphTrainer - INFO -   precision@10: 0.001821
+2025-11-11 23:36:16 - GraphTrainer - INFO -   recall@10: 0.016918
+2025-11-11 23:36:16 - GraphTrainer - INFO -   hit_rate@10: 0.018154
+2025-11-11 23:36:16 - GraphTrainer - INFO -   ndcg@10: 0.008917
+2025-11-11 23:36:16 - GraphTrainer - INFO -   map@10: 0.006362
+2025-11-11 23:36:16 - GraphTrainer - INFO -   mrr@10: 0.006749
+2025-11-11 23:36:16 - GraphTrainer - INFO -   precision@20: 0.001450
+2025-11-11 23:36:16 - GraphTrainer - INFO -   recall@20: 0.026763
+2025-11-11 23:36:16 - GraphTrainer - INFO -   hit_rate@20: 0.028851
+2025-11-11 23:36:16 - GraphTrainer - INFO -   ndcg@20: 0.011444
+2025-11-11 23:36:16 - GraphTrainer - INFO -   map@20: 0.007040
+2025-11-11 23:36:16 - GraphTrainer - INFO -   mrr@20: 0.007483
+2025-11-11 23:36:16 - GraphTrainer - INFO - 第 55 轮训练完成
+2025-11-11 23:36:16 - GraphTrainer - INFO - train_loss: 0.026808
+2025-11-11 23:36:16 - GraphTrainer - INFO - precision@5: 0.002150
+2025-11-11 23:36:16 - GraphTrainer - INFO - recall@5: 0.010113
+2025-11-11 23:36:16 - GraphTrainer - INFO - hit_rate@5: 0.010748
+2025-11-11 23:36:16 - GraphTrainer - INFO - ndcg@5: 0.006699
+2025-11-11 23:36:16 - GraphTrainer - INFO - map@5: 0.005475
+2025-11-11 23:36:16 - GraphTrainer - INFO - mrr@5: 0.005786
+2025-11-11 23:36:16 - GraphTrainer - INFO - precision@10: 0.001821
+2025-11-11 23:36:16 - GraphTrainer - INFO - recall@10: 0.016918
+2025-11-11 23:36:16 - GraphTrainer - INFO - hit_rate@10: 0.018154
+2025-11-11 23:36:16 - GraphTrainer - INFO - ndcg@10: 0.008917
+2025-11-11 23:36:16 - GraphTrainer - INFO - map@10: 0.006362
+2025-11-11 23:36:16 - GraphTrainer - INFO - mrr@10: 0.006749
+2025-11-11 23:36:16 - GraphTrainer - INFO - precision@20: 0.001450
+2025-11-11 23:36:16 - GraphTrainer - INFO - recall@20: 0.026763
+2025-11-11 23:36:16 - GraphTrainer - INFO - hit_rate@20: 0.028851
+2025-11-11 23:36:16 - GraphTrainer - INFO - ndcg@20: 0.011444
+2025-11-11 23:36:16 - GraphTrainer - INFO - map@20: 0.007040
+2025-11-11 23:36:16 - GraphTrainer - INFO - mrr@20: 0.007483
+2025-11-11 23:36:16 - GraphTrainer - INFO - ------------------------------------------------------------
+2025-11-11 23:36:16 - GraphTrainer - INFO - ============================================================
+2025-11-11 23:36:16 - GraphTrainer - INFO - 开始第 56/1000 轮训练
+2025-11-11 23:36:16 - GraphTrainer - INFO - ============================================================
+2025-11-11 23:37:25 - GraphTrainer - INFO - 验证结果:
+2025-11-11 23:37:25 - GraphTrainer - INFO -   precision@5: 0.002170
+2025-11-11 23:37:25 - GraphTrainer - INFO -   recall@5: 0.010007
+2025-11-11 23:37:25 - GraphTrainer - INFO -   hit_rate@5: 0.010851
+2025-11-11 23:37:25 - GraphTrainer - INFO -   ndcg@5: 0.006685
+2025-11-11 23:37:25 - GraphTrainer - INFO -   map@5: 0.005463
+2025-11-11 23:37:25 - GraphTrainer - INFO -   mrr@5: 0.005833
+2025-11-11 23:37:25 - GraphTrainer - INFO -   precision@10: 0.001831
+2025-11-11 23:37:25 - GraphTrainer - INFO -   recall@10: 0.016955
+2025-11-11 23:37:25 - GraphTrainer - INFO -   hit_rate@10: 0.018308
+2025-11-11 23:37:25 - GraphTrainer - INFO -   ndcg@10: 0.008927
+2025-11-11 23:37:25 - GraphTrainer - INFO -   map@10: 0.006353
+2025-11-11 23:37:25 - GraphTrainer - INFO -   mrr@10: 0.006789
+2025-11-11 23:37:25 - GraphTrainer - INFO -   precision@20: 0.001463
+2025-11-11 23:37:25 - GraphTrainer - INFO -   recall@20: 0.026803
+2025-11-11 23:37:25 - GraphTrainer - INFO -   hit_rate@20: 0.028851
+2025-11-11 23:37:25 - GraphTrainer - INFO -   ndcg@20: 0.011472
+2025-11-11 23:37:25 - GraphTrainer - INFO -   map@20: 0.007046
+2025-11-11 23:37:25 - GraphTrainer - INFO -   mrr@20: 0.007518
+2025-11-11 23:37:25 - GraphTrainer - INFO - 第 56 轮训练完成
+2025-11-11 23:37:25 - GraphTrainer - INFO - train_loss: 0.026569
+2025-11-11 23:37:25 - GraphTrainer - INFO - precision@5: 0.002170
+2025-11-11 23:37:25 - GraphTrainer - INFO - recall@5: 0.010007
+2025-11-11 23:37:25 - GraphTrainer - INFO - hit_rate@5: 0.010851
+2025-11-11 23:37:25 - GraphTrainer - INFO - ndcg@5: 0.006685
+2025-11-11 23:37:25 - GraphTrainer - INFO - map@5: 0.005463
+2025-11-11 23:37:25 - GraphTrainer - INFO - mrr@5: 0.005833
+2025-11-11 23:37:25 - GraphTrainer - INFO - precision@10: 0.001831
+2025-11-11 23:37:25 - GraphTrainer - INFO - recall@10: 0.016955
+2025-11-11 23:37:25 - GraphTrainer - INFO - hit_rate@10: 0.018308
+2025-11-11 23:37:25 - GraphTrainer - INFO - ndcg@10: 0.008927
+2025-11-11 23:37:25 - GraphTrainer - INFO - map@10: 0.006353
+2025-11-11 23:37:25 - GraphTrainer - INFO - mrr@10: 0.006789
+2025-11-11 23:37:25 - GraphTrainer - INFO - precision@20: 0.001463
+2025-11-11 23:37:25 - GraphTrainer - INFO - recall@20: 0.026803
+2025-11-11 23:37:25 - GraphTrainer - INFO - hit_rate@20: 0.028851
+2025-11-11 23:37:25 - GraphTrainer - INFO - ndcg@20: 0.011472
+2025-11-11 23:37:25 - GraphTrainer - INFO - map@20: 0.007046
+2025-11-11 23:37:25 - GraphTrainer - INFO - mrr@20: 0.007518
+2025-11-11 23:37:25 - GraphTrainer - INFO - ------------------------------------------------------------
+2025-11-11 23:37:25 - GraphTrainer - INFO - ============================================================
+2025-11-11 23:37:25 - GraphTrainer - INFO - 开始第 57/1000 轮训练
+2025-11-11 23:37:25 - GraphTrainer - INFO - ============================================================
+2025-11-11 23:38:34 - GraphTrainer - INFO - 验证结果:
+2025-11-11 23:38:34 - GraphTrainer - INFO -   precision@5: 0.002088
+2025-11-11 23:38:34 - GraphTrainer - INFO -   recall@5: 0.009775
+2025-11-11 23:38:34 - GraphTrainer - INFO -   hit_rate@5: 0.010440
+2025-11-11 23:38:34 - GraphTrainer - INFO -   ndcg@5: 0.006515
+2025-11-11 23:38:34 - GraphTrainer - INFO -   map@5: 0.005328
+2025-11-11 23:38:34 - GraphTrainer - INFO -   mrr@5: 0.005671
+2025-11-11 23:38:34 - GraphTrainer - INFO -   precision@10: 0.001805
+2025-11-11 23:38:34 - GraphTrainer - INFO -   recall@10: 0.016634
+2025-11-11 23:38:34 - GraphTrainer - INFO -   hit_rate@10: 0.018051
+2025-11-11 23:38:34 - GraphTrainer - INFO -   ndcg@10: 0.008763
+2025-11-11 23:38:34 - GraphTrainer - INFO -   map@10: 0.006228
+2025-11-11 23:38:34 - GraphTrainer - INFO -   mrr@10: 0.006674
+2025-11-11 23:38:34 - GraphTrainer - INFO -   precision@20: 0.001373
+2025-11-11 23:38:34 - GraphTrainer - INFO -   recall@20: 0.025194
+2025-11-11 23:38:34 - GraphTrainer - INFO -   hit_rate@20: 0.027154
+2025-11-11 23:38:34 - GraphTrainer - INFO -   ndcg@20: 0.010957
+2025-11-11 23:38:34 - GraphTrainer - INFO -   map@20: 0.006818
+2025-11-11 23:38:34 - GraphTrainer - INFO -   mrr@20: 0.007293
+2025-11-11 23:38:34 - GraphTrainer - INFO - 第 57 轮训练完成
+2025-11-11 23:38:34 - GraphTrainer - INFO - train_loss: 0.025424
+2025-11-11 23:38:34 - GraphTrainer - INFO - precision@5: 0.002088
+2025-11-11 23:38:34 - GraphTrainer - INFO - recall@5: 0.009775
+2025-11-11 23:38:34 - GraphTrainer - INFO - hit_rate@5: 0.010440
+2025-11-11 23:38:34 - GraphTrainer - INFO - ndcg@5: 0.006515
+2025-11-11 23:38:34 - GraphTrainer - INFO - map@5: 0.005328
+2025-11-11 23:38:34 - GraphTrainer - INFO - mrr@5: 0.005671
+2025-11-11 23:38:34 - GraphTrainer - INFO - precision@10: 0.001805
+2025-11-11 23:38:34 - GraphTrainer - INFO - recall@10: 0.016634
+2025-11-11 23:38:34 - GraphTrainer - INFO - hit_rate@10: 0.018051
+2025-11-11 23:38:34 - GraphTrainer - INFO - ndcg@10: 0.008763
+2025-11-11 23:38:34 - GraphTrainer - INFO - map@10: 0.006228
+2025-11-11 23:38:34 - GraphTrainer - INFO - mrr@10: 0.006674
+2025-11-11 23:38:34 - GraphTrainer - INFO - precision@20: 0.001373
+2025-11-11 23:38:34 - GraphTrainer - INFO - recall@20: 0.025194
+2025-11-11 23:38:34 - GraphTrainer - INFO - hit_rate@20: 0.027154
+2025-11-11 23:38:34 - GraphTrainer - INFO - ndcg@20: 0.010957
+2025-11-11 23:38:34 - GraphTrainer - INFO - map@20: 0.006818
+2025-11-11 23:38:34 - GraphTrainer - INFO - mrr@20: 0.007293
+2025-11-11 23:38:34 - GraphTrainer - INFO - ------------------------------------------------------------
+2025-11-11 23:38:34 - GraphTrainer - INFO - ============================================================
+2025-11-11 23:38:34 - GraphTrainer - INFO - 开始第 58/1000 轮训练
+2025-11-11 23:38:34 - GraphTrainer - INFO - ============================================================
+2025-11-11 23:39:44 - GraphTrainer - INFO - 验证结果:
+2025-11-11 23:39:44 - GraphTrainer - INFO -   precision@5: 0.002160
+2025-11-11 23:39:44 - GraphTrainer - INFO -   recall@5: 0.010088
+2025-11-11 23:39:44 - GraphTrainer - INFO -   hit_rate@5: 0.010800
+2025-11-11 23:39:44 - GraphTrainer - INFO -   ndcg@5: 0.006620
+2025-11-11 23:39:44 - GraphTrainer - INFO -   map@5: 0.005353
+2025-11-11 23:39:44 - GraphTrainer - INFO -   mrr@5: 0.005726
+2025-11-11 23:39:44 - GraphTrainer - INFO -   precision@10: 0.001836
+2025-11-11 23:39:44 - GraphTrainer - INFO -   recall@10: 0.017019
+2025-11-11 23:39:44 - GraphTrainer - INFO -   hit_rate@10: 0.018308
+2025-11-11 23:39:44 - GraphTrainer - INFO -   ndcg@10: 0.008884
+2025-11-11 23:39:44 - GraphTrainer - INFO -   map@10: 0.006267
+2025-11-11 23:39:44 - GraphTrainer - INFO -   mrr@10: 0.006717
+2025-11-11 23:39:44 - GraphTrainer - INFO -   precision@20: 0.001422
+2025-11-11 23:39:44 - GraphTrainer - INFO -   recall@20: 0.026333
+2025-11-11 23:39:44 - GraphTrainer - INFO -   hit_rate@20: 0.028285
+2025-11-11 23:39:44 - GraphTrainer - INFO -   ndcg@20: 0.011288
+2025-11-11 23:39:44 - GraphTrainer - INFO -   map@20: 0.006925
+2025-11-11 23:39:44 - GraphTrainer - INFO -   mrr@20: 0.007417
+2025-11-11 23:39:44 - GraphTrainer - INFO - 第 58 轮训练完成
+2025-11-11 23:39:44 - GraphTrainer - INFO - train_loss: 0.025800
+2025-11-11 23:39:44 - GraphTrainer - INFO - precision@5: 0.002160
+2025-11-11 23:39:44 - GraphTrainer - INFO - recall@5: 0.010088
+2025-11-11 23:39:44 - GraphTrainer - INFO - hit_rate@5: 0.010800
+2025-11-11 23:39:44 - GraphTrainer - INFO - ndcg@5: 0.006620
+2025-11-11 23:39:44 - GraphTrainer - INFO - map@5: 0.005353
+2025-11-11 23:39:44 - GraphTrainer - INFO - mrr@5: 0.005726
+2025-11-11 23:39:44 - GraphTrainer - INFO - precision@10: 0.001836
+2025-11-11 23:39:44 - GraphTrainer - INFO - recall@10: 0.017019
+2025-11-11 23:39:44 - GraphTrainer - INFO - hit_rate@10: 0.018308
+2025-11-11 23:39:44 - GraphTrainer - INFO - ndcg@10: 0.008884
+2025-11-11 23:39:44 - GraphTrainer - INFO - map@10: 0.006267
+2025-11-11 23:39:44 - GraphTrainer - INFO - mrr@10: 0.006717
+2025-11-11 23:39:44 - GraphTrainer - INFO - precision@20: 0.001422
+2025-11-11 23:39:44 - GraphTrainer - INFO - recall@20: 0.026333
+2025-11-11 23:39:44 - GraphTrainer - INFO - hit_rate@20: 0.028285
+2025-11-11 23:39:44 - GraphTrainer - INFO - ndcg@20: 0.011288
+2025-11-11 23:39:44 - GraphTrainer - INFO - map@20: 0.006925
+2025-11-11 23:39:44 - GraphTrainer - INFO - mrr@20: 0.007417
+2025-11-11 23:39:44 - GraphTrainer - INFO - ------------------------------------------------------------
+2025-11-11 23:39:44 - GraphTrainer - INFO - ============================================================
+2025-11-11 23:39:44 - GraphTrainer - INFO - 开始第 59/1000 轮训练
+2025-11-11 23:39:44 - GraphTrainer - INFO - ============================================================
+2025-11-11 23:40:53 - GraphTrainer - INFO - 验证结果:
+2025-11-11 23:40:53 - GraphTrainer - INFO -   precision@5: 0.002016
+2025-11-11 23:40:53 - GraphTrainer - INFO -   recall@5: 0.009362
+2025-11-11 23:40:53 - GraphTrainer - INFO -   hit_rate@5: 0.010080
+2025-11-11 23:40:53 - GraphTrainer - INFO -   ndcg@5: 0.006315
+2025-11-11 23:40:53 - GraphTrainer - INFO -   map@5: 0.005180
+2025-11-11 23:40:53 - GraphTrainer - INFO -   mrr@5: 0.005571
+2025-11-11 23:40:53 - GraphTrainer - INFO -   precision@10: 0.001769
+2025-11-11 23:40:53 - GraphTrainer - INFO -   recall@10: 0.016452
+2025-11-11 23:40:53 - GraphTrainer - INFO -   hit_rate@10: 0.017639
+2025-11-11 23:40:53 - GraphTrainer - INFO -   ndcg@10: 0.008631
+2025-11-11 23:40:53 - GraphTrainer - INFO -   map@10: 0.006121
+2025-11-11 23:40:53 - GraphTrainer - INFO -   mrr@10: 0.006575
+2025-11-11 23:40:53 - GraphTrainer - INFO -   precision@20: 0.001414
+2025-11-11 23:40:53 - GraphTrainer - INFO -   recall@20: 0.026095
+2025-11-11 23:40:53 - GraphTrainer - INFO -   hit_rate@20: 0.027976
+2025-11-11 23:40:53 - GraphTrainer - INFO -   ndcg@20: 0.011102
+2025-11-11 23:40:53 - GraphTrainer - INFO -   map@20: 0.006783
+2025-11-11 23:40:53 - GraphTrainer - INFO -   mrr@20: 0.007278
+2025-11-11 23:40:53 - GraphTrainer - INFO - 第 59 轮训练完成
+2025-11-11 23:40:53 - GraphTrainer - INFO - train_loss: 0.025481
+2025-11-11 23:40:53 - GraphTrainer - INFO - precision@5: 0.002016
+2025-11-11 23:40:53 - GraphTrainer - INFO - recall@5: 0.009362
+2025-11-11 23:40:53 - GraphTrainer - INFO - hit_rate@5: 0.010080
+2025-11-11 23:40:53 - GraphTrainer - INFO - ndcg@5: 0.006315
+2025-11-11 23:40:53 - GraphTrainer - INFO - map@5: 0.005180
+2025-11-11 23:40:53 - GraphTrainer - INFO - mrr@5: 0.005571
+2025-11-11 23:40:53 - GraphTrainer - INFO - precision@10: 0.001769
+2025-11-11 23:40:53 - GraphTrainer - INFO - recall@10: 0.016452
+2025-11-11 23:40:53 - GraphTrainer - INFO - hit_rate@10: 0.017639
+2025-11-11 23:40:53 - GraphTrainer - INFO - ndcg@10: 0.008631
+2025-11-11 23:40:53 - GraphTrainer - INFO - map@10: 0.006121
+2025-11-11 23:40:53 - GraphTrainer - INFO - mrr@10: 0.006575
+2025-11-11 23:40:53 - GraphTrainer - INFO - precision@20: 0.001414
+2025-11-11 23:40:53 - GraphTrainer - INFO - recall@20: 0.026095
+2025-11-11 23:40:53 - GraphTrainer - INFO - hit_rate@20: 0.027976
+2025-11-11 23:40:53 - GraphTrainer - INFO - ndcg@20: 0.011102
+2025-11-11 23:40:53 - GraphTrainer - INFO - map@20: 0.006783
+2025-11-11 23:40:53 - GraphTrainer - INFO - mrr@20: 0.007278
+2025-11-11 23:40:53 - GraphTrainer - INFO - ------------------------------------------------------------
+2025-11-11 23:40:53 - GraphTrainer - INFO - ============================================================
+2025-11-11 23:40:53 - GraphTrainer - INFO - 开始第 60/1000 轮训练
+2025-11-11 23:40:53 - GraphTrainer - INFO - ============================================================
+2025-11-11 23:42:02 - GraphTrainer - INFO - 验证结果:
+2025-11-11 23:42:02 - GraphTrainer - INFO -   precision@5: 0.002253
+2025-11-11 23:42:02 - GraphTrainer - INFO -   recall@5: 0.010415
+2025-11-11 23:42:02 - GraphTrainer - INFO -   hit_rate@5: 0.011263
+2025-11-11 23:42:02 - GraphTrainer - INFO -   ndcg@5: 0.006794
+2025-11-11 23:42:02 - GraphTrainer - INFO -   map@5: 0.005472
+2025-11-11 23:42:02 - GraphTrainer - INFO -   mrr@5: 0.005850
+2025-11-11 23:42:02 - GraphTrainer - INFO -   precision@10: 0.001836
+2025-11-11 23:42:02 - GraphTrainer - INFO -   recall@10: 0.016917
+2025-11-11 23:42:02 - GraphTrainer - INFO -   hit_rate@10: 0.018359
+2025-11-11 23:42:02 - GraphTrainer - INFO -   ndcg@10: 0.008905
+2025-11-11 23:42:02 - GraphTrainer - INFO -   map@10: 0.006315
+2025-11-11 23:42:02 - GraphTrainer - INFO -   mrr@10: 0.006764
+2025-11-11 23:42:02 - GraphTrainer - INFO -   precision@20: 0.001468
+2025-11-11 23:42:02 - GraphTrainer - INFO -   recall@20: 0.026940
+2025-11-11 23:42:02 - GraphTrainer - INFO -   hit_rate@20: 0.029211
+2025-11-11 23:42:02 - GraphTrainer - INFO -   ndcg@20: 0.011476
+2025-11-11 23:42:02 - GraphTrainer - INFO -   map@20: 0.007005
+2025-11-11 23:42:02 - GraphTrainer - INFO -   mrr@20: 0.007505
+2025-11-11 23:42:02 - GraphTrainer - INFO - 第 60 轮训练完成
+2025-11-11 23:42:02 - GraphTrainer - INFO - train_loss: 0.024004
+2025-11-11 23:42:02 - GraphTrainer - INFO - precision@5: 0.002253
+2025-11-11 23:42:02 - GraphTrainer - INFO - recall@5: 0.010415
+2025-11-11 23:42:02 - GraphTrainer - INFO - hit_rate@5: 0.011263
+2025-11-11 23:42:02 - GraphTrainer - INFO - ndcg@5: 0.006794
+2025-11-11 23:42:02 - GraphTrainer - INFO - map@5: 0.005472
+2025-11-11 23:42:02 - GraphTrainer - INFO - mrr@5: 0.005850
+2025-11-11 23:42:02 - GraphTrainer - INFO - precision@10: 0.001836
+2025-11-11 23:42:02 - GraphTrainer - INFO - recall@10: 0.016917
+2025-11-11 23:42:02 - GraphTrainer - INFO - hit_rate@10: 0.018359
+2025-11-11 23:42:02 - GraphTrainer - INFO - ndcg@10: 0.008905
+2025-11-11 23:42:02 - GraphTrainer - INFO - map@10: 0.006315
+2025-11-11 23:42:02 - GraphTrainer - INFO - mrr@10: 0.006764
+2025-11-11 23:42:02 - GraphTrainer - INFO - precision@20: 0.001468
+2025-11-11 23:42:02 - GraphTrainer - INFO - recall@20: 0.026940
+2025-11-11 23:42:02 - GraphTrainer - INFO - hit_rate@20: 0.029211
+2025-11-11 23:42:02 - GraphTrainer - INFO - ndcg@20: 0.011476
+2025-11-11 23:42:02 - GraphTrainer - INFO - map@20: 0.007005
+2025-11-11 23:42:02 - GraphTrainer - INFO - mrr@20: 0.007505
+2025-11-11 23:42:02 - GraphTrainer - INFO - ------------------------------------------------------------
+2025-11-11 23:42:02 - GraphTrainer - INFO - 检查点已保存: Epoch 60 -> ./checkpoints/checkpoint_epoch_60.pth
+2025-11-11 23:42:02 - GraphTrainer - INFO - ============================================================
+2025-11-11 23:42:02 - GraphTrainer - INFO - 开始第 61/1000 轮训练
+2025-11-11 23:42:02 - GraphTrainer - INFO - ============================================================
+2025-11-11 23:43:10 - GraphTrainer - INFO - 验证结果:
+2025-11-11 23:43:10 - GraphTrainer - INFO -   precision@5: 0.002170
+2025-11-11 23:43:10 - GraphTrainer - INFO -   recall@5: 0.010064
+2025-11-11 23:43:10 - GraphTrainer - INFO -   hit_rate@5: 0.010851
+2025-11-11 23:43:10 - GraphTrainer - INFO -   ndcg@5: 0.006658
+2025-11-11 23:43:10 - GraphTrainer - INFO -   map@5: 0.005410
+2025-11-11 23:43:10 - GraphTrainer - INFO -   mrr@5: 0.005805
+2025-11-11 23:43:10 - GraphTrainer - INFO -   precision@10: 0.001759
+2025-11-11 23:43:10 - GraphTrainer - INFO -   recall@10: 0.016277
+2025-11-11 23:43:10 - GraphTrainer - INFO -   hit_rate@10: 0.017588
+2025-11-11 23:43:10 - GraphTrainer - INFO -   ndcg@10: 0.008685
+2025-11-11 23:43:10 - GraphTrainer - INFO -   map@10: 0.006230
+2025-11-11 23:43:10 - GraphTrainer - INFO -   mrr@10: 0.006689
+2025-11-11 23:43:10 - GraphTrainer - INFO -   precision@20: 0.001448
+2025-11-11 23:43:10 - GraphTrainer - INFO -   recall@20: 0.026630
+2025-11-11 23:43:10 - GraphTrainer - INFO -   hit_rate@20: 0.028748
+2025-11-11 23:43:10 - GraphTrainer - INFO -   ndcg@20: 0.011374
+2025-11-11 23:43:10 - GraphTrainer - INFO -   map@20: 0.006969
+2025-11-11 23:43:10 - GraphTrainer - INFO -   mrr@20: 0.007480
+2025-11-11 23:43:10 - GraphTrainer - INFO - 第 61 轮训练完成
+2025-11-11 23:43:10 - GraphTrainer - INFO - train_loss: 0.023590
+2025-11-11 23:43:10 - GraphTrainer - INFO - precision@5: 0.002170
+2025-11-11 23:43:10 - GraphTrainer - INFO - recall@5: 0.010064
+2025-11-11 23:43:10 - GraphTrainer - INFO - hit_rate@5: 0.010851
+2025-11-11 23:43:10 - GraphTrainer - INFO - ndcg@5: 0.006658
+2025-11-11 23:43:10 - GraphTrainer - INFO - map@5: 0.005410
+2025-11-11 23:43:10 - GraphTrainer - INFO - mrr@5: 0.005805
+2025-11-11 23:43:10 - GraphTrainer - INFO - precision@10: 0.001759
+2025-11-11 23:43:10 - GraphTrainer - INFO - recall@10: 0.016277
+2025-11-11 23:43:10 - GraphTrainer - INFO - hit_rate@10: 0.017588
+2025-11-11 23:43:10 - GraphTrainer - INFO - ndcg@10: 0.008685
+2025-11-11 23:43:10 - GraphTrainer - INFO - map@10: 0.006230
+2025-11-11 23:43:10 - GraphTrainer - INFO - mrr@10: 0.006689
+2025-11-11 23:43:10 - GraphTrainer - INFO - precision@20: 0.001448
+2025-11-11 23:43:10 - GraphTrainer - INFO - recall@20: 0.026630
+2025-11-11 23:43:10 - GraphTrainer - INFO - hit_rate@20: 0.028748
+2025-11-11 23:43:10 - GraphTrainer - INFO - ndcg@20: 0.011374
+2025-11-11 23:43:10 - GraphTrainer - INFO - map@20: 0.006969
+2025-11-11 23:43:10 - GraphTrainer - INFO - mrr@20: 0.007480
+2025-11-11 23:43:10 - GraphTrainer - INFO - ------------------------------------------------------------
+2025-11-11 23:43:10 - GraphTrainer - INFO - ============================================================
+2025-11-11 23:43:10 - GraphTrainer - INFO - 开始第 62/1000 轮训练
+2025-11-11 23:43:10 - GraphTrainer - INFO - ============================================================
+2025-11-11 23:44:20 - GraphTrainer - INFO - 验证结果:
+2025-11-11 23:44:20 - GraphTrainer - INFO -   precision@5: 0.002479
+2025-11-11 23:44:20 - GraphTrainer - INFO -   recall@5: 0.011401
+2025-11-11 23:44:20 - GraphTrainer - INFO -   hit_rate@5: 0.012343
+2025-11-11 23:44:20 - GraphTrainer - INFO -   ndcg@5: 0.007337
+2025-11-11 23:44:20 - GraphTrainer - INFO -   map@5: 0.005857
+2025-11-11 23:44:20 - GraphTrainer - INFO -   mrr@5: 0.006308
+2025-11-11 23:44:20 - GraphTrainer - INFO -   precision@10: 0.001913
+2025-11-11 23:44:20 - GraphTrainer - INFO -   recall@10: 0.017536
+2025-11-11 23:44:20 - GraphTrainer - INFO -   hit_rate@10: 0.019028
+2025-11-11 23:44:20 - GraphTrainer - INFO -   ndcg@10: 0.009313
+2025-11-11 23:44:20 - GraphTrainer - INFO -   map@10: 0.006638
+2025-11-11 23:44:20 - GraphTrainer - INFO -   mrr@10: 0.007157
+2025-11-11 23:44:20 - GraphTrainer - INFO -   precision@20: 0.001440
+2025-11-11 23:44:20 - GraphTrainer - INFO -   recall@20: 0.026399
+2025-11-11 23:44:20 - GraphTrainer - INFO -   hit_rate@20: 0.028491
+2025-11-11 23:44:20 - GraphTrainer - INFO -   ndcg@20: 0.011563
+2025-11-11 23:44:20 - GraphTrainer - INFO -   map@20: 0.007233
+2025-11-11 23:44:20 - GraphTrainer - INFO -   mrr@20: 0.007784
+2025-11-11 23:44:20 - GraphTrainer - INFO - 第 62 轮训练完成
+2025-11-11 23:44:20 - GraphTrainer - INFO - train_loss: 0.024357
+2025-11-11 23:44:20 - GraphTrainer - INFO - precision@5: 0.002479
+2025-11-11 23:44:20 - GraphTrainer - INFO - recall@5: 0.011401
+2025-11-11 23:44:20 - GraphTrainer - INFO - hit_rate@5: 0.012343
+2025-11-11 23:44:20 - GraphTrainer - INFO - ndcg@5: 0.007337
+2025-11-11 23:44:20 - GraphTrainer - INFO - map@5: 0.005857
+2025-11-11 23:44:20 - GraphTrainer - INFO - mrr@5: 0.006308
+2025-11-11 23:44:20 - GraphTrainer - INFO - precision@10: 0.001913
+2025-11-11 23:44:20 - GraphTrainer - INFO - recall@10: 0.017536
+2025-11-11 23:44:20 - GraphTrainer - INFO - hit_rate@10: 0.019028
+2025-11-11 23:44:20 - GraphTrainer - INFO - ndcg@10: 0.009313
+2025-11-11 23:44:20 - GraphTrainer - INFO - map@10: 0.006638
+2025-11-11 23:44:20 - GraphTrainer - INFO - mrr@10: 0.007157
+2025-11-11 23:44:20 - GraphTrainer - INFO - precision@20: 0.001440
+2025-11-11 23:44:20 - GraphTrainer - INFO - recall@20: 0.026399
+2025-11-11 23:44:20 - GraphTrainer - INFO - hit_rate@20: 0.028491
+2025-11-11 23:44:20 - GraphTrainer - INFO - ndcg@20: 0.011563
+2025-11-11 23:44:20 - GraphTrainer - INFO - map@20: 0.007233
+2025-11-11 23:44:20 - GraphTrainer - INFO - mrr@20: 0.007784
+2025-11-11 23:44:20 - GraphTrainer - INFO - ------------------------------------------------------------
+2025-11-11 23:44:20 - GraphTrainer - INFO - ============================================================
+2025-11-11 23:44:20 - GraphTrainer - INFO - 开始第 63/1000 轮训练
+2025-11-11 23:44:20 - GraphTrainer - INFO - ============================================================
+2025-11-11 23:45:28 - GraphTrainer - INFO - 验证结果:
+2025-11-11 23:45:28 - GraphTrainer - INFO -   precision@5: 0.002355
+2025-11-11 23:45:28 - GraphTrainer - INFO -   recall@5: 0.010922
+2025-11-11 23:45:28 - GraphTrainer - INFO -   hit_rate@5: 0.011777
+2025-11-11 23:45:28 - GraphTrainer - INFO -   ndcg@5: 0.007052
+2025-11-11 23:45:28 - GraphTrainer - INFO -   map@5: 0.005665
+2025-11-11 23:45:28 - GraphTrainer - INFO -   mrr@5: 0.006043
+2025-11-11 23:45:28 - GraphTrainer - INFO -   precision@10: 0.001882
+2025-11-11 23:45:28 - GraphTrainer - INFO -   recall@10: 0.017362
+2025-11-11 23:45:28 - GraphTrainer - INFO -   hit_rate@10: 0.018668
+2025-11-11 23:45:28 - GraphTrainer - INFO -   ndcg@10: 0.009180
+2025-11-11 23:45:28 - GraphTrainer - INFO -   map@10: 0.006539
+2025-11-11 23:45:28 - GraphTrainer - INFO -   mrr@10: 0.006972
+2025-11-11 23:45:28 - GraphTrainer - INFO -   precision@20: 0.001461
+2025-11-11 23:45:28 - GraphTrainer - INFO -   recall@20: 0.027044
+2025-11-11 23:45:28 - GraphTrainer - INFO -   hit_rate@20: 0.028953
+2025-11-11 23:45:28 - GraphTrainer - INFO -   ndcg@20: 0.011637
+2025-11-11 23:45:28 - GraphTrainer - INFO -   map@20: 0.007192
+2025-11-11 23:45:28 - GraphTrainer - INFO -   mrr@20: 0.007663
+2025-11-11 23:45:28 - GraphTrainer - INFO - 第 63 轮训练完成
+2025-11-11 23:45:28 - GraphTrainer - INFO - train_loss: 0.024286
+2025-11-11 23:45:28 - GraphTrainer - INFO - precision@5: 0.002355
+2025-11-11 23:45:28 - GraphTrainer - INFO - recall@5: 0.010922
+2025-11-11 23:45:28 - GraphTrainer - INFO - hit_rate@5: 0.011777
+2025-11-11 23:45:28 - GraphTrainer - INFO - ndcg@5: 0.007052
+2025-11-11 23:45:28 - GraphTrainer - INFO - map@5: 0.005665
+2025-11-11 23:45:28 - GraphTrainer - INFO - mrr@5: 0.006043
+2025-11-11 23:45:28 - GraphTrainer - INFO - precision@10: 0.001882
+2025-11-11 23:45:28 - GraphTrainer - INFO - recall@10: 0.017362
+2025-11-11 23:45:28 - GraphTrainer - INFO - hit_rate@10: 0.018668
+2025-11-11 23:45:28 - GraphTrainer - INFO - ndcg@10: 0.009180
+2025-11-11 23:45:28 - GraphTrainer - INFO - map@10: 0.006539
+2025-11-11 23:45:28 - GraphTrainer - INFO - mrr@10: 0.006972
+2025-11-11 23:45:28 - GraphTrainer - INFO - precision@20: 0.001461
+2025-11-11 23:45:28 - GraphTrainer - INFO - recall@20: 0.027044
+2025-11-11 23:45:28 - GraphTrainer - INFO - hit_rate@20: 0.028953
+2025-11-11 23:45:28 - GraphTrainer - INFO - ndcg@20: 0.011637
+2025-11-11 23:45:28 - GraphTrainer - INFO - map@20: 0.007192
+2025-11-11 23:45:28 - GraphTrainer - INFO - mrr@20: 0.007663
+2025-11-11 23:45:28 - GraphTrainer - INFO - ------------------------------------------------------------
+2025-11-11 23:45:28 - GraphTrainer - INFO - ============================================================
+2025-11-11 23:45:28 - GraphTrainer - INFO - 开始第 64/1000 轮训练
+2025-11-11 23:45:28 - GraphTrainer - INFO - ============================================================
+2025-11-11 23:46:37 - GraphTrainer - INFO - 验证结果:
+2025-11-11 23:46:37 - GraphTrainer - INFO -   precision@5: 0.002386
+2025-11-11 23:46:37 - GraphTrainer - INFO -   recall@5: 0.011041
+2025-11-11 23:46:37 - GraphTrainer - INFO -   hit_rate@5: 0.011880
+2025-11-11 23:46:37 - GraphTrainer - INFO -   ndcg@5: 0.007060
+2025-11-11 23:46:37 - GraphTrainer - INFO -   map@5: 0.005622
+2025-11-11 23:46:37 - GraphTrainer - INFO -   mrr@5: 0.006012
+2025-11-11 23:46:37 - GraphTrainer - INFO -   precision@10: 0.001887
+2025-11-11 23:46:37 - GraphTrainer - INFO -   recall@10: 0.017512
+2025-11-11 23:46:37 - GraphTrainer - INFO -   hit_rate@10: 0.018771
+2025-11-11 23:46:37 - GraphTrainer - INFO -   ndcg@10: 0.009146
+2025-11-11 23:46:37 - GraphTrainer - INFO -   map@10: 0.006454
+2025-11-11 23:46:37 - GraphTrainer - INFO -   mrr@10: 0.006900
+2025-11-11 23:46:37 - GraphTrainer - INFO -   precision@20: 0.001445
+2025-11-11 23:46:37 - GraphTrainer - INFO -   recall@20: 0.026647
+2025-11-11 23:46:37 - GraphTrainer - INFO -   hit_rate@20: 0.028645
+2025-11-11 23:46:37 - GraphTrainer - INFO -   ndcg@20: 0.011487
+2025-11-11 23:46:37 - GraphTrainer - INFO -   map@20: 0.007079
+2025-11-11 23:46:37 - GraphTrainer - INFO -   mrr@20: 0.007576
+2025-11-11 23:46:37 - GraphTrainer - INFO - 第 64 轮训练完成
+2025-11-11 23:46:37 - GraphTrainer - INFO - train_loss: 0.023345
+2025-11-11 23:46:37 - GraphTrainer - INFO - precision@5: 0.002386
+2025-11-11 23:46:37 - GraphTrainer - INFO - recall@5: 0.011041
+2025-11-11 23:46:37 - GraphTrainer - INFO - hit_rate@5: 0.011880
+2025-11-11 23:46:37 - GraphTrainer - INFO - ndcg@5: 0.007060
+2025-11-11 23:46:37 - GraphTrainer - INFO - map@5: 0.005622
+2025-11-11 23:46:37 - GraphTrainer - INFO - mrr@5: 0.006012
+2025-11-11 23:46:37 - GraphTrainer - INFO - precision@10: 0.001887
+2025-11-11 23:46:37 - GraphTrainer - INFO - recall@10: 0.017512
+2025-11-11 23:46:37 - GraphTrainer - INFO - hit_rate@10: 0.018771
+2025-11-11 23:46:37 - GraphTrainer - INFO - ndcg@10: 0.009146
+2025-11-11 23:46:37 - GraphTrainer - INFO - map@10: 0.006454
+2025-11-11 23:46:37 - GraphTrainer - INFO - mrr@10: 0.006900
+2025-11-11 23:46:37 - GraphTrainer - INFO - precision@20: 0.001445
+2025-11-11 23:46:37 - GraphTrainer - INFO - recall@20: 0.026647
+2025-11-11 23:46:37 - GraphTrainer - INFO - hit_rate@20: 0.028645
+2025-11-11 23:46:37 - GraphTrainer - INFO - ndcg@20: 0.011487
+2025-11-11 23:46:37 - GraphTrainer - INFO - map@20: 0.007079
+2025-11-11 23:46:37 - GraphTrainer - INFO - mrr@20: 0.007576
+2025-11-11 23:46:37 - GraphTrainer - INFO - ------------------------------------------------------------
+2025-11-11 23:46:37 - GraphTrainer - INFO - ============================================================
+2025-11-11 23:46:37 - GraphTrainer - INFO - 开始第 65/1000 轮训练
+2025-11-11 23:46:37 - GraphTrainer - INFO - ============================================================
+2025-11-11 23:47:48 - GraphTrainer - INFO - 验证结果:
+2025-11-11 23:47:48 - GraphTrainer - INFO -   precision@5: 0.002253
+2025-11-11 23:47:48 - GraphTrainer - INFO -   recall@5: 0.010564
+2025-11-11 23:47:48 - GraphTrainer - INFO -   hit_rate@5: 0.011263
+2025-11-11 23:47:48 - GraphTrainer - INFO -   ndcg@5: 0.006887
+2025-11-11 23:47:48 - GraphTrainer - INFO -   map@5: 0.005574
+2025-11-11 23:47:48 - GraphTrainer - INFO -   mrr@5: 0.005868
+2025-11-11 23:47:48 - GraphTrainer - INFO -   precision@10: 0.001898
+2025-11-11 23:47:48 - GraphTrainer - INFO -   recall@10: 0.017422
+2025-11-11 23:47:48 - GraphTrainer - INFO -   hit_rate@10: 0.018925
+2025-11-11 23:47:48 - GraphTrainer - INFO -   ndcg@10: 0.009141
+2025-11-11 23:47:48 - GraphTrainer - INFO -   map@10: 0.006472
+2025-11-11 23:47:48 - GraphTrainer - INFO -   mrr@10: 0.006866
+2025-11-11 23:47:48 - GraphTrainer - INFO -   precision@20: 0.001551
+2025-11-11 23:47:48 - GraphTrainer - INFO -   recall@20: 0.028374
+2025-11-11 23:47:48 - GraphTrainer - INFO -   hit_rate@20: 0.030753
+2025-11-11 23:47:48 - GraphTrainer - INFO -   ndcg@20: 0.011928
+2025-11-11 23:47:48 - GraphTrainer - INFO -   map@20: 0.007209
+2025-11-11 23:47:48 - GraphTrainer - INFO -   mrr@20: 0.007657
+2025-11-11 23:47:48 - GraphTrainer - INFO - 第 65 轮训练完成
+2025-11-11 23:47:48 - GraphTrainer - INFO - train_loss: 0.024179
+2025-11-11 23:47:48 - GraphTrainer - INFO - precision@5: 0.002253
+2025-11-11 23:47:48 - GraphTrainer - INFO - recall@5: 0.010564
+2025-11-11 23:47:48 - GraphTrainer - INFO - hit_rate@5: 0.011263
+2025-11-11 23:47:48 - GraphTrainer - INFO - ndcg@5: 0.006887
+2025-11-11 23:47:48 - GraphTrainer - INFO - map@5: 0.005574
+2025-11-11 23:47:48 - GraphTrainer - INFO - mrr@5: 0.005868
+2025-11-11 23:47:48 - GraphTrainer - INFO - precision@10: 0.001898
+2025-11-11 23:47:48 - GraphTrainer - INFO - recall@10: 0.017422
+2025-11-11 23:47:48 - GraphTrainer - INFO - hit_rate@10: 0.018925
+2025-11-11 23:47:48 - GraphTrainer - INFO - ndcg@10: 0.009141
+2025-11-11 23:47:48 - GraphTrainer - INFO - map@10: 0.006472
+2025-11-11 23:47:48 - GraphTrainer - INFO - mrr@10: 0.006866
+2025-11-11 23:47:48 - GraphTrainer - INFO - precision@20: 0.001551
+2025-11-11 23:47:48 - GraphTrainer - INFO - recall@20: 0.028374
+2025-11-11 23:47:48 - GraphTrainer - INFO - hit_rate@20: 0.030753
+2025-11-11 23:47:48 - GraphTrainer - INFO - ndcg@20: 0.011928
+2025-11-11 23:47:48 - GraphTrainer - INFO - map@20: 0.007209
+2025-11-11 23:47:48 - GraphTrainer - INFO - mrr@20: 0.007657
+2025-11-11 23:47:48 - GraphTrainer - INFO - ------------------------------------------------------------
+2025-11-11 23:47:48 - GraphTrainer - INFO - ============================================================
+2025-11-11 23:47:48 - GraphTrainer - INFO - 开始第 66/1000 轮训练
+2025-11-11 23:47:48 - GraphTrainer - INFO - ============================================================
+2025-11-11 23:48:56 - GraphTrainer - INFO - 验证结果:
+2025-11-11 23:48:56 - GraphTrainer - INFO -   precision@5: 0.002294
+2025-11-11 23:48:56 - GraphTrainer - INFO -   recall@5: 0.010604
+2025-11-11 23:48:56 - GraphTrainer - INFO -   hit_rate@5: 0.011468
+2025-11-11 23:48:56 - GraphTrainer - INFO -   ndcg@5: 0.007020
+2025-11-11 23:48:56 - GraphTrainer - INFO -   map@5: 0.005707
+2025-11-11 23:48:56 - GraphTrainer - INFO -   mrr@5: 0.006063
+2025-11-11 23:48:56 - GraphTrainer - INFO -   precision@10: 0.001785
+2025-11-11 23:48:56 - GraphTrainer - INFO -   recall@10: 0.016348
+2025-11-11 23:48:56 - GraphTrainer - INFO -   hit_rate@10: 0.017794
+2025-11-11 23:48:56 - GraphTrainer - INFO -   ndcg@10: 0.008904
+2025-11-11 23:48:56 - GraphTrainer - INFO -   map@10: 0.006465
+2025-11-11 23:48:56 - GraphTrainer - INFO -   mrr@10: 0.006904
+2025-11-11 23:48:56 - GraphTrainer - INFO -   precision@20: 0.001471
+2025-11-11 23:48:56 - GraphTrainer - INFO -   recall@20: 0.026824
+2025-11-11 23:48:56 - GraphTrainer - INFO -   hit_rate@20: 0.029108
+2025-11-11 23:48:56 - GraphTrainer - INFO -   ndcg@20: 0.011590
+2025-11-11 23:48:56 - GraphTrainer - INFO -   map@20: 0.007182
+2025-11-11 23:48:56 - GraphTrainer - INFO -   mrr@20: 0.007675
+2025-11-11 23:48:56 - GraphTrainer - INFO - 第 66 轮训练完成
+2025-11-11 23:48:56 - GraphTrainer - INFO - train_loss: 0.023398
+2025-11-11 23:48:56 - GraphTrainer - INFO - precision@5: 0.002294
+2025-11-11 23:48:56 - GraphTrainer - INFO - recall@5: 0.010604
+2025-11-11 23:48:56 - GraphTrainer - INFO - hit_rate@5: 0.011468
+2025-11-11 23:48:56 - GraphTrainer - INFO - ndcg@5: 0.007020
+2025-11-11 23:48:56 - GraphTrainer - INFO - map@5: 0.005707
+2025-11-11 23:48:56 - GraphTrainer - INFO - mrr@5: 0.006063
+2025-11-11 23:48:56 - GraphTrainer - INFO - precision@10: 0.001785
+2025-11-11 23:48:56 - GraphTrainer - INFO - recall@10: 0.016348
+2025-11-11 23:48:56 - GraphTrainer - INFO - hit_rate@10: 0.017794
+2025-11-11 23:48:56 - GraphTrainer - INFO - ndcg@10: 0.008904
+2025-11-11 23:48:56 - GraphTrainer - INFO - map@10: 0.006465
+2025-11-11 23:48:56 - GraphTrainer - INFO - mrr@10: 0.006904
+2025-11-11 23:48:56 - GraphTrainer - INFO - precision@20: 0.001471
+2025-11-11 23:48:56 - GraphTrainer - INFO - recall@20: 0.026824
+2025-11-11 23:48:56 - GraphTrainer - INFO - hit_rate@20: 0.029108
+2025-11-11 23:48:56 - GraphTrainer - INFO - ndcg@20: 0.011590
+2025-11-11 23:48:56 - GraphTrainer - INFO - map@20: 0.007182
+2025-11-11 23:48:56 - GraphTrainer - INFO - mrr@20: 0.007675
+2025-11-11 23:48:56 - GraphTrainer - INFO - ------------------------------------------------------------
+2025-11-11 23:48:56 - GraphTrainer - INFO - ============================================================
+2025-11-11 23:48:56 - GraphTrainer - INFO - 开始第 67/1000 轮训练
+2025-11-11 23:48:56 - GraphTrainer - INFO - ============================================================
+2025-11-11 23:50:05 - GraphTrainer - INFO - 验证结果:
+2025-11-11 23:50:05 - GraphTrainer - INFO -   precision@5: 0.002253
+2025-11-11 23:50:05 - GraphTrainer - INFO -   recall@5: 0.010357
+2025-11-11 23:50:05 - GraphTrainer - INFO -   hit_rate@5: 0.011263
+2025-11-11 23:50:05 - GraphTrainer - INFO -   ndcg@5: 0.006722
+2025-11-11 23:50:05 - GraphTrainer - INFO -   map@5: 0.005388
+2025-11-11 23:50:05 - GraphTrainer - INFO -   mrr@5: 0.005782
+2025-11-11 23:50:05 - GraphTrainer - INFO -   precision@10: 0.001836
+2025-11-11 23:50:05 - GraphTrainer - INFO -   recall@10: 0.016800
+2025-11-11 23:50:05 - GraphTrainer - INFO -   hit_rate@10: 0.018257
+2025-11-11 23:50:05 - GraphTrainer - INFO -   ndcg@10: 0.008856
+2025-11-11 23:50:05 - GraphTrainer - INFO -   map@10: 0.006261
+2025-11-11 23:50:05 - GraphTrainer - INFO -   mrr@10: 0.006726
+2025-11-11 23:50:05 - GraphTrainer - INFO -   precision@20: 0.001448
+2025-11-11 23:50:05 - GraphTrainer - INFO -   recall@20: 0.026555
+2025-11-11 23:50:05 - GraphTrainer - INFO -   hit_rate@20: 0.028593
+2025-11-11 23:50:05 - GraphTrainer - INFO -   ndcg@20: 0.011362
+2025-11-11 23:50:05 - GraphTrainer - INFO -   map@20: 0.006942
+2025-11-11 23:50:05 - GraphTrainer - INFO -   mrr@20: 0.007440
+2025-11-11 23:50:05 - GraphTrainer - INFO - 第 67 轮训练完成
+2025-11-11 23:50:05 - GraphTrainer - INFO - train_loss: 0.022950
+2025-11-11 23:50:05 - GraphTrainer - INFO - precision@5: 0.002253
+2025-11-11 23:50:05 - GraphTrainer - INFO - recall@5: 0.010357
+2025-11-11 23:50:05 - GraphTrainer - INFO - hit_rate@5: 0.011263
+2025-11-11 23:50:05 - GraphTrainer - INFO - ndcg@5: 0.006722
+2025-11-11 23:50:05 - GraphTrainer - INFO - map@5: 0.005388
+2025-11-11 23:50:05 - GraphTrainer - INFO - mrr@5: 0.005782
+2025-11-11 23:50:05 - GraphTrainer - INFO - precision@10: 0.001836
+2025-11-11 23:50:05 - GraphTrainer - INFO - recall@10: 0.016800
+2025-11-11 23:50:05 - GraphTrainer - INFO - hit_rate@10: 0.018257
+2025-11-11 23:50:05 - GraphTrainer - INFO - ndcg@10: 0.008856
+2025-11-11 23:50:05 - GraphTrainer - INFO - map@10: 0.006261
+2025-11-11 23:50:05 - GraphTrainer - INFO - mrr@10: 0.006726
+2025-11-11 23:50:05 - GraphTrainer - INFO - precision@20: 0.001448
+2025-11-11 23:50:05 - GraphTrainer - INFO - recall@20: 0.026555
+2025-11-11 23:50:05 - GraphTrainer - INFO - hit_rate@20: 0.028593
+2025-11-11 23:50:05 - GraphTrainer - INFO - ndcg@20: 0.011362
+2025-11-11 23:50:05 - GraphTrainer - INFO - map@20: 0.006942
+2025-11-11 23:50:05 - GraphTrainer - INFO - mrr@20: 0.007440
+2025-11-11 23:50:05 - GraphTrainer - INFO - ------------------------------------------------------------
+2025-11-11 23:50:05 - GraphTrainer - INFO - ============================================================
+2025-11-11 23:50:05 - GraphTrainer - INFO - 开始第 68/1000 轮训练
+2025-11-11 23:50:05 - GraphTrainer - INFO - ============================================================
+2025-11-11 23:51:13 - GraphTrainer - INFO - 验证结果:
+2025-11-11 23:51:13 - GraphTrainer - INFO -   precision@5: 0.002263
+2025-11-11 23:51:13 - GraphTrainer - INFO -   recall@5: 0.010369
+2025-11-11 23:51:13 - GraphTrainer - INFO -   hit_rate@5: 0.011263
+2025-11-11 23:51:13 - GraphTrainer - INFO -   ndcg@5: 0.006944
+2025-11-11 23:51:13 - GraphTrainer - INFO -   map@5: 0.005671
+2025-11-11 23:51:13 - GraphTrainer - INFO -   mrr@5: 0.006051
+2025-11-11 23:51:13 - GraphTrainer - INFO -   precision@10: 0.001903
+2025-11-11 23:51:13 - GraphTrainer - INFO -   recall@10: 0.017230
+2025-11-11 23:51:13 - GraphTrainer - INFO -   hit_rate@10: 0.018874
+2025-11-11 23:51:13 - GraphTrainer - INFO -   ndcg@10: 0.009181
+2025-11-11 23:51:13 - GraphTrainer - INFO -   map@10: 0.006560
+2025-11-11 23:51:13 - GraphTrainer - INFO -   mrr@10: 0.007024
+2025-11-11 23:51:13 - GraphTrainer - INFO -   precision@20: 0.001497
+2025-11-11 23:51:13 - GraphTrainer - INFO -   recall@20: 0.027002
+2025-11-11 23:51:13 - GraphTrainer - INFO -   hit_rate@20: 0.029571
+2025-11-11 23:51:13 - GraphTrainer - INFO -   ndcg@20: 0.011693
+2025-11-11 23:51:13 - GraphTrainer - INFO -   map@20: 0.007230
+2025-11-11 23:51:13 - GraphTrainer - INFO -   mrr@20: 0.007754
+2025-11-11 23:51:13 - GraphTrainer - INFO - 第 68 轮训练完成
+2025-11-11 23:51:13 - GraphTrainer - INFO - train_loss: 0.021843
+2025-11-11 23:51:13 - GraphTrainer - INFO - precision@5: 0.002263
+2025-11-11 23:51:13 - GraphTrainer - INFO - recall@5: 0.010369
+2025-11-11 23:51:13 - GraphTrainer - INFO - hit_rate@5: 0.011263
+2025-11-11 23:51:13 - GraphTrainer - INFO - ndcg@5: 0.006944
+2025-11-11 23:51:13 - GraphTrainer - INFO - map@5: 0.005671
+2025-11-11 23:51:13 - GraphTrainer - INFO - mrr@5: 0.006051
+2025-11-11 23:51:13 - GraphTrainer - INFO - precision@10: 0.001903
+2025-11-11 23:51:13 - GraphTrainer - INFO - recall@10: 0.017230
+2025-11-11 23:51:13 - GraphTrainer - INFO - hit_rate@10: 0.018874
+2025-11-11 23:51:13 - GraphTrainer - INFO - ndcg@10: 0.009181
+2025-11-11 23:51:13 - GraphTrainer - INFO - map@10: 0.006560
+2025-11-11 23:51:13 - GraphTrainer - INFO - mrr@10: 0.007024
+2025-11-11 23:51:13 - GraphTrainer - INFO - precision@20: 0.001497
+2025-11-11 23:51:13 - GraphTrainer - INFO - recall@20: 0.027002
+2025-11-11 23:51:13 - GraphTrainer - INFO - hit_rate@20: 0.029571
+2025-11-11 23:51:13 - GraphTrainer - INFO - ndcg@20: 0.011693
+2025-11-11 23:51:13 - GraphTrainer - INFO - map@20: 0.007230
+2025-11-11 23:51:13 - GraphTrainer - INFO - mrr@20: 0.007754
+2025-11-11 23:51:13 - GraphTrainer - INFO - ------------------------------------------------------------
+2025-11-11 23:51:13 - GraphTrainer - INFO - ============================================================
+2025-11-11 23:51:13 - GraphTrainer - INFO - 开始第 69/1000 轮训练
+2025-11-11 23:51:13 - GraphTrainer - INFO - ============================================================
+2025-11-11 23:52:23 - GraphTrainer - INFO - 验证结果:
+2025-11-11 23:52:23 - GraphTrainer - INFO -   precision@5: 0.002355
+2025-11-11 23:52:23 - GraphTrainer - INFO -   recall@5: 0.010837
+2025-11-11 23:52:23 - GraphTrainer - INFO -   hit_rate@5: 0.011725
+2025-11-11 23:52:23 - GraphTrainer - INFO -   ndcg@5: 0.007112
+2025-11-11 23:52:23 - GraphTrainer - INFO -   map@5: 0.005756
+2025-11-11 23:52:23 - GraphTrainer - INFO -   mrr@5: 0.006117
+2025-11-11 23:52:23 - GraphTrainer - INFO -   precision@10: 0.001965
+2025-11-11 23:52:23 - GraphTrainer - INFO -   recall@10: 0.018030
+2025-11-11 23:52:23 - GraphTrainer - INFO -   hit_rate@10: 0.019542
+2025-11-11 23:52:23 - GraphTrainer - INFO -   ndcg@10: 0.009453
+2025-11-11 23:52:23 - GraphTrainer - INFO -   map@10: 0.006691
+2025-11-11 23:52:23 - GraphTrainer - INFO -   mrr@10: 0.007130
+2025-11-11 23:52:23 - GraphTrainer - INFO -   precision@20: 0.001473
+2025-11-11 23:52:23 - GraphTrainer - INFO -   recall@20: 0.027060
+2025-11-11 23:52:23 - GraphTrainer - INFO -   hit_rate@20: 0.029211
+2025-11-11 23:52:23 - GraphTrainer - INFO -   ndcg@20: 0.011754
+2025-11-11 23:52:23 - GraphTrainer - INFO -   map@20: 0.007302
+2025-11-11 23:52:23 - GraphTrainer - INFO -   mrr@20: 0.007784
+2025-11-11 23:52:23 - GraphTrainer - INFO - 第 69 轮训练完成
+2025-11-11 23:52:23 - GraphTrainer - INFO - train_loss: 0.022114
+2025-11-11 23:52:23 - GraphTrainer - INFO - precision@5: 0.002355
+2025-11-11 23:52:23 - GraphTrainer - INFO - recall@5: 0.010837
+2025-11-11 23:52:23 - GraphTrainer - INFO - hit_rate@5: 0.011725
+2025-11-11 23:52:23 - GraphTrainer - INFO - ndcg@5: 0.007112
+2025-11-11 23:52:23 - GraphTrainer - INFO - map@5: 0.005756
+2025-11-11 23:52:23 - GraphTrainer - INFO - mrr@5: 0.006117
+2025-11-11 23:52:23 - GraphTrainer - INFO - precision@10: 0.001965
+2025-11-11 23:52:23 - GraphTrainer - INFO - recall@10: 0.018030
+2025-11-11 23:52:23 - GraphTrainer - INFO - hit_rate@10: 0.019542
+2025-11-11 23:52:23 - GraphTrainer - INFO - ndcg@10: 0.009453
+2025-11-11 23:52:23 - GraphTrainer - INFO - map@10: 0.006691
+2025-11-11 23:52:23 - GraphTrainer - INFO - mrr@10: 0.007130
+2025-11-11 23:52:23 - GraphTrainer - INFO - precision@20: 0.001473
+2025-11-11 23:52:23 - GraphTrainer - INFO - recall@20: 0.027060
+2025-11-11 23:52:23 - GraphTrainer - INFO - hit_rate@20: 0.029211
+2025-11-11 23:52:23 - GraphTrainer - INFO - ndcg@20: 0.011754
+2025-11-11 23:52:23 - GraphTrainer - INFO - map@20: 0.007302
+2025-11-11 23:52:23 - GraphTrainer - INFO - mrr@20: 0.007784
+2025-11-11 23:52:23 - GraphTrainer - INFO - ------------------------------------------------------------
+2025-11-11 23:52:23 - GraphTrainer - INFO - ============================================================
+2025-11-11 23:52:23 - GraphTrainer - INFO - 开始第 70/1000 轮训练
+2025-11-11 23:52:23 - GraphTrainer - INFO - ============================================================

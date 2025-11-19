@@ -649,14 +649,23 @@ class FastMMGCN(nn.Module):
 
         self.user_ks = config.graph.user_ks
         self.item_ks = config.graph.item_ks
-
         self.user_emb = nn.Embedding(self.num_users, self.emb_dim)
         self.item_emb = nn.Embedding(self.num_items, self.emb_dim)
         
         self.graph = Graph(self.num_users, self.num_items, self.device, self.user_features, self.item_features, self.user_ks, self.item_ks, self.emb_dim)
 
-        
-        
+        self._initialize_parameters()
+
+    
+    def _initialize_parameters(self):
+        """Initialize model parameters."""
+        for module in self.modules():
+            if isinstance(module, nn.Linear):
+                nn.init.xavier_uniform_(module.weight)
+                if module.bias is not None:
+                    nn.init.zeros_(module.bias)
+            elif isinstance(module, nn.Embedding):
+                nn.init.normal_(module.weight, std=0.1)
 
 
     def build_graph(self, interactions):
@@ -672,8 +681,8 @@ class FastMMGCN(nn.Module):
     def forward(self, batch, mode="train"):
         result = {}
         if mode == "train":
-            result["item_embeddings"] = self.graph.func_train(k=2)
-            result["user_embeddings"] = self.user_emb
+            result["item_embeddings"] = self.graph.func_train(self.item_emb, k=2)
+            result["user_embeddings"] = self.user_emb.weight
 
         elif mode == "test":
             emb = self.graph.func_test(self.user_emb, self.item_emb)
@@ -681,7 +690,8 @@ class FastMMGCN(nn.Module):
         return result
 
     def loss_func(self, result, batch):
-        user_emb, item_emb = result["item_embeddings"], result["user_embeddings"]
+
+        user_emb, item_emb = result["user_embeddings"], result["item_embeddings"]
         batch_users = batch.get('user_ids', torch.tensor([], dtype=torch.long))
         pos_items = batch.get('item_ids', torch.tensor([], dtype=torch.long))
         neg_items = batch.get('neg_items', torch.tensor([], dtype=torch.long)).reshape(-1)
@@ -690,7 +700,12 @@ class FastMMGCN(nn.Module):
         negs = item_emb[neg_items]
         pos_score = torch.sum(users * items, dim=1)
         neg_score = torch.sum(users * negs, dim=1)
+        assert not torch.isnan(pos_score).any(), "pos_score contains NaN"
+        assert not torch.isinf(pos_score).any(), "pos_score contains Inf"
+        assert not torch.isnan(neg_score).any(), "neg_score contains NaN"
+        assert not torch.isinf(neg_score).any(), "neg_score contains Inf"
         loss = -torch.mean(torch.log(torch.sigmoid(pos_score - neg_score)))
+
         return loss
 
     def get_model_info(self) -> Dict[str, Any]:

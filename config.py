@@ -55,7 +55,7 @@ class ModelConfig:
 class TrainingConfig:
     """Training configuration."""
     epochs: int = 1000
-    learning_rate: float = 0.0001
+    learning_rate: float = 0.001
     weight_decay: float = 0
     optimizer: str = "adam"
     scheduler: str = "plateau"
