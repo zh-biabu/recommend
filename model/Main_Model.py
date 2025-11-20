@@ -649,10 +649,21 @@ class FastMMGCN(nn.Module):
 
         self.user_ks = config.graph.user_ks
         self.item_ks = config.graph.item_ks
+        self.ks = config.graph.ks
         self.user_emb = nn.Embedding(self.num_users, self.emb_dim)
         self.item_emb = nn.Embedding(self.num_items, self.emb_dim)
         
-        self.graph = Graph(self.num_users, self.num_items, self.device, self.user_features, self.item_features, self.user_ks, self.item_ks, self.emb_dim)
+        self.graph = Graph(
+            self.num_users, 
+            self.num_items, 
+            self.device, 
+            self.user_features, 
+            self.item_features, 
+            self.user_ks, 
+            self.item_ks, 
+            self.emb_dim,
+            self.ks
+            )
 
         self._initialize_parameters()
 
@@ -669,7 +680,7 @@ class FastMMGCN(nn.Module):
 
 
     def build_graph(self, interactions):
-        self.g, self.user_g, self.item_g = self.graph.build_graph(interactions)
+        self.g = self.graph.build_graph(interactions)
         return self.g
         
     
@@ -678,15 +689,12 @@ class FastMMGCN(nn.Module):
         return
 
 
-    def forward(self, batch, mode="train"):
+    def forward(self, batch):
         result = {}
-        if mode == "train":
-            result["item_embeddings"] = self.graph.func_train(self.item_emb, k=2)
-            result["user_embeddings"] = self.user_emb.weight
+        emb = self.graph(self.user_emb, self.item_emb)
+        result["user_embeddings"] = emb[: self.num_users]
+        result["item_embeddings"] = emb[self.num_users: ]
 
-        elif mode == "test":
-            emb = self.graph.func_test(self.user_emb, self.item_emb)
-            result["item_embeddings"], result["user_embeddings"] = emb[: self.num_users], emb[self.num_users: ]
         return result
 
     def loss_func(self, result, batch):

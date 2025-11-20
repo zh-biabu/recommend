@@ -107,6 +107,7 @@ class GraphConfig:
     max_neighbors: int = 50
     user_ks: Tuple[int] = ()
     item_ks: Tuple[int] = (3, 3)
+    ks:Tuple[int] = (4,2)
 
 
 class Config:
