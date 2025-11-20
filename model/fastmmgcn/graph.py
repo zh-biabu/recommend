@@ -137,9 +137,9 @@ class Graph(nn.Module):
         hs = []
         for i,feat in enumerate(self.feats):
             h = self.gcn_ii(feat, i)
-
+            hs.append(h)
         h = torch.cat(hs, dim=1)
-        emb = torch.cat(torch.zeros_like(user_emb, device=self.device), self.activate(self.trans(h))) + self.gcn(node_emb)
+        emb = torch.cat([torch.zeros_like(user_emb, device=self.device), self.activate(self.trans(h))], dim=0) + self.gcn(node_emb)
         
         return emb
 

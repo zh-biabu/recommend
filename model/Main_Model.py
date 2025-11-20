@@ -685,7 +685,7 @@ class FastMMGCN(nn.Module):
         
     
     def creat_feature_weight(self):
-        self.graph.creat_feature_weight()
+        # self.graph.creat_feature_weight()
         return
 
 
