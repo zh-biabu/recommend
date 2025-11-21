@@ -13,6 +13,7 @@ import random
 import numpy as np
 from pathlib import Path
 import time
+import json
 
 # Add current directory to path for imports
 _CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -241,6 +242,81 @@ def save_results(config, training_results, test_metrics, model_info):
     print(f"Results saved to {results_path}")
 
 
+def run_single_experiment(config, dataset_name: str):
+    """
+    执行一次完整的训练 + 验证 + 测试流程，返回结果字典。
+    方便在超参数搜索时多次调用。
+    """
+    # Set seed
+    set_seed(config.system.seed)
+
+    # Setup device
+    device = setup_device(config)
+
+    print("=" * 60)
+    print("Graph-based Recommendation System")
+    print("=" * 60)
+    print(f"Dataset: {dataset_name}")
+    print(f"Device: {device}")
+    print(f"Model: {config.model.model_name}")
+    print(f"Embedding dim: {config.model.emb_dim}")
+    print(f"Epochs: {config.training.epochs}")
+    print("=" * 60)
+
+    # Prepare data
+    train_loader, val_loader, test_loader, user_features, item_features = prepare_data(config)
+    # Build graph and model
+    model, graph = build_graph_and_model(config, train_loader, user_features, item_features)
+    model = model.to(device)
+
+    print(model)
+
+    # Get model info
+    model_info = model.get_model_info()
+    print(f"Model parameters: {model_info['total_parameters']:,}")
+
+    # init trainer,verifier,tester
+    print(f"init trainer,verifier,tester")
+
+    val_target, val_mask = mask_index(config, val_loader, [train_loader])
+    test_target, test_mask = mask_index(config, test_loader,[train_loader])
+
+    trainer = GraphTrainer(model, train_loader, config, loss_func=model.loss_func)
+    verifier = Verifier(config, val_loader,val_target, val_mask)
+    tester = Tester(config, test_loader,test_target, test_mask)
+
+    # Train model
+    training_results = trainer.train(verifier)
+
+    # Evaluate model
+    test_metrics = tester.test(model)
+
+    # Print results
+    print("\n" + "=" * 60)
+    print("FINAL RESULTS")
+    print("=" * 60)
+    print("Training Results:")
+    print(f"  Best epoch: {training_results['best_epoch']}")
+    print(f"  Best validation metric: {training_results['best_val_metric']:.4f}")
+    print(f"  Training time: {training_results['training_time']/3600:.2f} hours")
+
+    print("\nTest Metrics:")
+    for metric, value in test_metrics.items():
+        print(f"  {metric}: {value:.4f}")
+
+    # Save results
+    save_results(config, training_results, test_metrics, model_info)
+
+    print("\nTraining completed successfully!")
+
+    return {
+        "config": config.to_dict(),
+        "training_results": training_results,
+        "test_metrics": test_metrics,
+        "model_info": model_info,
+    }
+
+
 def main():
     """Main function."""
     parser = argparse.ArgumentParser(description="Graph-based Recommendation System")
@@ -252,89 +328,166 @@ def main():
                        help="Device to use (cpu, cuda, auto)")
     parser.add_argument("--seed", type=int, default=None,
                        help="Random seed")
+    parser.add_argument("--hparam_search", action="store_true", default=False,
+                       help="Whether to run hyper-parameter search (Bayesian Optimization with Optuna)")
+    parser.add_argument("--max_trials", type=int, default=10,
+                       help="Number of trials for hyper-parameter search")
     
     args = parser.parse_args()
-    
+
+    # 超参数搜索模式（使用 Optuna 做 Bayesian Optimization）
+    if args.hparam_search:
+        try:
+            import optuna
+        except ImportError:
+            print("需要安装 Optuna 才能使用 Bayesian Optimization 超参数搜索：pip install optuna")
+            return 1
+
+        all_trials = []
+        trial_results = {}
+
+        def objective(trial):
+            # 为每个 trial 重新加载一份 config，避免相互污染
+            config = get_config(args.dataset, args.config)
+
+            # Override device if specified
+            if args.device != "auto":
+                config.system.device = args.device
+
+            if args.seed is not None:
+                # 使用基础 seed + trial 编号，保证可复现又有差异
+                config.system.seed = args.seed + trial.number
+
+            # 使用 Optuna 定义搜索空间（Bayesian Optimization 会基于历史 trial 自适应采样）
+            lr = trial.suggest_float("training.learning_rate", 1e-4, 1e-2, log=True)
+            weight_decay = trial.suggest_float("training.weight_decay", 1e-6, 1e-2, log=True)
+            layer_num = trial.suggest_int("model.layer_num", 1, 3)
+
+            graph_v_k = trial.suggest_int("graph.v_k", 3, 10)
+            graph_t_k = trial.suggest_int("graph.t_k", 3, 10)
+            gcn_v_k = trial.suggest_int("model.gcn_v_k", 1, 10)
+            gcn_t_k = trial.suggest_int("model.gcn_t_k", 1, 10)
+            k = trial.suggest_int("model.k", 1, 10)
+
+            alpha = trial.suggest_float("model.alpha", 0.1, 0.5, log=True)
+            beta = trial.suggest_float("model.beta", 0.1, 0.5, log=True)
+            hidden_unit = trial.suggest_categorical("model.hidden_unit", [128, 256, 512])
+
+            config.training.learning_rate = lr
+            config.training.weight_decay = weight_decay
+            config.model.layer_num = layer_num
+            config.graph.v_k = graph_v_k
+            config.graph.t_k = graph_t_k
+            config.model.gcn_v_k = gcn_v_k
+            config.model.gcn_t_k = gcn_t_k
+            config.model.k = k
+            config.model.alpha = alpha
+            config.model.beta = beta
+            config.model.hidden_unit = hidden_unit
+
+            print("\n" + "#" * 60)
+            print(f"Optuna Trial {trial.number}")
+            print("#" * 60)
+            print("Trial config (partial):")
+            print(f"  lr={config.training.learning_rate}, "
+                  f"wd={config.training.weight_decay}, "
+                  f"layer_num={config.model.layer_num}, "
+                  f"graph_v_k={config.graph.v_k}, "
+                  f"graph_t_k={config.graph.t_k}, "
+                  f"gcn_v_k={config.model.gcn_v_k}, "
+                  f"gcn_t_k={config.model.gcn_t_k}, "
+                  f"k={config.model.k}, "
+                  f"alpha={config.model.alpha}, "
+                  f"beta={config.model.beta}, "
+                  f"hidden_unit={config.model.hidden_unit}")
+
+            result = run_single_experiment(config, args.dataset)
+            val_metric = float(result["training_results"]["best_val_metric"])
+
+            summary = {
+                "trial_id": trial.number,
+                "val_metric": val_metric,
+                "params": {
+                    "learning_rate": lr,
+                    "weight_decay": weight_decay,
+                    "layer_num": layer_num,
+                    "graph_v_k": graph_v_k,
+                    "graph_t_k": graph_t_k,
+                    "gcn_v_k": gcn_v_k,
+                    "gcn_t_k": gcn_t_k,
+                    "mmgcn_k": k,
+                    "alpha": alpha,
+                    "beta": beta,
+                    "hidden_unit": hidden_unit,
+                },
+                "config": result["config"],
+                "test_metrics": result["test_metrics"],
+            }
+            all_trials.append(summary)
+            trial_results[trial.number] = summary
+
+            return val_metric
+
+        study = optuna.create_study(direction="maximize")
+        study.optimize(objective, n_trials=args.max_trials)
+
+        if len(study.trials) == 0:
+            print("Hyper-parameter search failed: no successful trials.")
+            return 1
+
+        best_trial = study.best_trial
+        best_summary = trial_results.get(best_trial.number, None)
+
+        timestamp = time.strftime("%Y%m%d_%H%M", time.localtime())
+        filename = f"hparam_search_optuna_{timestamp}.json"
+        results_path = os.path.join("./results", filename)
+        os.makedirs(os.path.dirname(results_path), exist_ok=True)
+
+        with open(results_path, "w", encoding="utf-8") as f:
+            json.dump(
+                {
+                    "dataset": args.dataset,
+                    "max_trials": args.max_trials,
+                    "best_value": float(study.best_value),
+                    "best_trial_number": best_trial.number,
+                    "best_params": best_trial.params,
+                    "best_summary": best_summary,
+                    "all_trials": all_trials,
+                },
+                f,
+                ensure_ascii=False,
+                indent=2,
+            )
+
+        print("\n" + "=" * 60)
+        print("Hyper-parameter search (Bayesian Optimization) finished")
+        print(f"Best val metric: {study.best_value:.4f}")
+        print("Best trial params：")
+        for k, v in best_trial.params.items():
+            print(f"  {k}: {v}")
+        print(f"Results saved to {results_path}")
+
+        return 0
+
+    # 普通单次训练模式
     # Load configuration
     config = get_config(args.dataset, args.config)
-    
+    config.save_to_yaml("./sgrec.yaml")
     # Override device if specified
     if args.device != "auto":
         config.system.device = args.device
-    
-    if args.seed != None:
+
+    if args.seed is not None:
         config.system.seed = args.seed
-    
-    # Set seed
-    set_seed(config.system.seed)
 
-    # Setup device
-    device = setup_device(config)
-    
-    print("=" * 60)
-    print("Graph-based Recommendation System")
-    print("=" * 60)
-    print(f"Dataset: {args.dataset}")
-    print(f"Device: {device}")
-    print(f"Model: {config.model.model_name}")
-    print(f"Embedding dim: {config.model.emb_dim}")
-    print(f"Epochs: {config.training.epochs}")
-    print("=" * 60)
-    
     try:
-        # Prepare data
-        train_loader, val_loader, test_loader, user_features, item_features = prepare_data(config)
-        # Build graph and model
-        model, graph = build_graph_and_model(config, train_loader, user_features, item_features)
-        model = model.to(device)
-
-        print(model)
-        # print(model.__dict__)
-        
-        # Get model info
-        model_info = model.get_model_info()
-        print(f"Model parameters: {model_info['total_parameters']:,}")
-
-        # init trainer,verifier,tester
-        print(f"init trainer,verifier,tester")
-
-        val_target, val_mask = mask_index(config, val_loader, [train_loader])
-        test_target, test_mask = mask_index(config, test_loader,[train_loader])
-
-        trainer = GraphTrainer(model, train_loader, config, loss_func=model.loss_func)
-        verifier = Verifier(config, val_loader,val_target, val_mask)
-        tester = Tester(config, test_loader,test_target, test_mask)
-
-        # Train model
-        training_results = trainer.train(verifier)
-        
-        # Evaluate model
-        test_metrics = tester.test(model)
-        
-        # Print results
-        print("\n" + "=" * 60)
-        print("FINAL RESULTS")
-        print("=" * 60)
-        print("Training Results:")
-        print(f"  Best epoch: {training_results['best_epoch']}")
-        print(f"  Best validation metric: {training_results['best_val_metric']:.4f}")
-        print(f"  Training time: {training_results['training_time']/3600:.2f} hours")
-        
-        print("\nTest Metrics:")
-        for metric, value in test_metrics.items():
-            print(f"  {metric}: {value:.4f}")
-        
-        # Save results
-        save_results(config, training_results, test_metrics, model_info)
-        
-        print("\nTraining completed successfully!")
-        
+        _ = run_single_experiment(config, args.dataset)
     except Exception as e:
         print(f"Error during training: {str(e)}")
         import traceback
         traceback.print_exc()
         return 1
-    
+
     return 0
 
 

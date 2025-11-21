@@ -1,0 +1,81 @@
+data:
+  batch_size: 2048
+  data_path: ../autodl-tmp/data/ori_data/baby
+  filter_out_new_users: true
+  graph_from_train_only: true
+  item_col: itemID
+  neg_ratio: 1
+  negative_sampling: true
+  num_items: 7050
+  num_users: 19445
+  num_workers: 4
+  rating_col: rating
+  sep: "\t"
+  splitting_label: x_label
+  test_ratio: 0.1
+  timestamp_col: null
+  train_ratio: 0.8
+  use_time_split: true
+  user_col: userID
+  val_ratio: 0.1
+evaluation:
+  k_values:
+  - 5
+  - 10
+  - 20
+  main_metric: recall
+  metrics:
+  - precision
+  - recall
+  - hit_rate
+  - ndcg
+  - map
+  - mrr
+  num_negatives: 1
+  test_batch_size: 512
+graph:
+  add_self_loops: true
+  edge_weight_type: cosine
+  graph_type: bipartite
+  max_neighbors: 50
+  normalize_adj: true
+  t_k: 3
+  v_k: 3
+model:
+  alpha: 0.9
+  beta: 0.1
+  concat: false
+  edge_drop_rate: 0.2
+  emb_dim: 64
+  feat_drop_rate: 0.1
+  gcn_t_k: 4
+  gcn_v_k: 4
+  hidden_dim: 512
+  hidden_unit: 256
+  k: 2
+  modal_num: 2
+  model_name: SGrec
+  x_drop_rate: 0.3
+  z_drop_rate: 0.3
+system:
+  device: cuda
+  log_dir: ./logs
+  log_level: INFO
+  mixed_precision: false
+  num_gpus: 1
+  results_dir: ./results
+  save_dir: ./checkpoints
+  seed: 42
+training:
+  early_stopping_patience: 20
+  epochs: 1000
+  eval_every: 1
+  gradient_clip_norm: 1.0
+  learning_rate: 0.001
+  optimizer: adam
+  save_every: 10
+  scheduler: plateau
+  scheduler_factor: 0.5
+  scheduler_patience: 10
+  warmup_epochs: 5
+  weight_decay: 0

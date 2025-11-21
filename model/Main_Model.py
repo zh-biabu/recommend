@@ -23,7 +23,9 @@ import numpy as np
 
 # from .mmgcn_rec.net import Net_rec
 
-from .fastmmgcn.graph import Graph
+# from .fastmmgcn.graph import Graph
+
+from .sgrec.graph import Graph
 
 
 class TESTModel(nn.Module):
@@ -736,6 +738,129 @@ class FastMMGCN(nn.Module):
 
 
 
+class SGrec(nn.Module):
+    def __init__(
+        self,        
+        config,
+        user_features: Optional[Dict[str, torch.Tensor]] = None,
+        item_features: Optional[Dict[str, torch.Tensor]] = None
+    ):
+        super().__init__()
+        
+        self.config = config
+        self.user_features = user_features or {}
+        self.item_features = item_features or {}
+        self.num_users = config.data.num_users
+        self.num_items = config.data.num_items
+        self.emb_dim = config.model.emb_dim
+        self.device = config.system.device
+        self.v_feat = self.item_features["image_feat"]
+        self.t_feat = self.item_features["text_feat"]
+        self.v_k = config.graph.v_k
+        self.t_k = config.graph.t_k
+        self.gcn_v_k = config.model.gcn_v_k
+        self.gcn_t_k = config.model.gcn_t_k
+        self.k = config.model.k
+        self.edge_drop_rate = config.model.edge_drop_rate
+        self.feat_drop_rate = config.model.feat_drop_rate
+        self.x_drop_rate = config.model.x_drop_rate
+        self.z_drop_rate = config.model.z_drop_rate
+        self.alpha = config.model.alpha
+        self.beta = config.model.beta
+        self.hidden_unit = config.model.hidden_dim
+        self.user_emb = nn.Embedding(self.num_users, self.emb_dim)
+        self.item_emb = nn.Embedding(self.num_items, self.emb_dim)
+        
+        self.graph = Graph(
+            self.num_users,
+            self.num_items,
+            self.device,
+            self.v_feat,
+            self.t_feat,
+            self.v_k,
+            self.t_k,
+            self.emb_dim,
+            self.gcn_v_k,
+            self.gcn_t_k,
+            self.k,
+            self.edge_drop_rate,
+            self.feat_drop_rate,
+            self.x_drop_rate,
+            self.z_drop_rate,
+            self.alpha,
+            self.beta,
+            self.hidden_unit,
+            )
+
+        self._initialize_parameters()
+
+    
+    def _initialize_parameters(self):
+        """Initialize model parameters."""
+        for module in self.modules():
+            if isinstance(module, nn.Linear):
+                nn.init.xavier_uniform_(module.weight)
+                if module.bias is not None:
+                    nn.init.zeros_(module.bias)
+            elif isinstance(module, nn.Embedding):
+                nn.init.normal_(module.weight, std=0.1)
+
+
+    def build_graph(self, interactions):
+        self.g = self.graph.build_graph(interactions)
+        return self.g
+        
+    
+    def creat_feature_weight(self):
+        self.graph.creat_graph_weight()
+        return
+
+
+    def forward(self, batch):
+        result = {}
+        emb = self.graph(self.user_emb.weight, self.item_emb.weight)
+        result["user_embeddings"] = emb[: self.num_users]
+        result["item_embeddings"] = emb[self.num_users: ]
+
+        return result
+
+    def loss_func(self, result, batch):
+        
+        user_emb, item_emb = result["user_embeddings"], result["item_embeddings"]
+        batch_users = batch.get('user_ids', torch.tensor([], dtype=torch.long))
+        pos_items = batch.get('item_ids', torch.tensor([], dtype=torch.long))
+        neg_items = batch.get('neg_items', torch.tensor([], dtype=torch.long)).reshape(-1)
+        users = user_emb[batch_users]
+        items = item_emb[pos_items]
+        negs = item_emb[neg_items]
+        pos_score = torch.sum(users * items, dim=1)
+        neg_score = torch.sum(users * negs, dim=1)
+        assert not torch.isnan(pos_score).any(), "pos_score contains NaN"
+        assert not torch.isinf(pos_score).any(), "pos_score contains Inf"
+        assert not torch.isnan(neg_score).any(), "neg_score contains NaN"
+        assert not torch.isinf(neg_score).any(), "neg_score contains Inf"
+        loss = -torch.mean(torch.log(torch.sigmoid(pos_score - neg_score)))
+
+        return loss
+
+    def get_model_info(self) -> Dict[str, Any]:
+        """Get model information."""
+        total_params = sum(p.numel() for p in self.parameters())
+        trainable_params = sum(p.numel() for p in self.parameters() if p.requires_grad)
+        
+        return {
+            'model_name': 'MMFCN',
+            'total_parameters': total_params,
+            'trainable_parameters': trainable_params,
+            'num_users': self.num_users,
+            'num_items': self.num_items,
+            # 'num_nodes': self.num_nodes,
+            'embedding_dim': self.config.model.emb_dim,
+            'num_modalities': self.config.model.modal_num,
+            'user_features': list(self.user_features.keys()),
+            'item_features': list(self.item_features.keys())
+        }
+
 
 
 
@@ -788,6 +913,12 @@ class ModelFactory:
             )
         if config.model.model_name.lower() == "fastmmgcn":
             return FastMMGCN(
+                config=config,
+                user_features=user_features,
+                item_features=item_features
+            )
+        if config.model.model_name.lower() == "sgrec":
+            return SGrec(
                 config=config,
                 user_features=user_features,
                 item_features=item_features

@@ -6,7 +6,7 @@ Supports YAML, JSON, and Python dictionary configurations.
 import os
 import yaml
 import json
-from typing import Dict, Any, Optional, Tuple
+from typing import Dict, Any, Optional, Tuple, List
 from dataclasses import dataclass, asdict
 
 
@@ -39,16 +39,26 @@ class DataConfig:
 @dataclass
 class ModelConfig:
     """Model architecture configuration."""
-    model_name: str = "FastMMGCN"
+    model_name: str = "SGrec"
     modal_num: int = 2
     emb_dim: int = 64
-    layer_num: int = 2
-    dropout: float = 0.3
-    activation: str = "prelu"
-    use_batch_norm: bool = True
+    # layer_num: int = 2
+    # dropout: float = 0.3
+    # activation: str = "prelu"
+    # use_batch_norm: bool = True
     hidden_dim: int = 512
     concat: bool = False
-    k: int = 3
+    emb_dim: int = 256
+    gcn_v_k: int = 4
+    gcn_t_k: int = 4
+    k: int = 2
+    edge_drop_rate: float = 0.2
+    feat_drop_rate: float = 0.1
+    x_drop_rate: float = 0.3
+    z_drop_rate: float = 0.3
+    alpha: float = 0.9
+    beta: float = 0.1
+    hidden_unit: int = 256
 
 
 @dataclass
@@ -105,9 +115,8 @@ class GraphConfig:
     normalize_adj: bool = True
     edge_weight_type: str = "cosine"  # cosine, dot, uniform
     max_neighbors: int = 50
-    user_ks: Tuple[int] = ()
-    item_ks: Tuple[int] = (3, 3)
-    ks:Tuple[int] = (4,2)
+    v_k: int = 3
+    t_k: int = 3
 
 
 class Config:

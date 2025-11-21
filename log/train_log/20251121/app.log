@@ -1,0 +1,13 @@
+2025-11-21 14:50:50 - torch._inductor.config - INFO - compile_threads set to 1 for win32
+2025-11-21 14:50:55 - GraphTrainer - INFO - Starting training...
+2025-11-21 14:50:55 - GraphTrainer - INFO - 模型: FastMMGCN
+2025-11-21 14:50:55 - GraphTrainer - INFO - 总参数量: 1,712,384
+2025-11-21 14:50:55 - GraphTrainer - INFO - 可训练参数量: 1,712,384
+2025-11-21 14:50:55 - GraphTrainer - INFO - ============================================================
+2025-11-21 14:50:55 - GraphTrainer - INFO - 开始第 1/1000 轮训练
+2025-11-21 14:50:55 - GraphTrainer - INFO - ============================================================
+2025-11-21 14:51:39 - torch._dynamo.eval_frame - INFO - TorchDynamo attempted to trace the following frames: [
+
+]
+2025-11-21 14:51:39 - torch._dynamo.utils - INFO - TorchDynamo compilation metrics:
+Function, Runtimes (s)
