@@ -139,10 +139,10 @@ class GraphRecDataset(Dataset):
                     features = np.load(file_path, allow_pickle=True)
                     
                     if 'user' in file.lower():
-                        feature_name = file.replace('.npy', '').replace('user_', '').replace('_user', '')
+                        feature_name = file.replace('.npy', '').replace('user_', '').replace('_user', '').replace('user', '')
                         self.user_features[feature_name] = torch.tensor(features, dtype=torch.float32)
                     elif 'item' in file.lower():
-                        feature_name = file.replace('.npy', '').replace('item_', '').replace('_item', '')
+                        feature_name = file.replace('.npy', '').replace('item_', '').replace('_item', '').replace('item', '')
                         self.item_features[feature_name] = torch.tensor(features, dtype=torch.float32)
                 except Exception as e:
                     warnings.warn(f"Failed to load feature file {file}: {e}")

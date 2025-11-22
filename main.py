@@ -328,7 +328,7 @@ def main():
                        help="Device to use (cpu, cuda, auto)")
     parser.add_argument("--seed", type=int, default=None,
                        help="Random seed")
-    parser.add_argument("--hparam_search", action="store_true", default=False,
+    parser.add_argument("--hparam_search", action="store_true", default=True,
                        help="Whether to run hyper-parameter search (Bayesian Optimization with Optuna)")
     parser.add_argument("--max_trials", type=int, default=10,
                        help="Number of trials for hyper-parameter search")
@@ -359,8 +359,8 @@ def main():
                 config.system.seed = args.seed + trial.number
 
             # 使用 Optuna 定义搜索空间（Bayesian Optimization 会基于历史 trial 自适应采样）
-            lr = trial.suggest_float("training.learning_rate", 1e-4, 1e-2, log=True)
-            weight_decay = trial.suggest_float("training.weight_decay", 1e-6, 1e-2, log=True)
+            # lr = trial.suggest_float("training.learning_rate", 1e-4, 1e-2, log=True)
+            # weight_decay = trial.suggest_categorical("training.weight_decay", [1e-6, 1e-5, 1e-4, 1e-3, 1e-2])
             layer_num = trial.suggest_int("model.layer_num", 1, 3)
 
             graph_v_k = trial.suggest_int("graph.v_k", 3, 10)
@@ -370,11 +370,11 @@ def main():
             k = trial.suggest_int("model.k", 1, 10)
 
             alpha = trial.suggest_float("model.alpha", 0.1, 0.5, log=True)
-            beta = trial.suggest_float("model.beta", 0.1, 0.5, log=True)
+            # beta = trial.suggest_float("model.beta", 0.1, 0.5, log=True)
             hidden_unit = trial.suggest_categorical("model.hidden_unit", [128, 256, 512])
 
-            config.training.learning_rate = lr
-            config.training.weight_decay = weight_decay
+            # config.training.learning_rate = lr
+            # config.training.weight_decay = weight_decay
             config.model.layer_num = layer_num
             config.graph.v_k = graph_v_k
             config.graph.t_k = graph_t_k
@@ -382,7 +382,7 @@ def main():
             config.model.gcn_t_k = gcn_t_k
             config.model.k = k
             config.model.alpha = alpha
-            config.model.beta = beta
+            config.model.beta = 1-alpha
             config.model.hidden_unit = hidden_unit
 
             print("\n" + "#" * 60)
@@ -408,8 +408,8 @@ def main():
                 "trial_id": trial.number,
                 "val_metric": val_metric,
                 "params": {
-                    "learning_rate": lr,
-                    "weight_decay": weight_decay,
+                    # "learning_rate": lr,
+                    # "weight_decay": weight_decay,
                     "layer_num": layer_num,
                     "graph_v_k": graph_v_k,
                     "graph_t_k": graph_t_k,
@@ -417,7 +417,7 @@ def main():
                     "gcn_t_k": gcn_t_k,
                     "mmgcn_k": k,
                     "alpha": alpha,
-                    "beta": beta,
+                    "beta": 1-alpha,
                     "hidden_unit": hidden_unit,
                 },
                 "config": result["config"],
@@ -472,7 +472,7 @@ def main():
     # 普通单次训练模式
     # Load configuration
     config = get_config(args.dataset, args.config)
-    config.save_to_yaml("./sgrec.yaml")
+    # config.save_to_yaml("./sgrec.yaml")
     # Override device if specified
     if args.device != "auto":
         config.system.device = args.device

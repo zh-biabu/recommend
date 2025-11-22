@@ -62,7 +62,7 @@ class Graph(nn.Module):
             )
 
         self.t_ffn = nn.Sequential(
-            nn.Linear(v_feat.size(1), hidden_unit),
+            nn.Linear(t_feat.size(1), hidden_unit),
             nn.ReLU(),
             nn.Linear(hidden_unit, self.emb_dim),
             )

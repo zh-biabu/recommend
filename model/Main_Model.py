@@ -754,8 +754,8 @@ class SGrec(nn.Module):
         self.num_items = config.data.num_items
         self.emb_dim = config.model.emb_dim
         self.device = config.system.device
-        self.v_feat = self.item_features["image_feat"]
-        self.t_feat = self.item_features["text_feat"]
+        self.v_feat = self.item_features["image_feat"].to(self.device)
+        self.t_feat = self.item_features["text_feat"].to(self.device)
         self.v_k = config.graph.v_k
         self.t_k = config.graph.t_k
         self.gcn_v_k = config.model.gcn_v_k
@@ -770,7 +770,9 @@ class SGrec(nn.Module):
         self.hidden_unit = config.model.hidden_dim
         self.user_emb = nn.Embedding(self.num_users, self.emb_dim)
         self.item_emb = nn.Embedding(self.num_items, self.emb_dim)
-        
+
+        self.reg_weight = config.training.weight_decay
+
         self.graph = Graph(
             self.num_users,
             self.num_items,
@@ -821,11 +823,15 @@ class SGrec(nn.Module):
         emb = self.graph(self.user_emb.weight, self.item_emb.weight)
         result["user_embeddings"] = emb[: self.num_users]
         result["item_embeddings"] = emb[self.num_users: ]
+        result["ori_u_emb"] = self.user_emb.weight
+        result["ori_i_emb"] = self.item_emb.weight
 
         return result
 
     def loss_func(self, result, batch):
         
+        ori_u = result["ori_u_emb"]
+        ori_i = result["ori_i_emb"]
         user_emb, item_emb = result["user_embeddings"], result["item_embeddings"]
         batch_users = batch.get('user_ids', torch.tensor([], dtype=torch.long))
         pos_items = batch.get('item_ids', torch.tensor([], dtype=torch.long))
@@ -840,8 +846,9 @@ class SGrec(nn.Module):
         assert not torch.isnan(neg_score).any(), "neg_score contains NaN"
         assert not torch.isinf(neg_score).any(), "neg_score contains Inf"
         loss = -torch.mean(torch.log(torch.sigmoid(pos_score - neg_score)))
+        reg_loss = torch.mean(ori_u**2) + torch.mean(ori_i**2)
 
-        return loss
+        return loss + self.reg_weight * reg_loss
 
     def get_model_info(self) -> Dict[str, Any]:
         """Get model information."""
