@@ -58,13 +58,16 @@ class Graph(nn.Module):
 
         self.v_ffn = nn.Sequential(
             nn.Linear(v_feat.size(1), hidden_unit),
+            nn.ReLU(),
             nn.Linear(hidden_unit, self.emb_dim),
+            nn.BatchNorm1d(self.emb_dim)
             )
 
         self.t_ffn = nn.Sequential(
             nn.Linear(t_feat.size(1), hidden_unit),
             nn.ReLU(),
             nn.Linear(hidden_unit, self.emb_dim),
+            nn.BatchNorm1d(self.emb_dim)
             )
 
         self.v_gcn = II_GCN(
