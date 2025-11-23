@@ -6,6 +6,7 @@ import dgl.function as fn
 from typing import Dict, List, Tuple, Optional, Any
 from collections import defaultdict
 from .gcn import II_GCN,IU_GCN
+from .cross import Cross
 
 class Graph(nn.Module):
     """Constructs and manages recommendation graphs with multi-modal features."""
@@ -94,6 +95,9 @@ class Graph(nn.Module):
             x_drop_rate, 
             z_drop_rate,
             self.weight_cache,
+        )
+        self.cross = Cross(
+            
         )
         self.activate = nn.ReLU()
     
