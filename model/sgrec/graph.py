@@ -6,7 +6,7 @@ import dgl.function as fn
 from typing import Dict, List, Tuple, Optional, Any
 from collections import defaultdict
 from .gcn import II_GCN,IU_GCN
-from .cross import Cross
+from .s_transformer import SpatialTransformer
 
 class Graph(nn.Module):
     """Constructs and manages recommendation graphs with multi-modal features."""
@@ -96,9 +96,13 @@ class Graph(nn.Module):
             z_drop_rate,
             self.weight_cache,
         )
-        self.cross = Cross(
-            
+        self.v_transformer = SpatialTransformer(
+            3, self.emb_dim, 2, hidden_unit
         )
+        self.t_transformer = SpatialTransformer(
+            3, self.emb_dim, 2, hidden_unit
+        )
+        self.outl = nn.Linear(3 * self.emb_dim, self.emb_dim)
         self.activate = nn.ReLU()
     
     def build_graph(
@@ -162,12 +166,16 @@ class Graph(nn.Module):
         v_h = self.v_gcn(encode_v, self.v_g)
         t_h = self.t_gcn(encode_t, self.t_g)
 
-        node_emb = torch.cat([user_emb, item_emb], dim=0)
+        v_emb = self.v_transformer(v_h, v_h, item_emb)
+        t_emb = self.t_transformer(t_h, t_h, item_emb)
+
+        combine_i_h = torch.cat([v_emb, t_emb, item_emb], dim=1)
+        i_h = self.activate(self.outl(combine_i_h))
+
+        node_emb = torch.cat([user_emb, i_h], dim=0)
         node_h = self.iu_gcn(node_emb, self.g)
-
-        combine_i_h = v_h + t_h
-
-        node_h[self.num_users:] += combine_i_h
+        
+        # node_h[self.num_users:] += combine_i_h
 
         return node_h
 
