@@ -102,7 +102,15 @@ class Graph(nn.Module):
         self.t_transformer = SpatialTransformer(
             3, self.emb_dim, 2, hidden_unit
         )
-        self.outl = nn.Linear(3 * self.emb_dim, self.emb_dim)
+        self.outl = nn.Linear(4 * self.emb_dim, self.emb_dim)
+        # self.outl =nn.Sequential(
+        #     nn.Linear(4 * self.emb_dim, 2 * self.emb_dim),
+        #     nn.ReLU(),
+        #     nn.Linear(2 * self.emb_dim, self.emb_dim),
+        #     nn.ReLU(),
+        #     nn.Linear(self.emb_dim, self.emb_dim),
+
+        #     )
         self.activate = nn.ReLU()
     
     def build_graph(
@@ -169,8 +177,9 @@ class Graph(nn.Module):
         v_emb = self.v_transformer(v_h, v_h, item_emb)
         t_emb = self.t_transformer(t_h, t_h, item_emb)
 
-        combine_i_h = torch.cat([v_emb, t_emb, item_emb], dim=1)
-        i_h = self.activate(self.outl(combine_i_h))
+        combine_i_h = torch.cat([v_emb, t_emb, v_h, t_h], dim=1)
+        i_h = self.activate(self.outl(combine_i_h)) 
+        # + item_emb
 
         node_emb = torch.cat([user_emb, i_h], dim=0)
         node_h = self.iu_gcn(node_emb, self.g)
