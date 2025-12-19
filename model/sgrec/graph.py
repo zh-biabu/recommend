@@ -18,19 +18,15 @@ class Graph(nn.Module):
         device: str = "cpu",
         v_feat: Optional[torch.Tensor] = None, 
         t_feat: Optional[torch.Tensor] = None, 
-        v_k: int = 3,
-        t_k: int = 3,
         emb_dim: int = 256,
-        gcn_v_k: int = 4,
-        gcn_t_k: int = 4,
         k: int = 2,
         edge_drop_rate: float = 0.2,
         feat_drop_rate: float = 0.1,
         x_drop_rate: float = 0.3,
         z_drop_rate: float = 0.3,
-        alpha: float = 0.9,
-        beta: float = 0.1,
-        hidden_unit: int = 256
+        hidden_unit: int = 256,
+        v_layer: int = 3,
+        t_layer: int = 3,
         ):
         """
         Initialize graph constructor.
@@ -51,8 +47,6 @@ class Graph(nn.Module):
         self.emb_dim = emb_dim
         self.weight_cache = "weight"
         self.input_feat_dropout = nn.Dropout(feat_drop_rate)
-        self.v_k = v_k
-        self.t_k = t_k
 
         self.v_feat = v_feat
         self.t_feat = t_feat
@@ -71,24 +65,6 @@ class Graph(nn.Module):
             nn.BatchNorm1d(self.emb_dim)
             )
 
-        self.v_gcn = II_GCN(
-            gcn_v_k,
-            alpha,
-            beta,
-            edge_drop_rate,
-            x_drop_rate, 
-            z_drop_rate,
-            self.weight_cache,
-            )
-        self.t_gcn = II_GCN(
-            gcn_t_k,
-            alpha,
-            beta,
-            edge_drop_rate,
-            x_drop_rate, 
-            z_drop_rate,
-            self.weight_cache,
-            )
         self.iu_gcn = IU_GCN(
             k,
             edge_drop_rate,
@@ -97,20 +73,12 @@ class Graph(nn.Module):
             self.weight_cache,
         )
         self.v_transformer = SpatialTransformer(
-            3, self.emb_dim, 2, hidden_unit
+            v_layer, self.emb_dim, 2, hidden_unit
         )
         self.t_transformer = SpatialTransformer(
-            3, self.emb_dim, 2, hidden_unit
+            t_layer, self.emb_dim, 2, hidden_unit
         )
-        self.outl = nn.Linear(4 * self.emb_dim, self.emb_dim)
-        # self.outl =nn.Sequential(
-        #     nn.Linear(4 * self.emb_dim, 2 * self.emb_dim),
-        #     nn.ReLU(),
-        #     nn.Linear(2 * self.emb_dim, self.emb_dim),
-        #     nn.ReLU(),
-        #     nn.Linear(self.emb_dim, self.emb_dim),
-
-        #     )
+        self.outl = nn.Linear(2 * self.emb_dim, self.emb_dim)
         self.activate = nn.ReLU()
     
     def build_graph(
@@ -123,8 +91,6 @@ class Graph(nn.Module):
         inter[1] += self.num_users
         inter = torch.cat([inter, inter[[1, 0]], torch.arange(self.num_nodes).unsqueeze(0).repeat(2, 1)], dim = 1)
         self.g = dgl.graph((inter[0], inter[1])).to(self.device)
-        self.v_g = self.build_item_g(self.v_feat, self.v_k)
-        self.t_g = self.build_item_g(self.t_feat, self.t_k)
         return self.g
 
     def build_item_g(self, feat, k):
@@ -165,28 +131,25 @@ class Graph(nn.Module):
         self.g.edata[self.weight_cache] = gcn_weight
 
     def forward(self, user_emb, item_emb):
+        
         v_feat = self.input_feat_dropout(self.v_feat)
         t_feat = self.input_feat_dropout(self.t_feat)
         
         encode_v = self.v_ffn(v_feat)
         encode_t = self.t_ffn(t_feat)
 
-        v_h = self.v_gcn(encode_v, self.v_g)
-        t_h = self.t_gcn(encode_t, self.t_g)
+        
+        v_emb = self.v_transformer(encode_v, encode_v, item_emb)
+        t_emb = self.t_transformer(encode_t, encode_t, item_emb)
 
-        v_emb = self.v_transformer(v_h, v_h, item_emb)
-        t_emb = self.t_transformer(t_h, t_h, item_emb)
-
-        combine_i_h = torch.cat([v_emb, t_emb, v_h, t_h], dim=1)
-        i_h = self.activate(self.outl(combine_i_h)) 
-        # + item_emb
+        combine_i_h = torch.cat([v_emb, t_emb], dim=1)
+        i_h = self.outl(combine_i_h) + encode_v + encode_t
 
         node_emb = torch.cat([user_emb, i_h], dim=0)
         node_h = self.iu_gcn(node_emb, self.g)
         
-        # node_h[self.num_users:] += combine_i_h
-
         return node_h
+
 
 
 

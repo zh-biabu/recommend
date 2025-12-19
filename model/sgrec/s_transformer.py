@@ -199,7 +199,7 @@ class SpatialTransformer(nn.Module):
                 v = transformer_block(q, k, v)
             else:
                 # Subsequent blocks: use previous output as q, k, v (self-attention)
-                v = transformer_block(q, v, v)
+                v = transformer_block(v, v, v)
         return v
 
 

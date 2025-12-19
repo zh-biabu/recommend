@@ -55,20 +55,13 @@ class IU_GCN(nn.Module):
     def __init__(
         self,
         k,
-        # alpha,
-        # beta,
         edge_drop_rate,
         x_drop_rate, 
         z_drop_rate,
         cache_key,
         ):
         super().__init__()
-        # self.g = g
         self.k = k
-        # self.alpah = alpha
-        # self.beta = beta
-        # self.alpha = alpha
-        # self.gamma = pow(self.beta, k) + self.alpha * sum(pow(self.beta, i) for i in range(k))
 
         self.x_dropout = nn.Dropout(x_drop_rate)
         self.edge_dropout = nn.Dropout(edge_drop_rate)
@@ -90,9 +83,6 @@ class IU_GCN(nn.Module):
                 g.ndata["h"] = h
                 g.update_all(fn.u_mul_e("h", self.cache_key, "m"), fn.sum("m", "h"))
                 h = g.ndata.pop("h")
-
-                # h = h * self.beta + h0 * self.alpha
-                # h = h / self.gamma
                 h = self.z_dropout(h)
             return h
 

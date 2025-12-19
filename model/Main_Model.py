@@ -756,18 +756,14 @@ class SGrec(nn.Module):
         self.device = config.system.device
         self.v_feat = self.item_features["image_feat"].to(self.device)
         self.t_feat = self.item_features["text_feat"].to(self.device)
-        self.v_k = config.graph.v_k
-        self.t_k = config.graph.t_k
-        self.gcn_v_k = config.model.gcn_v_k
-        self.gcn_t_k = config.model.gcn_t_k
         self.k = config.model.k
         self.edge_drop_rate = config.model.edge_drop_rate
         self.feat_drop_rate = config.model.feat_drop_rate
         self.x_drop_rate = config.model.x_drop_rate
         self.z_drop_rate = config.model.z_drop_rate
-        self.alpha = config.model.alpha
-        self.beta = config.model.beta
         self.hidden_unit = config.model.hidden_dim
+        self.v_layer = config.model.v_layer
+        self.t_layer = config.model.t_layer
         self.user_emb = nn.Embedding(self.num_users, self.emb_dim)
         self.item_emb = nn.Embedding(self.num_items, self.emb_dim)
 
@@ -779,19 +775,15 @@ class SGrec(nn.Module):
             self.device,
             self.v_feat,
             self.t_feat,
-            self.v_k,
-            self.t_k,
             self.emb_dim,
-            self.gcn_v_k,
-            self.gcn_t_k,
             self.k,
             self.edge_drop_rate,
             self.feat_drop_rate,
             self.x_drop_rate,
             self.z_drop_rate,
-            self.alpha,
-            self.beta,
             self.hidden_unit,
+            self.v_layer,
+            self.t_layer
             )
 
         self._initialize_parameters()
@@ -856,7 +848,7 @@ class SGrec(nn.Module):
         trainable_params = sum(p.numel() for p in self.parameters() if p.requires_grad)
         
         return {
-            'model_name': 'MMFCN',
+            'model_name': self.config.model.model_name,
             'total_parameters': total_params,
             'trainable_parameters': trainable_params,
             'num_users': self.num_users,

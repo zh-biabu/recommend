@@ -1,0 +1,107 @@
+{
+  "dataset": "baby",
+  "max_trials": 10,
+  "best_value": 0.09456170350313187,
+  "best_trial_number": 4,
+  "best_params": {
+    "mmgcn_k": 2,
+    "v_layer": 1,
+    "t_layert": 5
+  },
+  "best_summary": {
+    "trial_id": 4,
+    "val_metric": 0.09456170350313187,
+    "params": {
+      "mmgcn_k": 2,
+      "v_layer": 1,
+      "t_layert": 5
+    },
+    "config": {
+      "data": {
+        "data_path": "../autodl-tmp/data/ori_data/baby",
+        "user_col": "userID",
+        "item_col": "itemID",
+        "rating_col": "rating",
+        "timestamp_col": null,
+        "splitting_label": "x_label",
+        "filter_out_new_users": true,
+        "negative_sampling": true,
+        "sep": "\t",
+        "neg_ratio": 1,
+        "train_ratio": 0.8,
+        "val_ratio": 0.1,
+        "test_ratio": 0.1,
+        "batch_size": 2048,
+        "num_workers": 4,
+        "use_time_split": true,
+        "graph_from_train_only": true,
+        "num_users": 19445,
+        "num_items": 7050
+      },
+      "model": {
+        "model_name": "SGrec",
+        "modal_num": 2,
+        "emb_dim": 64,
+        "hidden_dim": 512,
+        "concat": false,
+        "k": 2,
+        "edge_drop_rate": 0.2,
+        "feat_drop_rate": 0.1,
+        "x_drop_rate": 0.3,
+        "z_drop_rate": 0.3,
+        "hidden_unit": 256,
+        "v_layer": 1,
+        "t_layer": 5
+      },
+      "training": {
+        "epochs": 1000,
+        "learning_rate": 0.001,
+        "weight_decay": 0,
+        "optimizer": "adam",
+        "scheduler": "plateau",
+        "scheduler_patience": 10,
+        "scheduler_factor": 0.5,
+        "early_stopping_patience": 20,
+        "gradient_clip_norm": 1.0,
+        "warmup_epochs": 5,
+        "eval_every": 1,
+        "save_every": 10
+      },
+      "evaluation": {
+        "metrics": [
+          "precision",
+          "recall",
+          "hit_rate",
+          "ndcg",
+          "map",
+          "mrr"
+        ],
+        "k_values": [
+          5,
+          10,
+          20
+        ],
+        "test_batch_size": 512,
+        "num_negatives": 1,
+        "main_metric": "recall"
+      },
+      "system": {
+        "device": "cuda",
+        "seed": 42,
+        "log_level": "INFO",
+        "save_dir": "./checkpoints",
+        "log_dir": "./logs",
+        "results_dir": "./results",
+        "num_gpus": 1,
+        "mixed_precision": false
+      },
+      "graph": {
+        "graph_type": "bipartite",
+        "add_self_loops": true,
+        "normalize_adj": true,
+        "edge_weight_type": "cosine",
+        "max_neighbors": 50
+      }
+    },
+    "test_metrics": {
+      "precision@5": 
