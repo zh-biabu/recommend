@@ -328,7 +328,7 @@ def main():
                        help="Device to use (cpu, cuda, auto)")
     parser.add_argument("--seed", type=int, default=None,
                        help="Random seed")
-    parser.add_argument("--hparam_search", action="store_true", default=True,
+    parser.add_argument("--hparam_search", action="store_true", default=False,
                        help="Whether to run hyper-parameter search (Bayesian Optimization with Optuna)")
     parser.add_argument("--max_trials", type=int, default=10,
                        help="Number of trials for hyper-parameter search")

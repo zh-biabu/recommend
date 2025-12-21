@@ -55,8 +55,8 @@ class ModelConfig:
     x_drop_rate: float = 0.3
     z_drop_rate: float = 0.3
     hidden_unit: int = 256
-    v_layer: int = 3
-    t_layer: int = 2
+    v_layer: int = 1
+    t_layer: int = 4
 
 
 @dataclass

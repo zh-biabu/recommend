@@ -6,6 +6,7 @@ Handles multi-modal features and provides a unified interface.
 from turtle import forward
 import torch
 import torch.nn as nn
+import torch.nn.functional as F
 import os
 import sys
 from typing import Dict, List, Tuple, Optional, Any
@@ -831,6 +832,7 @@ class SGrec(nn.Module):
         users = user_emb[batch_users]
         items = item_emb[pos_items]
         negs = item_emb[neg_items]
+        sample_items = item_emb[torch.randint(low=0, high=self.num_items, size=(batch_users.size(0), 20))]
         pos_score = torch.sum(users * items, dim=1)
         neg_score = torch.sum(users * negs, dim=1)
         assert not torch.isnan(pos_score).any(), "pos_score contains NaN"
@@ -838,9 +840,14 @@ class SGrec(nn.Module):
         assert not torch.isnan(neg_score).any(), "neg_score contains NaN"
         assert not torch.isinf(neg_score).any(), "neg_score contains Inf"
         loss = -torch.mean(torch.log(torch.sigmoid(pos_score - neg_score)))
+
+        unsmooth_logits = torch.cat([pos_score.unsqueeze(1), torch.sum(users.unsqueeze(1) * sample_items, dim=2)], dim=1)
+
+        unsmooth_loss = F.cross_entropy(unsmooth_logits, torch.zeros([batch_users.size(0)], dtype=torch.long).to(unsmooth_logits.device), reduction="none").mean()
+        
         reg_loss = torch.mean(ori_u**2) + torch.mean(ori_i**2)
 
-        return loss + self.reg_weight * reg_loss
+        return loss + self.reg_weight * reg_loss + unsmooth_loss
 
     def get_model_info(self) -> Dict[str, Any]:
         """Get model information."""
