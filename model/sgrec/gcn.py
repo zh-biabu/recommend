@@ -54,14 +54,13 @@ class II_GCN(nn.Module):
 class IU_GCN(nn.Module):
     def __init__(
         self,
-        k,
         edge_drop_rate,
         x_drop_rate, 
         z_drop_rate,
         cache_key,
         ):
         super().__init__()
-        self.k = k
+
 
         self.x_dropout = nn.Dropout(x_drop_rate)
         self.edge_dropout = nn.Dropout(edge_drop_rate)
@@ -70,7 +69,8 @@ class IU_GCN(nn.Module):
         self.cache_key = cache_key
 
 
-    def forward(self,x,g):
+    def forward(self,x,g,k):
+        self.k = k
         self.g = g
         h0 = self.x_dropout(x)
         h = h0

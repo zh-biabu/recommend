@@ -65,9 +65,8 @@ class Graph(nn.Module):
             nn.Linear(hidden_unit, self.emb_dim),
             nn.BatchNorm1d(self.emb_dim)
             )
-
+        self.k = k
         self.iu_gcn = IU_GCN(
-            k,
             edge_drop_rate,
             x_drop_rate, 
             z_drop_rate,
@@ -82,8 +81,9 @@ class Graph(nn.Module):
         self.outl = nn.Linear(2 * self.emb_dim, self.emb_dim)
         self.activate = nn.ReLU()
 
+        self.alpha_w = nn.Linear(self.emb_dim, 3)
         self.alpha = nn.Parameter(torch.randn(3))
-        self.d = nn.Dropout(z_drop_rate)
+        self.d = nn.Dropout(0.3)
     
     def build_graph(
         self,
@@ -146,12 +146,29 @@ class Graph(nn.Module):
         v_emb = self.v_transformer(encode_v, encode_v, item_emb)
         t_emb = self.t_transformer(encode_t, encode_t, item_emb)
 
-        combine_i_h = torch.cat([v_emb, t_emb], dim=1)
-        alphas = F.softmax(self.d(self.alpha), dim=0)
-        i_h = alphas[0] * self.outl(combine_i_h) + alphas[1] * encode_v + alphas[2] * encode_t
+        juhefshi = 1
 
-        node_emb = torch.cat([user_emb, i_h], dim=0)
-        node_h = self.iu_gcn(node_emb, self.g)
+        if juhefshi == 1:
+            combine_i_h = torch.cat([v_emb, t_emb], dim=1)
+            alphas = F.softmax(self.alpha_w(self.d(item_emb)), dim=1)
+            i_h = alphas[:, 0].unsqueeze(1) * self.outl(combine_i_h) + alphas[:, 1].unsqueeze(1) * encode_v + alphas[:, 2].unsqueeze(1) * encode_t
+            node_emb = torch.cat([user_emb, i_h], dim=0)
+            node_h = self.iu_gcn(node_emb, self.g, self.k)
+
+        elif juhefshi == 2:
+            combine_i_h = torch.cat([v_emb, t_emb], dim=1)
+            alphas = F.softmax(self.d(self.alpha), dim=0)
+            i_h = alphas[0] * self.outl(combine_i_h) + alphas[1] * encode_v + alphas[2] * encode_t
+
+            node_emb = torch.cat([user_emb, i_h], dim=0)
+            node_h = self.iu_gcn(node_emb, self.g, self.k)
+        elif juhefshi == 3:
+            combine_i_h = torch.cat([v_emb, t_emb], dim=1)
+            i_h =self.outl(combine_i_h) + encode_v + encode_t
+
+            node_emb = torch.cat([user_emb, i_h], dim=0)
+            node_h = self.iu_gcn(node_emb, self.g, self.k)
+        
         
         return node_h
 
