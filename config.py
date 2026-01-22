@@ -47,8 +47,7 @@ class ModelConfig:
     # activation: str = "prelu"
     # use_batch_norm: bool = True
     hidden_dim: int = 512
-    concat: bool = False
-    emb_dim: int = 256
+    # concat: bool = False
     k: int = 2
     edge_drop_rate: float = 0.2
     feat_drop_rate: float = 0.1
@@ -64,7 +63,7 @@ class TrainingConfig:
     """Training configuration."""
     epochs: int = 1000
     learning_rate: float = 0.001
-    weight_decay: float = 0
+    weight_decay: float = 1e-4
     optimizer: str = "adam"
     scheduler: str = "plateau"
     scheduler_patience: int = 10
@@ -108,10 +107,10 @@ class SystemConfig:
 @dataclass
 class GraphConfig:
     """Graph construction configuration."""
-    graph_type: str = "bipartite"
-    add_self_loops: bool = True
-    normalize_adj: bool = True
-    edge_weight_type: str = "cosine"  # cosine, dot, uniform
+    # graph_type: str = "bipartite"
+    # add_self_loops: bool = True
+    # normalize_adj: bool = True
+    # edge_weight_type: str = "cosine"  # cosine, dot, uniform
     max_neighbors: int = 50
 
 
@@ -189,25 +188,48 @@ def get_baby_config() -> Config:
     config.training.epochs = 1000
     config.data.num_users=19445
     config.data.num_items=7050
-    config.graph.weight_feature = [None]
+
+    config.model.k = 2
+    config.model.edge_drop_rate = 0.2
+    config.model.feat_drop_rate = 0.1
+    config.model.x_drop_rate = 0.3
+    config.model.z_drop_rate = 0.3
+    config.model.hidden_dim = 512
+    config.model.v_layer = 1
+    config.model.t_layer = 4
+    config.training.unsmooth_weight = 0.1
+
+
     return config
 
 
 def get_clothing_config() -> Config:
     """Get configuration for clothing dataset."""
     config = Config()
-    config.data.data_path = "./data/scale_data/clothing"
-    config.data.batch_size = 1024
-    config.model.emb_dim = 128
-    config.training.epochs = 100
-    config.training.learning_rate = 0.0005
+    config.data.data_path = "../autodl-tmp/data/ori_data/clothing"
+    config.data.batch_size = 256
+    config.data.num_users = 39387
+    config.data.num_items = 23033
+    config.training.epochs = 1000
+
+    config.model.k = 2
+    config.model.edge_drop_rate = 0.2
+    config.model.feat_drop_rate = 0.1
+    config.model.x_drop_rate = 0.3
+    config.model.z_drop_rate = 0.3
+    config.model.emb_dim = 64
+    config.model.hidden_dim = 512
+    config.model.v_layer = 2
+    config.model.t_layer = 2
+
+
     return config
 
 
 def get_sports_config() -> Config:
     """Get configuration for sports dataset."""
     config = Config()
-    config.data.data_path = "./data/scale_data/sports"
+    config.data.data_path = "../autodl-tmp/data/ori_data/sports"
     config.data.batch_size = 256
     config.model.emb_dim = 64
     config.training.epochs = 80
@@ -218,7 +240,7 @@ def get_sports_config() -> Config:
 def get_elec_config() -> Config:
     """Get configuration for electronics dataset."""
     config = Config()
-    config.data.data_path = "./data/scale_data/elec"
+    config.data.data_path = "../autodl-tmp/data/ori_data/elec"
     config.data.batch_size = 256
     config.model.emb_dim = 64
     config.training.epochs = 60

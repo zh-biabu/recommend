@@ -320,7 +320,7 @@ def run_single_experiment(config, dataset_name: str):
 def main():
     """Main function."""
     parser = argparse.ArgumentParser(description="Graph-based Recommendation System")
-    parser.add_argument("--dataset", type=str, default="baby", 
+    parser.add_argument("--dataset", type=str, default="clothing", 
                        help="Dataset name (baby, clothing, sports, elec)")
     parser.add_argument("--config", type=str, default=None,
                        help="Path to custom config file")
@@ -328,7 +328,7 @@ def main():
                        help="Device to use (cpu, cuda, auto)")
     parser.add_argument("--seed", type=int, default=None,
                        help="Random seed")
-    parser.add_argument("--hparam_search", action="store_true", default=False,
+    parser.add_argument("--hparam_search", action="store_true", default=True,
                        help="Whether to run hyper-parameter search (Bayesian Optimization with Optuna)")
     parser.add_argument("--max_trials", type=int, default=10,
                        help="Number of trials for hyper-parameter search")
@@ -340,9 +340,9 @@ def main():
         from itertools import product
 
         # 手工设定需要网格遍历的搜索空间
-        grid_k = [2, 3, 4]
-        grid_v_layer = [i for i in range(1,6)]
-        grid_t_layer = [i for i in range(1,6)]
+        grid_k = [2]
+        grid_v_layer = [i for i in range(2, 0, -1)]
+        grid_t_layer = [i for i in range(2, 0, -1)]
         # 按顺序生成组合，必要时限制到 max_trials 以内
         param_grid = list(product(grid_k, grid_v_layer, grid_t_layer))
         if args.max_trials and args.max_trials > 0:
@@ -387,6 +387,7 @@ def main():
             try:
                 result = run_single_experiment(config, args.dataset)
             except:
+                print(f"Error during training: {str(e)}")
                 continue
             val_metric = float(result["training_results"]["best_val_metric"])
 
@@ -442,7 +443,7 @@ def main():
     # 普通单次训练模式
     # Load configuration
     config = get_config(args.dataset, args.config)
-    # config.save_to_yaml("./sgrec.yaml")
+    config.save_to_yaml(f"./{args.dataset}.yaml")
     # Override device if specified
     if args.device != "auto":
         config.system.device = args.device

@@ -82,19 +82,19 @@ class GraphTrainer:
             self.optimizer = torch.optim.Adam(
                 list(self.model.parameters()),
                 lr=self.config.training.learning_rate,
-                weight_decay=self.config.training.weight_decay
+                weight_decay=0
             )
         elif self.config.training.optimizer.lower() == "adamw":
             self.optimizer = torch.optim.AdamW(
                 self.model.parameters(),
                 lr=self.config.training.learning_rate,
-                weight_decay=self.config.training.weight_decay
+                weight_decay=0
             )
         elif self.config.training.optimizer.lower() == "sgd":
             self.optimizer = torch.optim.SGD(
                 self.model.parameters(),
                 lr=self.config.training.learning_rate,
-                weight_decay=self.config.training.weight_decay,
+                weight_decay=0,
                 momentum=0.9
             )
         else:

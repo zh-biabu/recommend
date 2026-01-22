@@ -847,6 +847,7 @@ class SGrec(nn.Module):
         self.item_emb = nn.Embedding(self.num_items, self.emb_dim)
 
         self.reg_weight = config.training.weight_decay
+        self.unsmooth_weight = config.training.unsmooth_weight
 
         self.graph = Graph(
             self.num_users,
@@ -925,7 +926,7 @@ class SGrec(nn.Module):
         
         reg_loss = torch.mean(ori_u**2) + torch.mean(ori_i**2)
 
-        return loss + self.reg_weight * reg_loss
+        return loss + self.reg_weight * reg_loss + self.unsmooth_weight * unsmooth_loss
 
     def get_model_info(self) -> Dict[str, Any]:
         """Get model information."""
