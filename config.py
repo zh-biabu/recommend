@@ -64,6 +64,7 @@ class TrainingConfig:
     epochs: int = 1000
     learning_rate: float = 0.001
     weight_decay: float = 1e-4
+    unsmooth_weight: float = 1
     optimizer: str = "adam"
     scheduler: str = "plateau"
     scheduler_patience: int = 10
@@ -188,6 +189,9 @@ def get_baby_config() -> Config:
     config.training.epochs = 1000
     config.data.num_users=19445
     config.data.num_items=7050
+    config.training.unsmooth_weight = 0.4
+    config.training.learning_rate = 0.001
+    config.training.weight_decay = 1e-4
 
     config.model.k = 2
     config.model.edge_drop_rate = 0.2
@@ -197,7 +201,6 @@ def get_baby_config() -> Config:
     config.model.hidden_dim = 512
     config.model.v_layer = 1
     config.model.t_layer = 4
-    config.training.unsmooth_weight = 0.1
 
 
     return config
@@ -207,10 +210,39 @@ def get_clothing_config() -> Config:
     """Get configuration for clothing dataset."""
     config = Config()
     config.data.data_path = "../autodl-tmp/data/ori_data/clothing"
-    config.data.batch_size = 256
+    config.data.batch_size = 2048
     config.data.num_users = 39387
     config.data.num_items = 23033
     config.training.epochs = 1000
+    config.training.unsmooth_weight = 1
+    config.training.learning_rate = 0.001
+    config.training.weight_decay = 1e-4
+
+    config.model.k = 2
+    config.model.edge_drop_rate = 0.2
+    config.model.feat_drop_rate = 0.1
+    config.model.x_drop_rate = 0.3
+    config.model.z_drop_rate = 0.3
+    config.model.emb_dim = 64
+    config.model.hidden_dim = 512
+    config.model.v_layer = 3
+    config.model.t_layer = 1
+
+
+    return config
+
+
+def get_sports_config() -> Config:
+    """Get configuration for sports dataset."""
+    config = Config()
+    config.data.data_path = "../autodl-tmp/data/ori_data/sports"
+    config.data.batch_size = 2048
+    config.data.num_users = 35598
+    config.data.num_items = 18357
+    config.training.epochs = 1000
+    config.training.unsmooth_weight = 1
+    config.training.learning_rate = 0.001
+    config.training.weight_decay = 1e-4
 
     config.model.k = 2
     config.model.edge_drop_rate = 0.2
@@ -223,17 +255,7 @@ def get_clothing_config() -> Config:
     config.model.t_layer = 2
 
 
-    return config
 
-
-def get_sports_config() -> Config:
-    """Get configuration for sports dataset."""
-    config = Config()
-    config.data.data_path = "../autodl-tmp/data/ori_data/sports"
-    config.data.batch_size = 256
-    config.model.emb_dim = 64
-    config.training.epochs = 80
-    config.training.learning_rate = 0.001
     return config
 
 

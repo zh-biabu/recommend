@@ -328,7 +328,7 @@ def main():
                        help="Device to use (cpu, cuda, auto)")
     parser.add_argument("--seed", type=int, default=None,
                        help="Random seed")
-    parser.add_argument("--hparam_search", action="store_true", default=True,
+    parser.add_argument("--hparam_search", action="store_true", default=False,
                        help="Whether to run hyper-parameter search (Bayesian Optimization with Optuna)")
     parser.add_argument("--max_trials", type=int, default=10,
                        help="Number of trials for hyper-parameter search")
@@ -341,10 +341,15 @@ def main():
 
         # 手工设定需要网格遍历的搜索空间
         grid_k = [2]
-        grid_v_layer = [i for i in range(2, 0, -1)]
-        grid_t_layer = [i for i in range(2, 0, -1)]
+        grid_v_layer = [i for i in range(3, 0, -1)]
+        grid_t_layer = [i for i in range(3, 0, -1)]
+        grid_unsmooth_weight = [1]
+        # grid_k = [2]
+        # grid_v_layer = [1]
+        # grid_t_layer = [4]
+        # grid_unsmooth_weight = [i/10 for i in range(1, 11, 1)]
         # 按顺序生成组合，必要时限制到 max_trials 以内
-        param_grid = list(product(grid_k, grid_v_layer, grid_t_layer))
+        param_grid = list(product(grid_k, grid_v_layer, grid_t_layer, grid_unsmooth_weight))
         if args.max_trials and args.max_trials > 0:
             param_grid = param_grid[:args.max_trials]
 
@@ -356,7 +361,7 @@ def main():
         best_summary = None
         best_val = -float("inf")
 
-        for idx, (k, v_layer, t_layer) in enumerate(param_grid):
+        for idx, (k, v_layer, t_layer, unsmooth_weight) in enumerate(param_grid):
             # 为每个 trial 重新加载一份 config，避免相互污染
             config = get_config(args.dataset, args.config)
 
@@ -372,6 +377,7 @@ def main():
             config.model.k = k
             config.model.v_layer = v_layer
             config.model.t_layer = t_layer
+            config.training.unsmooth_weight = unsmooth_weight
 
             print("\n" + "#" * 60)
             print(f"Grid Trial {idx}")
@@ -382,7 +388,8 @@ def main():
                 f"wd={config.training.weight_decay}, "
                 f"k={config.model.k}, "
                 f"v_layer={config.model.v_layer}, "
-                f"t_layer={config.model.t_layer}"
+                f"t_layer={config.model.t_layer}, "
+                f"unsmooth_weight={config.training.unsmooth_weight}"
             )
             try:
                 result = run_single_experiment(config, args.dataset)

@@ -1,0 +1,282 @@
+nohup: ignoring input
+2026-01-24 18:56:57 - GraphTrainer - INFO - Starting training...
+2026-01-24 18:56:57 - GraphTrainer - INFO - 模型: SGrec
+2026-01-24 18:56:57 - GraphTrainer - INFO - 总参数量: 6,320,326
+2026-01-24 18:56:57 - GraphTrainer - INFO - 可训练参数量: 6,320,326
+2026-01-24 18:56:57 - GraphTrainer - INFO - ============================================================
+2026-01-24 18:56:57 - GraphTrainer - INFO - 开始第 1/1000 轮训练
+2026-01-24 18:56:57 - GraphTrainer - INFO - ============================================================
+
+############################################################
+Grid Trial 0
+############################################################
+Trial config (partial):
+  lr=0.001, wd=0, k=2, v_layer=3, t_layer=3, unsmooth_weight=1
+Using GPU: NVIDIA GeForce RTX 4090
+============================================================
+Graph-based Recommendation System
+============================================================
+Dataset: sports
+Device: cuda
+Model: SGrec
+Embedding dim: 64
+Epochs: 1000
+============================================================
+Loading data...
+Initializing full dataset from ../autodl-tmp/data/ori_data/sports
+Loading interaction data from ../autodl-tmp/data/ori_data/sports
+Loading features from ../autodl-tmp/data/ori_data/sports
+Building user-item interaction index...
+Dataset Statistics:
+  num_users: 35598
+  num_items: 18357
+  num_interactions: 296337
+  sparsity: 0.9995465195454304
+  user_features: []
+  item_features_dimensions: {'image_feat': 4096, 'text_feat': 384}
+  user_feature_dimensions: {}
+  train_ratio: 0.7370291256238675
+  val_ratio: 0.12789155589750859
+  test_ratio: 0.135079318478624
+Full dataset initialized: 296337 interactions, 35598 users, 18357 items
+Splitting dataset into train/val/test...
+Initializing subset dataset (mode: train) with 218409 interactions
+Initializing subset dataset (mode: val) with 37899 interactions
+Initializing subset dataset (mode: test) with 40029 interactions
+Split results - Train: 218409 interactions, Val: 37899, Test: 40029
+Data loaders created - Train batches: 107, Val batches: 19, Test batches: 20
+Data loaded: 35598 users, 18357 items
+User features: []
+Item features: ['image_feat', 'text_feat']
+Building graph and model...
+Extracting training interactions for graph construction...
+Extracted 218409 positive interactions for graph construction
+Graph built from training data only: 53955 nodes, 490773 edges
+⚠️  Important: Graph constructed using only training data to prevent data leakage
+SGrec(
+  (user_emb): Embedding(35598, 64)
+  (item_emb): Embedding(18357, 64)
+  (graph): Graph(
+    (input_feat_dropout): Dropout(p=0.1, inplace=False)
+    (v_ffn): Sequential(
+      (0): Linear(in_features=4096, out_features=512, bias=True)
+      (1): ReLU()
+      (2): Linear(in_features=512, out_features=64, bias=True)
+      (3): ReLU()
+      (4): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (t_ffn): Sequential(
+      (0): Linear(in_features=384, out_features=512, bias=True)
+      (1): ReLU()
+      (2): Linear(in_features=512, out_features=64, bias=True)
+      (3): ReLU()
+      (4): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (iu_gcn): IU_GCN(
+      (x_dropout): Dropout(p=0.3, inplace=False)
+      (edge_dropout): Dropout(p=0.2, inplace=False)
+      (z_dropout): Dropout(p=0.3, inplace=False)
+    )
+    (v_transformer): SpatialTransformer(
+      (transformer_blocks): ModuleList(
+        (0-2): 3 x SpatialTransformerBlock(
+          (attention): MultiHeadSelfAttention(
+            (q_linear): Linear(in_features=64, out_features=64, bias=True)
+            (k_linear): Linear(in_features=64, out_features=64, bias=True)
+            (v_linear): Linear(in_features=64, out_features=64, bias=True)
+            (o_linear): Linear(in_features=64, out_features=64, bias=True)
+            (attn_dropout): Dropout(p=0.1, inplace=False)
+            (output_dropout): Dropout(p=0.1, inplace=False)
+          )
+          (feed_forward): FeedForward(
+            (linear1): Linear(in_features=64, out_features=512, bias=True)
+            (linear2): Linear(in_features=512, out_features=64, bias=True)
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+          (norm): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          (norm2): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          (output_dropout): Dropout(p=0.1, inplace=False)
+        )
+      )
+    )
+    (t_transformer): SpatialTransformer(
+      (transformer_blocks): ModuleList(
+        (0-2): 3 x SpatialTransformerBlock(
+          (attention): MultiHeadSelfAttention(
+            (q_linear): Linear(in_features=64, out_features=64, bias=True)
+            (k_linear): Linear(in_features=64, out_features=64, bias=True)
+            (v_linear): Linear(in_features=64, out_features=64, bias=True)
+            (o_linear): Linear(in_features=64, out_features=64, bias=True)
+            (attn_dropout): Dropout(p=0.1, inplace=False)
+            (output_dropout): Dropout(p=0.1, inplace=False)
+          )
+          (feed_forward): FeedForward(
+            (linear1): Linear(in_features=64, out_features=512, bias=True)
+            (linear2): Linear(in_features=512, out_features=64, bias=True)
+            (dropout): Dropout(p=0.1, inplace=False)
+          )
+          (norm): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          (norm2): LayerNorm((64,), eps=1e-05, elementwise_affine=True)
+          (output_dropout): Dropout(p=0.1, inplace=False)
+        )
+      )
+    )
+    (outl): Linear(in_features=128, out_features=64, bias=True)
+    (activate): ReLU()
+    (alpha_w): Linear(in_features=64, out_features=3, bias=True)
+    (d): Dropout(p=0.3, inplace=False)
+  )
+)
+Model parameters: 6,320,326
+init trainer,verifier,tester
+2026-01-24 18:57:51 - GraphTrainer - INFO - 验证结果:
+2026-01-24 18:57:51 - GraphTrainer - INFO -   precision@5: 0.004899
+2026-01-24 18:57:51 - GraphTrainer - INFO -   recall@5: 0.022959
+2026-01-24 18:57:51 - GraphTrainer - INFO -   hit_rate@5: 0.024411
+2026-01-24 18:57:51 - GraphTrainer - INFO -   ndcg@5: 0.015441
+2026-01-24 18:57:51 - GraphTrainer - INFO -   map@5: 0.012722
+2026-01-24 18:57:51 - GraphTrainer - INFO -   mrr@5: 0.013460
+2026-01-24 18:57:51 - GraphTrainer - INFO -   precision@10: 0.003924
+2026-01-24 18:57:51 - GraphTrainer - INFO -   recall@10: 0.036977
+2026-01-24 18:57:51 - GraphTrainer - INFO -   hit_rate@10: 0.039019
+2026-01-24 18:57:51 - GraphTrainer - INFO -   ndcg@10: 0.019959
+2026-01-24 18:57:51 - GraphTrainer - INFO -   map@10: 0.014544
+2026-01-24 18:57:51 - GraphTrainer - INFO -   mrr@10: 0.015360
+2026-01-24 18:57:51 - GraphTrainer - INFO -   precision@20: 0.003157
+2026-01-24 18:57:51 - GraphTrainer - INFO -   recall@20: 0.059474
+2026-01-24 18:57:51 - GraphTrainer - INFO -   hit_rate@20: 0.062588
+2026-01-24 18:57:51 - GraphTrainer - INFO -   ndcg@20: 0.025683
+2026-01-24 18:57:51 - GraphTrainer - INFO -   map@20: 0.016089
+2026-01-24 18:57:51 - GraphTrainer - INFO -   mrr@20: 0.016971
+2026-01-24 18:57:51 - GraphTrainer - INFO - 第 1 轮训练完成
+2026-01-24 18:57:51 - GraphTrainer - INFO - train_loss: 2.579950
+2026-01-24 18:57:51 - GraphTrainer - INFO - precision@5: 0.004899
+2026-01-24 18:57:51 - GraphTrainer - INFO - recall@5: 0.022959
+2026-01-24 18:57:51 - GraphTrainer - INFO - hit_rate@5: 0.024411
+2026-01-24 18:57:51 - GraphTrainer - INFO - ndcg@5: 0.015441
+2026-01-24 18:57:51 - GraphTrainer - INFO - map@5: 0.012722
+2026-01-24 18:57:51 - GraphTrainer - INFO - mrr@5: 0.013460
+2026-01-24 18:57:51 - GraphTrainer - INFO - precision@10: 0.003924
+2026-01-24 18:57:51 - GraphTrainer - INFO - recall@10: 0.036977
+2026-01-24 18:57:51 - GraphTrainer - INFO - hit_rate@10: 0.039019
+2026-01-24 18:57:51 - GraphTrainer - INFO - ndcg@10: 0.019959
+2026-01-24 18:57:51 - GraphTrainer - INFO - map@10: 0.014544
+2026-01-24 18:57:51 - GraphTrainer - INFO - mrr@10: 0.015360
+2026-01-24 18:57:51 - GraphTrainer - INFO - precision@20: 0.003157
+2026-01-24 18:57:51 - GraphTrainer - INFO - recall@20: 0.059474
+2026-01-24 18:57:51 - GraphTrainer - INFO - hit_rate@20: 0.062588
+2026-01-24 18:57:51 - GraphTrainer - INFO - ndcg@20: 0.025683
+2026-01-24 18:57:51 - GraphTrainer - INFO - map@20: 0.016089
+2026-01-24 18:57:51 - GraphTrainer - INFO - mrr@20: 0.016971
+2026-01-24 18:57:51 - GraphTrainer - INFO - ------------------------------------------------------------
+2026-01-24 18:57:51 - GraphTrainer - INFO - ============================================================
+2026-01-24 18:57:51 - GraphTrainer - INFO - 开始第 2/1000 轮训练
+2026-01-24 18:57:51 - GraphTrainer - INFO - ============================================================
+0 train_loss tensor(3.1708, device='cuda:0', grad_fn=<AddBackward0>)
+1 train_loss tensor(3.2441, device='cuda:0', grad_fn=<AddBackward0>)
+2 train_loss tensor(3.1310, device='cuda:0', grad_fn=<AddBackward0>)
+3 train_loss tensor(3.1299, device='cuda:0', grad_fn=<AddBackward0>)
+4 train_loss tensor(3.0535, device='cuda:0', grad_fn=<AddBackward0>)
+5 train_loss tensor(2.9631, device='cuda:0', grad_fn=<AddBackward0>)
+6 train_loss tensor(2.9381, device='cuda:0', grad_fn=<AddBackward0>)
+7 train_loss tensor(2.8729, device='cuda:0', grad_fn=<AddBackward0>)
+8 train_loss tensor(2.8754, device='cuda:0', grad_fn=<AddBackward0>)
+9 train_loss tensor(2.8703, device='cuda:0', grad_fn=<AddBackward0>)
+10 train_loss tensor(2.8684, device='cuda:0', grad_fn=<AddBackward0>)
+11 train_loss tensor(2.8440, device='cuda:0', grad_fn=<AddBackward0>)
+12 train_loss tensor(2.7982, device='cuda:0', grad_fn=<AddBackward0>)
+13 train_loss tensor(2.8052, device='cuda:0', grad_fn=<AddBackward0>)
+14 train_loss tensor(2.7625, device='cuda:0', grad_fn=<AddBackward0>)
+15 train_loss tensor(2.7712, device='cuda:0', grad_fn=<AddBackward0>)
+16 train_loss tensor(2.7245, device='cuda:0', grad_fn=<AddBackward0>)
+17 train_loss tensor(2.7843, device='cuda:0', grad_fn=<AddBackward0>)
+18 train_loss tensor(2.7780, device='cuda:0', grad_fn=<AddBackward0>)
+19 train_loss tensor(2.7162, device='cuda:0', grad_fn=<AddBackward0>)
+20 train_loss tensor(2.7076, device='cuda:0', grad_fn=<AddBackward0>)
+21 train_loss tensor(2.6967, device='cuda:0', grad_fn=<AddBackward0>)
+22 train_loss tensor(2.6971, device='cuda:0', grad_fn=<AddBackward0>)
+23 train_loss tensor(2.6907, device='cuda:0', grad_fn=<AddBackward0>)
+24 train_loss tensor(2.7015, device='cuda:0', grad_fn=<AddBackward0>)
+25 train_loss tensor(2.6661, device='cuda:0', grad_fn=<AddBackward0>)
+26 train_loss tensor(2.7001, device='cuda:0', grad_fn=<AddBackward0>)
+27 train_loss tensor(2.6909, device='cuda:0', grad_fn=<AddBackward0>)
+28 train_loss tensor(2.6864, device='cuda:0', grad_fn=<AddBackward0>)
+29 train_loss tensor(2.6359, device='cuda:0', grad_fn=<AddBackward0>)
+30 train_loss tensor(2.7045, device='cuda:0', grad_fn=<AddBackward0>)
+31 train_loss tensor(2.6433, device='cuda:0', grad_fn=<AddBackward0>)
+32 train_loss tensor(2.6508, device='cuda:0', grad_fn=<AddBackward0>)
+33 train_loss tensor(2.6420, device='cuda:0', grad_fn=<AddBackward0>)
+34 train_loss tensor(2.5976, device='cuda:0', grad_fn=<AddBackward0>)
+35 train_loss tensor(2.6451, device='cuda:0', grad_fn=<AddBackward0>)
+36 train_loss tensor(2.6484, device='cuda:0', grad_fn=<AddBackward0>)
+37 train_loss tensor(2.6037, device='cuda:0', grad_fn=<AddBackward0>)
+38 train_loss tensor(2.5946, device='cuda:0', grad_fn=<AddBackward0>)
+39 train_loss tensor(2.5785, device='cuda:0', grad_fn=<AddBackward0>)
+40 train_loss tensor(2.5420, device='cuda:0', grad_fn=<AddBackward0>)
+41 train_loss tensor(2.6363, device='cuda:0', grad_fn=<AddBackward0>)
+42 train_loss tensor(2.5909, device='cuda:0', grad_fn=<AddBackward0>)
+43 train_loss tensor(2.6136, device='cuda:0', grad_fn=<AddBackward0>)
+44 train_loss tensor(2.5698, device='cuda:0', grad_fn=<AddBackward0>)
+45 train_loss tensor(2.6065, device='cuda:0', grad_fn=<AddBackward0>)
+46 train_loss tensor(2.5758, device='cuda:0', grad_fn=<AddBackward0>)
+47 train_loss tensor(2.5577, device='cuda:0', grad_fn=<AddBackward0>)
+48 train_loss tensor(2.5216, device='cuda:0', grad_fn=<AddBackward0>)
+49 train_loss tensor(2.5899, device='cuda:0', grad_fn=<AddBackward0>)
+50 train_loss tensor(2.5478, device='cuda:0', grad_fn=<AddBackward0>)
+51 train_loss tensor(2.5354, device='cuda:0', grad_fn=<AddBackward0>)
+52 train_loss tensor(2.5769, device='cuda:0', grad_fn=<AddBackward0>)
+53 train_loss tensor(2.5410, device='cuda:0', grad_fn=<AddBackward0>)
+54 train_loss tensor(2.5378, device='cuda:0', grad_fn=<AddBackward0>)
+55 train_loss tensor(2.6040, device='cuda:0', grad_fn=<AddBackward0>)
+56 train_loss tensor(2.5279, device='cuda:0', grad_fn=<AddBackward0>)
+57 train_loss tensor(2.5282, device='cuda:0', grad_fn=<AddBackward0>)
+58 train_loss tensor(2.4865, device='cuda:0', grad_fn=<AddBackward0>)
+59 train_loss tensor(2.4680, device='cuda:0', grad_fn=<AddBackward0>)
+60 train_loss tensor(2.4491, device='cuda:0', grad_fn=<AddBackward0>)
+61 train_loss tensor(2.4665, device='cuda:0', grad_fn=<AddBackward0>)
+62 train_loss tensor(2.5243, device='cuda:0', grad_fn=<AddBackward0>)
+63 train_loss tensor(2.4972, device='cuda:0', grad_fn=<AddBackward0>)
+64 train_loss tensor(2.4809, device='cuda:0', grad_fn=<AddBackward0>)
+65 train_loss tensor(2.4960, device='cuda:0', grad_fn=<AddBackward0>)
+66 train_loss tensor(2.4191, device='cuda:0', grad_fn=<AddBackward0>)
+67 train_loss tensor(2.4642, device='cuda:0', grad_fn=<AddBackward0>)
+68 train_loss tensor(2.4603, device='cuda:0', grad_fn=<AddBackward0>)
+69 train_loss tensor(2.4574, device='cuda:0', grad_fn=<AddBackward0>)
+70 train_loss tensor(2.4830, device='cuda:0', grad_fn=<AddBackward0>)
+71 train_loss tensor(2.4556, device='cuda:0', grad_fn=<AddBackward0>)
+72 train_loss tensor(2.4564, device='cuda:0', grad_fn=<AddBackward0>)
+73 train_loss tensor(2.4772, device='cuda:0', grad_fn=<AddBackward0>)
+74 train_loss tensor(2.4563, device='cuda:0', grad_fn=<AddBackward0>)
+75 train_loss tensor(2.4470, device='cuda:0', grad_fn=<AddBackward0>)
+76 train_loss tensor(2.4463, device='cuda:0', grad_fn=<AddBackward0>)
+77 train_loss tensor(2.5030, device='cuda:0', grad_fn=<AddBackward0>)
+78 train_loss tensor(2.4716, device='cuda:0', grad_fn=<AddBackward0>)
+79 train_loss tensor(2.4306, device='cuda:0', grad_fn=<AddBackward0>)
+80 train_loss tensor(2.4418, device='cuda:0', grad_fn=<AddBackward0>)
+81 train_loss tensor(2.4481, device='cuda:0', grad_fn=<AddBackward0>)
+82 train_loss tensor(2.3823, device='cuda:0', grad_fn=<AddBackward0>)
+83 train_loss tensor(2.4193, device='cuda:0', grad_fn=<AddBackward0>)
+84 train_loss tensor(2.4469, device='cuda:0', grad_fn=<AddBackward0>)
+85 train_loss tensor(2.4244, device='cuda:0', grad_fn=<AddBackward0>)
+86 train_loss tensor(2.4090, device='cuda:0', grad_fn=<AddBackward0>)
+87 train_loss tensor(2.4052, device='cuda:0', grad_fn=<AddBackward0>)
+88 train_loss tensor(2.4547, device='cuda:0', grad_fn=<AddBackward0>)
+89 train_loss tensor(2.3562, device='cuda:0', grad_fn=<AddBackward0>)
+90 train_loss tensor(2.3445, device='cuda:0', grad_fn=<AddBackward0>)
+91 train_loss tensor(2.3267, device='cuda:0', grad_fn=<AddBackward0>)
+92 train_loss tensor(2.4039, device='cuda:0', grad_fn=<AddBackward0>)
+93 train_loss tensor(2.4112, device='cuda:0', grad_fn=<AddBackward0>)
+94 train_loss tensor(2.3516, device='cuda:0', grad_fn=<AddBackward0>)
+95 train_loss tensor(2.4060, device='cuda:0', grad_fn=<AddBackward0>)
+96 train_loss tensor(2.3717, device='cuda:0', grad_fn=<AddBackward0>)
+97 train_loss tensor(2.3722, device='cuda:0', grad_fn=<AddBackward0>)
+98 train_loss tensor(2.3283, device='cuda:0', grad_fn=<AddBackward0>)
+99 train_loss tensor(2.3048, device='cuda:0', grad_fn=<AddBackward0>)
+100 train_loss tensor(2.3095, device='cuda:0', grad_fn=<AddBackward0>)
+101 train_loss tensor(2.3696, device='cuda:0', grad_fn=<AddBackward0>)
+102 train_loss tensor(2.3562, device='cuda:0', grad_fn=<AddBackward0>)
+103 train_loss tensor(2.3784, device='cuda:0', grad_fn=<AddBackward0>)
+104 train_loss tensor(2.3279, device='cuda:0', grad_fn=<AddBackward0>)
+105 train_loss tensor(2.3358, device='cuda:0', grad_fn=<AddBackward0>)
+106 train_loss tensor(2.3858, device='cuda:0', grad_fn=<AddBackward0>)
+The 1 training average loss: 2.579950261338849

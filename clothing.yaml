@@ -1,5 +1,5 @@
 data:
-  batch_size: 1048
+  batch_size: 2048
   data_path: ../autodl-tmp/data/ori_data/clothing
   filter_out_new_users: true
   graph_from_train_only: true
@@ -44,8 +44,8 @@ model:
   k: 2
   modal_num: 2
   model_name: SGrec
-  t_layer: 4
-  v_layer: 1
+  t_layer: 1
+  v_layer: 3
   x_drop_rate: 0.3
   z_drop_rate: 0.3
 system:
@@ -68,5 +68,6 @@ training:
   scheduler: plateau
   scheduler_factor: 0.5
   scheduler_patience: 10
+  unsmooth_weight: 1
   warmup_epochs: 5
-  weight_decay: 0
+  weight_decay: 0.0001
